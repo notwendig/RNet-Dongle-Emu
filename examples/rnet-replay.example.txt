@@ -1,0 +1,10 @@
+# Replay transcript syntax used by the emulator.
+#
+# TX <24-byte framed request as hexadecimal>
+# RX [optional-delay-us] <24-byte framed response as hexadecimal>
+#
+# Example only; capture your own traffic from hardware/software you are
+# authorized to analyze. Real device captures are intentionally not shipped.
+#
+# TX 1002...10FE
+# RX 500 1002...10FE

@@ -1,0 +1,5 @@
+[emulator]
+Mode=replay
+ReplayFile=rnet-replay.txt
+LogFile=ftd2xx-emu.log
+EmulateReenumeration=1
