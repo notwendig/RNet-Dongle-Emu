@@ -156,18 +156,6 @@ research: Programmer startup, dongle re-enumeration, stateful repository write,
 persistent RNB2 storage and subsequent stateful read-back. Details are in
 [docs/VALIDATION.md](docs/VALIDATION.md).
 
-### Real CAN validation (not included)
-
-Separately from the published offline emulator, a direct connection through a
-CAN interface to my **You-Q test wheelchair** has already been successfully
-tested. With that setup, the Programmer reads the real configuration of the
-test wheelchair.
-
-For **safety and liability reasons**, neither this CAN integration nor the
-method used to switch from the **Dealer dongle to the OEM dongle** is part of
-this repository. The public project intentionally remains limited to offline
-emulation, replay and analysis.
-
 Compatibility information is documented in
 [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md).
 
@@ -183,27 +171,3 @@ data and trademarks remain subject to their respective owners' terms.
 > **Replay note:** `rnet-replay.txt` is capture-specific and is intentionally not
 > included in the public repository. `scripts/deploy-wine.sh` reuses an existing
 > valid replay or accepts `RNET_REPLAY_FILE=/path/to/rnet-replay.txt`.
-
-<!-- rnet-dongle-emu-readme-update:start -->
-
-## Screenshots
-
-### R-net Programmer with the emulated dongle
-
-![R-net Programmer with the emulated dongle](docs/images/rnet-programmer-connected.png)
-
-### R-net Programmer application information
-
-![R-net Programmer OEM Generic application information](docs/images/programmer-about.png)
-
-## Acknowledgements
-
-Special thanks to **Constantin Grosch <groschorama@gmail.com>**, who provided me
-with an R-net Programmer dongle free of charge for approximately **1.5 years**.
-That loan made the protocol analysis, comparison tests and development work
-possible in the first place and thereby enabled this project.
-
-I also thank **ChatGPT by OpenAI** for assistance with protocol and log analysis,
-debugging, and coding during the development of this project.
-
-<!-- rnet-dongle-emu-readme-update:end -->

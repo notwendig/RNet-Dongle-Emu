@@ -23,6 +23,18 @@ Der Analyzer deckt alle Hauptbereiche des Programmers ab:
 `Seating`, `Motor`, `Input Output Module`, `Omni`, `Mouse 1`, `Mouse 2`,
 `iDevice1`, `iDevice2`.
 
+## Reale CAN-Erprobung (nicht enthalten)
+
+Unabhängig vom veröffentlichten Offline-Emulator wurde eine direkte Anbindung
+über ein CAN-Interface an meinen **You-Q-Testrollstuhl** bereits erfolgreich
+erprobt. Über diese Verbindung liest der Programmer die reale Konfiguration des
+Testrollstuhls.
+
+Aus **Sicherheits- und Haftungsgründen** sind weder diese CAN-Anbindung noch das
+Verfahren zur Umschaltung vom **Dealer-Dongle auf den OEM-Dongle** Bestandteil
+dieses Repositories. Der öffentliche Projektstand bleibt bewusst auf
+Offline-Emulation, Replay und Analyse beschränkt.
+
 ## Build
 
 Fedora:
@@ -72,3 +84,23 @@ Weitere Details: [README.md](README.md), [docs/](docs/), [NOTICE.md](NOTICE.md).
 > bewusst nicht im öffentlichen Repository mitgeliefert. `scripts/deploy-wine.sh`
 > verwendet einen vorhandenen gültigen Replay weiter oder akzeptiert
 > `RNET_REPLAY_FILE=/pfad/zu/rnet-replay.txt`.
+
+## Screenshots
+
+### R-net Programmer mit emuliertem Dongle
+
+![R-net Programmer mit emuliertem Dongle](docs/images/rnet-programmer-connected.png)
+
+### Programminformationen des R-net Programmers
+
+![R-net Programmer OEM Generic – Programminformationen](docs/images/programmer-about.png)
+
+## Danksagung
+
+Mein besonderer Dank gilt **Constantin Grosch <groschorama@gmail.com>**, der mir
+für ungefähr **1,5 Jahre** kostenlos einen R-net Programmer Dongle zur Verfügung
+gestellt hat. Diese Leihgabe ermöglichte die Protokollanalyse, Vergleichstests
+und Entwicklungsarbeit und machte dieses Projekt damit überhaupt erst möglich.
+
+Außerdem danke ich **ChatGPT von OpenAI** für die Unterstützung bei Protokoll-
+und Loganalysen, Fehlersuche und Coding während der Entwicklung dieses Projekts.
