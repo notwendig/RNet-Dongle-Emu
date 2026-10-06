@@ -15,6 +15,7 @@ endif()
 add_library(ftd2xx SHARED
     src/ftd2xx_emu.cpp
     src/ftd2xx_emu.h
+    src/ftd2xx.def
 )
 
 target_compile_features(ftd2xx PRIVATE cxx_std_17)
