@@ -573,7 +573,7 @@ BOOL CALLBACK init_once(PINIT_ONCE, PVOID, PVOID*) {
 
     load_stored_blocks();
     if (g.replayMode) load_replay(join_path(g.baseDir, replayName));
-    logf("RNet Dongle Emulator initialized: mode=%s, no USB backend",
+    logf("FTD2XX RNet emulator initialized: mode=%s, no USB backend",
          g.replayMode ? "replay" : "synthetic");
     start_scheduler();
     return TRUE;
