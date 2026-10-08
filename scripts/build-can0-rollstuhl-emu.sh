@@ -4,7 +4,10 @@ set -euo pipefail
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 cd "$ROOT"
 
-case "${1:-release}" in
+BUILD_KIND="${1:-release}"
+MODE="${2:-emu}"
+
+case "$BUILD_KIND" in
     release|mingw32-release)
         PRESET=mingw32-release
         ;;
@@ -12,7 +15,15 @@ case "${1:-release}" in
         PRESET=mingw32-debug
         ;;
     *)
-        echo "Aufruf: $0 [release|debug]" >&2
+        echo "Aufruf: $0 [release|debug] [emu|real]" >&2
+        exit 2
+        ;;
+esac
+
+case "$MODE" in
+    emu|real) ;;
+    *)
+        echo "Aufruf: $0 [release|debug] [emu|real]" >&2
         exit 2
         ;;
 esac
@@ -26,10 +37,16 @@ echo "== nativer SocketCAN-Proxy =="
 cmake -S tools/rnet-can-proxy -B build/rnet-can-proxy -G Ninja
 cmake --build build/rnet-can-proxy -j"$(nproc)"
 
-echo
-echo "== Qt6 rollstuhl.emu =="
-cmake -S rollstuhl.emu -B build/rollstuhl.emu -G Ninja
-cmake --build build/rollstuhl.emu -j"$(nproc)"
+if [[ "$MODE" == "emu" ]]; then
+    echo
+    echo "== Qt6 rollstuhl.emu =="
+    cmake -S rollstuhl.emu -B build/rollstuhl.emu -G Ninja
+    cmake --build build/rollstuhl.emu -j"$(nproc)"
+else
+    echo
+    echo "== rollstuhl.emu =="
+    echo "REAL-Modus: nicht benötigt, Build übersprungen."
+fi
 
 echo
 echo "Fertig."
@@ -39,4 +56,6 @@ else
     echo "DLL:        $ROOT/build/mingw32-debug/ftd2xx.dll"
 fi
 echo "CAN proxy:  $ROOT/build/rnet-can-proxy/rnet-can-proxy"
-echo "Rollstuhl:  $ROOT/build/rollstuhl.emu/rollstuhl.emu"
+if [[ "$MODE" == "emu" ]]; then
+    echo "Rollstuhl:  $ROOT/build/rollstuhl.emu/rollstuhl.emu"
+fi

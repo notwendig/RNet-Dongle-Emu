@@ -64,6 +64,19 @@ bool valid_packet(const unsigned char* p, std::size_t n) {
     return n == kPacketSize && p[0] == 'R' && p[1] == 'N' &&
            p[2] == 'C' && p[3] == '1' && p[5] <= 8;
 }
+
+void print_can_frame(const char* tag, const std::string& iface,
+                     std::uint32_t id, unsigned char dlc,
+                     const unsigned char* data) {
+    if (id <= CAN_SFF_MASK)
+        std::printf("%s %s %03X#", tag, iface.c_str(), id);
+    else
+        std::printf("%s %s %08X#", tag, iface.c_str(), id);
+    for (unsigned i = 0; i < dlc; ++i)
+        std::printf("%02X", data[i]);
+    std::putchar('\n');
+    std::fflush(stdout);
+} // RX-CHAIN-LOGGING
 }
 
 int main(int argc, char** argv) {
@@ -159,7 +172,11 @@ int main(int argc, char** argv) {
                     f.can_dlc = p[5];
                     if (f.can_dlc) std::memcpy(f.data, p.data() + 10, f.can_dlc);
                     const ssize_t wr = ::write(canfd, &f, sizeof(f));
-                    if (wr != static_cast<ssize_t>(sizeof(f))) std::perror("write(can)");
+                    if (wr != static_cast<ssize_t>(sizeof(f))) {
+                        std::perror("write(can)");
+                    } else {
+                        print_can_frame("CAN-TX", iface, id, f.can_dlc, f.data);
+                    }
                 }
             }
         }
@@ -171,6 +188,7 @@ int main(int argc, char** argv) {
                 if (f.can_id & (CAN_RTR_FLAG | CAN_ERR_FLAG)) continue;
                 const std::uint32_t id = f.can_id & CAN_EFF_MASK;
                 const unsigned char dlc = f.can_dlc > 8 ? 8 : f.can_dlc;
+                print_can_frame("CAN-RX", iface, id, dlc, f.data); // RX-CHAIN-LOGGING
                 const auto p = make_packet(kCanRx, id, dlc, f.data);
                 ::sendto(udpfd, p.data(), p.size(), 0,
                          reinterpret_cast<sockaddr*>(&peer), peerLen);

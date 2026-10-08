@@ -1,16 +1,32 @@
 # Security and safety
 
-This project is for **offline interoperability research and software testing**.
-The emulator has no physical CAN/USB wheelchair backend.
+This repository is an interoperability/research project. It contains emulator
+logic and a generic SocketCAN test backend, but it is **not** a safety-certified
+service or programming system for an operational wheelchair.
 
-Do not use this software to tune, validate, or approve a mobility device for
-operation. Never test experimental programming logic on an occupied wheelchair
-or on hardware where unexpected motion could cause injury. Use vendor-approved
-service procedures and qualified personnel for real devices.
+## Safety boundary
 
-Do not publish logs, saved configuration files, decrypted parameter databases,
-or screenshots that contain customer/device identifiers without reviewing and
-sanitizing them first.
+- Use `Device=emu` for self-contained software testing whenever possible.
+- Use `Device=canN` only in a controlled, authorized bench environment.
+- Never test experimental programming or control logic on an occupied chair.
+- Do not rely on emulator success as evidence that a real-device write is safe.
+- Follow manufacturer-approved service procedures for operational mobility
+  equipment.
 
-For security issues in the code, open a private GitHub security advisory rather
-than posting exploit details in a public issue.
+The repository intentionally omits device-specific live-wheelchair wiring,
+programming instructions and the procedure used to switch from a Dealer dongle
+to an OEM dongle.
+
+## Data handling
+
+Do not publish unsanitized logs, captures, saved `.R-net` configurations,
+decrypted parameter databases or other files containing device/customer
+identifiers.
+
+Local runtime/research data such as replay captures, RNB2 state and proprietary
+parameter databases must remain outside committed project content.
+
+## Reporting security issues
+
+Use a private GitHub security advisory for security-sensitive code issues rather
+than publishing exploit details in a public issue.

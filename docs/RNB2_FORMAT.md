@@ -1,7 +1,7 @@
 # RNB2 state format
 
-`rnet-block-state.bin` is the emulator's persistent repository overlay. All
-integers are little-endian.
+`rnet-block-state.bin` is the emulator's persistent repository state/overlay.
+All integer fields are little-endian.
 
 ## File header
 
@@ -15,12 +15,18 @@ integers are little-endian.
 | Size | Meaning |
 |---:|---|
 | 4 | repository selector |
-| 4 | flags (`bit 0`: ODI 0x89 is valid) |
+| 4 | flags |
 | 4 | ODI `0x89` value |
 | 4 | payload size |
 | N | payload bytes |
 
-RNB1 is accepted by the emulator for backwards compatibility but does not carry
-ODI `0x89` metadata. New state files are written as RNB2.
+Flag bit 0 indicates that ODI `0x89` metadata is valid.
 
-The state file is runtime/user data and is ignored by Git.
+RNB1 can be accepted for backwards compatibility but does not carry the same
+ODI metadata. Newly written state uses RNB2.
+
+The state file is local runtime/user data, not repository source. It is used by
+the emulator to make writes persistent and to serve later reads from the
+updated state.
+
+The cleanup helper preserves `rnet-block-state.bin` in normal cleanup mode.

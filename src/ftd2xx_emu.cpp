@@ -34,7 +34,8 @@ constexpr size_t kUserAreaSize = 64;
 // RNET_CAN_PROXY_STAGE1
 // Native PE32 cannot open Linux SocketCAN directly. Device=canN therefore
 // talks to the small native rnet-can-proxy on localhost UDP port 39000+N.
-// Device=emu keeps the existing full in-DLL replay/dynamic emulation.
+// V15 runtime uses Device=canN only; chair simulation lives in rollstuhl.emu.
+// The older Device=emu code remains as rollback code but is not used by start.sh/deploy.
 constexpr unsigned short kCanProxyBasePort = 39000;
 constexpr size_t kCanProxyPacketSize = 20;
 constexpr unsigned char kCanProxyHello = 1;
@@ -171,6 +172,13 @@ struct Device {
     std::deque<ScheduledFrame> scheduled;
     std::vector<PeriodicSource> periodic;
     PeriodicSource statusPeriodic{};
+
+    // RNET-CAN-LIVE-V16
+    // Device=canN derives chair presence strictly from recent real SocketCAN RX.
+    // No CAN RX -> no synthetic attached/filter-status RX.
+    std::uint64_t canLastRxUs = 0;
+    bool canLive = false;
+    bool canAttachedAnnounced = false;
 
     // Stateful POP block overlay. Writes made by the Programmer are kept by
     // this virtual dongle and override replay data on later reads.
@@ -643,9 +651,20 @@ BOOL CALLBACK init_once(PINIT_ONCE, PVOID, PVOID*) {
     if (g.replayMode) load_replay(join_path(g.baseDir, replayName));
     logf("FTD2XX RNet initialized: Device=%s backend=%s",
          g.deviceName.c_str(), g.canBackend ? "SocketCAN-proxy" : "full-emu");
-    if (g.canBackend && !start_can_proxy())
-        logf("CAN proxy startup failed for %s", g.deviceName.c_str());
+    if (g.canBackend) {
+        if (!start_can_proxy())
+            logf("CAN proxy startup failed for %s", g.deviceName.c_str());
+    }
+
+    // RNET-CAN-LIVE-V16
+    // The scheduler is needed only for the dongle-local 300-ms filter-status
+    // phase. In Device=canN that phase is gated by recent SocketCAN RX and is
+    // stopped automatically as soon as the chair/simulator becomes silent.
     start_scheduler();
+    if (g.canBackend) {
+        logf("RNET-CAN-LIVE-V16: CAN backend follows live bus; local status is CAN-RX gated");
+    }
+
     return TRUE;
 }
 
@@ -692,7 +711,55 @@ void enqueue_pdu_locked(const std::array<unsigned char, 19>& pdu) {
     logf("RX %s", hex24(f.data()).c_str());
 }
 
+// RNET-CAN-LIVE-V16
+// Both the real capture and rollstuhl.emu provide cyclic traffic much faster
+// than this.  The timeout prevents stale dongle status from keeping Programmer
+// in SYSINIT after power-off.
+constexpr std::uint64_t kCanLiveTimeoutUsV16 = 250000u;
+
+bool rnet_can_live_v16_locked(std::uint64_t now) {
+    if (!g.canBackend) return true;
+    if (!g.canLive || g.canLastRxUs == 0) return false;
+
+    const std::uint64_t age =
+        now >= g.canLastRxUs ? now - g.canLastRxUs : 0;
+    if (age <= kCanLiveTimeoutUsV16)
+        return true;
+
+    g.canLive = false;
+    g.canAttachedAnnounced = false;
+    logf("RNET-CAN-LIVE-V16: CAN silent for >250 ms; synthetic status disabled");
+    return false;
+}
+
+bool mark_can_rx_v16_locked(std::uint64_t now) {
+    if (!g.canBackend) return false;
+
+    bool transition = !g.canLive || g.canLastRxUs == 0;
+    if (!transition && now >= g.canLastRxUs)
+        transition = (now - g.canLastRxUs) > kCanLiveTimeoutUsV16;
+
+    g.canLastRxUs = now;
+    g.canLive = true;
+
+    if (transition) {
+        g.canAttachedAnnounced = false;
+        g.statusPeriodic = PeriodicSource{};
+        logf("RNET-CAN-LIVE-V16: CAN traffic detected; chair/simulator is live");
+    }
+    return transition;
+}
+
 void queue_attached_status_locked() {
+    if (g.canBackend) {
+        if (!rnet_can_live_v16_locked(now_us())) {
+            logf("RNET-CAN-LIVE-V16: attached status suppressed; CAN is silent");
+            return;
+        }
+        if (g.canAttachedAnnounced)
+            return;
+    }
+
     std::array<unsigned char, 19> p{};
     p[0] = 0x00;
     p[1] = 0xFF;
@@ -703,8 +770,53 @@ void queue_attached_status_locked() {
     };
     std::copy(data, data + 16, p.begin() + 3);
     enqueue_pdu_locked(p);
+
+    if (g.canBackend) {
+        g.canAttachedAnnounced = true;
+        logf("RNET-CAN-LIVE-V16: attached status emitted after live CAN RX");
+    }
 }
 
+void queue_can_filter_status_v16_locked() {
+    const std::uint64_t now = now_us();
+    if (!rnet_can_live_v16_locked(now)) {
+        g.statusPeriodic = PeriodicSource{};
+        logf("RNET-CAN-LIVE-V16: WriteFilterMode=1 ignored; CAN is silent");
+        return;
+    }
+
+    // Immediate dongle-local mode-1 status.
+    std::array<unsigned char, 19> p{};
+    p[0] = 0x00;
+    p[1] = 0xFF;
+    p[2] = 0x00;
+    const unsigned char data[16] = {
+        0x01,0x02,0x00,0x01,0x00,0x00,0x00,0x00,
+        0x00,0x00,0x00,0x80,0x00,0x00,0x00,0x02
+    };
+    std::copy(data, data + 16, p.begin() + 3);
+    enqueue_pdu_locked(p);
+
+    // Then 000302 every 300 ms for the active mode-1 phase.
+    auto ready = p;
+    ready[3] = 0x03;
+    g.statusPeriodic.canId = 0xFFFFFFFFu;
+    g.statusPeriodic.intervalUs = 300000u;
+    g.statusPeriodic.nextDueUs = now + 300000u;
+    g.statusPeriodic.frame = make_rx_frame(ready);
+    g.statusPeriodic.active = true;
+    if (g.schedulerWakeEvent)
+        SetEvent(g.schedulerWakeEvent);
+
+    logf("RNET-CAN-LIVE-V16: WriteFilterMode=1 -> immediate 000102; periodic 000302 armed");
+}
+
+void stop_can_filter_status_v16_locked() {
+    g.statusPeriodic = PeriodicSource{};
+    if (g.schedulerWakeEvent)
+        SetEvent(g.schedulerWakeEvent);
+    logf("RNET-CAN-LIVE-V16: WriteFilterMode=2 -> periodic status stopped");
+}
 
 bool decode_can_id(const std::array<unsigned char, kFrameSize>& frame,
                    std::uint32_t& canId) {
@@ -789,10 +901,44 @@ std::array<unsigned char, kFrameSize> make_can_rx_frame(
     std::array<unsigned char, 19> p{};
     p[0] = 0x01;
     encode_can_id(canId, p.data() + 1);
+
     const unsigned char n = dlc > 8 ? 8 : dlc;
     if (data && n) std::copy_n(data, n, p.begin() + 5);
-    // Captured dongle RX CAN frames use the 0x20 receive flag plus DLC.
-    p[13] = static_cast<unsigned char>(0x20u | n);
+
+    // RNET-RX-WIRE-FIX-V3
+    //
+    // The R-Net Programmer does not receive a bare CAN record from the FTDI
+    // dongle.  DongleInterface adds receive/status bits to the four CAN-ID
+    // bytes and to the DLC/status byte.  The generic SocketCAN bridge used to
+    // reproduce only the CAN ID and payload, which produced syntactically
+    // valid 24-byte FTDI frames that FT_Read() delivered, but which the
+    // Programmer did not accept as valid R-Net replies.
+    //
+    // Observed dongle RX encoding:
+    //   * extended CAN data frames with payload: p[2] bit 0x10 is set;
+    //   * POP replies on standard IDs 0x790..0x79F: p[3] = 0x06 and
+    //     transaction/status nibble 0x30;
+    //   * segmented POP data 0x1E42xxxx / 0x1E43xxxx also uses 0x30;
+    //   * cyclic/broadcast R-Net frames retain the 0x20 receive nibble.
+    //
+    // DLC==0 extended flow-control frames intentionally keep the raw encoded
+    // header; the known 0x1E410000 segmented-write response is represented
+    // that way by the full emulator as well.
+    const bool extended = canId > 0x7FFu;
+    const bool popStandardReply = canId >= 0x790u && canId <= 0x79Fu;
+    const std::uint32_t family = canId & 0x1FFF0000u;
+    const bool popSegmentData =
+        family == 0x1E420000u || family == 0x1E430000u;
+
+    if (extended && n != 0)
+        p[2] = static_cast<unsigned char>(p[2] | 0x10u);
+
+    if (popStandardReply)
+        p[3] = 0x06u;
+
+    p[13] = static_cast<unsigned char>(
+        (popStandardReply || popSegmentData ? 0x30u : 0x20u) | n);
+
     return make_rx_frame(p);
 }
 
@@ -891,13 +1037,55 @@ DWORD WINAPI can_proxy_rx_thread_proc(LPVOID) {
         const unsigned char dlc = p[5];
         const auto f = make_can_rx_frame(canId, p.data() + 10, dlc);
 
+        std::string canDataHex;
+        canDataHex.reserve(static_cast<std::size_t>(dlc) * 2u);
+        static const char* kHex = "0123456789ABCDEF";
+        for (unsigned i = 0; i < dlc; ++i) {
+            const unsigned char b = p[10 + i];
+            canDataHex.push_back(kHex[b >> 4]);
+            canDataHex.push_back(kHex[b & 0x0F]);
+        }
+        char canIdText[16] = {};
+        if (canId <= 0x7FFu)
+            std::snprintf(canIdText, sizeof(canIdText), "%03lX",
+                          static_cast<unsigned long>(canId));
+        else
+            std::snprintf(canIdText, sizeof(canIdText), "%08lX",
+                          static_cast<unsigned long>(canId));
+
+        logf("CAN-RX %s %s#%s", g.deviceName.c_str(), canIdText,
+             canDataHex.c_str()); // RX-CHAIN-LOGGING
+        logf("RNET-RX %s", hex24(f.data()).c_str());
+
+        bool queued = false;
+        bool liveTransitionV16 = false;
+        std::size_t queueAfter = 0;
         EnterCriticalSection(&g.cs);
-        if (g.opened && !g.inputStopped)
+
+        const std::uint64_t rxNowV16 = now_us();
+        liveTransitionV16 = mark_can_rx_v16_locked(rxNowV16);
+
+        if (g.opened && !g.inputStopped) {
+            // Deliver the real CAN frame first. Only actual bus traffic may
+            // cause the virtual dongle to announce an attached system.
             enqueue_bytes_locked(f.data(), f.size());
+            if (liveTransitionV16)
+                queue_attached_status_locked();
+            queued = true;
+        }
+        queueAfter = g.rx.size();
         LeaveCriticalSection(&g.cs);
 
-        logf("CAN<-%s id=0x%08lX dlc=%u",
-             g.deviceName.c_str(), static_cast<unsigned long>(canId), dlc);
+        if (queued) {
+            logf("RX-QUEUE +%u => %u",
+                 static_cast<unsigned>(f.size()),
+                 static_cast<unsigned>(queueAfter));
+        } else {
+            logf("RX-QUEUE drop: opened=%u inputStopped=%u queued=%u",
+                 g.opened ? 1u : 0u,
+                 g.inputStopped ? 1u : 0u,
+                 static_cast<unsigned>(queueAfter));
+        }
     }
     return 0;
 }
@@ -1049,8 +1237,21 @@ void emit_periodic_locked(PeriodicSource& source,
     if (!source.active || source.intervalUs == 0) return;
     if (source.nextDueUs > now) return;
 
+    // RNET-CAN-LIVE-V16: dongle-local status may exist only while actual
+    // CAN traffic is still arriving. This is the power-off watchdog.
+    if (g.canBackend && source.canId == 0xFFFFFFFFu &&
+        !rnet_can_live_v16_locked(now)) {
+        source = PeriodicSource{};
+        logf("RNET-CAN-LIVE-V16: periodic status cancelled because CAN is silent");
+        return;
+    }
+
     if (g.opened && !g.inputStopped) {
         enqueue_bytes_locked(source.frame.data(), source.frame.size());
+    }
+    if (g.canBackend && source.canId == 0xFFFFFFFFu) {
+        logf("RNET-CAN-LIVE-V16 periodic RX %s",
+             hex24(source.frame.data()).c_str());
     }
     (void)tag;
 
@@ -1689,7 +1890,10 @@ void synthetic_usb_command_locked(const unsigned char* f) {
     }
     if (cmd == 0x05 && sub == 0x0A) { // WriteFlashOverCAN
         g.flashOverCan = d[0] != 0;
-        if (g.emulateReenumeration) g.reenumerationPending = true;
+        if (g.emulateReenumeration && !g.canBackend)
+            g.reenumerationPending = true; // RNET-CAN-NO-REENUM-V4
+        else if (g.canBackend)
+            logf("RNet dongle re-enumeration suppressed for CAN backend");
         return;
     }
     if (cmd == 0x05 && sub == 0x09) { // ReadFlashOverCAN
@@ -1713,9 +1917,113 @@ void synthetic_usb_command_locked(const unsigned char* f) {
     if (likelyRead) enqueue_pdu_locked(r);
 }
 
+
+// RNET-CAN-RX-META-V11
+//
+// The real dongle does not always use 0x0600 in the two bytes following
+// the encoded standard CAN ID. The captured Programmer transaction has
+// one state-dependent case which is required for the next POP request:
+//
+//   TX 20/81/06/0001
+//   RX 4F/81
+//   TX 40/8B
+//   CAN 790#2F8B000099660000
+//
+// Reference dongle wire frame:
+//   100201F20000082F8B0000996600003800000000008A10FE
+//
+// Generic SocketCAN encoder frame:
+//   100201F20006002F8B0000996600003800000000008410FE
+//
+// Do not rewrite every 2F8B/9966 response: the same CAN payload also occurs
+// elsewhere with 0x0600 and is accepted there. Arm only for the exact
+// preceding TX sequence.
+
+bool g_v11_saw_8106 = false;
+bool g_v11_fix_next_8b9966 = false;
+
+bool v11_frame_equal(const unsigned char* a, const unsigned char* b) {
+    for (std::size_t i = 0; i < kFrameSize; ++i) {
+        if (a[i] != b[i]) return false;
+    }
+    return true;
+}
+
+void v11_track_tx_meta_locked(const unsigned char* frame) {
+    static const unsigned char kTx8106[kFrameSize] = {
+        0x10,0x02,0x01,0xF1,0xE0,0x00,0x00,0x20,
+        0x81,0x00,0x00,0x06,0x00,0x01,0x00,0x08,
+        0x00,0x00,0x00,0x00,0x00,0xBE,0x10,0xFE
+    };
+    static const unsigned char kTx408B[kFrameSize] = {
+        0x10,0x02,0x01,0xF1,0xE0,0x00,0x00,0x40,
+        0x8B,0x00,0x00,0x00,0x00,0x00,0x00,0x08,
+        0x00,0x00,0x00,0x00,0x00,0xD3,0x10,0xFE
+    };
+
+    if (v11_frame_equal(frame, kTx8106)) {
+        g_v11_saw_8106 = true;
+        g_v11_fix_next_8b9966 = false;
+        logf("RNET-CAN-RX-META-V11 stage1: saw 20/81/06/0001");
+        return;
+    }
+
+    if (v11_frame_equal(frame, kTx408B)) {
+        g_v11_fix_next_8b9966 = g_v11_saw_8106;
+        g_v11_saw_8106 = false;
+        if (g_v11_fix_next_8b9966)
+            logf("RNET-CAN-RX-META-V11 armed: next 2F8B/9966 uses 0008 metadata");
+        return;
+    }
+
+    if (g_v11_saw_8106)
+        g_v11_saw_8106 = false;
+}
+
+void v11_rewrite_rx_meta_locked(unsigned char* data, DWORD n) {
+    if (!g_v11_fix_next_8b9966 || !data || n < kFrameSize)
+        return;
+
+    static const unsigned char kWrong[kFrameSize] = {
+        0x10,0x02,0x01,0xF2,0x00,0x06,0x00,0x2F,
+        0x8B,0x00,0x00,0x99,0x66,0x00,0x00,0x38,
+        0x00,0x00,0x00,0x00,0x00,0x84,0x10,0xFE
+    };
+    static const unsigned char kFixed[kFrameSize] = {
+        0x10,0x02,0x01,0xF2,0x00,0x00,0x08,0x2F,
+        0x8B,0x00,0x00,0x99,0x66,0x00,0x00,0x38,
+        0x00,0x00,0x00,0x00,0x00,0x8A,0x10,0xFE
+    };
+
+    for (DWORD off = 0; off + kFrameSize <= n; ++off) {
+        if (!v11_frame_equal(data + off, kWrong))
+            continue;
+
+        for (std::size_t i = 0; i < kFrameSize; ++i)
+            data[off + i] = kFixed[i];
+
+        g_v11_fix_next_8b9966 = false;
+        logf("RNET-CAN-RX-META-V11 rewrite: 2F8B/9966 0600 -> 0008");
+        return;
+    }
+}
+
 void process_frame_locked(const unsigned char* frame) {
     logf("TX %s", hex24(frame).c_str());
     const unsigned char* pdu = frame + 2;
+
+    v11_track_tx_meta_locked(frame);
+
+    // RNET-CAN-LIVE-V16
+    // 04/03 is a dongle-local filter-mode handshake, not CAN traffic.
+    // Answer it only while a real/simulated chair is actively producing CAN RX.
+    if (g.canBackend &&
+        pdu[0] == 0x00 && pdu[1] == 0x04 && pdu[2] == 0x03) {
+        if (pdu[3] == 0x01)
+            queue_can_filter_status_v16_locked();
+        else if (pdu[3] == 0x02)
+            stop_can_filter_status_v16_locked();
+    }
 
     // Device=canN: only the FTDI/R-Net dongle remains virtual. USB dongle
     // commands are answered locally; CAN traffic goes unchanged to canN.
@@ -1757,13 +2065,14 @@ void process_frame_locked(const unsigned char* frame) {
     // one FT_DEVICE_NOT_FOUND from FT_OpenEx, then a successful reopen.
     // Remember that transition even when the response itself comes from replay.
     if (pdu[0] == 0x00 && pdu[1] == 0x05 && pdu[2] == 0x0A &&
-        g.emulateReenumeration) {
+        g.emulateReenumeration && !g.canBackend) {
         g.flashOverCan = pdu[3] != 0;
         g.reenumerationPending = true;
         logf("RNet dongle re-enumeration armed by command 05/0A");
     }
 
     if (replay_locked(frame)) return;
+
 
     // A modified configuration contains POP writes that are intentionally absent
     // from the read-only capture. Acknowledge those control writes dynamically.
@@ -1909,8 +2218,17 @@ void reset_io_locked(bool resetReplay) {
     g.blockRead = BlockReadState{};
     if (resetReplay) g.replayPos = 0;
     g.inputStopped = false;
-    queue_attached_status_locked();
-    wake_scheduler_locked();
+    if (!g.canBackend) {
+        queue_attached_status_locked();
+        wake_scheduler_locked();
+    } else {
+        // RNET-CAN-LIVE-V16: a new open starts with no assumed chair state.
+        // The next real CAN RX establishes liveness; until then the DLL stays quiet.
+        g.canLastRxUs = 0;
+        g.canLive = false;
+        g.canAttachedAnnounced = false;
+        logf("RNET-CAN-LIVE-V16: open/reset: waiting for real CAN RX");
+    }
 }
 
 } // namespace
@@ -1982,7 +2300,7 @@ FT_STATUS WINAPI FT_OpenEx(PVOID arg, DWORD flags, FT_HANDLE* out) {
         return FT_DEVICE_NOT_FOUND;
     }
     EnterCriticalSection(&g.cs);
-    if (g.reopenFailuresRemaining) {
+    if (!g.canBackend && g.reopenFailuresRemaining) {
         --g.reopenFailuresRemaining;
         *out = nullptr;
         LeaveCriticalSection(&g.cs);
@@ -2001,8 +2319,13 @@ FT_STATUS WINAPI FT_OpenEx(PVOID arg, DWORD flags, FT_HANDLE* out) {
     *out = reinterpret_cast<FT_HANDLE>(&g);
     const size_t rp = g.replayPos;
     LeaveCriticalSection(&g.cs);
-    logf("FT_OpenEx: virtual %s/%s opened (replay step %u)",
-         kDescription, kSerial, static_cast<unsigned>(rp));
+    if (g.canBackend) {
+        logf("FT_OpenEx: virtual %s/%s opened (CAN backend %s)",
+             kDescription, kSerial, g.deviceName.c_str()); // RX-CHAIN-LOGGING
+    } else {
+        logf("FT_OpenEx: virtual %s/%s opened (replay step %u)",
+             kDescription, kSerial, static_cast<unsigned>(rp));
+    }
     return FT_OK;
 }
 
@@ -2029,23 +2352,42 @@ FT_STATUS WINAPI FT_Close(FT_HANDLE h) {
 FT_STATUS WINAPI FT_Read(FT_HANDLE h, LPVOID buf, DWORD want, LPDWORD got) {
     ensure_init();
     if (!got || (want && !buf)) return FT_INVALID_PARAMETER;
+
+    DWORD n = 0;
+    std::size_t queueAfter = 0;
+    std::string dataHex;
+
     EnterCriticalSection(&g.cs);
     if (!valid_handle(h)) {
         LeaveCriticalSection(&g.cs);
         return FT_INVALID_HANDLE;
     }
-    DWORD n = 0;
     if (!g.inputStopped) {
         n = static_cast<DWORD>(std::min<size_t>(want, g.rx.size()));
         auto* d = static_cast<unsigned char*>(buf);
+        dataHex.reserve(static_cast<std::size_t>(n) * 2u);
+        static const char* kHex = "0123456789ABCDEF";
         for (DWORD i = 0; i < n; ++i) {
             d[i] = g.rx.front();
             g.rx.pop_front();
+            dataHex.push_back(kHex[d[i] >> 4]);
+            dataHex.push_back(kHex[d[i] & 0x0F]);
         }
     }
+    v11_rewrite_rx_meta_locked(static_cast<unsigned char*>(buf), n);
     *got = n;
+    queueAfter = g.rx.size();
     if (!g.rx.empty()) signal_rx_locked();
     LeaveCriticalSection(&g.cs);
+
+    // Log only successful reads; zero-byte polling would flood the logfile.
+    if (n != 0) {
+        logf("FT_Read want=%lu got=%lu remain=%u data=%s",
+             static_cast<unsigned long>(want),
+             static_cast<unsigned long>(n),
+             static_cast<unsigned>(queueAfter),
+             dataHex.c_str()); // RX-CHAIN-LOGGING
+    }
     return FT_OK;
 }
 
@@ -2073,7 +2415,7 @@ FT_STATUS WINAPI FT_GetQueueStatus(FT_HANDLE h, DWORD* n) {
         LeaveCriticalSection(&g.cs);
         return FT_INVALID_HANDLE;
     }
-    if (g.reenumerationPending && g.rx.empty()) {
+    if (!g.canBackend && g.reenumerationPending && g.rx.empty()) {
         g.reenumerationPending = false;
         g.reopenFailuresRemaining = 1;
         *n = 0;

@@ -1,44 +1,96 @@
 # RNet-Dongle-Emu
 
-Offline FTD2XX/R-Net Programmer interoperability emulator plus tools for
-inspecting PGDT R-Net parameter/configuration data.
+FTD2XX/R-Net Programmer interoperability emulator and analysis toolkit.
 
-> **Research / interoperability project.** No physical wheelchair CAN/USB
-> backend is included. Do not use this project to approve or tune an operational
-> mobility device. See [SECURITY.md](SECURITY.md).
+The project provides a clean-room 32-bit `ftd2xx.dll` replacement for the
+examined R-Net Programmer environment. It supports a self-contained emulator
+backend and a SocketCAN backend for controlled bench interoperability work.
+
+> **Research / interoperability project.**
+> This is not a safety certification and must not be used to approve a mobility
+> device for operation. Device-specific real-wheelchair wiring, live programming
+> procedures and the Dealer-to-OEM dongle switch are intentionally not
+> documented here. See [SECURITY.md](SECURITY.md).
+
+## Current status — 2026-10-08
+
+The emulator path has now been exercised successfully end-to-end:
+
+- **connect: OK**
+- **read: OK**
+- **write: OK**
+
+This result applies to the emulator/test setup. It is not a claim that writing
+to a real wheelchair has been validated or is safe.
+
+A separate real-CAN test with a **You-Q test wheelchair** has previously
+confirmed that the Programmer can read the wheelchair configuration through a
+CAN interface. The device-specific connection procedure and the method for
+switching from a Dealer dongle to an OEM dongle remain outside this repository
+for safety and liability reasons.
+
+## Runtime backends
+
+The backend is selected in `ftd2xx-emu.ini`.
+
+### `Device=emu`
+
+Self-contained emulator mode. The DLL provides the R-Net/FTD2XX behavior needed
+by the Programmer without a physical wheelchair bus.
+
+### `Device=canN`
+
+SocketCAN mode. `canN` is the Linux CAN interface used by the backend, for
+example `can0`.
+
+A typical controlled test topology is:
+
+```text
+R-Net Programmer
+       |
+   ftd2xx.dll
+       |
+  Device=can0
+       |
+      can0
+       |
+   CAN test pair
+       |
+      can1
+       |
+ rollstuhl.emu
+```
+
+The same generic SocketCAN transport can be used with authorized bench hardware,
+but real-device setup details are deliberately not part of the public
+documentation.
 
 ## What is included
 
-- **`ftd2xx.dll` emulator** — a 32-bit clean-room FTD2XX-compatible DLL for the
-  examined R-Net Programmer environment.
-- **Replay + stateful repository overlay** — replays captured startup traffic,
-  accepts repository writes, persists them as RNB2, and serves later reads from
-  the updated state.
-- **`rnd-decrypt`** — reproduces the Blowfish decryption used by the examined
-  Generic V33.1.1245 parameter database.
-- **`rnet-bin2md.py`** — converts a saved `.R-net` file or RNB2 overlay into a
-  Markdown inventory using a locally decrypted RND database.
-
-The analyzer covers the complete main Programmer tree:
-
-`Profile Management`, `Configuration`, `Speeds`, `Controls`, `Latched`,
-`Seating`, `Motor`, `Input Output Module`, `Omni`, `Mouse 1`, `Mouse 2`,
-`iDevice1`, and `iDevice2`.
-
-![R-Net Programmer configuration tree](docs/images/programmer-tree.png)
+- `src/ftd2xx_emu.cpp` — 32-bit FTD2XX-compatible emulator DLL.
+- `Device=emu` — self-contained R-Net Programmer emulation.
+- `Device=canN` — SocketCAN transport for bench interoperability.
+- `rollstuhl.emu/` — software counterpart for CAN-pair testing.
+- Replay/stateful repository handling for POP configuration transactions.
+- Persistent RNB2 repository state.
+- `tools/rnd-decrypt.c` — decryptor for the examined
+  `Generic_V33_1_1245.rnd` database generation.
+- `tools/rnet-bin2md.py` — `.R-net`/RNB2 to Markdown inventory generator.
+- CMake/MinGW32 build support, tests and Wine deployment helpers.
 
 ## Repository layout
 
 ```text
 src/                    FTD2XX emulator DLL
+rollstuhl.emu/          software R-Net/CAN test counterpart
 cmake/toolchains/       MinGW32 cross-compilation toolchain
-tools/rnd-decrypt.c     RND decryptor for the tested database generation
-tools/rnet-bin2md.py    R-Net/RNB2 -> Markdown analyzer
-tests/                  dependency-free parser tests
-docs/                   protocol, RND/RNB2 and compatibility notes
-examples/               configuration/replay format examples only
-scripts/                Wine deployment and release packaging helpers
-.github/workflows/      CI for Python, decryptor and MinGW32 DLL
+tools/                  analysis/decryption utilities
+tests/                  parser and protocol tests
+docs/                   protocol, format, validation and compatibility notes
+examples/               configuration examples
+scripts/                deployment, release and cleanup helpers
+run/                    runtime helpers
+.github/workflows/      CI
 ```
 
 ## Dependencies
@@ -49,51 +101,66 @@ On Fedora:
 sudo dnf install cmake ninja-build mingw32-gcc-c++ gcc openssl-devel make python3
 ```
 
-Package names differ on other distributions. The emulator target must be
-32-bit Windows/i686 because the tested application is a 32-bit process.
+The Programmer process is 32-bit, therefore the FTD2XX replacement is built for
+Windows/i686.
 
-## Build the emulator DLL
+## Build
 
 ```bash
 cmake --preset mingw32-release
 cmake --build --preset mingw32-release
 ```
 
-Output:
+Expected DLL:
 
 ```text
 build/mingw32/ftd2xx.dll
 ```
 
-The project works well with VS Code + CMake Tools: select the
-`mingw32-release` configure/build preset.
+The project is intended to work with VS Code and CMake Tools using the
+`mingw32-release` preset.
 
-## Configure the emulator
+## Configure
 
-Copy `examples/ftd2xx-emu.ini.example` to `ftd2xx-emu.ini` next to the DLL.
-Replay mode expects an authorized local `rnet-replay.txt` capture. Runtime
-writes are stored in `rnet-block-state.bin`.
+`ftd2xx-emu.ini` selects the backend:
 
-Neither file is included in the repository.
-
-## Optional Wine deployment helper
-
-```bash
-scripts/deploy-wine.sh "/path/to/the/Programmer/directory"
+```ini
+Device=emu
 ```
 
-The helper backs up an existing `ftd2xx.dll` and installs a symlink to the
-new build. Close the Programmer before changing its DLL.
+or, for example:
 
-## Decrypt your local RND database
+```ini
+Device=can0
+```
 
-The tested database is `Generic_V33_1_1245.rnd`. Build:
+Replay/state files are local runtime data and are not distributed as repository
+content.
+
+Important local files can include:
+
+- `rnet-replay.txt`
+- `rnet-block-state.bin`
+
+The cleanup helper intentionally preserves those files unless an explicit
+full-purge mode is selected.
+
+## Wine deployment
+
+Use the existing project deployment helper for the local Programmer directory.
+Close the Programmer before replacing or relinking the DLL.
+
+## RND analysis
+
+The examined parameter database is `Generic_V33_1_1245.rnd`.
+
+Build the decryptor:
 
 ```bash
 make -C tools
 ```
 
-Then, using your own legally obtained file:
+Use only a legally obtained local database file:
 
 ```bash
 tools/rnd-decrypt \
@@ -101,12 +168,11 @@ tools/rnd-decrypt \
   Generic_V33_1_1245.dec.bin
 ```
 
-The decryptor is intentionally version-specific. See
-[docs/RND_FORMAT.md](docs/RND_FORMAT.md).
+See [docs/RND_FORMAT.md](docs/RND_FORMAT.md).
 
-## Generate a complete Markdown report
+## Markdown configuration report
 
-For a saved Programmer configuration:
+Saved Programmer configuration:
 
 ```bash
 python3 tools/rnet-bin2md.py \
@@ -115,7 +181,7 @@ python3 tools/rnet-bin2md.py \
   --rnd Generic_V33_1_1245.dec.bin
 ```
 
-For an emulator RNB2 overlay:
+Emulator state:
 
 ```bash
 python3 tools/rnet-bin2md.py \
@@ -124,86 +190,39 @@ python3 tools/rnet-bin2md.py \
   --rnd Generic_V33_1_1245.dec.bin
 ```
 
-If the RNB2 file is only an overlay and you also have a complete saved file:
+## Validation and compatibility
 
-```bash
-python3 tools/rnet-bin2md.py \
-  rnet-block-state.bin \
-  report.md \
-  --base example.R-net \
-  --rnd Generic_V33_1_1245.dec.bin
-```
-
-The report lists all RND dictionary definitions under the 13 main Programmer
-sections and adds confirmed repository selectors/NV offsets where the RND uses
-ordinary NV-location records. Unknown packed layouts stay marked as unknown;
-the tool does not invent offsets.
-
-## Tests
-
-```bash
-python3 -m unittest discover -s tests -v
-python3 -m py_compile tools/rnet-bin2md.py
-make -C tools
-```
-
-CI additionally cross-builds the 32-bit Windows DLL with MinGW.
-
-## Current interoperability results
-
-The tested snapshot supports the complete offline flow needed during this
-research: Programmer startup, dongle re-enumeration, stateful repository write,
-persistent RNB2 storage and subsequent stateful read-back. Details are in
-[docs/VALIDATION.md](docs/VALIDATION.md).
-
-### Real CAN validation (not included)
-
-Separately from the published offline emulator, a direct connection through a
-CAN interface to my **You-Q test wheelchair** has already been successfully
-tested. With that setup, the Programmer reads the real configuration of the
-test wheelchair.
-
-For **safety and liability reasons**, neither this CAN integration nor the
-method used to switch from the **Dealer dongle to the OEM dongle** is part of
-this repository. The public project intentionally remains limited to offline
-emulation, replay and analysis.
-
-Compatibility information is documented in
-[docs/COMPATIBILITY.md](docs/COMPATIBILITY.md).
+- [Validation](docs/VALIDATION.md)
+- [Compatibility](docs/COMPATIBILITY.md)
+- [Protocol notes](docs/PROTOCOL.md)
+- [RNB2 state format](docs/RNB2_FORMAT.md)
+- [RND analysis notes](docs/RND_FORMAT.md)
 
 ## Data and licensing boundary
 
-No PGDT executable, DLL, `.rnd` database, decrypted database, `.R-net` customer
-file, replay capture, or device state is distributed here. See
-[NOTICE.md](NOTICE.md).
+No vendor executable, vendor DLL, original/decrypted `.rnd` database, customer
+`.R-net` file, replay capture or device state is distributed as project content.
+See [NOTICE.md](NOTICE.md).
 
 Project source code is licensed under the MIT License. Third-party software,
-data and trademarks remain subject to their respective owners' terms.
-
-> **Replay note:** `rnet-replay.txt` is capture-specific and is intentionally not
-> included in the public repository. `scripts/deploy-wine.sh` reuses an existing
-> valid replay or accepts `RNET_REPLAY_FILE=/path/to/rnet-replay.txt`.
-
-<!-- rnet-dongle-emu-readme-update:start -->
+data, product names and trademarks remain subject to their respective owners'
+terms.
 
 ## Screenshots
 
-### R-net Programmer with the emulated dongle
+### R-Net Programmer with the emulated dongle
 
-![R-net Programmer with the emulated dongle](docs/images/rnet-programmer-connected.png)
+![R-Net Programmer with the emulated dongle](docs/images/rnet-programmer-connected.png)
 
-### R-net Programmer application information
+### R-Net Programmer application information
 
-![R-net Programmer OEM Generic application information](docs/images/programmer-about.png)
+![R-Net Programmer OEM Generic application information](docs/images/programmer-about.png)
 
 ## Acknowledgements
 
-Special thanks to **Constantin Grosch <groschorama@gmail.com>**, who provided me
-with an R-net Programmer dongle free of charge for approximately **1.5 years**.
-That loan made the protocol analysis, comparison tests and development work
-possible in the first place and thereby enabled this project.
+Special thanks to **Constantin Grosch <groschorama@gmail.com>**, who provided an
+R-Net Programmer dongle free of charge for approximately 1.5 years. That loan
+made the protocol analysis, comparison testing and development work possible.
 
-I also thank **ChatGPT by OpenAI** for assistance with protocol and log analysis,
-debugging, and coding during the development of this project.
-
-<!-- rnet-dongle-emu-readme-update:end -->
+Thanks also to **ChatGPT by OpenAI** for assistance with protocol/log analysis,
+debugging, documentation and coding during development.

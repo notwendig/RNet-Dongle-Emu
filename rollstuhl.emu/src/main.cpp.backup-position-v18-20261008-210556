@@ -10,7 +10,6 @@
 #include <QPlainTextEdit>
 #include <QPushButton>
 #include <QRegularExpression>
-#include <QSettings>
 #include <QSocketNotifier>
 #include <QStringList>
 #include <QTextStream>
@@ -390,17 +389,6 @@ public:
         setWindowTitle(QStringLiteral("rollstuhl.emu — %1").arg(iface_));
         resize(680, 470);
 
-        // RNET-CHAIR-POSITION-V18:
-        // Persist only the top-level window position. Window size and emulator
-        // state deliberately keep their existing defaults.
-        {
-            QSettings settings(QStringLiteral("notwendig"),
-                               QStringLiteral("rollstuhl.emu"));
-            const QString key = QStringLiteral("window/position");
-            if (settings.contains(key))
-                move(settings.value(key).toPoint());
-        }
-
         auto* central = new QWidget(this);
         auto* layout = new QVBoxLayout(central);
 
@@ -512,13 +500,6 @@ public:
 
     ~MainWindow() override
     {
-        {
-            QSettings settings(QStringLiteral("notwendig"),
-                               QStringLiteral("rollstuhl.emu"));
-            settings.setValue(QStringLiteral("window/position"), pos());
-            settings.sync();
-        }
-
         if (fd_ >= 0)
             ::close(fd_);
     }
