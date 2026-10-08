@@ -37,13 +37,3 @@ set_target_properties(ftd2xx PROPERTIES
 
 install(TARGETS ftd2xx RUNTIME DESTINATION . LIBRARY DESTINATION .)
 install(FILES examples/ftd2xx-emu.ini.example DESTINATION . RENAME ftd2xx-emu.ini)
-
-# BEGIN RNET_WINE_AUTO_DEPLOY
-add_custom_target(deploy_wine_runtime ALL
-    COMMAND /bin/bash
-            "${CMAKE_CURRENT_SOURCE_DIR}/tools/deploy-wine-runtime.sh"
-            "$<TARGET_FILE:ftd2xx>"
-    DEPENDS ftd2xx
-    VERBATIM
-)
-# END RNET_WINE_AUTO_DEPLOY

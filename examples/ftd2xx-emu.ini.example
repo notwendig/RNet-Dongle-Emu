@@ -1,5 +1,12 @@
 [emulator]
-Mode=replay
+; Device=emu  : jetzige Voll-Emulation in ftd2xx.dll (Replay + dynamische Antworten)
+; Device=canN : FTDI/R-Net-Dongle bleibt emuliert, CAN geht über SocketCAN canN
+;               via tools/rnet-can-proxy. Beispiele: can0, can1.
+Device=can0
+
 ReplayFile=rnet-replay.txt
 LogFile=ftd2xx-emu.log
+
+; Real trace: command 05/0A makes the FTDI device disappear briefly,
+; FT_GetQueueStatus returns FT_IO_ERROR, first reopen returns DEVICE_NOT_FOUND.
 EmulateReenumeration=1

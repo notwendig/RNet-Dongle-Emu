@@ -1,9 +1,3 @@
-#ifndef WIN32_LEAN_AND_MEAN
-#define WIN32_LEAN_AND_MEAN
-#endif
-#include <winsock2.h>
-#include <ws2tcpip.h>
-
 #include "ftd2xx_emu.h"
 
 #include <algorithm>
@@ -30,30 +24,6 @@ constexpr DWORD kLibraryVersion = 0x00030208u;
 constexpr DWORD kDriverVersion = 0x00021236u;
 constexpr size_t kFrameSize = 24;
 constexpr size_t kUserAreaSize = 64;
-
-// RNET_CAN_PROXY_STAGE1
-// Native PE32 cannot open Linux SocketCAN directly. Device=canN therefore
-// talks to the small native rnet-can-proxy on localhost UDP port 39000+N.
-// Device=emu keeps the existing full in-DLL replay/dynamic emulation.
-constexpr unsigned short kCanProxyBasePort = 39000;
-constexpr size_t kCanProxyPacketSize = 20;
-constexpr unsigned char kCanProxyHello = 1;
-constexpr unsigned char kCanProxyTx = 2;
-constexpr unsigned char kCanProxyRx = 3;
-constexpr unsigned char kCanProxyHelloAck = 4;
-
-struct WinSockApi {
-    HMODULE module = nullptr;
-    int (WSAAPI *startup)(WORD, LPWSADATA) = nullptr;
-    SOCKET (WSAAPI *socket_fn)(int, int, int) = nullptr;
-    int (WSAAPI *close_fn)(SOCKET) = nullptr;
-    int (WSAAPI *sendto_fn)(SOCKET, const char*, int, int, const sockaddr*, int) = nullptr;
-    int (WSAAPI *recvfrom_fn)(SOCKET, char*, int, int, sockaddr*, int*) = nullptr;
-    int (WSAAPI *ioctl_fn)(SOCKET, long, u_long*) = nullptr;
-    int (WSAAPI *last_error)() = nullptr;
-};
-
-WinSockApi gWinsock;
 
 struct ReplayRx {
     std::array<unsigned char, kFrameSize> frame{};
@@ -152,14 +122,6 @@ struct Device {
     unsigned char filterMode = 0;
     bool flashOverCan = false;
     bool replayMode = false;
-    bool canBackend = false;
-    int canIndex = -1;
-    std::string deviceName = "emu";
-    SOCKET canProxySocket = INVALID_SOCKET;
-    sockaddr_in canProxyAddress{};
-    HANDLE canProxyThread = nullptr;
-    volatile LONG canProxyStop = 0;
-    bool canProxyOnline = false;
     bool emulateReenumeration = true;
     bool reenumerationPending = false;
     unsigned reopenFailuresRemaining = 0;
@@ -570,36 +532,6 @@ void load_replay(const std::string& path) {
          g.replayHasTiming ? "captured" : "legacy-fallback");
 }
 
-void configure_device(const char* value) {
-    g.deviceName = (value && *value) ? value : "emu";
-    g.canBackend = false;
-    g.canIndex = -1;
-    g.replayMode = true;
-
-    if (_stricmp(g.deviceName.c_str(), "emu") == 0) {
-        g.deviceName = "emu";
-        return;
-    }
-
-    if (_strnicmp(g.deviceName.c_str(), "can", 3) == 0 &&
-        g.deviceName.size() > 3) {
-        char* endp = nullptr;
-        const long index = std::strtol(g.deviceName.c_str() + 3, &endp, 10);
-        if (endp && *endp == '\0' && index >= 0 && index <= 999 &&
-            (static_cast<unsigned long>(kCanProxyBasePort) +
-             static_cast<unsigned long>(index)) <= 65535ul) {
-            g.canBackend = true;
-            g.canIndex = static_cast<int>(index);
-            g.replayMode = false;
-            return;
-        }
-    }
-
-    g.deviceName = "emu";
-}
-
-bool start_can_proxy();
-void can_proxy_send_hello();
 void start_scheduler();
 
 BOOL CALLBACK init_once(PINIT_ONCE, PVOID, PVOID*) {
@@ -609,19 +541,19 @@ BOOL CALLBACK init_once(PINIT_ONCE, PVOID, PVOID*) {
     g.baseDir = module_dir();
 
     char logName[MAX_PATH] = "ftd2xx-emu.log";
-    char device[64] = "emu";
+    char mode[64] = "replay";
     char replayName[MAX_PATH] = "rnet-replay.txt";
     const std::string ini = join_path(g.baseDir, "ftd2xx-emu.ini");
     GetPrivateProfileStringA("emulator", "LogFile", "ftd2xx-emu.log",
                              logName, MAX_PATH, ini.c_str());
-    GetPrivateProfileStringA("emulator", "Device", "emu",
-                             device, static_cast<DWORD>(sizeof(device)), ini.c_str());
+    GetPrivateProfileStringA("emulator", "Mode", "replay",
+                             mode, static_cast<DWORD>(sizeof(mode)), ini.c_str());
     GetPrivateProfileStringA("emulator", "ReplayFile", "rnet-replay.txt",
                              replayName, MAX_PATH, ini.c_str());
 
     g.logPath = join_path(g.baseDir, logName);
     g.statePath = join_path(g.baseDir, "rnet-block-state.bin");
-    configure_device(device);
+    g.replayMode = (_stricmp(mode, "replay") == 0);
     g.emulateReenumeration = GetPrivateProfileIntA(
         "emulator", "EmulateReenumeration", 1, ini.c_str()) != 0;
 
@@ -641,10 +573,8 @@ BOOL CALLBACK init_once(PINIT_ONCE, PVOID, PVOID*) {
 
     load_stored_blocks();
     if (g.replayMode) load_replay(join_path(g.baseDir, replayName));
-    logf("FTD2XX RNet initialized: Device=%s backend=%s",
-         g.deviceName.c_str(), g.canBackend ? "SocketCAN-proxy" : "full-emu");
-    if (g.canBackend && !start_can_proxy())
-        logf("CAN proxy startup failed for %s", g.deviceName.c_str());
+    logf("FTD2XX RNet emulator initialized: mode=%s, no USB backend",
+         g.replayMode ? "replay" : "synthetic");
     start_scheduler();
     return TRUE;
 }
@@ -724,220 +654,6 @@ bool decode_can_id(const std::array<unsigned char, kFrameSize>& frame,
     } else {
         canId = (b2 >> 5) | (b1 << 3);
     }
-    return true;
-}
-
-
-
-unsigned short swap16(unsigned short v) {
-    return static_cast<unsigned short>((v << 8) | (v >> 8));
-}
-
-std::uint32_t proxy_get_u32le(const unsigned char* p) {
-    return static_cast<std::uint32_t>(p[0]) |
-           (static_cast<std::uint32_t>(p[1]) << 8) |
-           (static_cast<std::uint32_t>(p[2]) << 16) |
-           (static_cast<std::uint32_t>(p[3]) << 24);
-}
-
-void proxy_put_u32le(unsigned char* p, std::uint32_t v) {
-    p[0] = static_cast<unsigned char>(v);
-    p[1] = static_cast<unsigned char>(v >> 8);
-    p[2] = static_cast<unsigned char>(v >> 16);
-    p[3] = static_cast<unsigned char>(v >> 24);
-}
-
-std::array<unsigned char, kCanProxyPacketSize> make_proxy_packet(
-    unsigned char type, std::uint32_t canId, unsigned char dlc,
-    const unsigned char* data) {
-    std::array<unsigned char, kCanProxyPacketSize> p{};
-    p[0] = 'R'; p[1] = 'N'; p[2] = 'C'; p[3] = '1';
-    p[4] = type;
-    p[5] = dlc > 8 ? 8 : dlc;
-    proxy_put_u32le(p.data() + 6, canId & 0x1FFFFFFFu);
-    if (data && p[5]) std::copy_n(data, p[5], p.begin() + 10);
-    return p;
-}
-
-bool valid_proxy_packet(const unsigned char* p, int n) {
-    return n == static_cast<int>(kCanProxyPacketSize) &&
-           p[0] == 'R' && p[1] == 'N' && p[2] == 'C' && p[3] == '1' &&
-           p[5] <= 8;
-}
-
-void encode_can_id(std::uint32_t canId, unsigned char* out) {
-    canId &= 0x1FFFFFFFu;
-    if (canId <= 0x7FFu) {
-        out[0] = static_cast<unsigned char>((canId >> 3) & 0xFFu);
-        out[1] = static_cast<unsigned char>((canId & 0x07u) << 5);
-        out[2] = 0;
-        out[3] = 0;
-        return;
-    }
-
-    const std::uint32_t v = canId << 1;
-    out[0] = static_cast<unsigned char>((v >> 22) & 0xFFu);
-    out[1] = static_cast<unsigned char>((((v >> 19) & 0x07u) << 5) |
-                                        0x08u |
-                                        ((v >> 16) & 0x07u));
-    out[2] = static_cast<unsigned char>((v >> 8) & 0xFFu);
-    out[3] = static_cast<unsigned char>(v & 0xFEu);
-}
-
-std::array<unsigned char, kFrameSize> make_can_rx_frame(
-    std::uint32_t canId, const unsigned char* data, unsigned char dlc) {
-    std::array<unsigned char, 19> p{};
-    p[0] = 0x01;
-    encode_can_id(canId, p.data() + 1);
-    const unsigned char n = dlc > 8 ? 8 : dlc;
-    if (data && n) std::copy_n(data, n, p.begin() + 5);
-    // Captured dongle RX CAN frames use the 0x20 receive flag plus DLC.
-    p[13] = static_cast<unsigned char>(0x20u | n);
-    return make_rx_frame(p);
-}
-
-bool load_winsock_api() {
-    if (gWinsock.module) return true;
-    gWinsock.module = LoadLibraryA("ws2_32.dll");
-    if (!gWinsock.module) return false;
-
-#define LOAD_WS(name, member) \
-    gWinsock.member = reinterpret_cast<decltype(gWinsock.member)>( \
-        GetProcAddress(gWinsock.module, name)); \
-    if (!gWinsock.member) return false
-
-    LOAD_WS("WSAStartup", startup);
-    LOAD_WS("socket", socket_fn);
-    LOAD_WS("closesocket", close_fn);
-    LOAD_WS("sendto", sendto_fn);
-    LOAD_WS("recvfrom", recvfrom_fn);
-    LOAD_WS("ioctlsocket", ioctl_fn);
-    LOAD_WS("WSAGetLastError", last_error);
-#undef LOAD_WS
-
-    WSADATA data{};
-    return gWinsock.startup(MAKEWORD(2, 2), &data) == 0;
-}
-
-void can_proxy_send_hello() {
-    if (!g.canBackend || g.canProxySocket == INVALID_SOCKET || !gWinsock.sendto_fn)
-        return;
-    const auto p = make_proxy_packet(kCanProxyHello, 0, 0, nullptr);
-    gWinsock.sendto_fn(g.canProxySocket,
-                       reinterpret_cast<const char*>(p.data()),
-                       static_cast<int>(p.size()), 0,
-                       reinterpret_cast<const sockaddr*>(&g.canProxyAddress),
-                       static_cast<int>(sizeof(g.canProxyAddress)));
-}
-
-bool can_proxy_send_frame_locked(const unsigned char* frame) {
-    if (!g.canBackend || g.canProxySocket == INVALID_SOCKET || !gWinsock.sendto_fn)
-        return false;
-    if (!g.canProxyOnline) can_proxy_send_hello();
-
-    std::array<unsigned char, kFrameSize> copy{};
-    std::copy_n(frame, kFrameSize, copy.begin());
-    std::uint32_t canId = 0;
-    if (!decode_can_id(copy, canId)) return false;
-
-    const unsigned char* pdu = frame + 2;
-    const unsigned char dlc = static_cast<unsigned char>(pdu[13] & 0x0Fu);
-    if (dlc > 8) return false;
-
-    const auto packet = make_proxy_packet(kCanProxyTx, canId, dlc, pdu + 5);
-    const int rc = gWinsock.sendto_fn(
-        g.canProxySocket, reinterpret_cast<const char*>(packet.data()),
-        static_cast<int>(packet.size()), 0,
-        reinterpret_cast<const sockaddr*>(&g.canProxyAddress),
-        static_cast<int>(sizeof(g.canProxyAddress)));
-
-    if (rc == SOCKET_ERROR) {
-        const int err = gWinsock.last_error ? gWinsock.last_error() : -1;
-        logf("CAN->%s send failed: WSA=%d", g.deviceName.c_str(), err);
-        return false;
-    }
-
-    logf("CAN->%s id=0x%08lX dlc=%u",
-         g.deviceName.c_str(), static_cast<unsigned long>(canId), dlc);
-    return true;
-}
-
-DWORD WINAPI can_proxy_rx_thread_proc(LPVOID) {
-    while (InterlockedCompareExchange(&g.canProxyStop, 0, 0) == 0) {
-        std::array<unsigned char, kCanProxyPacketSize> p{};
-        sockaddr_in from{};
-        int fromLen = static_cast<int>(sizeof(from));
-        const int n = gWinsock.recvfrom_fn(
-            g.canProxySocket, reinterpret_cast<char*>(p.data()),
-            static_cast<int>(p.size()), 0,
-            reinterpret_cast<sockaddr*>(&from), &fromLen);
-
-        if (n == SOCKET_ERROR) {
-            Sleep(2);
-            continue;
-        }
-        if (!valid_proxy_packet(p.data(), n)) continue;
-
-        if (p[4] == kCanProxyHelloAck) {
-            if (!g.canProxyOnline) {
-                g.canProxyOnline = true;
-                logf("CAN proxy online: %s", g.deviceName.c_str());
-            }
-            continue;
-        }
-        if (p[4] != kCanProxyRx) continue;
-
-        const std::uint32_t canId = proxy_get_u32le(p.data() + 6) & 0x1FFFFFFFu;
-        const unsigned char dlc = p[5];
-        const auto f = make_can_rx_frame(canId, p.data() + 10, dlc);
-
-        EnterCriticalSection(&g.cs);
-        if (g.opened && !g.inputStopped)
-            enqueue_bytes_locked(f.data(), f.size());
-        LeaveCriticalSection(&g.cs);
-
-        logf("CAN<-%s id=0x%08lX dlc=%u",
-             g.deviceName.c_str(), static_cast<unsigned long>(canId), dlc);
-    }
-    return 0;
-}
-
-bool start_can_proxy() {
-    if (!g.canBackend) return true;
-    if (g.canProxySocket != INVALID_SOCKET) {
-        can_proxy_send_hello();
-        return true;
-    }
-    if (!load_winsock_api()) return false;
-
-    g.canProxySocket = gWinsock.socket_fn(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-    if (g.canProxySocket == INVALID_SOCKET) return false;
-
-    u_long nonBlocking = 1;
-    if (gWinsock.ioctl_fn(g.canProxySocket, FIONBIO, &nonBlocking) == SOCKET_ERROR) {
-        gWinsock.close_fn(g.canProxySocket);
-        g.canProxySocket = INVALID_SOCKET;
-        return false;
-    }
-
-    g.canProxyAddress = sockaddr_in{};
-    g.canProxyAddress.sin_family = AF_INET;
-    g.canProxyAddress.sin_addr.s_addr = 0x0100007Fu; // 127.0.0.1 in network byte order on x86
-    const unsigned short port = static_cast<unsigned short>(kCanProxyBasePort + g.canIndex);
-    g.canProxyAddress.sin_port = swap16(port);
-    g.canProxyStop = 0;
-
-    g.canProxyThread = CreateThread(nullptr, 0, can_proxy_rx_thread_proc,
-                                    nullptr, 0, nullptr);
-    if (!g.canProxyThread) {
-        gWinsock.close_fn(g.canProxySocket);
-        g.canProxySocket = INVALID_SOCKET;
-        return false;
-    }
-
-    logf("CAN proxy endpoint: %s -> 127.0.0.1:%u",
-         g.deviceName.c_str(), static_cast<unsigned>(port));
-    can_proxy_send_hello();
     return true;
 }
 
@@ -1717,17 +1433,6 @@ void process_frame_locked(const unsigned char* frame) {
     logf("TX %s", hex24(frame).c_str());
     const unsigned char* pdu = frame + 2;
 
-    // Device=canN: only the FTDI/R-Net dongle remains virtual. USB dongle
-    // commands are answered locally; CAN traffic goes unchanged to canN.
-    if (g.canBackend) {
-        if (pdu[0] == 0x00) {
-            synthetic_usb_command_locked(frame);
-        } else if (pdu[0] == 0x01) {
-            can_proxy_send_frame_locked(frame);
-        }
-        return;
-    }
-
     // Track POP selectors and block-size writes even when the ordinary replay
     // supplies the response. This is the key used for the stateful block overlay.
     observe_pop_control_locked(frame);
@@ -1997,7 +1702,6 @@ FT_STATUS WINAPI FT_OpenEx(PVOID arg, DWORD flags, FT_HANDLE* out) {
     // On USB re-enumeration the protocol trace continues at the next replay step.
     // Only a process's first open starts replay from step zero.
     reset_io_locked(firstOpen);
-    if (g.canBackend) can_proxy_send_hello();
     *out = reinterpret_cast<FT_HANDLE>(&g);
     const size_t rp = g.replayPos;
     LeaveCriticalSection(&g.cs);

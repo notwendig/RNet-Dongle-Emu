@@ -39,11 +39,26 @@ install(TARGETS ftd2xx RUNTIME DESTINATION . LIBRARY DESTINATION .)
 install(FILES examples/ftd2xx-emu.ini.example DESTINATION . RENAME ftd2xx-emu.ini)
 
 # BEGIN RNET_WINE_AUTO_DEPLOY
+# Keep the Wine Programmer runtime synchronized with the local GitHub build.
+# This target runs on every build. The helper copies DLL/INI/replay only when
+# the source is newer, so changes to only INI or replay are also deployed.
+set(RNET_WINE_APP
+    "$ENV{HOME}/.wine/drive_c/Program Files (x86)/PG Drives Technology/R-net Programmer OEM Generic"
+    CACHE PATH
+    "Wine directory containing RNet Programmer6 OEM.exe"
+)
+
 add_custom_target(deploy_wine_runtime ALL
-    COMMAND /bin/bash
-            "${CMAKE_CURRENT_SOURCE_DIR}/tools/deploy-wine-runtime.sh"
-            "$<TARGET_FILE:ftd2xx>"
-    DEPENDS ftd2xx
+    COMMAND "${CMAKE_COMMAND}"
+        "-DAPP=${RNET_WINE_APP}"
+        "-DDLL=$<TARGET_FILE:ftd2xx>"
+        "-DINI=${CMAKE_CURRENT_SOURCE_DIR}/ftd2xx-emu.ini"
+        "-DREPLAY=${CMAKE_CURRENT_SOURCE_DIR}/rnet-replay.txt"
+        -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/deploy-wine-runtime.cmake"
+    DEPENDS
+        ftd2xx
+        "${CMAKE_CURRENT_SOURCE_DIR}/ftd2xx-emu.ini"
+        "${CMAKE_CURRENT_SOURCE_DIR}/rnet-replay.txt"
     VERBATIM
 )
 # END RNET_WINE_AUTO_DEPLOY
