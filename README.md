@@ -205,3 +205,46 @@ debugging, documentation and coding during development.
 ### rollstuhl.emu startup state
 
 Beginning with V23, `rollstuhl.emu` always starts with **power OFF**. Normal wheelchair cyclic CAN traffic is silent until ON/OFF is pressed. Switching on runs the captured PowerOn CAN sequence before normal periodic traffic starts.
+
+## Betriebsmodi
+
+<!-- RNET-MODES-V29 -->
+
+```text
+emu: App -> DLL -> can0 <CAN> can1 -> rollstuhl.emu
+dev: RealRollstuhl -> can0 <CAN> Device.emu_CJSM
+```
+
+```bash
+./start.sh emu
+./start.sh dev
+./start.sh stop
+./start.sh status
+```
+
+Direkter GUI-Start: `rollstuhl.emu emu` bzw. `rollstuhl.emu dev`.
+Im `dev`-Modus wird kein Programmer-Replay geladen. Details: [`docs/MODES.md`](docs/MODES.md).
+
+## D2XX Ereignisse
+
+<!-- RNET-D2XX-EVENTS-V29 -->
+
+`FT_SetEventNotification` speichert Event-Maske und Event-Handle. Neue RX-Daten setzen `FT_EVENT_RXCHAR` und signalisieren das vom Aufrufer übergebene Windows-Event. Der Eventstatus wird getrennt von der RX-Queue geführt; Einzelheiten stehen in [`docs/D2XX_EVENTS.md`](docs/D2XX_EVENTS.md).
+
+## Sauberer Build
+
+<!-- RNET-ZERO-WARNINGS-V30 -->
+
+`./build-clean.sh all` konfiguriert und baut DLL, CAN-Proxy und `rollstuhl.emu` vollständig. Der Build läuft mit `-Werror`; Warnungen oder Fehler führen zum Abbruch. `apply-v30.sh` führt diesen Build automatisch aus.
+
+## Zero-Warning Build V31
+
+<!-- RNET-ZERO-WARNINGS-V31 -->
+
+Der Build bleibt mit `-Werror` streng. Nur die im aktuellen CAN-only-Pfad absichtlich nicht referenzierten Legacy-Replay/POP-Helper sind im Source explizit mit `[[maybe_unused]]` dokumentiert. Es werden keine Warnungen global abgeschaltet. `./build-clean.sh all` baut DLL, CAN-Proxy und `rollstuhl.emu` und akzeptiert am Ende weder Compiler-/CMake-Warnungen noch Fehler.
+
+## Zero-Warning Build V32
+
+<!-- RNET-ZERO-WARNINGS-V32 -->
+
+V32 ergänzt `load_stored_blocks()` zur expliziten Liste der im CAN-only-Pfad erhaltenen, aber derzeit nicht referenzierten Replay/POP-Helfer. Es wird ausschließlich lokal `[[maybe_unused]]` verwendet; `-Werror` bleibt aktiv und es gibt keine globale Warnungsabschaltung. `./build-clean.sh all` baut DLL, CAN-Proxy und `rollstuhl.emu` vollständig neu und akzeptiert keine Warnungen oder Fehler.

@@ -1,3 +1,4 @@
+#include <cstdio>
 #include <QApplication>
 #include <QBrush>
 #include <QColor>
@@ -1802,22 +1803,49 @@ private:
 int main(int argc, char** argv)
 {
     QApplication app(argc, argv);
-    QCoreApplication::setApplicationName(QStringLiteral("free R-Net"));
-    QCoreApplication::setOrganizationName(QStringLiteral("free-r-net"));
-    app.setWindowIcon(loadBrandingIcon());
 
-    QString iface = QStringLiteral("can1");
-    QString explicitReplay;
+    constexpr const char* kModeMarker = "RNET-GUI-MODES-V29";
 
-    if (argc >= 2 && argv[1] && *argv[1])
-        iface = QString::fromLocal8Bit(argv[1]);
+    if (argc != 2 || !argv[1] || !*argv[1]) {
+        std::fprintf(stderr,
+                     "Usage: rollstuhl.emu {emu|dev}\n"
+                     "  emu  App -> DLL -> <CAN> -> Rollstuhl.emu\n"
+                     "  dev  RealRollstuhl -> <CAN> -> Device.emu_CJSM\n");
+        return 2;
+    }
 
-    if (argc >= 3 && argv[2] && *argv[2])
-        explicitReplay = QString::fromLocal8Bit(argv[2]);
+    const QString token = QString::fromLocal8Bit(argv[1]).trimmed().toLower();
+    QString iface;
+    QString replay;
 
-    const QString replay = findReplayFile(explicitReplay);
+    if (token == QStringLiteral("emu")) {
+        iface = qEnvironmentVariable("RNET_EMU_CAN");
+        if (iface.isEmpty())
+            iface = QStringLiteral("can1");
+        replay = findReplayFile(QString{});
+    } else if (token == QStringLiteral("dev")) {
+        iface = qEnvironmentVariable("RNET_DEV_CAN");
+        if (iface.isEmpty())
+            iface = QStringLiteral("can0");
+        // DEV is attached to a real wheelchair. Never load Programmer replay
+        // responses into this side of the CAN bus.
+        replay.clear();
+    } else {
+        std::fprintf(stderr, "FEHLER: unbekannter Modus '%s'\n", argv[1]);
+        return 2;
+    }
+
+    std::fprintf(stderr, "%s mode=%s iface=%s\n",
+                 kModeMarker,
+                 token.toLocal8Bit().constData(),
+                 iface.toLocal8Bit().constData());
 
     MainWindow w(iface, replay);
+    w.setProperty("rnetRunMode", token);
+    if (token == QStringLiteral("emu"))
+        w.setWindowTitle(QStringLiteral("rollstuhl.emu — EMU — %1").arg(iface));
+    else
+        w.setWindowTitle(QStringLiteral("Device.emu_CJSM — DEV — %1").arg(iface));
     w.show();
     return app.exec();
 }

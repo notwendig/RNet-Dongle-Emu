@@ -53,7 +53,7 @@ build CMakeFiles/ftd2xx.dir/src/ftd2xx_emu.cpp.obj: CXX_COMPILER__ftd2xx_unscann
   CONFIG = Release
   DEFINES = -DNOMINMAX -DWIN32_LEAN_AND_MEAN -D_CRT_SECURE_NO_WARNINGS -Dftd2xx_EXPORTS
   DEP_FILE = CMakeFiles/ftd2xx.dir/src/ftd2xx_emu.cpp.obj.d
-  FLAGS = -ffunction-sections -fdata-sections -Wall -Wextra -Wpedantic
+  FLAGS = -Werror -O3 -DNDEBUG -Wall -Wextra -Wpedantic
   OBJECT_DIR = CMakeFiles/ftd2xx.dir
   OBJECT_FILE_DIR = CMakeFiles/ftd2xx.dir/src
   TARGET_SUPPORT_DIR = CMakeFiles/ftd2xx.dir
@@ -68,8 +68,8 @@ build CMakeFiles/ftd2xx.dir/src/ftd2xx_emu.cpp.obj: CXX_COMPILER__ftd2xx_unscann
 
 build ftd2xx.dll libftd2xx.dll.a: CXX_SHARED_LIBRARY_LINKER__ftd2xx_Release CMakeFiles/ftd2xx.dir/src/ftd2xx_emu.cpp.obj | /home/juergen/Projects/RNet-Dongle-Emu/src/ftd2xx.def
   CONFIG = Release
-  LANGUAGE_COMPILE_FLAGS = -ffunction-sections -fdata-sections
-  LINK_FLAGS = -shared  -Wl,--gc-sections -static-libgcc -static-libstdc++ /home/juergen/Projects/RNet-Dongle-Emu/src/ftd2xx.def
+  LANGUAGE_COMPILE_FLAGS = -Werror -O3 -DNDEBUG
+  LINK_FLAGS = -shared -static-libgcc -static-libstdc++ /home/juergen/Projects/RNet-Dongle-Emu/src/ftd2xx.def
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles/ftd2xx.dir
   POST_BUILD = cd /home/juergen/Projects/RNet-Dongle-Emu/build/mingw32 && /usr/bin/cmake -E copy_if_different /home/juergen/Projects/RNet-Dongle-Emu/ftd2xx-emu.ini /home/juergen/Projects/RNet-Dongle-Emu/build/mingw32/ftd2xx-emu.ini

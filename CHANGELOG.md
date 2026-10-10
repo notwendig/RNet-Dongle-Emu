@@ -106,3 +106,34 @@ All notable project changes are documented here.
 - RND decryptor for the examined Generic V33.1.1245 database generation.
 - Markdown inventory generator for the main Programmer configuration sections.
 - MinGW32 CMake presets, CI, unit tests and safety/legal documentation.
+
+## 2026-10-10 — D2XX async events + emu/dev V29
+
+- `RNET-D2XX-ASYNC-EVENT-V29`: RX event notification is edge-triggered on newly queued data and uses the application supplied event handle.
+- Event status is stored separately from RX queue occupancy and consumed by `FT_GetStatus`/`FT_GetEventStatus`.
+- `RNET-GUI-MODES-V29`: `rollstuhl.emu emu|dev`.
+- `start.sh emu|dev|stop|status`.
+- `dev` does not load Programmer replay responses.
+- Installer only accepts canonical active GUI source paths and never searches `run/backup-*`.
+
+## 2026-10-10 — Clean build V30
+
+- `RNET-ZERO-WARNINGS-V30`: removes the observed MinGW function-pointer and unused-helper warnings.
+- `build-clean.sh` configures and builds DLL, CAN proxy and GUI itself.
+- All builds use `-Werror`; any compiler warning therefore stops installation.
+- Build logs are checked for CMake/compiler warnings and errors.
+
+## 2026-10-10 — Zero-Warning Build V31
+
+- `RNET-ZERO-WARNINGS-V31`.
+- Keine globale Abschaltung von `-Wunused-function`.
+- Absichtlich nicht referenzierte Legacy-Replay/POP-Einstiegspunkte sind lokal mit `[[maybe_unused]]` markiert.
+- `-Werror` bleibt für alle übrigen Warnungen aktiv.
+- DLL, `rnet-can-proxy` und `rollstuhl.emu` werden vollständig neu gebaut und die Logs auf 0 warnings / 0 errors geprüft.
+
+## 2026-10-10 — Zero-Warning Build V32
+
+- `RNET-ZERO-WARNINGS-V32`.
+- `load_stored_blocks()` als absichtlich unreferenzierten Legacy-Helper dokumentiert.
+- Keine globale Warnungsabschaltung; `-Werror` bleibt aktiv.
+- Vollständiger Clean-Build von DLL, `rnet-can-proxy` und `rollstuhl.emu`.

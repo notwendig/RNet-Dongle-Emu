@@ -7,14 +7,14 @@
 
 # =============================================================================
 # Project: rnet_rollstuhl_emu
-# Configurations: 
+# Configurations: Release
 # =============================================================================
 # =============================================================================
 
 #############################################
 # Rule for compiling CXX files.
 
-rule CXX_COMPILER__rnet_rollstuhl_emu_unscanned_
+rule CXX_COMPILER__rnet_rollstuhl_emu_unscanned_Release
   depfile = $DEP_FILE
   deps = gcc
   command = ${LAUNCHER}${CODE_CHECK}/usr/lib64/ccache/c++ $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
@@ -24,7 +24,7 @@ rule CXX_COMPILER__rnet_rollstuhl_emu_unscanned_
 #############################################
 # Rule for linking CXX executable.
 
-rule CXX_EXECUTABLE_LINKER__rnet_rollstuhl_emu_
+rule CXX_EXECUTABLE_LINKER__rnet_rollstuhl_emu_Release
   depfile = $DEP_FILE
   deps = gcc
   command = $PRE_LINK && /usr/lib64/ccache/c++ $FLAGS $LINK_FLAGS $in -o $TARGET_FILE $LINK_PATH $LINK_LIBRARIES && $POST_BUILD

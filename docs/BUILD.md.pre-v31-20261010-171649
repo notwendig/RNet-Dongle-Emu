@@ -1,0 +1,22 @@
+# Build V30
+
+<!-- RNET-ZERO-WARNINGS-V30 -->
+
+`build-clean.sh` baut alle drei Laufzeitkomponenten selbst und benötigt keine bereits vorhandenen Build-Verzeichnisse:
+
+```text
+./build-clean.sh all
+./build-clean.sh dll
+./build-clean.sh proxy
+./build-clean.sh gui
+```
+
+Für den vollständigen Build werden die jeweiligen Build-Verzeichnisse neu erzeugt. Alle C++-Builds laufen mit `-Werror`. Zusätzlich wird jede Configure-/Build-Ausgabe auf Compiler- und CMake-Warnungen bzw. Fehler geprüft.
+
+Erwartetes Endergebnis:
+
+```text
+BUILD CLEAN: 0 errors, 0 warnings
+```
+
+`start.sh emu` und `start.sh dev` rufen den passenden Teilbuild automatisch auf, falls das benötigte Binary fehlt.

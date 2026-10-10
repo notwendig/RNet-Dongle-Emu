@@ -1,0 +1,23 @@
+# Build V31
+
+<!-- RNET-ZERO-WARNINGS-V31 -->
+
+Der vollständige Build ist:
+
+```bash
+./build-clean.sh all
+```
+
+Er baut nacheinander:
+
+1. `ftd2xx.dll` (MinGW32 Release)
+2. `rnet-can-proxy`
+3. `rollstuhl.emu`
+
+Alle drei Builds laufen mit `-Werror`. Zusätzlich werden die Build-Logs auf `warning:`, `error:`, `CMake Warning`, `CMake Error` und `FAILED:` geprüft.
+
+## Absichtlich unbenutzte Legacy-Helper
+
+Der aktuelle CAN-only-Pfad enthält noch einige Replay-/stateful-POP-Einstiegspunkte aus der älteren Voll-Emulation. Diese Funktionen werden nicht gelöscht und Warnungen werden nicht global abgeschaltet. Stattdessen sind nur diese konkreten Definitionen mit `[[maybe_unused]]` gekennzeichnet. Dadurch bleibt der Code verfügbar, ohne `-Wunused-function` im aktuellen Build auszulösen.
+
+`-Werror` bleibt für alle anderen Diagnosen aktiv.

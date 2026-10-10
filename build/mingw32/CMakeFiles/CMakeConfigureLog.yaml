@@ -20,6 +20,7 @@ events:
     names:
       - "uname"
     candidate_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -30,6 +31,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
       - "/bin/"
     searched_directories:
+      - "/home/juergen/.opencode/bin/uname"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/uname"
       - "/home/juergen/.local/bin/uname"
       - "/home/juergen/bin/uname"
@@ -38,7 +40,10 @@ events:
     found: "/usr/bin/uname"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -47,6 +52,7 @@ events:
         - "/usr/libexec/sdcc"
         - "/usr/libexec/sdcc"
         - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
+        - "/usr/libexec/sdcc"
         - "/usr/libexec/sdcc"
   -
     kind: "message-v1"
@@ -77,6 +83,7 @@ events:
       - "ninja"
       - "samu"
     candidate_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -86,6 +93,9 @@ events:
       - "/usr/libexec/sdcc/"
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
+      - "/home/juergen/.opencode/bin/ninja-build"
+      - "/home/juergen/.opencode/bin/ninja"
+      - "/home/juergen/.opencode/bin/samu"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/ninja-build"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/ninja"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/samu"
@@ -104,7 +114,10 @@ events:
     found: "/usr/bin/ninja-build"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -114,7 +127,8 @@ events:
         - "/usr/libexec/sdcc"
         - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
         - "/usr/libexec/sdcc"
-      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32"
+        - "/usr/libexec/sdcc"
+      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32/sys-root/mingw"
   -
     kind: "find-v1"
     backtrace:
@@ -135,6 +149,7 @@ events:
     names:
       - "i686-w64-mingw32-g++"
     candidate_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -144,13 +159,17 @@ events:
       - "/usr/libexec/sdcc/"
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
+      - "/home/juergen/.opencode/bin/i686-w64-mingw32-g++"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-g++"
       - "/home/juergen/.local/bin/i686-w64-mingw32-g++"
       - "/home/juergen/bin/i686-w64-mingw32-g++"
     found: "/usr/lib64/ccache/i686-w64-mingw32-g++"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -160,7 +179,8 @@ events:
         - "/usr/libexec/sdcc"
         - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
         - "/usr/libexec/sdcc"
-      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32"
+        - "/usr/libexec/sdcc"
+      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32/sys-root/mingw"
   -
     kind: "find-v1"
     backtrace:
@@ -188,7 +208,10 @@ events:
     found: "/usr/share/cmake/Modules/CMakeCXXCompilerId.cpp.in"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -198,7 +221,8 @@ events:
         - "/usr/libexec/sdcc"
         - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
         - "/usr/libexec/sdcc"
-      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32"
+        - "/usr/libexec/sdcc"
+      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32/sys-root/mingw"
   -
     kind: "message-v1"
     backtrace:
@@ -209,7 +233,7 @@ events:
     message: |
       Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
       Compiler: /usr/lib64/ccache/i686-w64-mingw32-g++ 
-      Build flags: 
+      Build flags: -Werror
       Id flags:  
       
       The output was:
@@ -243,6 +267,7 @@ events:
       - "ar"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -252,6 +277,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/i686-w64-mingw32-ar"
+      - "/home/juergen/.opencode/bin/i686-w64-mingw32-ar"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-ar"
       - "/home/juergen/.local/bin/i686-w64-mingw32-ar"
       - "/home/juergen/bin/i686-w64-mingw32-ar"
@@ -259,7 +285,10 @@ events:
     found: "/usr/bin/i686-w64-mingw32-ar"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -269,7 +298,8 @@ events:
         - "/usr/libexec/sdcc"
         - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
         - "/usr/libexec/sdcc"
-      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32"
+        - "/usr/libexec/sdcc"
+      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32/sys-root/mingw"
   -
     kind: "find-v1"
     backtrace:
@@ -292,6 +322,7 @@ events:
       - "ranlib"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -301,6 +332,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/i686-w64-mingw32-ranlib"
+      - "/home/juergen/.opencode/bin/i686-w64-mingw32-ranlib"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-ranlib"
       - "/home/juergen/.local/bin/i686-w64-mingw32-ranlib"
       - "/home/juergen/bin/i686-w64-mingw32-ranlib"
@@ -308,7 +340,10 @@ events:
     found: "/usr/bin/i686-w64-mingw32-ranlib"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -318,7 +353,8 @@ events:
         - "/usr/libexec/sdcc"
         - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
         - "/usr/libexec/sdcc"
-      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32"
+        - "/usr/libexec/sdcc"
+      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32/sys-root/mingw"
   -
     kind: "find-v1"
     backtrace:
@@ -341,6 +377,7 @@ events:
       - "strip"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -350,6 +387,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/i686-w64-mingw32-strip"
+      - "/home/juergen/.opencode/bin/i686-w64-mingw32-strip"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-strip"
       - "/home/juergen/.local/bin/i686-w64-mingw32-strip"
       - "/home/juergen/bin/i686-w64-mingw32-strip"
@@ -357,7 +395,10 @@ events:
     found: "/usr/bin/i686-w64-mingw32-strip"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -367,7 +408,8 @@ events:
         - "/usr/libexec/sdcc"
         - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
         - "/usr/libexec/sdcc"
-      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32"
+        - "/usr/libexec/sdcc"
+      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32/sys-root/mingw"
   -
     kind: "find-v1"
     backtrace:
@@ -390,6 +432,7 @@ events:
       - "ld"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -399,6 +442,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/i686-w64-mingw32-ld"
+      - "/home/juergen/.opencode/bin/i686-w64-mingw32-ld"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-ld"
       - "/home/juergen/.local/bin/i686-w64-mingw32-ld"
       - "/home/juergen/bin/i686-w64-mingw32-ld"
@@ -406,7 +450,10 @@ events:
     found: "/usr/bin/i686-w64-mingw32-ld"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -416,7 +463,8 @@ events:
         - "/usr/libexec/sdcc"
         - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
         - "/usr/libexec/sdcc"
-      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32"
+        - "/usr/libexec/sdcc"
+      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32/sys-root/mingw"
   -
     kind: "find-v1"
     backtrace:
@@ -439,6 +487,7 @@ events:
       - "nm"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -448,6 +497,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/i686-w64-mingw32-nm"
+      - "/home/juergen/.opencode/bin/i686-w64-mingw32-nm"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-nm"
       - "/home/juergen/.local/bin/i686-w64-mingw32-nm"
       - "/home/juergen/bin/i686-w64-mingw32-nm"
@@ -455,7 +505,10 @@ events:
     found: "/usr/bin/i686-w64-mingw32-nm"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -465,7 +518,8 @@ events:
         - "/usr/libexec/sdcc"
         - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
         - "/usr/libexec/sdcc"
-      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32"
+        - "/usr/libexec/sdcc"
+      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32/sys-root/mingw"
   -
     kind: "find-v1"
     backtrace:
@@ -488,6 +542,7 @@ events:
       - "objdump"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -497,6 +552,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/i686-w64-mingw32-objdump"
+      - "/home/juergen/.opencode/bin/i686-w64-mingw32-objdump"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-objdump"
       - "/home/juergen/.local/bin/i686-w64-mingw32-objdump"
       - "/home/juergen/bin/i686-w64-mingw32-objdump"
@@ -504,7 +560,10 @@ events:
     found: "/usr/bin/i686-w64-mingw32-objdump"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -514,7 +573,8 @@ events:
         - "/usr/libexec/sdcc"
         - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
         - "/usr/libexec/sdcc"
-      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32"
+        - "/usr/libexec/sdcc"
+      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32/sys-root/mingw"
   -
     kind: "find-v1"
     backtrace:
@@ -537,6 +597,7 @@ events:
       - "objcopy"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -546,6 +607,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/i686-w64-mingw32-objcopy"
+      - "/home/juergen/.opencode/bin/i686-w64-mingw32-objcopy"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-objcopy"
       - "/home/juergen/.local/bin/i686-w64-mingw32-objcopy"
       - "/home/juergen/bin/i686-w64-mingw32-objcopy"
@@ -553,7 +615,10 @@ events:
     found: "/usr/bin/i686-w64-mingw32-objcopy"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -563,7 +628,8 @@ events:
         - "/usr/libexec/sdcc"
         - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
         - "/usr/libexec/sdcc"
-      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32"
+        - "/usr/libexec/sdcc"
+      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32/sys-root/mingw"
   -
     kind: "find-v1"
     backtrace:
@@ -586,6 +652,7 @@ events:
       - "readelf"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -595,6 +662,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/i686-w64-mingw32-readelf"
+      - "/home/juergen/.opencode/bin/i686-w64-mingw32-readelf"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-readelf"
       - "/home/juergen/.local/bin/i686-w64-mingw32-readelf"
       - "/home/juergen/bin/i686-w64-mingw32-readelf"
@@ -602,7 +670,10 @@ events:
     found: "/usr/bin/i686-w64-mingw32-readelf"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -612,7 +683,8 @@ events:
         - "/usr/libexec/sdcc"
         - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
         - "/usr/libexec/sdcc"
-      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32"
+        - "/usr/libexec/sdcc"
+      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32/sys-root/mingw"
   -
     kind: "find-v1"
     backtrace:
@@ -635,6 +707,7 @@ events:
       - "dlltool"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -644,6 +717,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/i686-w64-mingw32-dlltool"
+      - "/home/juergen/.opencode/bin/i686-w64-mingw32-dlltool"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-dlltool"
       - "/home/juergen/.local/bin/i686-w64-mingw32-dlltool"
       - "/home/juergen/bin/i686-w64-mingw32-dlltool"
@@ -651,7 +725,10 @@ events:
     found: "/usr/bin/i686-w64-mingw32-dlltool"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -661,7 +738,8 @@ events:
         - "/usr/libexec/sdcc"
         - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
         - "/usr/libexec/sdcc"
-      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32"
+        - "/usr/libexec/sdcc"
+      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32/sys-root/mingw"
   -
     kind: "find-v1"
     backtrace:
@@ -684,6 +762,7 @@ events:
       - "addr2line"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -693,6 +772,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/i686-w64-mingw32-addr2line"
+      - "/home/juergen/.opencode/bin/i686-w64-mingw32-addr2line"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-addr2line"
       - "/home/juergen/.local/bin/i686-w64-mingw32-addr2line"
       - "/home/juergen/bin/i686-w64-mingw32-addr2line"
@@ -700,7 +780,10 @@ events:
     found: "/usr/bin/i686-w64-mingw32-addr2line"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -710,7 +793,8 @@ events:
         - "/usr/libexec/sdcc"
         - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
         - "/usr/libexec/sdcc"
-      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32"
+        - "/usr/libexec/sdcc"
+      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32/sys-root/mingw"
   -
     kind: "find-v1"
     backtrace:
@@ -733,6 +817,7 @@ events:
       - "tapi"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -742,6 +827,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/i686-w64-mingw32-tapi"
+      - "/home/juergen/.opencode/bin/i686-w64-mingw32-tapi"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-tapi"
       - "/home/juergen/.local/bin/i686-w64-mingw32-tapi"
       - "/home/juergen/bin/i686-w64-mingw32-tapi"
@@ -750,6 +836,7 @@ events:
       - "/usr/libexec/sdcc/i686-w64-mingw32-tapi"
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/i686-w64-mingw32-tapi"
       - "/usr/lib64/ccache/tapi"
+      - "/home/juergen/.opencode/bin/tapi"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/tapi"
       - "/home/juergen/.local/bin/tapi"
       - "/home/juergen/bin/tapi"
@@ -760,7 +847,10 @@ events:
     found: false
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -770,7 +860,8 @@ events:
         - "/usr/libexec/sdcc"
         - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
         - "/usr/libexec/sdcc"
-      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32"
+        - "/usr/libexec/sdcc"
+      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32/sys-root/mingw"
   -
     kind: "find-v1"
     backtrace:
@@ -795,6 +886,7 @@ events:
       - "i686-w64-mingw32-gcc-ar"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -804,6 +896,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/i686-w64-mingw32-gcc-ar-16.2"
+      - "/home/juergen/.opencode/bin/i686-w64-mingw32-gcc-ar-16.2"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-gcc-ar-16.2"
       - "/home/juergen/.local/bin/i686-w64-mingw32-gcc-ar-16.2"
       - "/home/juergen/bin/i686-w64-mingw32-gcc-ar-16.2"
@@ -812,6 +905,7 @@ events:
       - "/usr/libexec/sdcc/i686-w64-mingw32-gcc-ar-16.2"
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/i686-w64-mingw32-gcc-ar-16.2"
       - "/usr/lib64/ccache/i686-w64-mingw32-gcc-ar-16"
+      - "/home/juergen/.opencode/bin/i686-w64-mingw32-gcc-ar-16"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-gcc-ar-16"
       - "/home/juergen/.local/bin/i686-w64-mingw32-gcc-ar-16"
       - "/home/juergen/bin/i686-w64-mingw32-gcc-ar-16"
@@ -820,6 +914,7 @@ events:
       - "/usr/libexec/sdcc/i686-w64-mingw32-gcc-ar-16"
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/i686-w64-mingw32-gcc-ar-16"
       - "/usr/lib64/ccache/i686-w64-mingw32-gcc-ar16"
+      - "/home/juergen/.opencode/bin/i686-w64-mingw32-gcc-ar16"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-gcc-ar16"
       - "/home/juergen/.local/bin/i686-w64-mingw32-gcc-ar16"
       - "/home/juergen/bin/i686-w64-mingw32-gcc-ar16"
@@ -828,6 +923,7 @@ events:
       - "/usr/libexec/sdcc/i686-w64-mingw32-gcc-ar16"
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/i686-w64-mingw32-gcc-ar16"
       - "/usr/lib64/ccache/i686-w64-mingw32-gcc-ar"
+      - "/home/juergen/.opencode/bin/i686-w64-mingw32-gcc-ar"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-gcc-ar"
       - "/home/juergen/.local/bin/i686-w64-mingw32-gcc-ar"
       - "/home/juergen/bin/i686-w64-mingw32-gcc-ar"
@@ -835,7 +931,10 @@ events:
     found: "/usr/bin/i686-w64-mingw32-gcc-ar"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -845,7 +944,8 @@ events:
         - "/usr/libexec/sdcc"
         - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
         - "/usr/libexec/sdcc"
-      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32"
+        - "/usr/libexec/sdcc"
+      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32/sys-root/mingw"
   -
     kind: "find-v1"
     backtrace:
@@ -870,6 +970,7 @@ events:
       - "i686-w64-mingw32-gcc-ranlib"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -879,6 +980,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/i686-w64-mingw32-gcc-ranlib-16.2"
+      - "/home/juergen/.opencode/bin/i686-w64-mingw32-gcc-ranlib-16.2"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-gcc-ranlib-16.2"
       - "/home/juergen/.local/bin/i686-w64-mingw32-gcc-ranlib-16.2"
       - "/home/juergen/bin/i686-w64-mingw32-gcc-ranlib-16.2"
@@ -887,6 +989,7 @@ events:
       - "/usr/libexec/sdcc/i686-w64-mingw32-gcc-ranlib-16.2"
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/i686-w64-mingw32-gcc-ranlib-16.2"
       - "/usr/lib64/ccache/i686-w64-mingw32-gcc-ranlib-16"
+      - "/home/juergen/.opencode/bin/i686-w64-mingw32-gcc-ranlib-16"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-gcc-ranlib-16"
       - "/home/juergen/.local/bin/i686-w64-mingw32-gcc-ranlib-16"
       - "/home/juergen/bin/i686-w64-mingw32-gcc-ranlib-16"
@@ -895,6 +998,7 @@ events:
       - "/usr/libexec/sdcc/i686-w64-mingw32-gcc-ranlib-16"
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/i686-w64-mingw32-gcc-ranlib-16"
       - "/usr/lib64/ccache/i686-w64-mingw32-gcc-ranlib16"
+      - "/home/juergen/.opencode/bin/i686-w64-mingw32-gcc-ranlib16"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-gcc-ranlib16"
       - "/home/juergen/.local/bin/i686-w64-mingw32-gcc-ranlib16"
       - "/home/juergen/bin/i686-w64-mingw32-gcc-ranlib16"
@@ -903,6 +1007,7 @@ events:
       - "/usr/libexec/sdcc/i686-w64-mingw32-gcc-ranlib16"
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/i686-w64-mingw32-gcc-ranlib16"
       - "/usr/lib64/ccache/i686-w64-mingw32-gcc-ranlib"
+      - "/home/juergen/.opencode/bin/i686-w64-mingw32-gcc-ranlib"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-gcc-ranlib"
       - "/home/juergen/.local/bin/i686-w64-mingw32-gcc-ranlib"
       - "/home/juergen/bin/i686-w64-mingw32-gcc-ranlib"
@@ -910,7 +1015,10 @@ events:
     found: "/usr/bin/i686-w64-mingw32-gcc-ranlib"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -920,7 +1028,8 @@ events:
         - "/usr/libexec/sdcc"
         - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
         - "/usr/libexec/sdcc"
-      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32"
+        - "/usr/libexec/sdcc"
+      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32/sys-root/mingw"
   -
     kind: "try_compile-v1"
     backtrace:
@@ -930,10 +1039,10 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "/home/juergen/Projects/RNet-Dongle-Emu/build/mingw32/CMakeFiles/CMakeScratch/TryCompile-vue9at"
-      binary: "/home/juergen/Projects/RNet-Dongle-Emu/build/mingw32/CMakeFiles/CMakeScratch/TryCompile-vue9at"
+      source: "/home/juergen/Projects/RNet-Dongle-Emu/build/mingw32/CMakeFiles/CMakeScratch/TryCompile-oaxNJE"
+      binary: "/home/juergen/Projects/RNet-Dongle-Emu/build/mingw32/CMakeFiles/CMakeScratch/TryCompile-oaxNJE"
     cmakeVariables:
-      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS: " "
       CMAKE_CXX_FLAGS_DEBUG: "-g"
       CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
       CMAKE_CXX_STDLIB_MODULES_JSON: ""
@@ -942,10 +1051,10 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: '/home/juergen/Projects/RNet-Dongle-Emu/build/mingw32/CMakeFiles/CMakeScratch/TryCompile-vue9at'
+        Change Dir: '/home/juergen/Projects/RNet-Dongle-Emu/build/mingw32/CMakeFiles/CMakeScratch/TryCompile-oaxNJE'
         
-        Run Build Command(s): /usr/bin/ninja-build -v cmTC_0e01c
-        [1/2] /usr/lib64/ccache/i686-w64-mingw32-g++   -v -o CMakeFiles/cmTC_0e01c.dir/CMakeCXXCompilerABI.cpp.obj -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp
+        Run Build Command(s): /usr/bin/ninja-build -v cmTC_34f9c
+        [1/2] /usr/lib64/ccache/i686-w64-mingw32-g++   -v -o CMakeFiles/cmTC_34f9c.dir/CMakeCXXCompilerABI.cpp.obj -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp
         Using built-in specs.
         COLLECT_GCC=/usr/bin/i686-w64-mingw32-g++
         Target: i686-w64-mingw32
@@ -976,7 +1085,7 @@ events:
         COMPILER_PATH=/usr/libexec/gcc/i686-w64-mingw32/16.2.1/:/usr/libexec/gcc/i686-w64-mingw32/16.2.1/:/usr/libexec/gcc/i686-w64-mingw32/:/usr/lib/gcc/i686-w64-mingw32/16.2.1/:/usr/lib/gcc/i686-w64-mingw32/:/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/bin/
         LIBRARY_PATH=/usr/lib/gcc/i686-w64-mingw32/16.2.1/:/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib/../lib/:/usr/i686-w64-mingw32/sys-root/mingw/lib/../lib/:/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib/:/usr/i686-w64-mingw32/sys-root/mingw/lib/
         COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-c' '-o' 'CMakeFiles/cmTC_8417a.dir/CMakeCXXCompilerABI.cpp.obj' '-shared-libgcc' '-mtune=generic' '-march=pentiumpro' '-dumpdir' 'CMakeFiles/cmTC_8417a.dir/CMakeCXXCompilerABI.cpp.'
-        [2/2] : && /usr/lib64/ccache/i686-w64-mingw32-g++  -v -Wl,-v CMakeFiles/cmTC_0e01c.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_0e01c.exe -Wl,--out-implib,libcmTC_0e01c.dll.a -Wl,--major-image-version,0,--minor-image-version,0   && :
+        [2/2] : && /usr/lib64/ccache/i686-w64-mingw32-g++  -v -Wl,-v CMakeFiles/cmTC_34f9c.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_34f9c.exe -Wl,--out-implib,libcmTC_34f9c.dll.a -Wl,--major-image-version,0,--minor-image-version,0   && :
         Using built-in specs.
         COLLECT_GCC=/usr/bin/i686-w64-mingw32-g++
         COLLECT_LTO_WRAPPER=/usr/libexec/gcc/i686-w64-mingw32/16.2.1/lto-wrapper
@@ -987,12 +1096,12 @@ events:
         gcc version 16.2.1 20260819 (Fedora MinGW 16.2.1-1.fc44) (GCC) 
         COMPILER_PATH=/usr/libexec/gcc/i686-w64-mingw32/16.2.1/:/usr/libexec/gcc/i686-w64-mingw32/16.2.1/:/usr/libexec/gcc/i686-w64-mingw32/:/usr/lib/gcc/i686-w64-mingw32/16.2.1/:/usr/lib/gcc/i686-w64-mingw32/:/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/bin/
         LIBRARY_PATH=/usr/lib/gcc/i686-w64-mingw32/16.2.1/:/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib/../lib/:/usr/i686-w64-mingw32/sys-root/mingw/lib/../lib/:/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib/:/usr/i686-w64-mingw32/sys-root/mingw/lib/
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_0e01c.exe' '-shared-libgcc' '-mtune=generic' '-march=pentiumpro' '-dumpdir' 'cmTC_0e01c.'
-         /usr/libexec/gcc/i686-w64-mingw32/16.2.1/collect2 -plugin /usr/libexec/gcc/i686-w64-mingw32/16.2.1/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/i686-w64-mingw32/16.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccepopU4.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 --sysroot=/usr/i686-w64-mingw32/sys-root -m i386pe -Bdynamic -u ___register_frame_info -u ___deregister_frame_info -o cmTC_0e01c.exe /usr/i686-w64-mingw32/sys-root/mingw/lib/../lib/crt2.o /usr/lib/gcc/i686-w64-mingw32/16.2.1/crtbegin.o -L/usr/lib/gcc/i686-w64-mingw32/16.2.1 -L/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib/../lib -L/usr/i686-w64-mingw32/sys-root/mingw/lib/../lib -L/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib -L/usr/i686-w64-mingw32/sys-root/mingw/lib -v CMakeFiles/cmTC_0e01c.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_0e01c.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 /usr/lib/gcc/i686-w64-mingw32/16.2.1/crtend.o
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_34f9c.exe' '-shared-libgcc' '-mtune=generic' '-march=pentiumpro' '-dumpdir' 'cmTC_34f9c.'
+         /usr/libexec/gcc/i686-w64-mingw32/16.2.1/collect2 -plugin /usr/libexec/gcc/i686-w64-mingw32/16.2.1/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/i686-w64-mingw32/16.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/cca4c8Pl.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 --sysroot=/usr/i686-w64-mingw32/sys-root -m i386pe -Bdynamic -u ___register_frame_info -u ___deregister_frame_info -o cmTC_34f9c.exe /usr/i686-w64-mingw32/sys-root/mingw/lib/../lib/crt2.o /usr/lib/gcc/i686-w64-mingw32/16.2.1/crtbegin.o -L/usr/lib/gcc/i686-w64-mingw32/16.2.1 -L/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib/../lib -L/usr/i686-w64-mingw32/sys-root/mingw/lib/../lib -L/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib -L/usr/i686-w64-mingw32/sys-root/mingw/lib -v CMakeFiles/cmTC_34f9c.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_34f9c.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 /usr/lib/gcc/i686-w64-mingw32/16.2.1/crtend.o
         collect2 version 16.2.1 20260819 (Fedora MinGW 16.2.1-1.fc44)
-        /usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/bin/ld -plugin /usr/libexec/gcc/i686-w64-mingw32/16.2.1/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/i686-w64-mingw32/16.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccepopU4.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 --sysroot=/usr/i686-w64-mingw32/sys-root -m i386pe -Bdynamic -u ___register_frame_info -u ___deregister_frame_info -o cmTC_0e01c.exe /usr/i686-w64-mingw32/sys-root/mingw/lib/../lib/crt2.o /usr/lib/gcc/i686-w64-mingw32/16.2.1/crtbegin.o -L/usr/lib/gcc/i686-w64-mingw32/16.2.1 -L/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib/../lib -L/usr/i686-w64-mingw32/sys-root/mingw/lib/../lib -L/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib -L/usr/i686-w64-mingw32/sys-root/mingw/lib -v CMakeFiles/cmTC_0e01c.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_0e01c.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 /usr/lib/gcc/i686-w64-mingw32/16.2.1/crtend.o
+        /usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/bin/ld -plugin /usr/libexec/gcc/i686-w64-mingw32/16.2.1/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/i686-w64-mingw32/16.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/cca4c8Pl.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 --sysroot=/usr/i686-w64-mingw32/sys-root -m i386pe -Bdynamic -u ___register_frame_info -u ___deregister_frame_info -o cmTC_34f9c.exe /usr/i686-w64-mingw32/sys-root/mingw/lib/../lib/crt2.o /usr/lib/gcc/i686-w64-mingw32/16.2.1/crtbegin.o -L/usr/lib/gcc/i686-w64-mingw32/16.2.1 -L/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib/../lib -L/usr/i686-w64-mingw32/sys-root/mingw/lib/../lib -L/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib -L/usr/i686-w64-mingw32/sys-root/mingw/lib -v CMakeFiles/cmTC_34f9c.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_34f9c.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 /usr/lib/gcc/i686-w64-mingw32/16.2.1/crtend.o
         GNU ld version 2.46.0.20260210
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_0e01c.exe' '-shared-libgcc' '-mtune=generic' '-march=pentiumpro' '-dumpdir' 'cmTC_0e01c.'
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_34f9c.exe' '-shared-libgcc' '-mtune=generic' '-march=pentiumpro' '-dumpdir' 'cmTC_34f9c.'
         
       exitCode: 0
   -
@@ -1031,10 +1140,10 @@ events:
       Parsed CXX implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
-        ignore line: [Change Dir: '/home/juergen/Projects/RNet-Dongle-Emu/build/mingw32/CMakeFiles/CMakeScratch/TryCompile-vue9at']
+        ignore line: [Change Dir: '/home/juergen/Projects/RNet-Dongle-Emu/build/mingw32/CMakeFiles/CMakeScratch/TryCompile-oaxNJE']
         ignore line: []
-        ignore line: [Run Build Command(s): /usr/bin/ninja-build -v cmTC_0e01c]
-        ignore line: [[1/2] /usr/lib64/ccache/i686-w64-mingw32-g++   -v -o CMakeFiles/cmTC_0e01c.dir/CMakeCXXCompilerABI.cpp.obj -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Run Build Command(s): /usr/bin/ninja-build -v cmTC_34f9c]
+        ignore line: [[1/2] /usr/lib64/ccache/i686-w64-mingw32-g++   -v -o CMakeFiles/cmTC_34f9c.dir/CMakeCXXCompilerABI.cpp.obj -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=/usr/bin/i686-w64-mingw32-g++]
         ignore line: [Target: i686-w64-mingw32]
@@ -1065,7 +1174,7 @@ events:
         ignore line: [COMPILER_PATH=/usr/libexec/gcc/i686-w64-mingw32/16.2.1/:/usr/libexec/gcc/i686-w64-mingw32/16.2.1/:/usr/libexec/gcc/i686-w64-mingw32/:/usr/lib/gcc/i686-w64-mingw32/16.2.1/:/usr/lib/gcc/i686-w64-mingw32/:/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/bin/]
         ignore line: [LIBRARY_PATH=/usr/lib/gcc/i686-w64-mingw32/16.2.1/:/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib/../lib/:/usr/i686-w64-mingw32/sys-root/mingw/lib/../lib/:/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib/:/usr/i686-w64-mingw32/sys-root/mingw/lib/]
         ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-c' '-o' 'CMakeFiles/cmTC_8417a.dir/CMakeCXXCompilerABI.cpp.obj' '-shared-libgcc' '-mtune=generic' '-march=pentiumpro' '-dumpdir' 'CMakeFiles/cmTC_8417a.dir/CMakeCXXCompilerABI.cpp.']
-        ignore line: [[2/2] : && /usr/lib64/ccache/i686-w64-mingw32-g++  -v -Wl -v CMakeFiles/cmTC_0e01c.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_0e01c.exe -Wl --out-implib libcmTC_0e01c.dll.a -Wl --major-image-version 0 --minor-image-version 0   && :]
+        ignore line: [[2/2] : && /usr/lib64/ccache/i686-w64-mingw32-g++  -v -Wl -v CMakeFiles/cmTC_34f9c.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_34f9c.exe -Wl --out-implib libcmTC_34f9c.dll.a -Wl --major-image-version 0 --minor-image-version 0   && :]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=/usr/bin/i686-w64-mingw32-g++]
         ignore line: [COLLECT_LTO_WRAPPER=/usr/libexec/gcc/i686-w64-mingw32/16.2.1/lto-wrapper]
@@ -1076,13 +1185,13 @@ events:
         ignore line: [gcc version 16.2.1 20260819 (Fedora MinGW 16.2.1-1.fc44) (GCC) ]
         ignore line: [COMPILER_PATH=/usr/libexec/gcc/i686-w64-mingw32/16.2.1/:/usr/libexec/gcc/i686-w64-mingw32/16.2.1/:/usr/libexec/gcc/i686-w64-mingw32/:/usr/lib/gcc/i686-w64-mingw32/16.2.1/:/usr/lib/gcc/i686-w64-mingw32/:/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/bin/]
         ignore line: [LIBRARY_PATH=/usr/lib/gcc/i686-w64-mingw32/16.2.1/:/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib/../lib/:/usr/i686-w64-mingw32/sys-root/mingw/lib/../lib/:/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib/:/usr/i686-w64-mingw32/sys-root/mingw/lib/]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_0e01c.exe' '-shared-libgcc' '-mtune=generic' '-march=pentiumpro' '-dumpdir' 'cmTC_0e01c.']
-        link line: [ /usr/libexec/gcc/i686-w64-mingw32/16.2.1/collect2 -plugin /usr/libexec/gcc/i686-w64-mingw32/16.2.1/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/i686-w64-mingw32/16.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccepopU4.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 --sysroot=/usr/i686-w64-mingw32/sys-root -m i386pe -Bdynamic -u ___register_frame_info -u ___deregister_frame_info -o cmTC_0e01c.exe /usr/i686-w64-mingw32/sys-root/mingw/lib/../lib/crt2.o /usr/lib/gcc/i686-w64-mingw32/16.2.1/crtbegin.o -L/usr/lib/gcc/i686-w64-mingw32/16.2.1 -L/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib/../lib -L/usr/i686-w64-mingw32/sys-root/mingw/lib/../lib -L/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib -L/usr/i686-w64-mingw32/sys-root/mingw/lib -v CMakeFiles/cmTC_0e01c.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_0e01c.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 /usr/lib/gcc/i686-w64-mingw32/16.2.1/crtend.o]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_34f9c.exe' '-shared-libgcc' '-mtune=generic' '-march=pentiumpro' '-dumpdir' 'cmTC_34f9c.']
+        link line: [ /usr/libexec/gcc/i686-w64-mingw32/16.2.1/collect2 -plugin /usr/libexec/gcc/i686-w64-mingw32/16.2.1/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/i686-w64-mingw32/16.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/cca4c8Pl.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 --sysroot=/usr/i686-w64-mingw32/sys-root -m i386pe -Bdynamic -u ___register_frame_info -u ___deregister_frame_info -o cmTC_34f9c.exe /usr/i686-w64-mingw32/sys-root/mingw/lib/../lib/crt2.o /usr/lib/gcc/i686-w64-mingw32/16.2.1/crtbegin.o -L/usr/lib/gcc/i686-w64-mingw32/16.2.1 -L/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib/../lib -L/usr/i686-w64-mingw32/sys-root/mingw/lib/../lib -L/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib -L/usr/i686-w64-mingw32/sys-root/mingw/lib -v CMakeFiles/cmTC_34f9c.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_34f9c.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 /usr/lib/gcc/i686-w64-mingw32/16.2.1/crtend.o]
           arg [/usr/libexec/gcc/i686-w64-mingw32/16.2.1/collect2] ==> ignore
           arg [-plugin] ==> ignore
           arg [/usr/libexec/gcc/i686-w64-mingw32/16.2.1/liblto_plugin.so] ==> ignore
           arg [-plugin-opt=/usr/libexec/gcc/i686-w64-mingw32/16.2.1/lto-wrapper] ==> ignore
-          arg [-plugin-opt=-fresolution=/tmp/ccepopU4.res] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/cca4c8Pl.res] ==> ignore
           arg [-plugin-opt=-pass-through=-lmingw32] ==> ignore
           arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
           arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
@@ -1109,7 +1218,7 @@ events:
           arg [-u] ==> ignore
           arg [___deregister_frame_info] ==> ignore
           arg [-o] ==> ignore
-          arg [cmTC_0e01c.exe] ==> ignore
+          arg [cmTC_34f9c.exe] ==> ignore
           arg [/usr/i686-w64-mingw32/sys-root/mingw/lib/../lib/crt2.o] ==> obj [/usr/i686-w64-mingw32/sys-root/mingw/lib/../lib/crt2.o]
           arg [/usr/lib/gcc/i686-w64-mingw32/16.2.1/crtbegin.o] ==> obj [/usr/lib/gcc/i686-w64-mingw32/16.2.1/crtbegin.o]
           arg [-L/usr/lib/gcc/i686-w64-mingw32/16.2.1] ==> dir [/usr/lib/gcc/i686-w64-mingw32/16.2.1]
@@ -1118,9 +1227,9 @@ events:
           arg [-L/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib] ==> dir [/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib]
           arg [-L/usr/i686-w64-mingw32/sys-root/mingw/lib] ==> dir [/usr/i686-w64-mingw32/sys-root/mingw/lib]
           arg [-v] ==> ignore
-          arg [CMakeFiles/cmTC_0e01c.dir/CMakeCXXCompilerABI.cpp.obj] ==> ignore
+          arg [CMakeFiles/cmTC_34f9c.dir/CMakeCXXCompilerABI.cpp.obj] ==> ignore
           arg [--out-implib] ==> ignore
-          arg [libcmTC_0e01c.dll.a] ==> ignore
+          arg [libcmTC_34f9c.dll.a] ==> ignore
           arg [--major-image-version] ==> ignore
           arg [0] ==> ignore
           arg [--minor-image-version] ==> ignore
@@ -1145,7 +1254,7 @@ events:
           arg [-lkernel32] ==> lib [kernel32]
           arg [/usr/lib/gcc/i686-w64-mingw32/16.2.1/crtend.o] ==> obj [/usr/lib/gcc/i686-w64-mingw32/16.2.1/crtend.o]
         ignore line: [collect2 version 16.2.1 20260819 (Fedora MinGW 16.2.1-1.fc44)]
-        ignore line: [/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/bin/ld -plugin /usr/libexec/gcc/i686-w64-mingw32/16.2.1/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/i686-w64-mingw32/16.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccepopU4.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 --sysroot=/usr/i686-w64-mingw32/sys-root -m i386pe -Bdynamic -u ___register_frame_info -u ___deregister_frame_info -o cmTC_0e01c.exe /usr/i686-w64-mingw32/sys-root/mingw/lib/../lib/crt2.o /usr/lib/gcc/i686-w64-mingw32/16.2.1/crtbegin.o -L/usr/lib/gcc/i686-w64-mingw32/16.2.1 -L/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib/../lib -L/usr/i686-w64-mingw32/sys-root/mingw/lib/../lib -L/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib -L/usr/i686-w64-mingw32/sys-root/mingw/lib -v CMakeFiles/cmTC_0e01c.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_0e01c.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 /usr/lib/gcc/i686-w64-mingw32/16.2.1/crtend.o]
+        ignore line: [/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/bin/ld -plugin /usr/libexec/gcc/i686-w64-mingw32/16.2.1/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/i686-w64-mingw32/16.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/cca4c8Pl.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 --sysroot=/usr/i686-w64-mingw32/sys-root -m i386pe -Bdynamic -u ___register_frame_info -u ___deregister_frame_info -o cmTC_34f9c.exe /usr/i686-w64-mingw32/sys-root/mingw/lib/../lib/crt2.o /usr/lib/gcc/i686-w64-mingw32/16.2.1/crtbegin.o -L/usr/lib/gcc/i686-w64-mingw32/16.2.1 -L/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib/../lib -L/usr/i686-w64-mingw32/sys-root/mingw/lib/../lib -L/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib -L/usr/i686-w64-mingw32/sys-root/mingw/lib -v CMakeFiles/cmTC_34f9c.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_34f9c.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 /usr/lib/gcc/i686-w64-mingw32/16.2.1/crtend.o]
         linker tool for 'CXX': /usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/bin/ld
         remove lib [msvcrt]
         remove lib [msvcrt]

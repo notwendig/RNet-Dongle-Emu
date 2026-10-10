@@ -1,0 +1,8 @@
+[1/2] Building CXX object CMakeFiles/ftd2xx.dir/src/ftd2xx_emu.cpp.obj
+FAILED: [code=1] CMakeFiles/ftd2xx.dir/src/ftd2xx_emu.cpp.obj 
+/usr/lib64/ccache/i686-w64-mingw32-g++ -DNOMINMAX -DWIN32_LEAN_AND_MEAN -D_CRT_SECURE_NO_WARNINGS -Dftd2xx_EXPORTS  -Werror -O3 -DNDEBUG -Wall -Wextra -Wpedantic -MD -MT CMakeFiles/ftd2xx.dir/src/ftd2xx_emu.cpp.obj -MF CMakeFiles/ftd2xx.dir/src/ftd2xx_emu.cpp.obj.d -o CMakeFiles/ftd2xx.dir/src/ftd2xx_emu.cpp.obj -c /home/juergen/Projects/RNet-Dongle-Emu/src/ftd2xx_emu.cpp
+/home/juergen/Projects/RNet-Dongle-Emu/src/ftd2xx_emu.cpp:399:6: error: 'void {anonymous}::load_stored_blocks()' defined but not used [-Werror=unused-function]
+  399 | void load_stored_blocks() {
+      |      ^~~~~~~~~~~~~~~~~~
+cc1plus: all warnings being treated as errors
+ninja: build stopped: subcommand failed.

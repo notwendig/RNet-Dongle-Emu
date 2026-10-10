@@ -23,11 +23,18 @@
 
 namespace {
 
+// RNET-ZERO-WARNINGS-V32
+
+// RNET-ZERO-WARNINGS-V31
+
+// RNET-ZERO-WARNINGS-V30
+
 constexpr char kSerial[] = "RNET0200";
 constexpr char kDescription[] = "RNet Dongle";
 constexpr DWORD kDeviceId = 0x0403E128u; // VID 0403 / PID E128
 constexpr DWORD kLibraryVersion = 0x00030208u;
 constexpr DWORD kDriverVersion = 0x00021236u;
+constexpr char kAsyncEventMarker[] = "RNET-D2XX-ASYNC-EVENT-V29";
 constexpr size_t kFrameSize = 24;
 constexpr size_t kUserAreaSize = 64;
 
@@ -129,6 +136,7 @@ struct Device {
     bool inputStopped = false;
     HANDLE eventHandle = nullptr;
     DWORD eventMask = 0;
+    DWORD eventStatus = 0;
     ULONG readTimeout = 300;
     ULONG writeTimeout = 300;
     UCHAR latency = 16;
@@ -390,7 +398,7 @@ void save_stored_blocks_locked() {
          static_cast<unsigned>(g.storedBlocks.size()));
 }
 
-void load_stored_blocks() {
+[[maybe_unused]] void load_stored_blocks() {
     if (g.statePath.empty()) return;
     std::ifstream in(g.statePath, std::ios::binary);
     if (!in) return;
@@ -528,7 +536,7 @@ void store_block_locked(const std::array<unsigned char, 4>& selector,
     save_stored_blocks_locked();
 }
 
-void load_replay(const std::string& path) {
+[[maybe_unused]] void load_replay(const std::string& path) {
     std::ifstream in(path);
     if (!in) {
         logf("Replay file not found: %s", path.c_str());
@@ -664,14 +672,24 @@ bool valid_handle(FT_HANDLE h) {
     return h == reinterpret_cast<FT_HANDLE>(&g) && g.opened;
 }
 
-void signal_rx_locked() {
-    if (!g.inputStopped && g.eventHandle && (g.eventMask & FT_EVENT_RXCHAR) && !g.rx.empty())
+void signal_event_locked(DWORD events) {
+    if (!events)
+        return;
+    g.eventStatus |= events;
+    if (!g.inputStopped && g.eventHandle && (g.eventMask & events))
         SetEvent(g.eventHandle);
 }
 
+void signal_pending_events_locked() {
+    if (!g.inputStopped && g.eventHandle && (g.eventMask & g.eventStatus))
+        SetEvent(g.eventHandle);
+}
+
+
 void enqueue_bytes_locked(const unsigned char* p, size_t n) {
     for (size_t i = 0; i < n; ++i) g.rx.push_back(p[i]);
-    signal_rx_locked();
+    if (n != 0)
+        signal_event_locked(FT_EVENT_RXCHAR);
 }
 
 std::array<unsigned char, kFrameSize> make_rx_frame(const std::array<unsigned char, 19>& pdu) {
@@ -936,8 +954,12 @@ bool load_winsock_api() {
     if (!gWinsock.module) return false;
 
 #define LOAD_WS(name, member) \
-    gWinsock.member = reinterpret_cast<decltype(gWinsock.member)>( \
-        GetProcAddress(gWinsock.module, name)); \
+    { \
+        FARPROC rnetProc = GetProcAddress(gWinsock.module, name); \
+        static_assert(sizeof(gWinsock.member) == sizeof(rnetProc), \
+                      "Win32 function pointer size mismatch"); \
+        std::memcpy(&gWinsock.member, &rnetProc, sizeof(rnetProc)); \
+    } \
     if (!gWinsock.member) return false
 
     LOAD_WS("WSAStartup", startup);
@@ -1470,7 +1492,7 @@ void emit_block_read_window_locked() {
     }
 }
 
-bool handle_stored_block_metadata_read_locked(const unsigned char* frame) {
+[[maybe_unused]] bool handle_stored_block_metadata_read_locked(const unsigned char* frame) {
     const unsigned char* p = frame + 2;
     if (p[0] != 0x01 || p[5] != 0x40 || !g.currentSelectorValid)
         return false;
@@ -1521,7 +1543,7 @@ bool handle_stored_block_metadata_read_locked(const unsigned char* frame) {
     }
 }
 
-bool start_stored_block_read_locked(const unsigned char* frame) {
+[[maybe_unused]] bool start_stored_block_read_locked(const unsigned char* frame) {
     const unsigned char* p = frame + 2;
     if (p[0] != 0x01 || p[5] != 0x50 || p[6] != 0x8C ||
         !g.currentSelectorValid) return false;
@@ -1544,7 +1566,7 @@ bool start_stored_block_read_locked(const unsigned char* frame) {
     return true;
 }
 
-bool handle_block_read_ack_locked(const unsigned char* frame) {
+[[maybe_unused]] bool handle_block_read_ack_locked(const unsigned char* frame) {
     if (!g.blockRead.active || !g.blockRead.block) return false;
     std::array<unsigned char, kFrameSize> f{};
     std::copy(frame, frame + kFrameSize, f.begin());
@@ -1565,7 +1587,7 @@ bool handle_block_read_ack_locked(const unsigned char* frame) {
     return true;
 }
 
-void observe_pop_control_locked(const unsigned char* frame) {
+[[maybe_unused]] void observe_pop_control_locked(const unsigned char* frame) {
     const unsigned char* p = frame + 2;
     if (p[0] != 0x01 || p[5] != 0x20) return;
     const unsigned char odi = p[6];
@@ -1586,7 +1608,7 @@ void observe_pop_control_locked(const unsigned char* frame) {
     }
 }
 
-bool handle_dynamic_pop_control_locked(const unsigned char* frame) {
+[[maybe_unused]] bool handle_dynamic_pop_control_locked(const unsigned char* frame) {
     const unsigned char* p = frame + 2;
     if (p[0] != 0x01) return false;
     const unsigned char tc = p[5];
@@ -1727,7 +1749,7 @@ bool handle_dynamic_pop_control_locked(const unsigned char* frame) {
     return false;
 }
 
-bool capture_block_write_segment_locked(const unsigned char* frame) {
+[[maybe_unused]] bool capture_block_write_segment_locked(const unsigned char* frame) {
     if (!g.blockWrite.receiving || g.blockWrite.expectedSize == 0) return false;
     std::array<unsigned char, kFrameSize> f{};
     std::copy(frame, frame + kFrameSize, f.begin());
@@ -1778,7 +1800,7 @@ bool capture_block_write_segment_locked(const unsigned char* frame) {
     return true;
 }
 
-bool replay_locked(const unsigned char* frame) {
+[[maybe_unused]] bool replay_locked(const unsigned char* frame) {
     if (!g.replayMode || g.replay.empty()) return false;
 
     const size_t end = std::min(g.replay.size(), g.replayPos + 17);
@@ -2146,6 +2168,7 @@ void consume_tx_locked() {
 
 void reset_io_locked(bool /*resetReplay*/) {
     g.rx.clear();
+    g.eventStatus = 0;
     g.txStream.clear();
     g.scheduled.clear();
     g.periodic.clear();
@@ -2263,6 +2286,7 @@ FT_STATUS WINAPI FT_Close(FT_HANDLE h) {
     g.opened = false;
     g.eventHandle = nullptr;
     g.eventMask = 0;
+    g.eventStatus = 0;
     g.rx.clear();
     g.txStream.clear();
     g.scheduled.clear();
@@ -2301,8 +2325,7 @@ FT_STATUS WINAPI FT_Read(FT_HANDLE h, LPVOID buf, DWORD want, LPDWORD got) {
     v11_rewrite_rx_meta_locked(static_cast<unsigned char*>(buf), n);
     *got = n;
     queueAfter = g.rx.size();
-    if (!g.rx.empty()) signal_rx_locked();
-    LeaveCriticalSection(&g.cs);
+LeaveCriticalSection(&g.cs);
 
     // Log only successful reads; zero-byte polling would flood the logfile.
     if (n != 0) {
@@ -2353,7 +2376,10 @@ FT_STATUS WINAPI FT_GetStatus(FT_HANDLE h, DWORD* rx, DWORD* tx, DWORD* ev) {
     }
     if (rx) *rx = static_cast<DWORD>(g.rx.size());
     if (tx) *tx = 0;
-    if (ev) *ev = g.rx.empty() ? 0 : FT_EVENT_RXCHAR;
+    if (ev) {
+        *ev = g.eventStatus;
+        g.eventStatus = 0;
+    }
     LeaveCriticalSection(&g.cs);
     return FT_OK;
 }
@@ -2363,7 +2389,8 @@ FT_STATUS WINAPI FT_GetEventStatus(FT_HANDLE h, DWORD* ev) {
     if (!ev) return FT_INVALID_PARAMETER;
     EnterCriticalSection(&g.cs);
     if (!valid_handle(h)) { LeaveCriticalSection(&g.cs); return FT_INVALID_HANDLE; }
-    *ev = g.rx.empty() ? 0 : FT_EVENT_RXCHAR;
+    *ev = g.eventStatus;
+    g.eventStatus = 0;
     LeaveCriticalSection(&g.cs);
     return FT_OK;
 }
@@ -2419,8 +2446,12 @@ FT_STATUS WINAPI FT_SetEventNotification(FT_HANDLE h, DWORD mask, PVOID param) {
     }
     g.eventMask = mask;
     g.eventHandle = static_cast<HANDLE>(param);
-    signal_rx_locked();
+    if (!g.rx.empty())
+        g.eventStatus |= FT_EVENT_RXCHAR;
+    signal_pending_events_locked();
     LeaveCriticalSection(&g.cs);
+    logf("%s: FT_SetEventNotification mask=0x%08lX",
+         kAsyncEventMarker, static_cast<unsigned long>(mask));
     return FT_OK;
 }
 
@@ -2500,7 +2531,7 @@ FT_STATUS WINAPI FT_RestartInTask(FT_HANDLE h) {
         return FT_INVALID_HANDLE;
     }
     g.inputStopped = false;
-    signal_rx_locked();
+    signal_pending_events_locked();
     LeaveCriticalSection(&g.cs);
     return FT_OK;
 }

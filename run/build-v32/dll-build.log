@@ -1,0 +1,2 @@
+[1/2] Building CXX object CMakeFiles/ftd2xx.dir/src/ftd2xx_emu.cpp.obj
+[2/2] Linking CXX shared library ftd2xx.dll; Copying CAN-only FTD2XX runtime INI

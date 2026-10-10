@@ -20,6 +20,7 @@ events:
     names:
       - "uname"
     candidate_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -30,6 +31,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
       - "/bin/"
     searched_directories:
+      - "/home/juergen/.opencode/bin/uname"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/uname"
       - "/home/juergen/.local/bin/uname"
       - "/home/juergen/bin/uname"
@@ -38,7 +40,9 @@ events:
     found: "/usr/bin/uname"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -76,6 +80,7 @@ events:
       - "ninja"
       - "samu"
     candidate_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -85,6 +90,9 @@ events:
       - "/usr/libexec/sdcc/"
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
+      - "/home/juergen/.opencode/bin/ninja-build"
+      - "/home/juergen/.opencode/bin/ninja"
+      - "/home/juergen/.opencode/bin/samu"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/ninja-build"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/ninja"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/samu"
@@ -103,7 +111,9 @@ events:
     found: "/usr/bin/ninja-build"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -142,6 +152,7 @@ events:
       - "icx"
       - "clang++"
     candidate_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -151,13 +162,16 @@ events:
       - "/usr/libexec/sdcc/"
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
+      - "/home/juergen/.opencode/bin/c++"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/c++"
       - "/home/juergen/.local/bin/c++"
       - "/home/juergen/bin/c++"
     found: "/usr/lib64/ccache/c++"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -194,7 +208,9 @@ events:
     found: "/usr/share/cmake/Modules/CMakeCXXCompilerId.cpp.in"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -214,7 +230,7 @@ events:
     message: |
       Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
       Compiler: /usr/lib64/ccache/c++ 
-      Build flags: 
+      Build flags: -Werror
       Id flags:  
       
       The output was:
@@ -247,6 +263,7 @@ events:
       - "ar"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -256,6 +273,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/ar"
+      - "/home/juergen/.opencode/bin/ar"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/ar"
       - "/home/juergen/.local/bin/ar"
       - "/home/juergen/bin/ar"
@@ -263,7 +281,9 @@ events:
     found: "/usr/bin/ar"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -294,6 +314,7 @@ events:
       - "ranlib"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -303,6 +324,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/ranlib"
+      - "/home/juergen/.opencode/bin/ranlib"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/ranlib"
       - "/home/juergen/.local/bin/ranlib"
       - "/home/juergen/bin/ranlib"
@@ -310,7 +332,9 @@ events:
     found: "/usr/bin/ranlib"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -341,6 +365,7 @@ events:
       - "strip"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -350,6 +375,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/strip"
+      - "/home/juergen/.opencode/bin/strip"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/strip"
       - "/home/juergen/.local/bin/strip"
       - "/home/juergen/bin/strip"
@@ -357,7 +383,9 @@ events:
     found: "/usr/bin/strip"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -388,6 +416,7 @@ events:
       - "ld"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -397,6 +426,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/ld"
+      - "/home/juergen/.opencode/bin/ld"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/ld"
       - "/home/juergen/.local/bin/ld"
       - "/home/juergen/bin/ld"
@@ -404,7 +434,9 @@ events:
     found: "/usr/bin/ld"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -435,6 +467,7 @@ events:
       - "nm"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -444,6 +477,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/nm"
+      - "/home/juergen/.opencode/bin/nm"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/nm"
       - "/home/juergen/.local/bin/nm"
       - "/home/juergen/bin/nm"
@@ -451,7 +485,9 @@ events:
     found: "/usr/bin/nm"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -482,6 +518,7 @@ events:
       - "objdump"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -491,6 +528,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/objdump"
+      - "/home/juergen/.opencode/bin/objdump"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/objdump"
       - "/home/juergen/.local/bin/objdump"
       - "/home/juergen/bin/objdump"
@@ -498,7 +536,9 @@ events:
     found: "/usr/bin/objdump"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -529,6 +569,7 @@ events:
       - "objcopy"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -538,6 +579,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/objcopy"
+      - "/home/juergen/.opencode/bin/objcopy"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/objcopy"
       - "/home/juergen/.local/bin/objcopy"
       - "/home/juergen/bin/objcopy"
@@ -545,7 +587,9 @@ events:
     found: "/usr/bin/objcopy"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -576,6 +620,7 @@ events:
       - "readelf"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -585,6 +630,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/readelf"
+      - "/home/juergen/.opencode/bin/readelf"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/readelf"
       - "/home/juergen/.local/bin/readelf"
       - "/home/juergen/bin/readelf"
@@ -592,7 +638,9 @@ events:
     found: "/usr/bin/readelf"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -623,6 +671,7 @@ events:
       - "dlltool"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -632,6 +681,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/dlltool"
+      - "/home/juergen/.opencode/bin/dlltool"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/dlltool"
       - "/home/juergen/.local/bin/dlltool"
       - "/home/juergen/bin/dlltool"
@@ -642,7 +692,9 @@ events:
     found: false
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -673,6 +725,7 @@ events:
       - "addr2line"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -682,6 +735,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/addr2line"
+      - "/home/juergen/.opencode/bin/addr2line"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/addr2line"
       - "/home/juergen/.local/bin/addr2line"
       - "/home/juergen/bin/addr2line"
@@ -689,7 +743,9 @@ events:
     found: "/usr/bin/addr2line"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -720,6 +776,7 @@ events:
       - "tapi"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -729,6 +786,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/tapi"
+      - "/home/juergen/.opencode/bin/tapi"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/tapi"
       - "/home/juergen/.local/bin/tapi"
       - "/home/juergen/bin/tapi"
@@ -739,7 +797,9 @@ events:
     found: false
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -773,6 +833,7 @@ events:
       - "gcc-ar"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -782,6 +843,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/gcc-ar-16.2"
+      - "/home/juergen/.opencode/bin/gcc-ar-16.2"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/gcc-ar-16.2"
       - "/home/juergen/.local/bin/gcc-ar-16.2"
       - "/home/juergen/bin/gcc-ar-16.2"
@@ -790,6 +852,7 @@ events:
       - "/usr/libexec/sdcc/gcc-ar-16.2"
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/gcc-ar-16.2"
       - "/usr/lib64/ccache/gcc-ar-16"
+      - "/home/juergen/.opencode/bin/gcc-ar-16"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/gcc-ar-16"
       - "/home/juergen/.local/bin/gcc-ar-16"
       - "/home/juergen/bin/gcc-ar-16"
@@ -798,6 +861,7 @@ events:
       - "/usr/libexec/sdcc/gcc-ar-16"
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/gcc-ar-16"
       - "/usr/lib64/ccache/gcc-ar16"
+      - "/home/juergen/.opencode/bin/gcc-ar16"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/gcc-ar16"
       - "/home/juergen/.local/bin/gcc-ar16"
       - "/home/juergen/bin/gcc-ar16"
@@ -806,6 +870,7 @@ events:
       - "/usr/libexec/sdcc/gcc-ar16"
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/gcc-ar16"
       - "/usr/lib64/ccache/gcc-ar"
+      - "/home/juergen/.opencode/bin/gcc-ar"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/gcc-ar"
       - "/home/juergen/.local/bin/gcc-ar"
       - "/home/juergen/bin/gcc-ar"
@@ -813,7 +878,9 @@ events:
     found: "/usr/bin/gcc-ar"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -847,6 +914,7 @@ events:
       - "gcc-ranlib"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -856,6 +924,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/gcc-ranlib-16.2"
+      - "/home/juergen/.opencode/bin/gcc-ranlib-16.2"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/gcc-ranlib-16.2"
       - "/home/juergen/.local/bin/gcc-ranlib-16.2"
       - "/home/juergen/bin/gcc-ranlib-16.2"
@@ -864,6 +933,7 @@ events:
       - "/usr/libexec/sdcc/gcc-ranlib-16.2"
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/gcc-ranlib-16.2"
       - "/usr/lib64/ccache/gcc-ranlib-16"
+      - "/home/juergen/.opencode/bin/gcc-ranlib-16"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/gcc-ranlib-16"
       - "/home/juergen/.local/bin/gcc-ranlib-16"
       - "/home/juergen/bin/gcc-ranlib-16"
@@ -872,6 +942,7 @@ events:
       - "/usr/libexec/sdcc/gcc-ranlib-16"
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/gcc-ranlib-16"
       - "/usr/lib64/ccache/gcc-ranlib16"
+      - "/home/juergen/.opencode/bin/gcc-ranlib16"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/gcc-ranlib16"
       - "/home/juergen/.local/bin/gcc-ranlib16"
       - "/home/juergen/bin/gcc-ranlib16"
@@ -880,6 +951,7 @@ events:
       - "/usr/libexec/sdcc/gcc-ranlib16"
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/gcc-ranlib16"
       - "/usr/lib64/ccache/gcc-ranlib"
+      - "/home/juergen/.opencode/bin/gcc-ranlib"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/gcc-ranlib"
       - "/home/juergen/.local/bin/gcc-ranlib"
       - "/home/juergen/bin/gcc-ranlib"
@@ -887,7 +959,9 @@ events:
     found: "/usr/bin/gcc-ranlib"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -906,10 +980,10 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "/home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/CMakeFiles/CMakeScratch/TryCompile-LDsY5R"
-      binary: "/home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/CMakeFiles/CMakeScratch/TryCompile-LDsY5R"
+      source: "/home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/CMakeFiles/CMakeScratch/TryCompile-a27H6M"
+      binary: "/home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/CMakeFiles/CMakeScratch/TryCompile-a27H6M"
     cmakeVariables:
-      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS: " "
       CMAKE_CXX_FLAGS_DEBUG: "-g"
       CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
       CMAKE_CXX_STDLIB_MODULES_JSON: ""
@@ -918,10 +992,10 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: '/home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/CMakeFiles/CMakeScratch/TryCompile-LDsY5R'
+        Change Dir: '/home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/CMakeFiles/CMakeScratch/TryCompile-a27H6M'
         
-        Run Build Command(s): /usr/bin/ninja-build -v cmTC_3fe9f
-        [1/2] /usr/lib64/ccache/c++   -v -o CMakeFiles/cmTC_3fe9f.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp
+        Run Build Command(s): /usr/bin/ninja-build -v cmTC_efc16
+        [1/2] /usr/lib64/ccache/c++   -v -o CMakeFiles/cmTC_efc16.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp
         Using built-in specs.
         COLLECT_GCC=/usr/bin/c++
         OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa
@@ -955,7 +1029,7 @@ events:
         COMPILER_PATH=/usr/libexec/gcc/x86_64-redhat-linux/16/:/usr/libexec/gcc/x86_64-redhat-linux/16/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/16/:/usr/lib/gcc/x86_64-redhat-linux/
         LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/16/:/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-redhat-linux/16/../../../:/lib/:/usr/lib/
         COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-c' '-o' 'CMakeFiles/cmTC_e267b.dir/CMakeCXXCompilerABI.cpp.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-mtls-dialect=gnu2' '-dumpdir' 'CMakeFiles/cmTC_e267b.dir/CMakeCXXCompilerABI.cpp.'
-        [2/2] : && /usr/lib64/ccache/c++  -v -Wl,-v CMakeFiles/cmTC_3fe9f.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_3fe9f   && :
+        [2/2] : && /usr/lib64/ccache/c++  -v -Wl,-v CMakeFiles/cmTC_efc16.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_efc16   && :
         Using built-in specs.
         COLLECT_GCC=/usr/bin/c++
         COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-redhat-linux/16/lto-wrapper
@@ -968,12 +1042,12 @@ events:
         gcc version 16.2.1 20260819 (Red Hat 16.2.1-2) (GCC) 
         COMPILER_PATH=/usr/libexec/gcc/x86_64-redhat-linux/16/:/usr/libexec/gcc/x86_64-redhat-linux/16/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/16/:/usr/lib/gcc/x86_64-redhat-linux/
         LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/16/:/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-redhat-linux/16/../../../:/lib/:/usr/lib/
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_3fe9f' '-foffload-options=-l_GCC_stdc++' '-foffload-options=-l_GCC_m' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-mtls-dialect=gnu2' '-dumpdir' 'cmTC_3fe9f.'
-         /usr/libexec/gcc/x86_64-redhat-linux/16/collect2 -plugin /usr/libexec/gcc/x86_64-redhat-linux/16/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccn7yMRM.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_3fe9f /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/16/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/16 -L/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_3fe9f.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -latomic_asneeded -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-redhat-linux/16/crtend.o /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crtn.o
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_efc16' '-foffload-options=-l_GCC_stdc++' '-foffload-options=-l_GCC_m' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-mtls-dialect=gnu2' '-dumpdir' 'cmTC_efc16.'
+         /usr/libexec/gcc/x86_64-redhat-linux/16/collect2 -plugin /usr/libexec/gcc/x86_64-redhat-linux/16/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccnwIDc7.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_efc16 /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/16/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/16 -L/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_efc16.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -latomic_asneeded -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-redhat-linux/16/crtend.o /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crtn.o
         collect2 version 16.2.1 20260819 (Red Hat 16.2.1-2)
-        /usr/bin/ld -plugin /usr/libexec/gcc/x86_64-redhat-linux/16/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccn7yMRM.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_3fe9f /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/16/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/16 -L/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_3fe9f.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -latomic_asneeded -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-redhat-linux/16/crtend.o /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crtn.o
+        /usr/bin/ld -plugin /usr/libexec/gcc/x86_64-redhat-linux/16/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccnwIDc7.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_efc16 /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/16/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/16 -L/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_efc16.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -latomic_asneeded -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-redhat-linux/16/crtend.o /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crtn.o
         GNU ld version 2.46.1-1.fc44
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_3fe9f' '-foffload-options=-l_GCC_stdc++' '-foffload-options=-l_GCC_m' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-mtls-dialect=gnu2' '-dumpdir' 'cmTC_3fe9f.'
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_efc16' '-foffload-options=-l_GCC_stdc++' '-foffload-options=-l_GCC_m' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-mtls-dialect=gnu2' '-dumpdir' 'cmTC_efc16.'
         
       exitCode: 0
   -
@@ -1012,10 +1086,10 @@ events:
       Parsed CXX implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
-        ignore line: [Change Dir: '/home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/CMakeFiles/CMakeScratch/TryCompile-LDsY5R']
+        ignore line: [Change Dir: '/home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/CMakeFiles/CMakeScratch/TryCompile-a27H6M']
         ignore line: []
-        ignore line: [Run Build Command(s): /usr/bin/ninja-build -v cmTC_3fe9f]
-        ignore line: [[1/2] /usr/lib64/ccache/c++   -v -o CMakeFiles/cmTC_3fe9f.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Run Build Command(s): /usr/bin/ninja-build -v cmTC_efc16]
+        ignore line: [[1/2] /usr/lib64/ccache/c++   -v -o CMakeFiles/cmTC_efc16.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=/usr/bin/c++]
         ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa]
@@ -1049,7 +1123,7 @@ events:
         ignore line: [COMPILER_PATH=/usr/libexec/gcc/x86_64-redhat-linux/16/:/usr/libexec/gcc/x86_64-redhat-linux/16/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/16/:/usr/lib/gcc/x86_64-redhat-linux/]
         ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/16/:/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-redhat-linux/16/../../../:/lib/:/usr/lib/]
         ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-c' '-o' 'CMakeFiles/cmTC_e267b.dir/CMakeCXXCompilerABI.cpp.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-mtls-dialect=gnu2' '-dumpdir' 'CMakeFiles/cmTC_e267b.dir/CMakeCXXCompilerABI.cpp.']
-        ignore line: [[2/2] : && /usr/lib64/ccache/c++  -v -Wl -v CMakeFiles/cmTC_3fe9f.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_3fe9f   && :]
+        ignore line: [[2/2] : && /usr/lib64/ccache/c++  -v -Wl -v CMakeFiles/cmTC_efc16.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_efc16   && :]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=/usr/bin/c++]
         ignore line: [COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-redhat-linux/16/lto-wrapper]
@@ -1062,13 +1136,13 @@ events:
         ignore line: [gcc version 16.2.1 20260819 (Red Hat 16.2.1-2) (GCC) ]
         ignore line: [COMPILER_PATH=/usr/libexec/gcc/x86_64-redhat-linux/16/:/usr/libexec/gcc/x86_64-redhat-linux/16/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/16/:/usr/lib/gcc/x86_64-redhat-linux/]
         ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/16/:/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-redhat-linux/16/../../../:/lib/:/usr/lib/]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_3fe9f' '-foffload-options=-l_GCC_stdc++' '-foffload-options=-l_GCC_m' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-mtls-dialect=gnu2' '-dumpdir' 'cmTC_3fe9f.']
-        link line: [ /usr/libexec/gcc/x86_64-redhat-linux/16/collect2 -plugin /usr/libexec/gcc/x86_64-redhat-linux/16/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccn7yMRM.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_3fe9f /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/16/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/16 -L/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_3fe9f.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -latomic_asneeded -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-redhat-linux/16/crtend.o /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crtn.o]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_efc16' '-foffload-options=-l_GCC_stdc++' '-foffload-options=-l_GCC_m' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-mtls-dialect=gnu2' '-dumpdir' 'cmTC_efc16.']
+        link line: [ /usr/libexec/gcc/x86_64-redhat-linux/16/collect2 -plugin /usr/libexec/gcc/x86_64-redhat-linux/16/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccnwIDc7.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_efc16 /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/16/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/16 -L/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_efc16.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -latomic_asneeded -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-redhat-linux/16/crtend.o /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crtn.o]
           arg [/usr/libexec/gcc/x86_64-redhat-linux/16/collect2] ==> ignore
           arg [-plugin] ==> ignore
           arg [/usr/libexec/gcc/x86_64-redhat-linux/16/liblto_plugin.so] ==> ignore
           arg [-plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/16/lto-wrapper] ==> ignore
-          arg [-plugin-opt=-fresolution=/tmp/ccn7yMRM.res] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/ccnwIDc7.res] ==> ignore
           arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
           arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
           arg [-plugin-opt=-pass-through=-latomic_asneeded] ==> ignore
@@ -1084,7 +1158,7 @@ events:
           arg [-dynamic-linker] ==> ignore
           arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
           arg [-o] ==> ignore
-          arg [cmTC_3fe9f] ==> ignore
+          arg [cmTC_efc16] ==> ignore
           arg [/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crt1.o] ==> obj [/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crt1.o]
           arg [/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crti.o] ==> obj [/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crti.o]
           arg [/usr/lib/gcc/x86_64-redhat-linux/16/crtbegin.o] ==> obj [/usr/lib/gcc/x86_64-redhat-linux/16/crtbegin.o]
@@ -1096,7 +1170,7 @@ events:
           arg [-L/lib] ==> dir [/lib]
           arg [-L/usr/lib] ==> dir [/usr/lib]
           arg [-v] ==> ignore
-          arg [CMakeFiles/cmTC_3fe9f.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+          arg [CMakeFiles/cmTC_efc16.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
           arg [-lstdc++] ==> lib [stdc++]
           arg [-lm] ==> lib [m]
           arg [-lgcc_s] ==> lib [gcc_s]
@@ -1108,7 +1182,7 @@ events:
           arg [/usr/lib/gcc/x86_64-redhat-linux/16/crtend.o] ==> obj [/usr/lib/gcc/x86_64-redhat-linux/16/crtend.o]
           arg [/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crtn.o] ==> obj [/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crtn.o]
         ignore line: [collect2 version 16.2.1 20260819 (Red Hat 16.2.1-2)]
-        ignore line: [/usr/bin/ld -plugin /usr/libexec/gcc/x86_64-redhat-linux/16/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccn7yMRM.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_3fe9f /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/16/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/16 -L/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_3fe9f.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -latomic_asneeded -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-redhat-linux/16/crtend.o /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crtn.o]
+        ignore line: [/usr/bin/ld -plugin /usr/libexec/gcc/x86_64-redhat-linux/16/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccnwIDc7.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_efc16 /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/16/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/16 -L/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_efc16.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -latomic_asneeded -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-redhat-linux/16/crtend.o /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crtn.o]
         linker tool for 'CXX': /usr/bin/ld
         collapse obj [/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crt1.o] ==> [/usr/lib64/crt1.o]
         collapse obj [/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crti.o] ==> [/usr/lib64/crti.o]

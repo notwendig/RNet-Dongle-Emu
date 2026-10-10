@@ -5,7 +5,7 @@ events:
     kind: "find-v1"
     backtrace:
       - "/usr/share/cmake/Modules/CMakeDetermineSystem.cmake:12 (find_program)"
-      - "CMakeLists.txt:3 (project)"
+      - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_UNAME"
     description: "Path to a program."
@@ -20,6 +20,7 @@ events:
     names:
       - "uname"
     candidate_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -30,6 +31,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
       - "/bin/"
     searched_directories:
+      - "/home/juergen/.opencode/bin/uname"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/uname"
       - "/home/juergen/.local/bin/uname"
       - "/home/juergen/bin/uname"
@@ -38,7 +40,9 @@ events:
     found: "/usr/bin/uname"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -52,14 +56,14 @@ events:
     kind: "message-v1"
     backtrace:
       - "/usr/share/cmake/Modules/CMakeDetermineSystem.cmake:212 (message)"
-      - "CMakeLists.txt:3 (project)"
+      - "CMakeLists.txt:2 (project)"
     message: |
       The system is: Linux - 7.2.9-200.fc44.x86_64 - x86_64
   -
     kind: "find-v1"
     backtrace:
       - "/usr/share/cmake/Modules/CMakeNinjaFindMake.cmake:5 (find_program)"
-      - "CMakeLists.txt:3 (project)"
+      - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_MAKE_PROGRAM"
     description: "Program used to build from build.ninja files."
@@ -76,6 +80,7 @@ events:
       - "ninja"
       - "samu"
     candidate_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -85,6 +90,9 @@ events:
       - "/usr/libexec/sdcc/"
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
+      - "/home/juergen/.opencode/bin/ninja-build"
+      - "/home/juergen/.opencode/bin/ninja"
+      - "/home/juergen/.opencode/bin/samu"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/ninja-build"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/ninja"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/samu"
@@ -103,7 +111,9 @@ events:
     found: "/usr/bin/ninja-build"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -118,7 +128,7 @@ events:
     backtrace:
       - "/usr/share/cmake/Modules/CMakeDetermineCompiler.cmake:73 (find_program)"
       - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:69 (_cmake_find_compiler)"
-      - "CMakeLists.txt:3 (project)"
+      - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_CXX_COMPILER"
     description: "CXX compiler"
@@ -142,6 +152,7 @@ events:
       - "icx"
       - "clang++"
     candidate_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -151,13 +162,16 @@ events:
       - "/usr/libexec/sdcc/"
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
+      - "/home/juergen/.opencode/bin/c++"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/c++"
       - "/home/juergen/.local/bin/c++"
       - "/home/juergen/bin/c++"
     found: "/usr/lib64/ccache/c++"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -175,7 +189,7 @@ events:
       - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
       - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
       - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
-      - "CMakeLists.txt:3 (project)"
+      - "CMakeLists.txt:2 (project)"
     mode: "file"
     variable: "src_in"
     description: "Path to a file."
@@ -194,7 +208,9 @@ events:
     found: "/usr/share/cmake/Modules/CMakeCXXCompilerId.cpp.in"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -210,11 +226,11 @@ events:
       - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
       - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
       - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
-      - "CMakeLists.txt:3 (project)"
+      - "CMakeLists.txt:2 (project)"
     message: |
       Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
       Compiler: /usr/lib64/ccache/c++ 
-      Build flags: 
+      Build flags: -Werror
       Id flags:  
       
       The output was:
@@ -231,7 +247,7 @@ events:
     backtrace:
       - "/usr/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
       - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
-      - "CMakeLists.txt:3 (project)"
+      - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_AR"
     description: "Path to a program."
@@ -247,6 +263,7 @@ events:
       - "ar"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -256,6 +273,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/ar"
+      - "/home/juergen/.opencode/bin/ar"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/ar"
       - "/home/juergen/.local/bin/ar"
       - "/home/juergen/bin/ar"
@@ -263,7 +281,9 @@ events:
     found: "/usr/bin/ar"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -278,7 +298,7 @@ events:
     backtrace:
       - "/usr/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
       - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
-      - "CMakeLists.txt:3 (project)"
+      - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_RANLIB"
     description: "Path to a program."
@@ -294,6 +314,7 @@ events:
       - "ranlib"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -303,6 +324,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/ranlib"
+      - "/home/juergen/.opencode/bin/ranlib"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/ranlib"
       - "/home/juergen/.local/bin/ranlib"
       - "/home/juergen/bin/ranlib"
@@ -310,7 +332,9 @@ events:
     found: "/usr/bin/ranlib"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -325,7 +349,7 @@ events:
     backtrace:
       - "/usr/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
       - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
-      - "CMakeLists.txt:3 (project)"
+      - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_STRIP"
     description: "Path to a program."
@@ -341,6 +365,7 @@ events:
       - "strip"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -350,6 +375,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/strip"
+      - "/home/juergen/.opencode/bin/strip"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/strip"
       - "/home/juergen/.local/bin/strip"
       - "/home/juergen/bin/strip"
@@ -357,7 +383,9 @@ events:
     found: "/usr/bin/strip"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -372,7 +400,7 @@ events:
     backtrace:
       - "/usr/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
       - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
-      - "CMakeLists.txt:3 (project)"
+      - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_LINKER"
     description: "Path to a program."
@@ -388,6 +416,7 @@ events:
       - "ld"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -397,6 +426,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/ld"
+      - "/home/juergen/.opencode/bin/ld"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/ld"
       - "/home/juergen/.local/bin/ld"
       - "/home/juergen/bin/ld"
@@ -404,7 +434,9 @@ events:
     found: "/usr/bin/ld"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -419,7 +451,7 @@ events:
     backtrace:
       - "/usr/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
       - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
-      - "CMakeLists.txt:3 (project)"
+      - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_NM"
     description: "Path to a program."
@@ -435,6 +467,7 @@ events:
       - "nm"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -444,6 +477,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/nm"
+      - "/home/juergen/.opencode/bin/nm"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/nm"
       - "/home/juergen/.local/bin/nm"
       - "/home/juergen/bin/nm"
@@ -451,7 +485,9 @@ events:
     found: "/usr/bin/nm"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -466,7 +502,7 @@ events:
     backtrace:
       - "/usr/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
       - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
-      - "CMakeLists.txt:3 (project)"
+      - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_OBJDUMP"
     description: "Path to a program."
@@ -482,6 +518,7 @@ events:
       - "objdump"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -491,6 +528,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/objdump"
+      - "/home/juergen/.opencode/bin/objdump"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/objdump"
       - "/home/juergen/.local/bin/objdump"
       - "/home/juergen/bin/objdump"
@@ -498,7 +536,9 @@ events:
     found: "/usr/bin/objdump"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -513,7 +553,7 @@ events:
     backtrace:
       - "/usr/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
       - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
-      - "CMakeLists.txt:3 (project)"
+      - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_OBJCOPY"
     description: "Path to a program."
@@ -529,6 +569,7 @@ events:
       - "objcopy"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -538,6 +579,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/objcopy"
+      - "/home/juergen/.opencode/bin/objcopy"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/objcopy"
       - "/home/juergen/.local/bin/objcopy"
       - "/home/juergen/bin/objcopy"
@@ -545,7 +587,9 @@ events:
     found: "/usr/bin/objcopy"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -560,7 +604,7 @@ events:
     backtrace:
       - "/usr/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
       - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
-      - "CMakeLists.txt:3 (project)"
+      - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_READELF"
     description: "Path to a program."
@@ -576,6 +620,7 @@ events:
       - "readelf"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -585,6 +630,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/readelf"
+      - "/home/juergen/.opencode/bin/readelf"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/readelf"
       - "/home/juergen/.local/bin/readelf"
       - "/home/juergen/bin/readelf"
@@ -592,7 +638,9 @@ events:
     found: "/usr/bin/readelf"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -607,7 +655,7 @@ events:
     backtrace:
       - "/usr/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
       - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
-      - "CMakeLists.txt:3 (project)"
+      - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_DLLTOOL"
     description: "Path to a program."
@@ -623,6 +671,7 @@ events:
       - "dlltool"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -632,6 +681,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/dlltool"
+      - "/home/juergen/.opencode/bin/dlltool"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/dlltool"
       - "/home/juergen/.local/bin/dlltool"
       - "/home/juergen/bin/dlltool"
@@ -642,7 +692,9 @@ events:
     found: false
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -657,7 +709,7 @@ events:
     backtrace:
       - "/usr/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
       - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
-      - "CMakeLists.txt:3 (project)"
+      - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_ADDR2LINE"
     description: "Path to a program."
@@ -673,6 +725,7 @@ events:
       - "addr2line"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -682,6 +735,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/addr2line"
+      - "/home/juergen/.opencode/bin/addr2line"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/addr2line"
       - "/home/juergen/.local/bin/addr2line"
       - "/home/juergen/bin/addr2line"
@@ -689,7 +743,9 @@ events:
     found: "/usr/bin/addr2line"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -704,7 +760,7 @@ events:
     backtrace:
       - "/usr/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
       - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
-      - "CMakeLists.txt:3 (project)"
+      - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_TAPI"
     description: "Path to a program."
@@ -720,6 +776,7 @@ events:
       - "tapi"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -729,6 +786,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/tapi"
+      - "/home/juergen/.opencode/bin/tapi"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/tapi"
       - "/home/juergen/.local/bin/tapi"
       - "/home/juergen/bin/tapi"
@@ -739,7 +797,9 @@ events:
     found: false
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -754,7 +814,7 @@ events:
     backtrace:
       - "/usr/share/cmake/Modules/Compiler/GNU-FindBinUtils.cmake:18 (find_program)"
       - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:207 (include)"
-      - "CMakeLists.txt:3 (project)"
+      - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_CXX_COMPILER_AR"
     description: "A wrapper around 'ar' adding the appropriate '--plugin' option for the GCC compiler"
@@ -773,6 +833,7 @@ events:
       - "gcc-ar"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -782,6 +843,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/gcc-ar-16.2"
+      - "/home/juergen/.opencode/bin/gcc-ar-16.2"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/gcc-ar-16.2"
       - "/home/juergen/.local/bin/gcc-ar-16.2"
       - "/home/juergen/bin/gcc-ar-16.2"
@@ -790,6 +852,7 @@ events:
       - "/usr/libexec/sdcc/gcc-ar-16.2"
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/gcc-ar-16.2"
       - "/usr/lib64/ccache/gcc-ar-16"
+      - "/home/juergen/.opencode/bin/gcc-ar-16"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/gcc-ar-16"
       - "/home/juergen/.local/bin/gcc-ar-16"
       - "/home/juergen/bin/gcc-ar-16"
@@ -798,6 +861,7 @@ events:
       - "/usr/libexec/sdcc/gcc-ar-16"
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/gcc-ar-16"
       - "/usr/lib64/ccache/gcc-ar16"
+      - "/home/juergen/.opencode/bin/gcc-ar16"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/gcc-ar16"
       - "/home/juergen/.local/bin/gcc-ar16"
       - "/home/juergen/bin/gcc-ar16"
@@ -806,6 +870,7 @@ events:
       - "/usr/libexec/sdcc/gcc-ar16"
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/gcc-ar16"
       - "/usr/lib64/ccache/gcc-ar"
+      - "/home/juergen/.opencode/bin/gcc-ar"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/gcc-ar"
       - "/home/juergen/.local/bin/gcc-ar"
       - "/home/juergen/bin/gcc-ar"
@@ -813,7 +878,9 @@ events:
     found: "/usr/bin/gcc-ar"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -828,7 +895,7 @@ events:
     backtrace:
       - "/usr/share/cmake/Modules/Compiler/GNU-FindBinUtils.cmake:30 (find_program)"
       - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:207 (include)"
-      - "CMakeLists.txt:3 (project)"
+      - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_CXX_COMPILER_RANLIB"
     description: "A wrapper around 'ranlib' adding the appropriate '--plugin' option for the GCC compiler"
@@ -847,6 +914,7 @@ events:
       - "gcc-ranlib"
     candidate_directories:
       - "/usr/lib64/ccache/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -856,6 +924,7 @@ events:
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "/usr/lib64/ccache/gcc-ranlib-16.2"
+      - "/home/juergen/.opencode/bin/gcc-ranlib-16.2"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/gcc-ranlib-16.2"
       - "/home/juergen/.local/bin/gcc-ranlib-16.2"
       - "/home/juergen/bin/gcc-ranlib-16.2"
@@ -864,6 +933,7 @@ events:
       - "/usr/libexec/sdcc/gcc-ranlib-16.2"
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/gcc-ranlib-16.2"
       - "/usr/lib64/ccache/gcc-ranlib-16"
+      - "/home/juergen/.opencode/bin/gcc-ranlib-16"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/gcc-ranlib-16"
       - "/home/juergen/.local/bin/gcc-ranlib-16"
       - "/home/juergen/bin/gcc-ranlib-16"
@@ -872,6 +942,7 @@ events:
       - "/usr/libexec/sdcc/gcc-ranlib-16"
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/gcc-ranlib-16"
       - "/usr/lib64/ccache/gcc-ranlib16"
+      - "/home/juergen/.opencode/bin/gcc-ranlib16"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/gcc-ranlib16"
       - "/home/juergen/.local/bin/gcc-ranlib16"
       - "/home/juergen/bin/gcc-ranlib16"
@@ -880,6 +951,7 @@ events:
       - "/usr/libexec/sdcc/gcc-ranlib16"
       - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/gcc-ranlib16"
       - "/usr/lib64/ccache/gcc-ranlib"
+      - "/home/juergen/.opencode/bin/gcc-ranlib"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/gcc-ranlib"
       - "/home/juergen/.local/bin/gcc-ranlib"
       - "/home/juergen/bin/gcc-ranlib"
@@ -887,7 +959,9 @@ events:
     found: "/usr/bin/gcc-ranlib"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -902,14 +976,14 @@ events:
     backtrace:
       - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
       - "/usr/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
-      - "CMakeLists.txt:3 (project)"
+      - "CMakeLists.txt:2 (project)"
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "/home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/CMakeFiles/CMakeScratch/TryCompile-0Zcn3M"
-      binary: "/home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/CMakeFiles/CMakeScratch/TryCompile-0Zcn3M"
+      source: "/home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/CMakeFiles/CMakeScratch/TryCompile-rJdlgn"
+      binary: "/home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/CMakeFiles/CMakeScratch/TryCompile-rJdlgn"
     cmakeVariables:
-      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS: " "
       CMAKE_CXX_FLAGS_DEBUG: "-g"
       CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
       CMAKE_CXX_STDLIB_MODULES_JSON: ""
@@ -918,10 +992,10 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: '/home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/CMakeFiles/CMakeScratch/TryCompile-0Zcn3M'
+        Change Dir: '/home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/CMakeFiles/CMakeScratch/TryCompile-rJdlgn'
         
-        Run Build Command(s): /usr/bin/ninja-build -v cmTC_3f687
-        [1/2] /usr/lib64/ccache/c++   -v -o CMakeFiles/cmTC_3f687.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp
+        Run Build Command(s): /usr/bin/ninja-build -v cmTC_dcfce
+        [1/2] /usr/lib64/ccache/c++   -v -o CMakeFiles/cmTC_dcfce.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp
         Using built-in specs.
         COLLECT_GCC=/usr/bin/c++
         OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa
@@ -955,7 +1029,7 @@ events:
         COMPILER_PATH=/usr/libexec/gcc/x86_64-redhat-linux/16/:/usr/libexec/gcc/x86_64-redhat-linux/16/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/16/:/usr/lib/gcc/x86_64-redhat-linux/
         LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/16/:/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-redhat-linux/16/../../../:/lib/:/usr/lib/
         COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-c' '-o' 'CMakeFiles/cmTC_e267b.dir/CMakeCXXCompilerABI.cpp.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-mtls-dialect=gnu2' '-dumpdir' 'CMakeFiles/cmTC_e267b.dir/CMakeCXXCompilerABI.cpp.'
-        [2/2] : && /usr/lib64/ccache/c++  -v -Wl,-v CMakeFiles/cmTC_3f687.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_3f687   && :
+        [2/2] : && /usr/lib64/ccache/c++  -v -Wl,-v CMakeFiles/cmTC_dcfce.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_dcfce   && :
         Using built-in specs.
         COLLECT_GCC=/usr/bin/c++
         COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-redhat-linux/16/lto-wrapper
@@ -968,12 +1042,12 @@ events:
         gcc version 16.2.1 20260819 (Red Hat 16.2.1-2) (GCC) 
         COMPILER_PATH=/usr/libexec/gcc/x86_64-redhat-linux/16/:/usr/libexec/gcc/x86_64-redhat-linux/16/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/16/:/usr/lib/gcc/x86_64-redhat-linux/
         LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/16/:/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-redhat-linux/16/../../../:/lib/:/usr/lib/
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_3f687' '-foffload-options=-l_GCC_stdc++' '-foffload-options=-l_GCC_m' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-mtls-dialect=gnu2' '-dumpdir' 'cmTC_3f687.'
-         /usr/libexec/gcc/x86_64-redhat-linux/16/collect2 -plugin /usr/libexec/gcc/x86_64-redhat-linux/16/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccOxrUrg.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_3f687 /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/16/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/16 -L/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_3f687.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -latomic_asneeded -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-redhat-linux/16/crtend.o /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crtn.o
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_dcfce' '-foffload-options=-l_GCC_stdc++' '-foffload-options=-l_GCC_m' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-mtls-dialect=gnu2' '-dumpdir' 'cmTC_dcfce.'
+         /usr/libexec/gcc/x86_64-redhat-linux/16/collect2 -plugin /usr/libexec/gcc/x86_64-redhat-linux/16/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccobAaVJ.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_dcfce /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/16/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/16 -L/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_dcfce.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -latomic_asneeded -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-redhat-linux/16/crtend.o /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crtn.o
         collect2 version 16.2.1 20260819 (Red Hat 16.2.1-2)
-        /usr/bin/ld -plugin /usr/libexec/gcc/x86_64-redhat-linux/16/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccOxrUrg.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_3f687 /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/16/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/16 -L/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_3f687.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -latomic_asneeded -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-redhat-linux/16/crtend.o /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crtn.o
+        /usr/bin/ld -plugin /usr/libexec/gcc/x86_64-redhat-linux/16/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccobAaVJ.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_dcfce /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/16/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/16 -L/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_dcfce.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -latomic_asneeded -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-redhat-linux/16/crtend.o /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crtn.o
         GNU ld version 2.46.1-1.fc44
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_3f687' '-foffload-options=-l_GCC_stdc++' '-foffload-options=-l_GCC_m' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-mtls-dialect=gnu2' '-dumpdir' 'cmTC_3f687.'
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_dcfce' '-foffload-options=-l_GCC_stdc++' '-foffload-options=-l_GCC_m' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-mtls-dialect=gnu2' '-dumpdir' 'cmTC_dcfce.'
         
       exitCode: 0
   -
@@ -981,7 +1055,7 @@ events:
     backtrace:
       - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:217 (message)"
       - "/usr/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
-      - "CMakeLists.txt:3 (project)"
+      - "CMakeLists.txt:2 (project)"
     message: |
       Parsed CXX implicit include dir info: rv=done
         found start of include info
@@ -1007,15 +1081,15 @@ events:
     backtrace:
       - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:253 (message)"
       - "/usr/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
-      - "CMakeLists.txt:3 (project)"
+      - "CMakeLists.txt:2 (project)"
     message: |
       Parsed CXX implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
-        ignore line: [Change Dir: '/home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/CMakeFiles/CMakeScratch/TryCompile-0Zcn3M']
+        ignore line: [Change Dir: '/home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/CMakeFiles/CMakeScratch/TryCompile-rJdlgn']
         ignore line: []
-        ignore line: [Run Build Command(s): /usr/bin/ninja-build -v cmTC_3f687]
-        ignore line: [[1/2] /usr/lib64/ccache/c++   -v -o CMakeFiles/cmTC_3f687.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Run Build Command(s): /usr/bin/ninja-build -v cmTC_dcfce]
+        ignore line: [[1/2] /usr/lib64/ccache/c++   -v -o CMakeFiles/cmTC_dcfce.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=/usr/bin/c++]
         ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa]
@@ -1049,7 +1123,7 @@ events:
         ignore line: [COMPILER_PATH=/usr/libexec/gcc/x86_64-redhat-linux/16/:/usr/libexec/gcc/x86_64-redhat-linux/16/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/16/:/usr/lib/gcc/x86_64-redhat-linux/]
         ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/16/:/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-redhat-linux/16/../../../:/lib/:/usr/lib/]
         ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-c' '-o' 'CMakeFiles/cmTC_e267b.dir/CMakeCXXCompilerABI.cpp.o' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-mtls-dialect=gnu2' '-dumpdir' 'CMakeFiles/cmTC_e267b.dir/CMakeCXXCompilerABI.cpp.']
-        ignore line: [[2/2] : && /usr/lib64/ccache/c++  -v -Wl -v CMakeFiles/cmTC_3f687.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_3f687   && :]
+        ignore line: [[2/2] : && /usr/lib64/ccache/c++  -v -Wl -v CMakeFiles/cmTC_dcfce.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_dcfce   && :]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=/usr/bin/c++]
         ignore line: [COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-redhat-linux/16/lto-wrapper]
@@ -1062,13 +1136,13 @@ events:
         ignore line: [gcc version 16.2.1 20260819 (Red Hat 16.2.1-2) (GCC) ]
         ignore line: [COMPILER_PATH=/usr/libexec/gcc/x86_64-redhat-linux/16/:/usr/libexec/gcc/x86_64-redhat-linux/16/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/16/:/usr/lib/gcc/x86_64-redhat-linux/]
         ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/16/:/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-redhat-linux/16/../../../:/lib/:/usr/lib/]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_3f687' '-foffload-options=-l_GCC_stdc++' '-foffload-options=-l_GCC_m' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-mtls-dialect=gnu2' '-dumpdir' 'cmTC_3f687.']
-        link line: [ /usr/libexec/gcc/x86_64-redhat-linux/16/collect2 -plugin /usr/libexec/gcc/x86_64-redhat-linux/16/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccOxrUrg.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_3f687 /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/16/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/16 -L/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_3f687.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -latomic_asneeded -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-redhat-linux/16/crtend.o /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crtn.o]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_dcfce' '-foffload-options=-l_GCC_stdc++' '-foffload-options=-l_GCC_m' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-mtls-dialect=gnu2' '-dumpdir' 'cmTC_dcfce.']
+        link line: [ /usr/libexec/gcc/x86_64-redhat-linux/16/collect2 -plugin /usr/libexec/gcc/x86_64-redhat-linux/16/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccobAaVJ.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_dcfce /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/16/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/16 -L/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_dcfce.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -latomic_asneeded -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-redhat-linux/16/crtend.o /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crtn.o]
           arg [/usr/libexec/gcc/x86_64-redhat-linux/16/collect2] ==> ignore
           arg [-plugin] ==> ignore
           arg [/usr/libexec/gcc/x86_64-redhat-linux/16/liblto_plugin.so] ==> ignore
           arg [-plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/16/lto-wrapper] ==> ignore
-          arg [-plugin-opt=-fresolution=/tmp/ccOxrUrg.res] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/ccobAaVJ.res] ==> ignore
           arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
           arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
           arg [-plugin-opt=-pass-through=-latomic_asneeded] ==> ignore
@@ -1084,7 +1158,7 @@ events:
           arg [-dynamic-linker] ==> ignore
           arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
           arg [-o] ==> ignore
-          arg [cmTC_3f687] ==> ignore
+          arg [cmTC_dcfce] ==> ignore
           arg [/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crt1.o] ==> obj [/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crt1.o]
           arg [/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crti.o] ==> obj [/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crti.o]
           arg [/usr/lib/gcc/x86_64-redhat-linux/16/crtbegin.o] ==> obj [/usr/lib/gcc/x86_64-redhat-linux/16/crtbegin.o]
@@ -1096,7 +1170,7 @@ events:
           arg [-L/lib] ==> dir [/lib]
           arg [-L/usr/lib] ==> dir [/usr/lib]
           arg [-v] ==> ignore
-          arg [CMakeFiles/cmTC_3f687.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+          arg [CMakeFiles/cmTC_dcfce.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
           arg [-lstdc++] ==> lib [stdc++]
           arg [-lm] ==> lib [m]
           arg [-lgcc_s] ==> lib [gcc_s]
@@ -1108,7 +1182,7 @@ events:
           arg [/usr/lib/gcc/x86_64-redhat-linux/16/crtend.o] ==> obj [/usr/lib/gcc/x86_64-redhat-linux/16/crtend.o]
           arg [/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crtn.o] ==> obj [/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crtn.o]
         ignore line: [collect2 version 16.2.1 20260819 (Red Hat 16.2.1-2)]
-        ignore line: [/usr/bin/ld -plugin /usr/libexec/gcc/x86_64-redhat-linux/16/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccOxrUrg.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_3f687 /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/16/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/16 -L/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_3f687.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -latomic_asneeded -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-redhat-linux/16/crtend.o /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crtn.o]
+        ignore line: [/usr/bin/ld -plugin /usr/libexec/gcc/x86_64-redhat-linux/16/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccobAaVJ.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_dcfce /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/16/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/16 -L/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_dcfce.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -latomic_asneeded -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-redhat-linux/16/crtend.o /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crtn.o]
         linker tool for 'CXX': /usr/bin/ld
         collapse obj [/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crt1.o] ==> [/usr/lib64/crt1.o]
         collapse obj [/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crti.o] ==> [/usr/lib64/crti.o]
@@ -1132,7 +1206,7 @@ events:
       - "/usr/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake:38 (message)"
       - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:299 (cmake_determine_linker_id)"
       - "/usr/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
-      - "CMakeLists.txt:3 (project)"
+      - "CMakeLists.txt:2 (project)"
     message: |
       Running the CXX compiler's linker: "/usr/bin/ld" "-v"
       GNU ld version 2.46.1-1.fc44
@@ -1148,14 +1222,14 @@ events:
       - "/usr/lib64/cmake/Qt6/QtPublicDependencyHelpers.cmake:36 (find_dependency)"
       - "/usr/lib64/cmake/Qt6/Qt6Dependencies.cmake:38 (_qt_internal_find_third_party_dependencies)"
       - "/usr/lib64/cmake/Qt6/Qt6Config.cmake:206 (include)"
-      - "CMakeLists.txt:9 (find_package)"
+      - "CMakeLists.txt:3 (find_package)"
     checks:
       - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
     directories:
-      source: "/home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/CMakeFiles/CMakeScratch/TryCompile-XCaXsp"
-      binary: "/home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/CMakeFiles/CMakeScratch/TryCompile-XCaXsp"
+      source: "/home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/CMakeFiles/CMakeScratch/TryCompile-lfzPBM"
+      binary: "/home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/CMakeFiles/CMakeScratch/TryCompile-lfzPBM"
     cmakeVariables:
-      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS: "-Werror"
       CMAKE_CXX_FLAGS_DEBUG: "-g"
       CMAKE_CXX_STDLIB_MODULES_JSON: ""
       CMAKE_EXE_LINKER_FLAGS: ""
@@ -1164,11 +1238,11 @@ events:
       variable: "CMAKE_HAVE_LIBC_PTHREAD"
       cached: true
       stdout: |
-        Change Dir: '/home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/CMakeFiles/CMakeScratch/TryCompile-XCaXsp'
+        Change Dir: '/home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/CMakeFiles/CMakeScratch/TryCompile-lfzPBM'
         
-        Run Build Command(s): /usr/bin/ninja-build -v cmTC_9e5fb
-        [1/2] /usr/lib64/ccache/c++ -DCMAKE_HAVE_LIBC_PTHREAD  -std=c++20 -o CMakeFiles/cmTC_9e5fb.dir/src.cxx.o -c /home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/CMakeFiles/CMakeScratch/TryCompile-XCaXsp/src.cxx
-        [2/2] : && /usr/lib64/ccache/c++   CMakeFiles/cmTC_9e5fb.dir/src.cxx.o -o cmTC_9e5fb   && :
+        Run Build Command(s): /usr/bin/ninja-build -v cmTC_666d8
+        [1/2] /usr/lib64/ccache/c++ -DCMAKE_HAVE_LIBC_PTHREAD  -Werror -o CMakeFiles/cmTC_666d8.dir/src.cxx.o -c /home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/CMakeFiles/CMakeScratch/TryCompile-lfzPBM/src.cxx
+        [2/2] : && /usr/lib64/ccache/c++ -Werror  CMakeFiles/cmTC_666d8.dir/src.cxx.o -o cmTC_666d8   && :
         
       exitCode: 0
   -
@@ -1181,7 +1255,7 @@ events:
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake:43 (_qt_internal_find_tool_dependencies)"
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake:50 (include)"
       - "/usr/lib64/cmake/Qt6/Qt6Config.cmake:267 (find_package)"
-      - "CMakeLists.txt:9 (find_package)"
+      - "CMakeLists.txt:3 (find_package)"
     name: "Qt6CoreTools"
     configs:
       -
@@ -1254,6 +1328,38 @@ events:
         reason: "no_exist"
       -
         path: "/home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/CMakeFiles/pkgRedirects/share/cps/qt6coretools.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/Qt6CoreToolsConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/qt6coretools-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/lib64/cps/Qt6CoreTools.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/lib64/cps/qt6coretools.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/lib/cps/Qt6CoreTools.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/lib/cps/qt6coretools.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/share/cps/Qt6CoreTools.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/share/cps/qt6coretools.cps"
         mode: "cps"
         reason: "no_exist"
       -
@@ -1454,7 +1560,9 @@ events:
       version: "6.11.2"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -1484,7 +1592,7 @@ events:
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake:43 (_qt_internal_find_tool_dependencies)"
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake:50 (include)"
       - "/usr/lib64/cmake/Qt6/Qt6Config.cmake:267 (find_package)"
-      - "CMakeLists.txt:9 (find_package)"
+      - "CMakeLists.txt:3 (find_package)"
     name: "Qt6GuiTools"
     configs:
       -
@@ -1557,6 +1665,38 @@ events:
         reason: "no_exist"
       -
         path: "/home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/CMakeFiles/pkgRedirects/share/cps/qt6guitools.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/Qt6GuiToolsConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/qt6guitools-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/lib64/cps/Qt6GuiTools.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/lib64/cps/qt6guitools.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/lib/cps/Qt6GuiTools.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/lib/cps/qt6guitools.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/share/cps/Qt6GuiTools.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/share/cps/qt6guitools.cps"
         mode: "cps"
         reason: "no_exist"
       -
@@ -1757,7 +1897,9 @@ events:
       version: "6.11.2"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -1784,7 +1926,7 @@ events:
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake:43 (_qt_internal_find_tool_dependencies)"
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake:50 (include)"
       - "/usr/lib64/cmake/Qt6/Qt6Config.cmake:267 (find_package)"
-      - "CMakeLists.txt:9 (find_package)"
+      - "CMakeLists.txt:3 (find_package)"
     name: "Qt6WidgetsTools"
     configs:
       -
@@ -1857,6 +1999,38 @@ events:
         reason: "no_exist"
       -
         path: "/home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/CMakeFiles/pkgRedirects/share/cps/qt6widgetstools.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/Qt6WidgetsToolsConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/qt6widgetstools-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/lib64/cps/Qt6WidgetsTools.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/lib64/cps/qt6widgetstools.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/lib/cps/Qt6WidgetsTools.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/lib/cps/qt6widgetstools.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/share/cps/Qt6WidgetsTools.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/share/cps/qt6widgetstools.cps"
         mode: "cps"
         reason: "no_exist"
       -
@@ -2057,7 +2231,9 @@ events:
       version: "6.11.2"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -2094,14 +2270,14 @@ events:
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake:51 (_qt_internal_find_qt_dependencies)"
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake:50 (include)"
       - "/usr/lib64/cmake/Qt6/Qt6Config.cmake:267 (find_package)"
-      - "CMakeLists.txt:9 (find_package)"
+      - "CMakeLists.txt:3 (find_package)"
     checks:
       - "Performing Test HAVE_STDATOMIC"
     directories:
-      source: "/home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/CMakeFiles/CMakeScratch/TryCompile-6GJXhI"
-      binary: "/home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/CMakeFiles/CMakeScratch/TryCompile-6GJXhI"
+      source: "/home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/CMakeFiles/CMakeScratch/TryCompile-9mWsjg"
+      binary: "/home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/CMakeFiles/CMakeScratch/TryCompile-9mWsjg"
     cmakeVariables:
-      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS: "-Werror"
       CMAKE_CXX_FLAGS_DEBUG: "-g"
       CMAKE_CXX_STDLIB_MODULES_JSON: ""
       CMAKE_EXE_LINKER_FLAGS: ""
@@ -2110,11 +2286,11 @@ events:
       variable: "HAVE_STDATOMIC"
       cached: true
       stdout: |
-        Change Dir: '/home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/CMakeFiles/CMakeScratch/TryCompile-6GJXhI'
+        Change Dir: '/home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/CMakeFiles/CMakeScratch/TryCompile-9mWsjg'
         
-        Run Build Command(s): /usr/bin/ninja-build -v cmTC_2e0cc
-        [1/2] /usr/lib64/ccache/c++ -DHAVE_STDATOMIC  -std=c++20 -o CMakeFiles/cmTC_2e0cc.dir/src.cxx.o -c /home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/CMakeFiles/CMakeScratch/TryCompile-6GJXhI/src.cxx
-        [2/2] : && /usr/lib64/ccache/c++   CMakeFiles/cmTC_2e0cc.dir/src.cxx.o -o cmTC_2e0cc   && :
+        Run Build Command(s): /usr/bin/ninja-build -v cmTC_b60b9
+        [1/2] /usr/lib64/ccache/c++ -DHAVE_STDATOMIC  -Werror -o CMakeFiles/cmTC_b60b9.dir/src.cxx.o -c /home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/CMakeFiles/CMakeScratch/TryCompile-9mWsjg/src.cxx
+        [2/2] : && /usr/lib64/ccache/c++ -Werror  CMakeFiles/cmTC_b60b9.dir/src.cxx.o -o cmTC_b60b9   && :
         
       exitCode: 0
   -
@@ -2126,7 +2302,7 @@ events:
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake:51 (_qt_internal_find_qt_dependencies)"
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake:50 (include)"
       - "/usr/lib64/cmake/Qt6/Qt6Config.cmake:267 (find_package)"
-      - "CMakeLists.txt:9 (find_package)"
+      - "CMakeLists.txt:3 (find_package)"
     name: "Qt6Core"
     configs:
       -
@@ -2247,7 +2423,9 @@ events:
       version: "6.11.2"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -2283,7 +2461,7 @@ events:
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake:51 (_qt_internal_find_qt_dependencies)"
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake:50 (include)"
       - "/usr/lib64/cmake/Qt6/Qt6Config.cmake:267 (find_package)"
-      - "CMakeLists.txt:9 (find_package)"
+      - "CMakeLists.txt:3 (find_package)"
     mode: "path"
     variable: "OPENGL_INCLUDE_DIR"
     description: "Path to a file."
@@ -2298,6 +2476,7 @@ events:
     names:
       - "GL/gl.h"
     candidate_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -2322,6 +2501,7 @@ events:
       - "/usr/openwin/share/include/"
       - "/opt/graphics/OpenGL/include/"
     searched_directories:
+      - "/home/juergen/.opencode/bin/GL/gl.h"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/GL/gl.h"
       - "/home/juergen/.local/bin/GL/gl.h"
       - "/home/juergen/bin/GL/gl.h"
@@ -2335,7 +2515,9 @@ events:
     found: "/usr/include/"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -2373,7 +2555,7 @@ events:
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake:51 (_qt_internal_find_qt_dependencies)"
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake:50 (include)"
       - "/usr/lib64/cmake/Qt6/Qt6Config.cmake:267 (find_package)"
-      - "CMakeLists.txt:9 (find_package)"
+      - "CMakeLists.txt:3 (find_package)"
     mode: "path"
     variable: "OPENGL_GLX_INCLUDE_DIR"
     description: "Path to a file."
@@ -2388,6 +2570,7 @@ events:
     names:
       - "GL/glx.h"
     candidate_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -2409,6 +2592,7 @@ events:
       - "/opt/"
       - "/usr/include/X11/"
     searched_directories:
+      - "/home/juergen/.opencode/bin/GL/glx.h"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/GL/glx.h"
       - "/home/juergen/.local/bin/GL/glx.h"
       - "/home/juergen/bin/GL/glx.h"
@@ -2422,7 +2606,9 @@ events:
     found: "/usr/include/"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -2460,7 +2646,7 @@ events:
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake:51 (_qt_internal_find_qt_dependencies)"
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake:50 (include)"
       - "/usr/lib64/cmake/Qt6/Qt6Config.cmake:267 (find_package)"
-      - "CMakeLists.txt:9 (find_package)"
+      - "CMakeLists.txt:3 (find_package)"
     mode: "path"
     variable: "OPENGL_EGL_INCLUDE_DIR"
     description: "Path to a file."
@@ -2475,6 +2661,7 @@ events:
     names:
       - "EGL/egl.h"
     candidate_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -2496,6 +2683,7 @@ events:
       - "/opt/"
       - "/usr/include/X11/"
     searched_directories:
+      - "/home/juergen/.opencode/bin/EGL/egl.h"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/EGL/egl.h"
       - "/home/juergen/.local/bin/EGL/egl.h"
       - "/home/juergen/bin/EGL/egl.h"
@@ -2509,7 +2697,9 @@ events:
     found: "/usr/include/"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -2547,7 +2737,7 @@ events:
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake:51 (_qt_internal_find_qt_dependencies)"
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake:50 (include)"
       - "/usr/lib64/cmake/Qt6/Qt6Config.cmake:267 (find_package)"
-      - "CMakeLists.txt:9 (find_package)"
+      - "CMakeLists.txt:3 (find_package)"
     mode: "path"
     variable: "OPENGL_GLES2_INCLUDE_DIR"
     description: "Path to a file."
@@ -2562,6 +2752,7 @@ events:
     names:
       - "GLES2/gl2.h"
     candidate_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -2583,6 +2774,7 @@ events:
       - "/opt/"
       - "/usr/include/X11/"
     searched_directories:
+      - "/home/juergen/.opencode/bin/GLES2/gl2.h"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/GLES2/gl2.h"
       - "/home/juergen/.local/bin/GLES2/gl2.h"
       - "/home/juergen/bin/GLES2/gl2.h"
@@ -2596,7 +2788,9 @@ events:
     found: "/usr/include/"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -2634,7 +2828,7 @@ events:
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake:51 (_qt_internal_find_qt_dependencies)"
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake:50 (include)"
       - "/usr/lib64/cmake/Qt6/Qt6Config.cmake:267 (find_package)"
-      - "CMakeLists.txt:9 (find_package)"
+      - "CMakeLists.txt:3 (find_package)"
     mode: "path"
     variable: "OPENGL_GLES3_INCLUDE_DIR"
     description: "Path to a file."
@@ -2649,6 +2843,7 @@ events:
     names:
       - "GLES3/gl3.h"
     candidate_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -2670,6 +2865,7 @@ events:
       - "/opt/"
       - "/usr/include/X11/"
     searched_directories:
+      - "/home/juergen/.opencode/bin/GLES3/gl3.h"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/GLES3/gl3.h"
       - "/home/juergen/.local/bin/GLES3/gl3.h"
       - "/home/juergen/bin/GLES3/gl3.h"
@@ -2683,7 +2879,9 @@ events:
     found: "/usr/include/"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -2721,7 +2919,7 @@ events:
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake:51 (_qt_internal_find_qt_dependencies)"
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake:50 (include)"
       - "/usr/lib64/cmake/Qt6/Qt6Config.cmake:267 (find_package)"
-      - "CMakeLists.txt:9 (find_package)"
+      - "CMakeLists.txt:3 (find_package)"
     mode: "path"
     variable: "OPENGL_xmesa_INCLUDE_DIR"
     description: "Path to a file."
@@ -2736,6 +2934,7 @@ events:
     names:
       - "GL/xmesa.h"
     candidate_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -2760,6 +2959,7 @@ events:
       - "/usr/openwin/share/include/"
       - "/opt/graphics/OpenGL/include/"
     searched_directories:
+      - "/home/juergen/.opencode/bin/GL/xmesa.h"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/GL/xmesa.h"
       - "/home/juergen/.local/bin/GL/xmesa.h"
       - "/home/juergen/bin/GL/xmesa.h"
@@ -2786,7 +2986,9 @@ events:
     found: false
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -2824,7 +3026,7 @@ events:
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake:51 (_qt_internal_find_qt_dependencies)"
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake:50 (include)"
       - "/usr/lib64/cmake/Qt6/Qt6Config.cmake:267 (find_package)"
-      - "CMakeLists.txt:9 (find_package)"
+      - "CMakeLists.txt:3 (find_package)"
     mode: "path"
     variable: "OPENGL_GLU_INCLUDE_DIR"
     description: "Path to a file."
@@ -2839,6 +3041,7 @@ events:
     names:
       - "GL/glu.h"
     candidate_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -2860,6 +3063,7 @@ events:
       - "/opt/"
       - "/usr/include/X11/"
     searched_directories:
+      - "/home/juergen/.opencode/bin/GL/glu.h"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/GL/glu.h"
       - "/home/juergen/.local/bin/GL/glu.h"
       - "/home/juergen/bin/GL/glu.h"
@@ -2883,7 +3087,9 @@ events:
     found: false
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -2921,7 +3127,7 @@ events:
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake:51 (_qt_internal_find_qt_dependencies)"
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake:50 (include)"
       - "/usr/lib64/cmake/Qt6/Qt6Config.cmake:267 (find_package)"
-      - "CMakeLists.txt:9 (find_package)"
+      - "CMakeLists.txt:3 (find_package)"
     mode: "library"
     variable: "OPENGL_opengl_LIBRARY"
     description: "Path to a library."
@@ -2936,6 +3142,7 @@ events:
     names:
       - "OpenGL"
     candidate_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -2955,6 +3162,7 @@ events:
       - "/opt/"
       - "/usr/lib64/X11/"
     searched_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -2969,7 +3177,9 @@ events:
     found: "/usr/lib64/libOpenGL.so"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -3007,7 +3217,7 @@ events:
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake:51 (_qt_internal_find_qt_dependencies)"
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake:50 (include)"
       - "/usr/lib64/cmake/Qt6/Qt6Config.cmake:267 (find_package)"
-      - "CMakeLists.txt:9 (find_package)"
+      - "CMakeLists.txt:3 (find_package)"
     mode: "library"
     variable: "OPENGL_glx_LIBRARY"
     description: "Path to a library."
@@ -3022,6 +3232,7 @@ events:
     names:
       - "GLX"
     candidate_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -3041,6 +3252,7 @@ events:
       - "/opt/"
       - "/usr/lib64/X11/"
     searched_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -3055,7 +3267,9 @@ events:
     found: "/usr/lib64/libGLX.so"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -3093,7 +3307,7 @@ events:
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake:51 (_qt_internal_find_qt_dependencies)"
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake:50 (include)"
       - "/usr/lib64/cmake/Qt6/Qt6Config.cmake:267 (find_package)"
-      - "CMakeLists.txt:9 (find_package)"
+      - "CMakeLists.txt:3 (find_package)"
     mode: "library"
     variable: "OPENGL_egl_LIBRARY"
     description: "Path to a library."
@@ -3108,6 +3322,7 @@ events:
     names:
       - "EGL"
     candidate_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -3127,6 +3342,7 @@ events:
       - "/opt/"
       - "/usr/lib64/X11/"
     searched_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -3141,7 +3357,9 @@ events:
     found: "/usr/lib64/libEGL.so"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -3179,7 +3397,7 @@ events:
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake:51 (_qt_internal_find_qt_dependencies)"
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake:50 (include)"
       - "/usr/lib64/cmake/Qt6/Qt6Config.cmake:267 (find_package)"
-      - "CMakeLists.txt:9 (find_package)"
+      - "CMakeLists.txt:3 (find_package)"
     mode: "library"
     variable: "OPENGL_gles2_LIBRARY"
     description: "Path to a library."
@@ -3194,6 +3412,7 @@ events:
     names:
       - "GLESv2"
     candidate_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -3213,6 +3432,7 @@ events:
       - "/opt/"
       - "/usr/lib64/X11/"
     searched_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -3227,7 +3447,9 @@ events:
     found: "/usr/lib64/libGLESv2.so"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -3265,7 +3487,7 @@ events:
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake:51 (_qt_internal_find_qt_dependencies)"
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake:50 (include)"
       - "/usr/lib64/cmake/Qt6/Qt6Config.cmake:267 (find_package)"
-      - "CMakeLists.txt:9 (find_package)"
+      - "CMakeLists.txt:3 (find_package)"
     mode: "library"
     variable: "OPENGL_gles3_LIBRARY"
     description: "Path to a library."
@@ -3281,6 +3503,7 @@ events:
       - "GLESv3"
       - "GLESv2"
     candidate_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -3300,6 +3523,7 @@ events:
       - "/opt/"
       - "/usr/lib64/X11/"
     searched_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -3318,6 +3542,7 @@ events:
       - "/lib/"
       - "/opt/"
       - "/usr/lib64/X11/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -3332,7 +3557,9 @@ events:
     found: "/usr/lib64/libGLESv2.so"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -3370,7 +3597,7 @@ events:
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake:51 (_qt_internal_find_qt_dependencies)"
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake:50 (include)"
       - "/usr/lib64/cmake/Qt6/Qt6Config.cmake:267 (find_package)"
-      - "CMakeLists.txt:9 (find_package)"
+      - "CMakeLists.txt:3 (find_package)"
     mode: "library"
     variable: "OPENGL_glu_LIBRARY"
     description: "Path to a library."
@@ -3386,6 +3613,7 @@ events:
       - "GLU"
       - "MesaGLU"
     candidate_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -3405,6 +3633,7 @@ events:
       - "/opt/"
       - "/usr/lib64/X11/"
     searched_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -3423,6 +3652,7 @@ events:
       - "/lib/"
       - "/opt/"
       - "/usr/lib64/X11/"
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -3444,7 +3674,9 @@ events:
     found: false
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -3480,7 +3712,7 @@ events:
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake:51 (_qt_internal_find_qt_dependencies)"
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake:50 (include)"
       - "/usr/lib64/cmake/Qt6/Qt6Config.cmake:267 (find_package)"
-      - "CMakeLists.txt:9 (find_package)"
+      - "CMakeLists.txt:3 (find_package)"
     mode: "path"
     variable: "Vulkan_INCLUDE_DIR"
     description: "Path to a file."
@@ -3495,6 +3727,7 @@ events:
     names:
       - "vulkan/vulkan.h"
     candidate_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -3516,6 +3749,7 @@ events:
       - "/opt/"
       - "/usr/include/X11/"
     searched_directories:
+      - "/home/juergen/.opencode/bin/vulkan/vulkan.h"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/vulkan/vulkan.h"
       - "/home/juergen/.local/bin/vulkan/vulkan.h"
       - "/home/juergen/bin/vulkan/vulkan.h"
@@ -3529,7 +3763,9 @@ events:
     found: "/usr/include/"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -3565,7 +3801,7 @@ events:
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake:51 (_qt_internal_find_qt_dependencies)"
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake:50 (include)"
       - "/usr/lib64/cmake/Qt6/Qt6Config.cmake:267 (find_package)"
-      - "CMakeLists.txt:9 (find_package)"
+      - "CMakeLists.txt:3 (find_package)"
     mode: "library"
     variable: "Vulkan_LIBRARY"
     description: "Path to a library."
@@ -3580,6 +3816,7 @@ events:
     names:
       - "vulkan"
     candidate_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -3599,6 +3836,7 @@ events:
       - "/opt/"
       - "/usr/lib64/X11/"
     searched_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -3613,7 +3851,9 @@ events:
     found: "/usr/lib64/libvulkan.so"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -3649,7 +3889,7 @@ events:
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake:51 (_qt_internal_find_qt_dependencies)"
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake:50 (include)"
       - "/usr/lib64/cmake/Qt6/Qt6Config.cmake:267 (find_package)"
-      - "CMakeLists.txt:9 (find_package)"
+      - "CMakeLists.txt:3 (find_package)"
     mode: "program"
     variable: "Vulkan_GLSLC_EXECUTABLE"
     description: "Path to a program."
@@ -3664,6 +3904,7 @@ events:
     names:
       - "glslc"
     candidate_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -3690,6 +3931,7 @@ events:
       - "/opt/sbin/"
       - "/opt/"
     searched_directories:
+      - "/home/juergen/.opencode/bin/glslc"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/glslc"
       - "/home/juergen/.local/bin/glslc"
       - "/home/juergen/bin/glslc"
@@ -3718,7 +3960,9 @@ events:
     found: false
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -3752,7 +3996,7 @@ events:
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake:51 (_qt_internal_find_qt_dependencies)"
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake:50 (include)"
       - "/usr/lib64/cmake/Qt6/Qt6Config.cmake:267 (find_package)"
-      - "CMakeLists.txt:9 (find_package)"
+      - "CMakeLists.txt:3 (find_package)"
     mode: "program"
     variable: "Vulkan_GLSLANG_VALIDATOR_EXECUTABLE"
     description: "Path to a program."
@@ -3767,6 +4011,7 @@ events:
     names:
       - "glslangValidator"
     candidate_directories:
+      - "/home/juergen/.opencode/bin/"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
       - "/home/juergen/.local/bin/"
       - "/home/juergen/bin/"
@@ -3793,6 +4038,7 @@ events:
       - "/opt/sbin/"
       - "/opt/"
     searched_directories:
+      - "/home/juergen/.opencode/bin/glslangValidator"
       - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/glslangValidator"
       - "/home/juergen/.local/bin/glslangValidator"
       - "/home/juergen/bin/glslangValidator"
@@ -3821,7 +4067,9 @@ events:
     found: false
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -3858,7 +4106,7 @@ events:
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake:51 (_qt_internal_find_qt_dependencies)"
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake:50 (include)"
       - "/usr/lib64/cmake/Qt6/Qt6Config.cmake:267 (find_package)"
-      - "CMakeLists.txt:9 (find_package)"
+      - "CMakeLists.txt:3 (find_package)"
     name: "Qt6DBusTools"
     configs:
       -
@@ -3931,6 +4179,38 @@ events:
         reason: "no_exist"
       -
         path: "/home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/CMakeFiles/pkgRedirects/share/cps/qt6dbustools.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/Qt6DBusToolsConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/qt6dbustools-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/lib64/cps/Qt6DBusTools.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/lib64/cps/qt6dbustools.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/lib/cps/Qt6DBusTools.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/lib/cps/qt6dbustools.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/share/cps/Qt6DBusTools.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/share/cps/qt6dbustools.cps"
         mode: "cps"
         reason: "no_exist"
       -
@@ -4131,7 +4411,9 @@ events:
       version: "6.11.2"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -4165,7 +4447,7 @@ events:
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake:51 (_qt_internal_find_qt_dependencies)"
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake:50 (include)"
       - "/usr/lib64/cmake/Qt6/Qt6Config.cmake:267 (find_package)"
-      - "CMakeLists.txt:9 (find_package)"
+      - "CMakeLists.txt:3 (find_package)"
     name: "Qt6DBus"
     configs:
       -
@@ -4270,7 +4552,9 @@ events:
       version: "6.11.2"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -4299,7 +4583,7 @@ events:
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake:51 (_qt_internal_find_qt_dependencies)"
       - "/usr/lib64/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake:50 (include)"
       - "/usr/lib64/cmake/Qt6/Qt6Config.cmake:267 (find_package)"
-      - "CMakeLists.txt:9 (find_package)"
+      - "CMakeLists.txt:3 (find_package)"
     name: "Qt6Gui"
     configs:
       -
@@ -4404,7 +4688,9 @@ events:
       version: "6.11.2"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -4428,7 +4714,7 @@ events:
     kind: "find_package-v1"
     backtrace:
       - "/usr/lib64/cmake/Qt6/Qt6Config.cmake:267 (find_package)"
-      - "CMakeLists.txt:9 (find_package)"
+      - "CMakeLists.txt:3 (find_package)"
     name: "Qt6Widgets"
     configs:
       -
@@ -4444,6 +4730,8 @@ events:
         filename: "qt6widgets-config.cmake"
         kind: "cmake"
     version_request:
+      version: "6.2"
+      version_complete: "6.2"
       exact: false
     settings:
       required: "optional"
@@ -4530,7 +4818,9 @@ events:
       version: "6.11.2"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
@@ -4553,7 +4843,7 @@ events:
   -
     kind: "find_package-v1"
     backtrace:
-      - "CMakeLists.txt:9 (find_package)"
+      - "CMakeLists.txt:3 (find_package)"
     name: "Qt6"
     components:
       -
@@ -4574,6 +4864,8 @@ events:
         filename: "qt6-config.cmake"
         kind: "cmake"
     version_request:
+      version: "6.2"
+      version_complete: "6.2"
       exact: false
     settings:
       required: "required_explicit"
@@ -4626,6 +4918,38 @@ events:
         reason: "no_exist"
       -
         path: "/home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/CMakeFiles/pkgRedirects/share/cps/qt6.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/Qt6Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/qt6-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/lib64/cps/Qt6.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/lib64/cps/qt6.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/lib/cps/Qt6.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/lib/cps/qt6.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/share/cps/Qt6.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/juergen/.opencode/share/cps/qt6.cps"
         mode: "cps"
         reason: "no_exist"
       -
@@ -7826,7 +8150,9 @@ events:
       version: "6.11.2"
     search_context:
       ENV{PATH}:
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.opencode/bin"
         - "/home/juergen/.local/bin"
         - "/home/juergen/bin"
         - "/usr/lib64/ccache"
