@@ -18,7 +18,7 @@
 #############################################
 # Minimal version of Ninja required by this file
 
-ninja_required_version = 1.5
+ninja_required_version = 1.8
 
 
 #############################################
@@ -47,12 +47,26 @@ cmake_ninja_workdir = /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-prox
 #############################################
 # Order-only phony target for rnet-can-proxy
 
-build cmake_object_order_depends_target_rnet-can-proxy: phony || .
+build cmake_object_order_depends_target_rnet-can-proxy: phony || cmake_object_order_depends_target_RNetMsgBroker
 
 build CMakeFiles/rnet-can-proxy.dir/main.cpp.o: CXX_COMPILER__rnet-can-proxy_unscanned_Release /home/juergen/Projects/RNet-Dongle-Emu/tools/rnet-can-proxy/main.cpp || cmake_object_order_depends_target_rnet-can-proxy
   CONFIG = Release
+  DEFINES = -DQT_CORE_LIB -DQT_NO_DEBUG -DRNET_PROXY_LOG_DECODE_V35=1
   DEP_FILE = CMakeFiles/rnet-can-proxy.dir/main.cpp.o.d
   FLAGS = -Werror -O3 -DNDEBUG -Wall -Wextra -Wpedantic
+  INCLUDES = -I/home/juergen/Projects/RNet-Dongle-Emu/tools/rnet-can-proxy/../../external/RNetMsgBroker -I/home/juergen/Projects/RNet-Dongle-Emu/tools/rnet-can-proxy/../../external/RNetMsgBroker/src -I/home/juergen/Projects/RNet-Dongle-Emu/external/RNetMsgBroker -isystem /usr/include/qt6/QtCore -isystem /usr/include/qt6 -isystem /usr/lib64/qt6/mkspecs/linux-g++
+  OBJECT_DIR = CMakeFiles/rnet-can-proxy.dir
+  OBJECT_FILE_DIR = CMakeFiles/rnet-can-proxy.dir
+  TARGET_COMPILE_PDB = CMakeFiles/rnet-can-proxy.dir/
+  TARGET_PDB = rnet-can-proxy.pdb
+  TARGET_SUPPORT_DIR = CMakeFiles/rnet-can-proxy.dir
+
+build CMakeFiles/rnet-can-proxy.dir/rnet_proxy_logdecode.cpp.o: CXX_COMPILER__rnet-can-proxy_unscanned_Release /home/juergen/Projects/RNet-Dongle-Emu/tools/rnet-can-proxy/rnet_proxy_logdecode.cpp || cmake_object_order_depends_target_rnet-can-proxy
+  CONFIG = Release
+  DEFINES = -DQT_CORE_LIB -DQT_NO_DEBUG -DRNET_PROXY_LOG_DECODE_V35=1
+  DEP_FILE = CMakeFiles/rnet-can-proxy.dir/rnet_proxy_logdecode.cpp.o.d
+  FLAGS = -Werror -O3 -DNDEBUG -Wall -Wextra -Wpedantic
+  INCLUDES = -I/home/juergen/Projects/RNet-Dongle-Emu/tools/rnet-can-proxy/../../external/RNetMsgBroker -I/home/juergen/Projects/RNet-Dongle-Emu/tools/rnet-can-proxy/../../external/RNetMsgBroker/src -I/home/juergen/Projects/RNet-Dongle-Emu/external/RNetMsgBroker -isystem /usr/include/qt6/QtCore -isystem /usr/include/qt6 -isystem /usr/lib64/qt6/mkspecs/linux-g++
   OBJECT_DIR = CMakeFiles/rnet-can-proxy.dir
   OBJECT_FILE_DIR = CMakeFiles/rnet-can-proxy.dir
   TARGET_COMPILE_PDB = CMakeFiles/rnet-can-proxy.dir/
@@ -67,11 +81,12 @@ build CMakeFiles/rnet-can-proxy.dir/main.cpp.o: CXX_COMPILER__rnet-can-proxy_uns
 #############################################
 # Link the executable rnet-can-proxy
 
-build rnet-can-proxy: CXX_EXECUTABLE_LINKER__rnet-can-proxy_Release CMakeFiles/rnet-can-proxy.dir/main.cpp.o
+build rnet-can-proxy: CXX_EXECUTABLE_LINKER__rnet-can-proxy_Release CMakeFiles/rnet-can-proxy.dir/main.cpp.o CMakeFiles/rnet-can-proxy.dir/rnet_proxy_logdecode.cpp.o | external/RNetMsgBroker/libRNetMsgBroker.so /usr/lib64/libQt6Core.so.6.11.2 || external/RNetMsgBroker/libRNetMsgBroker.so
   CONFIG = Release
   DEP_FILE = CMakeFiles/rnet-can-proxy.dir/link.d
   FLAGS = -Werror -O3 -DNDEBUG
   LINK_FLAGS = -Wl,--dependency-file=CMakeFiles/rnet-can-proxy.dir/link.d
+  LINK_LIBRARIES = -Wl,-rpath,/home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker  external/RNetMsgBroker/libRNetMsgBroker.so  /usr/lib64/libQt6Core.so.6.11.2
   OBJECT_DIR = CMakeFiles/rnet-can-proxy.dir
   POST_BUILD = :
   PRE_LINK = :
@@ -79,6 +94,49 @@ build rnet-can-proxy: CXX_EXECUTABLE_LINKER__rnet-can-proxy_Release CMakeFiles/r
   TARGET_FILE = rnet-can-proxy
   TARGET_PDB = rnet-can-proxy.pdb
   TARGET_SUPPORT_DIR = CMakeFiles/rnet-can-proxy.dir
+
+# =============================================================================
+# Object build statements for EXECUTABLE target rnet-proxy-decode-test
+
+
+#############################################
+# Order-only phony target for rnet-proxy-decode-test
+
+build cmake_object_order_depends_target_rnet-proxy-decode-test: phony || cmake_object_order_depends_target_RNetMsgBroker
+
+build CMakeFiles/rnet-proxy-decode-test.dir/rnet_proxy_decode_test.cpp.o: CXX_COMPILER__rnet-proxy-decode-test_unscanned_Release /home/juergen/Projects/RNet-Dongle-Emu/tools/rnet-can-proxy/rnet_proxy_decode_test.cpp || cmake_object_order_depends_target_rnet-proxy-decode-test
+  CONFIG = Release
+  DEFINES = -DQT_CORE_LIB -DQT_NO_DEBUG
+  DEP_FILE = CMakeFiles/rnet-proxy-decode-test.dir/rnet_proxy_decode_test.cpp.o.d
+  FLAGS = -Werror -O3 -DNDEBUG -Wall -Wextra -Wpedantic -Werror
+  INCLUDES = -I/home/juergen/Projects/RNet-Dongle-Emu/tools/rnet-can-proxy/../../external/RNetMsgBroker -I/home/juergen/Projects/RNet-Dongle-Emu/tools/rnet-can-proxy/../../external/RNetMsgBroker/src -I/home/juergen/Projects/RNet-Dongle-Emu/external/RNetMsgBroker -isystem /usr/include/qt6/QtCore -isystem /usr/include/qt6 -isystem /usr/lib64/qt6/mkspecs/linux-g++
+  OBJECT_DIR = CMakeFiles/rnet-proxy-decode-test.dir
+  OBJECT_FILE_DIR = CMakeFiles/rnet-proxy-decode-test.dir
+  TARGET_COMPILE_PDB = CMakeFiles/rnet-proxy-decode-test.dir/
+  TARGET_PDB = rnet-proxy-decode-test.pdb
+  TARGET_SUPPORT_DIR = CMakeFiles/rnet-proxy-decode-test.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target rnet-proxy-decode-test
+
+
+#############################################
+# Link the executable rnet-proxy-decode-test
+
+build rnet-proxy-decode-test: CXX_EXECUTABLE_LINKER__rnet-proxy-decode-test_Release CMakeFiles/rnet-proxy-decode-test.dir/rnet_proxy_decode_test.cpp.o | external/RNetMsgBroker/libRNetMsgBroker.so /usr/lib64/libQt6Core.so.6.11.2 || external/RNetMsgBroker/libRNetMsgBroker.so
+  CONFIG = Release
+  DEP_FILE = CMakeFiles/rnet-proxy-decode-test.dir/link.d
+  FLAGS = -Werror -O3 -DNDEBUG
+  LINK_FLAGS = -Wl,--dependency-file=CMakeFiles/rnet-proxy-decode-test.dir/link.d
+  LINK_LIBRARIES = -Wl,-rpath,/home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker  external/RNetMsgBroker/libRNetMsgBroker.so  /usr/lib64/libQt6Core.so.6.11.2
+  OBJECT_DIR = CMakeFiles/rnet-proxy-decode-test.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_COMPILE_PDB = CMakeFiles/rnet-proxy-decode-test.dir/
+  TARGET_FILE = rnet-proxy-decode-test
+  TARGET_PDB = rnet-proxy-decode-test.pdb
+  TARGET_SUPPORT_DIR = CMakeFiles/rnet-proxy-decode-test.dir
 
 
 #############################################
@@ -104,8 +162,321 @@ build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
 
 build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
+
+#############################################
+# Utility command for list_install_components
+
+build list_install_components: phony
+
+
+#############################################
+# Utility command for install
+
+build CMakeFiles/install.util: CUSTOM_COMMAND all
+  COMMAND = cd /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy && /usr/bin/cmake -P cmake_install.cmake
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build install: phony CMakeFiles/install.util
+
+
+#############################################
+# Utility command for install/local
+
+build CMakeFiles/install/local.util: CUSTOM_COMMAND all
+  COMMAND = cd /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy && /usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build install/local: phony CMakeFiles/install/local.util
+
+
+#############################################
+# Utility command for install/strip
+
+build CMakeFiles/install/strip.util: CUSTOM_COMMAND all
+  COMMAND = cd /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy && /usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+  DESC = Installing the project stripped...
+  pool = console
+  restat = 1
+
+build install/strip: phony CMakeFiles/install/strip.util
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /home/juergen/Projects/RNet-Dongle-Emu/tools/rnet-can-proxy/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for SHARED_LIBRARY target RNetMsgBroker
+
+
+#############################################
+# Order-only phony target for RNetMsgBroker
+
+build cmake_object_order_depends_target_RNetMsgBroker: phony || external/RNetMsgBroker/RNetMsgBroker_autogen external/RNetMsgBroker/RNetMsgBroker_autogen/mocs_compilation.cpp external/RNetMsgBroker/RNetMsgBroker_autogen/timestamp external/RNetMsgBroker/RNetMsgBroker_autogen_timestamp_deps
+
+build external/RNetMsgBroker/CMakeFiles/RNetMsgBroker.dir/RNetMsgBroker_autogen/mocs_compilation.cpp.o: CXX_COMPILER__RNetMsgBroker_unscanned_Release /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker/RNetMsgBroker_autogen/mocs_compilation.cpp || cmake_object_order_depends_target_RNetMsgBroker
+  CONFIG = Release
+  DEFINES = -DQT_CORE_LIB -DQT_NO_DEBUG -DRNETMSGBROKER_LIBRARY -DRNETMSGBROKER_VERSION_STRING=\"1.0.0\" -DRNetMsgBroker_EXPORTS
+  DEP_FILE = external/RNetMsgBroker/CMakeFiles/RNetMsgBroker.dir/RNetMsgBroker_autogen/mocs_compilation.cpp.o.d
+  FLAGS = -Werror -O3 -DNDEBUG -std=gnu++17 -fPIC
+  INCLUDES = -I/home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker/RNetMsgBroker_autogen/include -I/home/juergen/Projects/RNet-Dongle-Emu/external/RNetMsgBroker -isystem /usr/include/qt6/QtCore -isystem /usr/include/qt6 -isystem /usr/lib64/qt6/mkspecs/linux-g++
+  OBJECT_DIR = external/RNetMsgBroker/CMakeFiles/RNetMsgBroker.dir
+  OBJECT_FILE_DIR = external/RNetMsgBroker/CMakeFiles/RNetMsgBroker.dir/RNetMsgBroker_autogen
+  TARGET_COMPILE_PDB = external/RNetMsgBroker/CMakeFiles/RNetMsgBroker.dir/
+  TARGET_PDB = external/RNetMsgBroker/libRNetMsgBroker.pdb
+  TARGET_SUPPORT_DIR = external/RNetMsgBroker/CMakeFiles/RNetMsgBroker.dir
+
+build external/RNetMsgBroker/CMakeFiles/RNetMsgBroker.dir/rnetmsgbroker.cpp.o: CXX_COMPILER__RNetMsgBroker_unscanned_Release /home/juergen/Projects/RNet-Dongle-Emu/external/RNetMsgBroker/rnetmsgbroker.cpp || cmake_object_order_depends_target_RNetMsgBroker
+  CONFIG = Release
+  DEFINES = -DQT_CORE_LIB -DQT_NO_DEBUG -DRNETMSGBROKER_LIBRARY -DRNETMSGBROKER_VERSION_STRING=\"1.0.0\" -DRNetMsgBroker_EXPORTS
+  DEP_FILE = external/RNetMsgBroker/CMakeFiles/RNetMsgBroker.dir/rnetmsgbroker.cpp.o.d
+  FLAGS = -Werror -O3 -DNDEBUG -std=gnu++17 -fPIC
+  INCLUDES = -I/home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker/RNetMsgBroker_autogen/include -I/home/juergen/Projects/RNet-Dongle-Emu/external/RNetMsgBroker -isystem /usr/include/qt6/QtCore -isystem /usr/include/qt6 -isystem /usr/lib64/qt6/mkspecs/linux-g++
+  OBJECT_DIR = external/RNetMsgBroker/CMakeFiles/RNetMsgBroker.dir
+  OBJECT_FILE_DIR = external/RNetMsgBroker/CMakeFiles/RNetMsgBroker.dir
+  TARGET_COMPILE_PDB = external/RNetMsgBroker/CMakeFiles/RNetMsgBroker.dir/
+  TARGET_PDB = external/RNetMsgBroker/libRNetMsgBroker.pdb
+  TARGET_SUPPORT_DIR = external/RNetMsgBroker/CMakeFiles/RNetMsgBroker.dir
+
+
+# =============================================================================
+# Link build statements for SHARED_LIBRARY target RNetMsgBroker
+
+
+#############################################
+# Link the shared library external/RNetMsgBroker/libRNetMsgBroker.so
+
+build external/RNetMsgBroker/libRNetMsgBroker.so: CXX_SHARED_LIBRARY_LINKER__RNetMsgBroker_Release external/RNetMsgBroker/CMakeFiles/RNetMsgBroker.dir/RNetMsgBroker_autogen/mocs_compilation.cpp.o external/RNetMsgBroker/CMakeFiles/RNetMsgBroker.dir/rnetmsgbroker.cpp.o | /usr/lib64/libQt6Core.so.6.11.2 || external/RNetMsgBroker/RNetMsgBroker_autogen external/RNetMsgBroker/RNetMsgBroker_autogen_timestamp_deps
+  CONFIG = Release
+  DEP_FILE = external/RNetMsgBroker/CMakeFiles/RNetMsgBroker.dir/link.d
+  LANGUAGE_COMPILE_FLAGS = -Werror -O3 -DNDEBUG
+  LINK_FLAGS = -shared -Wl,--dependency-file=external/RNetMsgBroker/CMakeFiles/RNetMsgBroker.dir/link.d
+  LINK_LIBRARIES = /usr/lib64/libQt6Core.so.6.11.2
+  OBJECT_DIR = external/RNetMsgBroker/CMakeFiles/RNetMsgBroker.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  SONAME = libRNetMsgBroker.so
+  SONAME_FLAG = -Wl,-soname,
+  TARGET_COMPILE_PDB = external/RNetMsgBroker/CMakeFiles/RNetMsgBroker.dir/
+  TARGET_FILE = external/RNetMsgBroker/libRNetMsgBroker.so
+  TARGET_PDB = external/RNetMsgBroker/libRNetMsgBroker.pdb
+  TARGET_SUPPORT_DIR = external/RNetMsgBroker/CMakeFiles/RNetMsgBroker.dir
+
+# =============================================================================
+# Object build statements for EXECUTABLE target RNetMsgBrokerTest
+
+
+#############################################
+# Order-only phony target for RNetMsgBrokerTest
+
+build cmake_object_order_depends_target_RNetMsgBrokerTest: phony || cmake_object_order_depends_target_RNetMsgBroker external/RNetMsgBroker/RNetMsgBrokerTest_autogen external/RNetMsgBroker/RNetMsgBrokerTest_autogen/mocs_compilation.cpp external/RNetMsgBroker/RNetMsgBrokerTest_autogen/timestamp external/RNetMsgBroker/RNetMsgBrokerTest_autogen_timestamp_deps
+
+build external/RNetMsgBroker/CMakeFiles/RNetMsgBrokerTest.dir/RNetMsgBrokerTest_autogen/mocs_compilation.cpp.o: CXX_COMPILER__RNetMsgBrokerTest_unscanned_Release /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker/RNetMsgBrokerTest_autogen/mocs_compilation.cpp || cmake_object_order_depends_target_RNetMsgBrokerTest
+  CONFIG = Release
+  DEFINES = -DQT_CORE_LIB -DQT_NO_DEBUG
+  DEP_FILE = external/RNetMsgBroker/CMakeFiles/RNetMsgBrokerTest.dir/RNetMsgBrokerTest_autogen/mocs_compilation.cpp.o.d
+  FLAGS = -Werror -O3 -DNDEBUG -std=gnu++17
+  INCLUDES = -I/home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker/RNetMsgBrokerTest_autogen/include -I/home/juergen/Projects/RNet-Dongle-Emu/external/RNetMsgBroker -isystem /usr/include/qt6/QtCore -isystem /usr/include/qt6 -isystem /usr/lib64/qt6/mkspecs/linux-g++
+  OBJECT_DIR = external/RNetMsgBroker/CMakeFiles/RNetMsgBrokerTest.dir
+  OBJECT_FILE_DIR = external/RNetMsgBroker/CMakeFiles/RNetMsgBrokerTest.dir/RNetMsgBrokerTest_autogen
+  TARGET_COMPILE_PDB = external/RNetMsgBroker/CMakeFiles/RNetMsgBrokerTest.dir/
+  TARGET_PDB = external/RNetMsgBroker/RNetMsgBrokerTest.pdb
+  TARGET_SUPPORT_DIR = external/RNetMsgBroker/CMakeFiles/RNetMsgBrokerTest.dir
+
+build external/RNetMsgBroker/CMakeFiles/RNetMsgBrokerTest.dir/testapp/main.cpp.o: CXX_COMPILER__RNetMsgBrokerTest_unscanned_Release /home/juergen/Projects/RNet-Dongle-Emu/external/RNetMsgBroker/testapp/main.cpp || cmake_object_order_depends_target_RNetMsgBrokerTest
+  CONFIG = Release
+  DEFINES = -DQT_CORE_LIB -DQT_NO_DEBUG
+  DEP_FILE = external/RNetMsgBroker/CMakeFiles/RNetMsgBrokerTest.dir/testapp/main.cpp.o.d
+  FLAGS = -Werror -O3 -DNDEBUG -std=gnu++17
+  INCLUDES = -I/home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker/RNetMsgBrokerTest_autogen/include -I/home/juergen/Projects/RNet-Dongle-Emu/external/RNetMsgBroker -isystem /usr/include/qt6/QtCore -isystem /usr/include/qt6 -isystem /usr/lib64/qt6/mkspecs/linux-g++
+  OBJECT_DIR = external/RNetMsgBroker/CMakeFiles/RNetMsgBrokerTest.dir
+  OBJECT_FILE_DIR = external/RNetMsgBroker/CMakeFiles/RNetMsgBrokerTest.dir/testapp
+  TARGET_COMPILE_PDB = external/RNetMsgBroker/CMakeFiles/RNetMsgBrokerTest.dir/
+  TARGET_PDB = external/RNetMsgBroker/RNetMsgBrokerTest.pdb
+  TARGET_SUPPORT_DIR = external/RNetMsgBroker/CMakeFiles/RNetMsgBrokerTest.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target RNetMsgBrokerTest
+
+
+#############################################
+# Link the executable external/RNetMsgBroker/RNetMsgBrokerTest
+
+build external/RNetMsgBroker/RNetMsgBrokerTest: CXX_EXECUTABLE_LINKER__RNetMsgBrokerTest_Release external/RNetMsgBroker/CMakeFiles/RNetMsgBrokerTest.dir/RNetMsgBrokerTest_autogen/mocs_compilation.cpp.o external/RNetMsgBroker/CMakeFiles/RNetMsgBrokerTest.dir/testapp/main.cpp.o | external/RNetMsgBroker/libRNetMsgBroker.so /usr/lib64/libQt6Core.so.6.11.2 || external/RNetMsgBroker/RNetMsgBrokerTest_autogen external/RNetMsgBroker/RNetMsgBrokerTest_autogen_timestamp_deps external/RNetMsgBroker/libRNetMsgBroker.so
+  CONFIG = Release
+  DEP_FILE = external/RNetMsgBroker/CMakeFiles/RNetMsgBrokerTest.dir/link.d
+  FLAGS = -Werror -O3 -DNDEBUG
+  LINK_FLAGS = -Wl,--dependency-file=external/RNetMsgBroker/CMakeFiles/RNetMsgBrokerTest.dir/link.d
+  LINK_LIBRARIES = -Wl,-rpath,/home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker  external/RNetMsgBroker/libRNetMsgBroker.so  /usr/lib64/libQt6Core.so.6.11.2
+  OBJECT_DIR = external/RNetMsgBroker/CMakeFiles/RNetMsgBrokerTest.dir
+  POST_BUILD = cd /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker && /usr/bin/cmake -E copy_if_different /home/juergen/Projects/RNet-Dongle-Emu/external/RNetMsgBroker/R-Net.json /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker/R-Net.json && /usr/bin/cmake -E make_directory /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker/testdata && /usr/bin/cmake -E copy_if_different /home/juergen/Projects/RNet-Dongle-Emu/external/RNetMsgBroker/testdata/candump_sample.txt /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker/testdata/candump_sample.txt && /usr/bin/cmake -E copy_if_different /home/juergen/Projects/RNet-Dongle-Emu/external/RNetMsgBroker/testdata/candump_open_rnet_sample.txt /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker/testdata/candump_open_rnet_sample.txt
+  PRE_LINK = :
+  TARGET_COMPILE_PDB = external/RNetMsgBroker/CMakeFiles/RNetMsgBrokerTest.dir/
+  TARGET_FILE = external/RNetMsgBroker/RNetMsgBrokerTest
+  TARGET_PDB = external/RNetMsgBroker/RNetMsgBrokerTest.pdb
+  TARGET_SUPPORT_DIR = external/RNetMsgBroker/CMakeFiles/RNetMsgBrokerTest.dir
+
+
+#############################################
+# Utility command for deliver
+
+build external/RNetMsgBroker/deliver: phony external/RNetMsgBroker/CMakeFiles/deliver external/RNetMsgBroker/RNetMsgBrokerTest external/RNetMsgBroker/libRNetMsgBroker.so
+
+
+#############################################
+# Utility command for edit_cache
+
+build external/RNetMsgBroker/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker && /usr/bin/ccmake -S/home/juergen/Projects/RNet-Dongle-Emu/tools/rnet-can-proxy -B/home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy
+  DESC = Running CMake cache editor...
+  pool = console
+  restat = 1
+
+build external/RNetMsgBroker/edit_cache: phony external/RNetMsgBroker/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build external/RNetMsgBroker/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker && /usr/bin/cmake --regenerate-during-build -S/home/juergen/Projects/RNet-Dongle-Emu/tools/rnet-can-proxy -B/home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build external/RNetMsgBroker/rebuild_cache: phony external/RNetMsgBroker/CMakeFiles/rebuild_cache.util
+
+
+#############################################
+# Utility command for list_install_components
+
+build external/RNetMsgBroker/list_install_components: phony
+
+
+#############################################
+# Utility command for install
+
+build external/RNetMsgBroker/CMakeFiles/install.util: CUSTOM_COMMAND external/RNetMsgBroker/all
+  COMMAND = cd /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker && /usr/bin/cmake -P cmake_install.cmake
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build external/RNetMsgBroker/install: phony external/RNetMsgBroker/CMakeFiles/install.util
+
+
+#############################################
+# Utility command for install/local
+
+build external/RNetMsgBroker/CMakeFiles/install/local.util: CUSTOM_COMMAND external/RNetMsgBroker/all
+  COMMAND = cd /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker && /usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build external/RNetMsgBroker/install/local: phony external/RNetMsgBroker/CMakeFiles/install/local.util
+
+
+#############################################
+# Utility command for install/strip
+
+build external/RNetMsgBroker/CMakeFiles/install/strip.util: CUSTOM_COMMAND external/RNetMsgBroker/all
+  COMMAND = cd /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker && /usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+  DESC = Installing the project stripped...
+  pool = console
+  restat = 1
+
+build external/RNetMsgBroker/install/strip: phony external/RNetMsgBroker/CMakeFiles/install/strip.util
+
+
+#############################################
+# Utility command for RNetMsgBroker_autogen_timestamp_deps
+
+build external/RNetMsgBroker/RNetMsgBroker_autogen_timestamp_deps: phony
+
+
+#############################################
+# Utility command for RNetMsgBroker_autogen
+
+build external/RNetMsgBroker/RNetMsgBroker_autogen: phony external/RNetMsgBroker/CMakeFiles/RNetMsgBroker_autogen external/RNetMsgBroker/RNetMsgBroker_autogen/timestamp external/RNetMsgBroker/RNetMsgBroker_autogen/mocs_compilation.cpp external/RNetMsgBroker/RNetMsgBroker_autogen_timestamp_deps
+
+
+#############################################
+# Utility command for RNetMsgBrokerTest_autogen_timestamp_deps
+
+build external/RNetMsgBroker/RNetMsgBrokerTest_autogen_timestamp_deps: phony external/RNetMsgBroker/libRNetMsgBroker.so
+
+
+#############################################
+# Utility command for RNetMsgBrokerTest_autogen
+
+build external/RNetMsgBroker/RNetMsgBrokerTest_autogen: phony external/RNetMsgBroker/CMakeFiles/RNetMsgBrokerTest_autogen external/RNetMsgBroker/RNetMsgBrokerTest_autogen/timestamp external/RNetMsgBroker/RNetMsgBrokerTest_autogen/mocs_compilation.cpp external/RNetMsgBroker/RNetMsgBrokerTest_autogen_timestamp_deps
+
+
+#############################################
+# Custom command for external/RNetMsgBroker/RNetMsgBroker_autogen/timestamp
+
+build external/RNetMsgBroker/RNetMsgBroker_autogen/timestamp external/RNetMsgBroker/RNetMsgBroker_autogen/mocs_compilation.cpp | ${cmake_ninja_workdir}external/RNetMsgBroker/RNetMsgBroker_autogen/timestamp ${cmake_ninja_workdir}external/RNetMsgBroker/RNetMsgBroker_autogen/mocs_compilation.cpp: CUSTOM_COMMAND /usr/lib64/qt6/libexec/moc || external/RNetMsgBroker/RNetMsgBroker_autogen_timestamp_deps
+  COMMAND = cd /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker && /usr/bin/cmake -E cmake_autogen /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker/CMakeFiles/RNetMsgBroker_autogen.dir/AutogenInfo.json Release && /usr/bin/cmake -E touch /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker/RNetMsgBroker_autogen/timestamp && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/juergen/Projects/RNet-Dongle-Emu/tools/rnet-can-proxy /home/juergen/Projects/RNet-Dongle-Emu/external/RNetMsgBroker /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker/RNetMsgBroker_autogen/deps /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/CMakeFiles/d/0b2bf88f67b57fc929ccca921b6c342d841de0aa588d7062e60a566c6c3077f1.d
+  DESC = Automatic MOC and UIC for target RNetMsgBroker
+  depfile = CMakeFiles/d/0b2bf88f67b57fc929ccca921b6c342d841de0aa588d7062e60a566c6c3077f1.d
+  deps = gcc
+  restat = 1
+
+
+#############################################
+# Custom command for external/RNetMsgBroker/RNetMsgBrokerTest_autogen/timestamp
+
+build external/RNetMsgBroker/RNetMsgBrokerTest_autogen/timestamp external/RNetMsgBroker/RNetMsgBrokerTest_autogen/mocs_compilation.cpp | ${cmake_ninja_workdir}external/RNetMsgBroker/RNetMsgBrokerTest_autogen/timestamp ${cmake_ninja_workdir}external/RNetMsgBroker/RNetMsgBrokerTest_autogen/mocs_compilation.cpp: CUSTOM_COMMAND /usr/lib64/qt6/libexec/moc || external/RNetMsgBroker/RNetMsgBrokerTest_autogen_timestamp_deps external/RNetMsgBroker/RNetMsgBroker_autogen external/RNetMsgBroker/RNetMsgBroker_autogen_timestamp_deps external/RNetMsgBroker/libRNetMsgBroker.so
+  COMMAND = cd /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker && /usr/bin/cmake -E cmake_autogen /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker/CMakeFiles/RNetMsgBrokerTest_autogen.dir/AutogenInfo.json Release && /usr/bin/cmake -E touch /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker/RNetMsgBrokerTest_autogen/timestamp && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/juergen/Projects/RNet-Dongle-Emu/tools/rnet-can-proxy /home/juergen/Projects/RNet-Dongle-Emu/external/RNetMsgBroker /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker/RNetMsgBrokerTest_autogen/deps /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/CMakeFiles/d/72b2d3a54503da0f9bd8ca64b9a0ca5764166561c282cc36ef52e55e1e733486.d
+  DESC = Automatic MOC and UIC for target RNetMsgBrokerTest
+  depfile = CMakeFiles/d/72b2d3a54503da0f9bd8ca64b9a0ca5764166561c282cc36ef52e55e1e733486.d
+  deps = gcc
+  restat = 1
+
+
+#############################################
+# Custom command for external/RNetMsgBroker/CMakeFiles/deliver
+
+build external/RNetMsgBroker/CMakeFiles/deliver | ${cmake_ninja_workdir}external/RNetMsgBroker/CMakeFiles/deliver: CUSTOM_COMMAND external/RNetMsgBroker/libRNetMsgBroker.so external/RNetMsgBroker/RNetMsgBrokerTest || external/RNetMsgBroker/RNetMsgBrokerTest external/RNetMsgBroker/RNetMsgBrokerTest_autogen external/RNetMsgBroker/RNetMsgBrokerTest_autogen_timestamp_deps external/RNetMsgBroker/RNetMsgBroker_autogen external/RNetMsgBroker/RNetMsgBroker_autogen_timestamp_deps external/RNetMsgBroker/libRNetMsgBroker.so
+  COMMAND = cd /home/juergen/Projects/RNet-Dongle-Emu/external && /usr/bin/cmake -E rm -f /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/RNetMsgBroker_v1.0.0.zip && /usr/bin/cmake -E tar cfv /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/RNetMsgBroker_v1.0.0.zip --format=zip RNetMsgBroker/.gitignore RNetMsgBroker/CMakeLists.txt RNetMsgBroker/R-Net.json RNetMsgBroker/README.md RNetMsgBroker/CHANGELOG.md RNetMsgBroker/AUTHORS.md RNetMsgBroker/CONTRIBUTING.md RNetMsgBroker/SECURITY.md RNetMsgBroker/LICENSE_TODO.md RNetMsgBroker/VERSION.txt RNetMsgBroker/RNetMsgBroker_global.h RNetMsgBroker/rnetmsgbroker.h RNetMsgBroker/rnetmsgbroker.cpp RNetMsgBroker/RNetMsgBroker_de_DE.ts RNetMsgBroker/testapp/main.cpp RNetMsgBroker/testdata/candump_sample.txt RNetMsgBroker/testdata/candump_open_rnet_sample.txt RNetMsgBroker/scripts/build.sh RNetMsgBroker/scripts/check.sh RNetMsgBroker/scripts/candump_to_csv.sh RNetMsgBroker/scripts/list_unknown_observed.py RNetMsgBroker/docs/CSV_FORMAT.md RNetMsgBroker/docs/RNET_JSON_SCHEMA.md RNetMsgBroker/docs/STARTUP_SEQUENCE.md RNetMsgBroker/docs/UNKNOWN_FRAMES.md RNetMsgBroker/.github/workflows/cmake.yml RNetMsgBroker/.github/ISSUE_TEMPLATE/bug_report.yml RNetMsgBroker/.github/ISSUE_TEMPLATE/config.yml RNetMsgBroker/.github/pull_request_template.md && /usr/bin/cmake -E echo "Delivery archive written to: /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/RNetMsgBroker_v1.0.0.zip"
+  DESC = Creating delivery archive /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/RNetMsgBroker_v1.0.0.zip
+
+
+#############################################
+# Phony custom command for external/RNetMsgBroker/CMakeFiles/RNetMsgBroker_autogen
+
+build external/RNetMsgBroker/CMakeFiles/RNetMsgBroker_autogen | ${cmake_ninja_workdir}external/RNetMsgBroker/CMakeFiles/RNetMsgBroker_autogen: phony external/RNetMsgBroker/RNetMsgBroker_autogen/timestamp || external/RNetMsgBroker/RNetMsgBroker_autogen_timestamp_deps
+
+
+#############################################
+# Phony custom command for external/RNetMsgBroker/CMakeFiles/RNetMsgBrokerTest_autogen
+
+build external/RNetMsgBroker/CMakeFiles/RNetMsgBrokerTest_autogen | ${cmake_ninja_workdir}external/RNetMsgBroker/CMakeFiles/RNetMsgBrokerTest_autogen: phony external/RNetMsgBroker/RNetMsgBrokerTest_autogen/timestamp || external/RNetMsgBroker/RNetMsgBrokerTest_autogen_timestamp_deps external/RNetMsgBroker/RNetMsgBroker_autogen external/RNetMsgBroker/RNetMsgBroker_autogen_timestamp_deps external/RNetMsgBroker/libRNetMsgBroker.so
+
 # =============================================================================
 # Target aliases.
+
+build RNetMsgBroker: phony external/RNetMsgBroker/libRNetMsgBroker.so
+
+build RNetMsgBrokerTest: phony external/RNetMsgBroker/RNetMsgBrokerTest
+
+build RNetMsgBrokerTest_autogen: phony external/RNetMsgBroker/RNetMsgBrokerTest_autogen
+
+build RNetMsgBrokerTest_autogen_timestamp_deps: phony external/RNetMsgBroker/RNetMsgBrokerTest_autogen_timestamp_deps
+
+build RNetMsgBroker_autogen: phony external/RNetMsgBroker/RNetMsgBroker_autogen
+
+build RNetMsgBroker_autogen_timestamp_deps: phony external/RNetMsgBroker/RNetMsgBroker_autogen_timestamp_deps
+
+build deliver: phony external/RNetMsgBroker/deliver
+
+build libRNetMsgBroker.so: phony external/RNetMsgBroker/libRNetMsgBroker.so
 
 # =============================================================================
 # Folder targets.
@@ -115,29 +486,57 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 #############################################
 # Folder: /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy
 
-build all: phony rnet-can-proxy
+build all: phony rnet-can-proxy rnet-proxy-decode-test external/RNetMsgBroker/all
+
+# =============================================================================
+
+#############################################
+# Folder: /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker
+
+build external/RNetMsgBroker/all: phony external/RNetMsgBroker/libRNetMsgBroker.so external/RNetMsgBroker/RNetMsgBrokerTest
 
 # =============================================================================
 # Built-in targets
 
 
 #############################################
+# Phony target to force glob verification run.
+
+build /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/CMakeFiles/VerifyGlobs.cmake_force: phony
+
+
+#############################################
+# Re-run CMake to check if globbed directories changed.
+
+build /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/CMakeFiles/cmake.verify_globs: VERIFY_GLOBS | /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/CMakeFiles/VerifyGlobs.cmake_force
+  pool = console
+  restat = 1
+
+
+#############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/cmake_install.cmake: RERUN_CMAKE | /home/juergen/Projects/RNet-Dongle-Emu/tools/rnet-can-proxy/CMakeLists.txt /usr/share/cmake/Modules/CMakeCXXCompiler.cmake.in /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp /usr/share/cmake/Modules/CMakeCXXInformation.cmake /usr/share/cmake/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake/Modules/CMakeCompilerIdDetection.cmake /usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake /usr/share/cmake/Modules/CMakeDetermineCompiler.cmake /usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake /usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake /usr/share/cmake/Modules/CMakeDetermineCompilerSupport.cmake /usr/share/cmake/Modules/CMakeDetermineSystem.cmake /usr/share/cmake/Modules/CMakeFindBinUtils.cmake /usr/share/cmake/Modules/CMakeGenericSystem.cmake /usr/share/cmake/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake/Modules/CMakeLanguageInformation.cmake /usr/share/cmake/Modules/CMakeNinjaFindMake.cmake /usr/share/cmake/Modules/CMakeParseImplicitIncludeInfo.cmake /usr/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake /usr/share/cmake/Modules/CMakeParseLibraryArchitecture.cmake /usr/share/cmake/Modules/CMakeSystem.cmake.in /usr/share/cmake/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake/Modules/CMakeTestCXXCompiler.cmake /usr/share/cmake/Modules/CMakeTestCompilerCommon.cmake /usr/share/cmake/Modules/Compiler/ADSP-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/ARMCC-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/ARMClang-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/AppleClang-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Borland-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake/Modules/Compiler/Clang-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /usr/share/cmake/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Cray-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/CrayClang-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Diab-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/GHS-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/GNU-CXX-CXXImportStd.cmake /usr/share/cmake/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake/Modules/Compiler/GNU-FindBinUtils.cmake /usr/share/cmake/Modules/Compiler/GNU.cmake /usr/share/cmake/Modules/Compiler/HP-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/IAR-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake /usr/share/cmake/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Intel-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/MSVC-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/NVHPC-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/OrangeC-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/PGI-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/PathScale-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Renesas-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/SCO-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/TI-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/TIClang-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Tasking-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Watcom-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/XL-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake /usr/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake /usr/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake /usr/share/cmake/Modules/Internal/CMakeInspectCXXLinker.cmake /usr/share/cmake/Modules/Internal/FeatureTesting.cmake /usr/share/cmake/Modules/Linker/GNU-CXX.cmake /usr/share/cmake/Modules/Linker/GNU.cmake /usr/share/cmake/Modules/Platform/Linker/GNU.cmake /usr/share/cmake/Modules/Platform/Linker/Linux-GNU-CXX.cmake /usr/share/cmake/Modules/Platform/Linker/Linux-GNU.cmake /usr/share/cmake/Modules/Platform/Linux-Determine-CXX.cmake /usr/share/cmake/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake/Modules/Platform/Linux-GNU.cmake /usr/share/cmake/Modules/Platform/Linux-Initialize.cmake /usr/share/cmake/Modules/Platform/Linux.cmake /usr/share/cmake/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/4.3.0/CMakeCXXCompiler.cmake CMakeFiles/4.3.0/CMakeSystem.cmake
+build build.ninja /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/cmake_install.cmake /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker/cmake_install.cmake: RERUN_CMAKE /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/CMakeFiles/cmake.verify_globs | /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/CMakeFiles/VerifyGlobs.cmake /home/juergen/Projects/RNet-Dongle-Emu/external/RNetMsgBroker/CMakeLists.txt /home/juergen/Projects/RNet-Dongle-Emu/external/RNetMsgBroker/R-Net.json /home/juergen/Projects/RNet-Dongle-Emu/tools/rnet-can-proxy/CMakeLists.txt /usr/lib64/cmake/Qt6/FindWrapAtomic.cmake /usr/lib64/cmake/Qt6/Qt6Config.cmake /usr/lib64/cmake/Qt6/Qt6ConfigExtras.cmake /usr/lib64/cmake/Qt6/Qt6ConfigVersion.cmake /usr/lib64/cmake/Qt6/Qt6ConfigVersionImpl.cmake /usr/lib64/cmake/Qt6/Qt6Dependencies.cmake /usr/lib64/cmake/Qt6/Qt6Targets.cmake /usr/lib64/cmake/Qt6/Qt6TargetsPrecheck.cmake /usr/lib64/cmake/Qt6/Qt6VersionlessAliasTargets.cmake /usr/lib64/cmake/Qt6/QtFeature.cmake /usr/lib64/cmake/Qt6/QtFeatureCommon.cmake /usr/lib64/cmake/Qt6/QtInstallPaths.cmake /usr/lib64/cmake/Qt6/QtPublicAndroidHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicAppleHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicCMakeEarlyPolicyHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicCMakeHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicCMakeIncludeGuardHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicCMakeVersionHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicDependencyHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicExternalProjectHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicFinalizerHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicFindPackageHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicGitHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicJsonHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicPluginHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicPluginHelpers_v2.cmake /usr/lib64/cmake/Qt6/QtPublicSbomAttributionHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomBuildToolHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomCommonGenerationHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomCpeHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomCycloneDXHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomDepHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomDocumentNamespaceHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomExternalReferenceHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomFileHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomGenerationCycloneDXHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomGenerationHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomLicenseHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomOpsHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomPurlHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomPythonHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomQtEntityHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomRelationshipHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomSystemDepHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicTargetHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicTestHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicToolHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicWalkLibsHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicWindowsHelpers.cmake /usr/lib64/cmake/Qt6Core/Qt6CoreAdditionalTargetInfo.cmake /usr/lib64/cmake/Qt6Core/Qt6CoreConfig.cmake /usr/lib64/cmake/Qt6Core/Qt6CoreConfigExtras.cmake /usr/lib64/cmake/Qt6Core/Qt6CoreConfigVersion.cmake /usr/lib64/cmake/Qt6Core/Qt6CoreConfigVersionImpl.cmake /usr/lib64/cmake/Qt6Core/Qt6CoreDependencies.cmake /usr/lib64/cmake/Qt6Core/Qt6CoreMacros.cmake /usr/lib64/cmake/Qt6Core/Qt6CoreTargets-relwithdebinfo.cmake /usr/lib64/cmake/Qt6Core/Qt6CoreTargets.cmake /usr/lib64/cmake/Qt6Core/Qt6CoreTargetsPrecheck.cmake /usr/lib64/cmake/Qt6Core/Qt6CoreVersionlessAliasTargets.cmake /usr/lib64/cmake/Qt6CoreTools/Qt6CoreToolsAdditionalTargetInfo.cmake /usr/lib64/cmake/Qt6CoreTools/Qt6CoreToolsConfig.cmake /usr/lib64/cmake/Qt6CoreTools/Qt6CoreToolsConfigVersion.cmake /usr/lib64/cmake/Qt6CoreTools/Qt6CoreToolsConfigVersionImpl.cmake /usr/lib64/cmake/Qt6CoreTools/Qt6CoreToolsDependencies.cmake /usr/lib64/cmake/Qt6CoreTools/Qt6CoreToolsTargets-relwithdebinfo.cmake /usr/lib64/cmake/Qt6CoreTools/Qt6CoreToolsTargets.cmake /usr/lib64/cmake/Qt6CoreTools/Qt6CoreToolsTargetsPrecheck.cmake /usr/lib64/cmake/Qt6CoreTools/Qt6CoreToolsVersionlessTargets.cmake /usr/lib64/cmake/Qt6LinguistTools/Qt6LinguistToolsAdditionalTargetInfo.cmake /usr/lib64/cmake/Qt6LinguistTools/Qt6LinguistToolsConfig.cmake /usr/lib64/cmake/Qt6LinguistTools/Qt6LinguistToolsConfigVersion.cmake /usr/lib64/cmake/Qt6LinguistTools/Qt6LinguistToolsConfigVersionImpl.cmake /usr/lib64/cmake/Qt6LinguistTools/Qt6LinguistToolsDependencies.cmake /usr/lib64/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake /usr/lib64/cmake/Qt6LinguistTools/Qt6LinguistToolsTargets-relwithdebinfo.cmake /usr/lib64/cmake/Qt6LinguistTools/Qt6LinguistToolsTargets.cmake /usr/lib64/cmake/Qt6LinguistTools/Qt6LinguistToolsTargetsPrecheck.cmake /usr/lib64/cmake/Qt6LinguistTools/Qt6LinguistToolsVersionlessTargets.cmake /usr/share/cmake/Modules/CMakeCXXCompiler.cmake.in /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp /usr/share/cmake/Modules/CMakeCXXInformation.cmake /usr/share/cmake/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake /usr/share/cmake/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake/Modules/CMakeCompilerIdDetection.cmake /usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake /usr/share/cmake/Modules/CMakeDetermineCompiler.cmake /usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake /usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake /usr/share/cmake/Modules/CMakeDetermineCompilerSupport.cmake /usr/share/cmake/Modules/CMakeDetermineSystem.cmake /usr/share/cmake/Modules/CMakeFindBinUtils.cmake /usr/share/cmake/Modules/CMakeFindDependencyMacro.cmake /usr/share/cmake/Modules/CMakeGenericSystem.cmake /usr/share/cmake/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake/Modules/CMakeLanguageInformation.cmake /usr/share/cmake/Modules/CMakeNinjaFindMake.cmake /usr/share/cmake/Modules/CMakeParseArguments.cmake /usr/share/cmake/Modules/CMakeParseImplicitIncludeInfo.cmake /usr/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake /usr/share/cmake/Modules/CMakeParseLibraryArchitecture.cmake /usr/share/cmake/Modules/CMakeSystem.cmake.in /usr/share/cmake/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake/Modules/CMakeTestCXXCompiler.cmake /usr/share/cmake/Modules/CMakeTestCompilerCommon.cmake /usr/share/cmake/Modules/CheckCXXCompilerFlag.cmake /usr/share/cmake/Modules/CheckCXXSourceCompiles.cmake /usr/share/cmake/Modules/CheckIncludeFileCXX.cmake /usr/share/cmake/Modules/CheckLibraryExists.cmake /usr/share/cmake/Modules/Compiler/ADSP-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/ARMCC-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/ARMClang-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/AppleClang-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Borland-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake/Modules/Compiler/Clang-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /usr/share/cmake/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Cray-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/CrayClang-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Diab-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/GHS-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/GNU-CXX-CXXImportStd.cmake /usr/share/cmake/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake/Modules/Compiler/GNU-FindBinUtils.cmake /usr/share/cmake/Modules/Compiler/GNU.cmake /usr/share/cmake/Modules/Compiler/HP-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/IAR-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake /usr/share/cmake/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Intel-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/MSVC-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/NVHPC-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/OrangeC-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/PGI-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/PathScale-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Renesas-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/SCO-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/TI-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/TIClang-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Tasking-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Watcom-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/XL-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/FindPackageHandleStandardArgs.cmake /usr/share/cmake/Modules/FindPackageMessage.cmake /usr/share/cmake/Modules/FindThreads.cmake /usr/share/cmake/Modules/GNUInstallDirs.cmake /usr/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake /usr/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake /usr/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake /usr/share/cmake/Modules/Internal/CMakeInspectCXXLinker.cmake /usr/share/cmake/Modules/Internal/CheckCompilerFlag.cmake /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake /usr/share/cmake/Modules/Internal/FeatureTesting.cmake /usr/share/cmake/Modules/Linker/GNU-CXX.cmake /usr/share/cmake/Modules/Linker/GNU.cmake /usr/share/cmake/Modules/Platform/Linker/GNU.cmake /usr/share/cmake/Modules/Platform/Linker/Linux-GNU-CXX.cmake /usr/share/cmake/Modules/Platform/Linker/Linux-GNU.cmake /usr/share/cmake/Modules/Platform/Linux-Determine-CXX.cmake /usr/share/cmake/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake/Modules/Platform/Linux-GNU.cmake /usr/share/cmake/Modules/Platform/Linux-Initialize.cmake /usr/share/cmake/Modules/Platform/Linux.cmake /usr/share/cmake/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/4.3.0/CMakeCXXCompiler.cmake CMakeFiles/4.3.0/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build /home/juergen/Projects/RNet-Dongle-Emu/tools/rnet-can-proxy/CMakeLists.txt /usr/share/cmake/Modules/CMakeCXXCompiler.cmake.in /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp /usr/share/cmake/Modules/CMakeCXXInformation.cmake /usr/share/cmake/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake/Modules/CMakeCompilerIdDetection.cmake /usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake /usr/share/cmake/Modules/CMakeDetermineCompiler.cmake /usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake /usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake /usr/share/cmake/Modules/CMakeDetermineCompilerSupport.cmake /usr/share/cmake/Modules/CMakeDetermineSystem.cmake /usr/share/cmake/Modules/CMakeFindBinUtils.cmake /usr/share/cmake/Modules/CMakeGenericSystem.cmake /usr/share/cmake/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake/Modules/CMakeLanguageInformation.cmake /usr/share/cmake/Modules/CMakeNinjaFindMake.cmake /usr/share/cmake/Modules/CMakeParseImplicitIncludeInfo.cmake /usr/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake /usr/share/cmake/Modules/CMakeParseLibraryArchitecture.cmake /usr/share/cmake/Modules/CMakeSystem.cmake.in /usr/share/cmake/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake/Modules/CMakeTestCXXCompiler.cmake /usr/share/cmake/Modules/CMakeTestCompilerCommon.cmake /usr/share/cmake/Modules/Compiler/ADSP-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/ARMCC-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/ARMClang-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/AppleClang-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Borland-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake/Modules/Compiler/Clang-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /usr/share/cmake/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Cray-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/CrayClang-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Diab-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/GHS-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/GNU-CXX-CXXImportStd.cmake /usr/share/cmake/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake/Modules/Compiler/GNU-FindBinUtils.cmake /usr/share/cmake/Modules/Compiler/GNU.cmake /usr/share/cmake/Modules/Compiler/HP-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/IAR-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake /usr/share/cmake/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Intel-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/MSVC-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/NVHPC-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/OrangeC-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/PGI-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/PathScale-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Renesas-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/SCO-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/TI-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/TIClang-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Tasking-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Watcom-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/XL-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake /usr/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake /usr/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake /usr/share/cmake/Modules/Internal/CMakeInspectCXXLinker.cmake /usr/share/cmake/Modules/Internal/FeatureTesting.cmake /usr/share/cmake/Modules/Linker/GNU-CXX.cmake /usr/share/cmake/Modules/Linker/GNU.cmake /usr/share/cmake/Modules/Platform/Linker/GNU.cmake /usr/share/cmake/Modules/Platform/Linker/Linux-GNU-CXX.cmake /usr/share/cmake/Modules/Platform/Linker/Linux-GNU.cmake /usr/share/cmake/Modules/Platform/Linux-Determine-CXX.cmake /usr/share/cmake/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake/Modules/Platform/Linux-GNU.cmake /usr/share/cmake/Modules/Platform/Linux-Initialize.cmake /usr/share/cmake/Modules/Platform/Linux.cmake /usr/share/cmake/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/4.3.0/CMakeCXXCompiler.cmake CMakeFiles/4.3.0/CMakeSystem.cmake: phony
+build /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/CMakeFiles/VerifyGlobs.cmake /home/juergen/Projects/RNet-Dongle-Emu/external/RNetMsgBroker/CMakeLists.txt /home/juergen/Projects/RNet-Dongle-Emu/external/RNetMsgBroker/R-Net.json /home/juergen/Projects/RNet-Dongle-Emu/tools/rnet-can-proxy/CMakeLists.txt /usr/lib64/cmake/Qt6/FindWrapAtomic.cmake /usr/lib64/cmake/Qt6/Qt6Config.cmake /usr/lib64/cmake/Qt6/Qt6ConfigExtras.cmake /usr/lib64/cmake/Qt6/Qt6ConfigVersion.cmake /usr/lib64/cmake/Qt6/Qt6ConfigVersionImpl.cmake /usr/lib64/cmake/Qt6/Qt6Dependencies.cmake /usr/lib64/cmake/Qt6/Qt6Targets.cmake /usr/lib64/cmake/Qt6/Qt6TargetsPrecheck.cmake /usr/lib64/cmake/Qt6/Qt6VersionlessAliasTargets.cmake /usr/lib64/cmake/Qt6/QtFeature.cmake /usr/lib64/cmake/Qt6/QtFeatureCommon.cmake /usr/lib64/cmake/Qt6/QtInstallPaths.cmake /usr/lib64/cmake/Qt6/QtPublicAndroidHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicAppleHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicCMakeEarlyPolicyHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicCMakeHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicCMakeIncludeGuardHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicCMakeVersionHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicDependencyHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicExternalProjectHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicFinalizerHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicFindPackageHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicGitHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicJsonHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicPluginHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicPluginHelpers_v2.cmake /usr/lib64/cmake/Qt6/QtPublicSbomAttributionHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomBuildToolHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomCommonGenerationHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomCpeHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomCycloneDXHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomDepHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomDocumentNamespaceHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomExternalReferenceHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomFileHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomGenerationCycloneDXHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomGenerationHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomLicenseHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomOpsHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomPurlHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomPythonHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomQtEntityHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomRelationshipHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicSbomSystemDepHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicTargetHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicTestHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicToolHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicWalkLibsHelpers.cmake /usr/lib64/cmake/Qt6/QtPublicWindowsHelpers.cmake /usr/lib64/cmake/Qt6Core/Qt6CoreAdditionalTargetInfo.cmake /usr/lib64/cmake/Qt6Core/Qt6CoreConfig.cmake /usr/lib64/cmake/Qt6Core/Qt6CoreConfigExtras.cmake /usr/lib64/cmake/Qt6Core/Qt6CoreConfigVersion.cmake /usr/lib64/cmake/Qt6Core/Qt6CoreConfigVersionImpl.cmake /usr/lib64/cmake/Qt6Core/Qt6CoreDependencies.cmake /usr/lib64/cmake/Qt6Core/Qt6CoreMacros.cmake /usr/lib64/cmake/Qt6Core/Qt6CoreTargets-relwithdebinfo.cmake /usr/lib64/cmake/Qt6Core/Qt6CoreTargets.cmake /usr/lib64/cmake/Qt6Core/Qt6CoreTargetsPrecheck.cmake /usr/lib64/cmake/Qt6Core/Qt6CoreVersionlessAliasTargets.cmake /usr/lib64/cmake/Qt6CoreTools/Qt6CoreToolsAdditionalTargetInfo.cmake /usr/lib64/cmake/Qt6CoreTools/Qt6CoreToolsConfig.cmake /usr/lib64/cmake/Qt6CoreTools/Qt6CoreToolsConfigVersion.cmake /usr/lib64/cmake/Qt6CoreTools/Qt6CoreToolsConfigVersionImpl.cmake /usr/lib64/cmake/Qt6CoreTools/Qt6CoreToolsDependencies.cmake /usr/lib64/cmake/Qt6CoreTools/Qt6CoreToolsTargets-relwithdebinfo.cmake /usr/lib64/cmake/Qt6CoreTools/Qt6CoreToolsTargets.cmake /usr/lib64/cmake/Qt6CoreTools/Qt6CoreToolsTargetsPrecheck.cmake /usr/lib64/cmake/Qt6CoreTools/Qt6CoreToolsVersionlessTargets.cmake /usr/lib64/cmake/Qt6LinguistTools/Qt6LinguistToolsAdditionalTargetInfo.cmake /usr/lib64/cmake/Qt6LinguistTools/Qt6LinguistToolsConfig.cmake /usr/lib64/cmake/Qt6LinguistTools/Qt6LinguistToolsConfigVersion.cmake /usr/lib64/cmake/Qt6LinguistTools/Qt6LinguistToolsConfigVersionImpl.cmake /usr/lib64/cmake/Qt6LinguistTools/Qt6LinguistToolsDependencies.cmake /usr/lib64/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake /usr/lib64/cmake/Qt6LinguistTools/Qt6LinguistToolsTargets-relwithdebinfo.cmake /usr/lib64/cmake/Qt6LinguistTools/Qt6LinguistToolsTargets.cmake /usr/lib64/cmake/Qt6LinguistTools/Qt6LinguistToolsTargetsPrecheck.cmake /usr/lib64/cmake/Qt6LinguistTools/Qt6LinguistToolsVersionlessTargets.cmake /usr/share/cmake/Modules/CMakeCXXCompiler.cmake.in /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp /usr/share/cmake/Modules/CMakeCXXInformation.cmake /usr/share/cmake/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake /usr/share/cmake/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake/Modules/CMakeCompilerIdDetection.cmake /usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake /usr/share/cmake/Modules/CMakeDetermineCompiler.cmake /usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake /usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake /usr/share/cmake/Modules/CMakeDetermineCompilerSupport.cmake /usr/share/cmake/Modules/CMakeDetermineSystem.cmake /usr/share/cmake/Modules/CMakeFindBinUtils.cmake /usr/share/cmake/Modules/CMakeFindDependencyMacro.cmake /usr/share/cmake/Modules/CMakeGenericSystem.cmake /usr/share/cmake/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake/Modules/CMakeLanguageInformation.cmake /usr/share/cmake/Modules/CMakeNinjaFindMake.cmake /usr/share/cmake/Modules/CMakeParseArguments.cmake /usr/share/cmake/Modules/CMakeParseImplicitIncludeInfo.cmake /usr/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake /usr/share/cmake/Modules/CMakeParseLibraryArchitecture.cmake /usr/share/cmake/Modules/CMakeSystem.cmake.in /usr/share/cmake/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake/Modules/CMakeTestCXXCompiler.cmake /usr/share/cmake/Modules/CMakeTestCompilerCommon.cmake /usr/share/cmake/Modules/CheckCXXCompilerFlag.cmake /usr/share/cmake/Modules/CheckCXXSourceCompiles.cmake /usr/share/cmake/Modules/CheckIncludeFileCXX.cmake /usr/share/cmake/Modules/CheckLibraryExists.cmake /usr/share/cmake/Modules/Compiler/ADSP-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/ARMCC-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/ARMClang-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/AppleClang-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Borland-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake/Modules/Compiler/Clang-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /usr/share/cmake/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Cray-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/CrayClang-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Diab-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/GHS-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/GNU-CXX-CXXImportStd.cmake /usr/share/cmake/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake/Modules/Compiler/GNU-FindBinUtils.cmake /usr/share/cmake/Modules/Compiler/GNU.cmake /usr/share/cmake/Modules/Compiler/HP-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/IAR-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake /usr/share/cmake/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Intel-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/MSVC-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/NVHPC-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/OrangeC-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/PGI-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/PathScale-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Renesas-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/SCO-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/TI-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/TIClang-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Tasking-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/Watcom-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/XL-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake /usr/share/cmake/Modules/FindPackageHandleStandardArgs.cmake /usr/share/cmake/Modules/FindPackageMessage.cmake /usr/share/cmake/Modules/FindThreads.cmake /usr/share/cmake/Modules/GNUInstallDirs.cmake /usr/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake /usr/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake /usr/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake /usr/share/cmake/Modules/Internal/CMakeInspectCXXLinker.cmake /usr/share/cmake/Modules/Internal/CheckCompilerFlag.cmake /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake /usr/share/cmake/Modules/Internal/FeatureTesting.cmake /usr/share/cmake/Modules/Linker/GNU-CXX.cmake /usr/share/cmake/Modules/Linker/GNU.cmake /usr/share/cmake/Modules/Platform/Linker/GNU.cmake /usr/share/cmake/Modules/Platform/Linker/Linux-GNU-CXX.cmake /usr/share/cmake/Modules/Platform/Linker/Linux-GNU.cmake /usr/share/cmake/Modules/Platform/Linux-Determine-CXX.cmake /usr/share/cmake/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake/Modules/Platform/Linux-GNU.cmake /usr/share/cmake/Modules/Platform/Linux-Initialize.cmake /usr/share/cmake/Modules/Platform/Linux.cmake /usr/share/cmake/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/4.3.0/CMakeCXXCompiler.cmake CMakeFiles/4.3.0/CMakeSystem.cmake: phony
+
+
+#############################################
+# Clean additional files.
+
+build CMakeFiles/clean.additional: CLEAN_ADDITIONAL
+  CONFIG = Release
 
 
 #############################################
 # Clean all the built files.
 
-build clean: CLEAN
+build clean: CLEAN CMakeFiles/clean.additional
 
 
 #############################################

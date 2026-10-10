@@ -1,1 +1,2 @@
+nohup: Eingabe wird ignoriert
 RNET-GUI-MODES-V29 mode=emu iface=can1

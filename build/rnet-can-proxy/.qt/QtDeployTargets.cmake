@@ -1,0 +1,8 @@
+set(__QT_DEPLOY_TARGET_RNetMsgBroker_FILE /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker/libRNetMsgBroker.so)
+set(__QT_DEPLOY_TARGET_RNetMsgBroker_TYPE SHARED_LIBRARY)
+set(__QT_DEPLOY_TARGET_RNetMsgBrokerTest_FILE /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker/RNetMsgBrokerTest)
+set(__QT_DEPLOY_TARGET_RNetMsgBrokerTest_TYPE EXECUTABLE)
+set(__QT_DEPLOY_TARGET_rnet-can-proxy_FILE /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/rnet-can-proxy)
+set(__QT_DEPLOY_TARGET_rnet-can-proxy_TYPE EXECUTABLE)
+set(__QT_DEPLOY_TARGET_rnet-proxy-decode-test_FILE /home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/rnet-proxy-decode-test)
+set(__QT_DEPLOY_TARGET_rnet-proxy-decode-test_TYPE EXECUTABLE)

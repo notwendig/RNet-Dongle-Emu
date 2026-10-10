@@ -248,3 +248,66 @@ Der Build bleibt mit `-Werror` streng. Nur die im aktuellen CAN-only-Pfad absich
 <!-- RNET-ZERO-WARNINGS-V32 -->
 
 V32 ergänzt `load_stored_blocks()` zur expliziten Liste der im CAN-only-Pfad erhaltenen, aber derzeit nicht referenzierten Replay/POP-Helfer. Es wird ausschließlich lokal `[[maybe_unused]]` verwendet; `-Werror` bleibt aktiv und es gibt keine globale Warnungsabschaltung. `./build-clean.sh all` baut DLL, CAN-Proxy und `rollstuhl.emu` vollständig neu und akzeptiert keine Warnungen oder Fehler.
+
+## R-Net-Log-Kommentare V33
+
+<!-- RNET-LOG-DECODE-V33 -->
+
+V33 ergänzt die CAN/R-Net-Logs um lesbare Kommentare hinter dem unveränderten Roh-Frame. Die Dekodierung verwendet direkt `RNetMsgBroker` und dessen `R-Net.json`, also dieselbe Definitionsebene wie der R-Net Analyzer; es gibt keine zweite handgepflegte Decoder-Tabelle. `run/ftd2xx-emu.decoded.log` ist die kommentierte Begleitdatei zum unveränderten DLL-Rohlog. Details: `docs/LOGGING.md`. Apply-Backups werden ausschließlich unter `/tmp` angelegt.
+
+## RNetMsgBroker-Subprojekt V35
+
+<!-- RNET-BROKER-SUBPROJECT-V35 -->
+
+`external/RNetMsgBroker` ist jetzt ein natives CMake-Subprojekt des Dongle-Emulators. `rnet-can-proxy` linkt den Broker direkt und ergänzt CAN-Logmeldungen im selben Prozess um `; <Kurzdecode>`. Die Definitionen stammen aus `external/RNetMsgBroker/R-Net.json`, derselben Decoderbasis wie im R-Net Analyzer. Fehlt lokal ein Broker-Quellbaum, holt der V35-Apply reproduzierbar den öffentlichen Tag `v1.0.0` nach `/tmp` und vendort ihn anschließend nach `external/RNetMsgBroker`. Der separate V33-Logfilterprozess entfällt. Apply-Backups liegen ausschließlich unter `/tmp`. Details: `docs/RNETMSGBROKER.md` und `docs/LOGGING.md`.
+
+## Power-Off branding (V37)
+
+`rollstuhl.emu` zeigt bei Power-Off das vorhandene
+`assets/branding/free-r-net-logo-1254.png` groß, seitenverhältnisgetreu
+und zentriert im CJSM2-Dialog-Screen. Es wird kein Ersatztext gezeichnet.
+
+## v2.00 Release Candidate V38 (RNET-V2-RC-V38)
+
+Der Launcher entfernt stale Projekt-Proxies, bricht bei fremdem UDP-Port-Besitzer hart ab und verifiziert den neu gestarteten Proxy. Der Proxy protokolliert den CAN-Bus passiv mit Kommentaren aus dem eingebetteten RNetMsgBroker. `v2-release-check.sh` prüft den Release-Lauf; `release-v2.00.sh` commit/tag/pusht erst nach bestandenem Check. Backups ausschließlich unter `/tmp`.
+
+
+## v2.00 Release Candidate V39 (RNET-V2-RC-V39)
+
+V39 korrigiert die UDP-39000-Erkennung des V38-Launchers (`ss -lun`: Local Address ist Spalte 4), entfernt auch ungetrackte alte Projekt-Proxies über `/proc/<pid>/exe` und verifiziert nach dem Start die neue Proxy-PID. Der RNetMsgBroker-Monitor schreibt CAN-Decodes direkt, ohne stdout/stderr umzuleiten; damit beendet sich der Proxy auch bei frühem `bind()`-Fehler sauber. Backups ausschließlich unter `/tmp`.
+
+
+## v2.00 Release Candidate V40 (RNET-V2-RC-V40)
+
+V40 korrigiert die Erkennung alter eigener `rnet-can-proxy`-Prozesse.
+Ein Prozess gilt als eigener Projekt-Proxy, wenn entweder `/proc/<pid>/exe`
+oder das exakt kanonisierte `argv[0]` aus `/proc/<pid>/cmdline` auf
+`$HOME/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/rnet-can-proxy` zeigt.
+Nur dieser exakte Projektpfad wird automatisch beendet; namensgleiche
+Proxies aus anderen Verzeichnissen bleiben unangetastet.
+
+
+## v2.00 RC V41 (RNET-V2-RC-V41)
+
+`start.sh emu` und `start.sh dev` beginnen jetzt immer mit einem Clean-Start:
+alle Projekt-`*.log` sowie `*.log` im Programmer-Verzeichnis werden gelöscht,
+`build/` und `bin/` werden komplett entfernt und die für den Modus benötigten
+Targets anschließend frisch gebaut. `stop` und `status` führen keinen Clean aus.
+
+
+## Proxy-Log TX/RX V42 (RNET-PROXY-DECODE-V42)
+
+`rnet-can-proxy.log` besitzt jetzt eine explizite Richtungs-Spalte:
+
+`TX` = lokal durch den DLL/Proxy auf `can0` gesendet.
+
+`RX` = vom CAN-Bus auf `can0` empfangen.
+
+Beispiel:
+
+`2026-10-11 00:42:00.200 TX can0 78F#... ; RNetPopQuickRequest ...`
+
+`2026-10-11 00:42:00.217 RX can0 790#... ; RNetPopQuickResponse ...`
+
+Die Richtung wird passiv aus `recvmsg()`/SocketCAN `MSG_DONTROUTE`
+ermittelt; es werden keine zusätzlichen CAN-Frames gesendet.

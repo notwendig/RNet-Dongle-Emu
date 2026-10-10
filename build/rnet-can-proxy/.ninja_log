@@ -1,3 +1,21 @@
 # ninja log v7
-2	1132	1791645749170990710	CMakeFiles/rnet-can-proxy.dir/main.cpp.o	28e804b3aea4b9e4
-1134	1243	1791645750304112933	rnet-can-proxy	c1ada6e11beca02b
+2	25	1791673962358905776	/home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/CMakeFiles/cmake.verify_globs	6ead2c548c2f559c
+26	559	1791673962893418903	external/RNetMsgBroker/RNetMsgBroker_autogen/timestamp	3c5261576c7bbf9c
+26	559	1791673962893418903	external/RNetMsgBroker/RNetMsgBroker_autogen/mocs_compilation.cpp	3c5261576c7bbf9c
+26	559	1791673962893418903	/home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker/RNetMsgBroker_autogen/timestamp	3c5261576c7bbf9c
+26	559	1791673962893418903	/home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker/RNetMsgBroker_autogen/mocs_compilation.cpp	3c5261576c7bbf9c
+562	573	1791673962919374755	CMakeFiles/rnet-can-proxy.dir/main.cpp.o	a4e2052013d27c3c
+561	576	1791673962918584068	external/RNetMsgBroker/CMakeFiles/RNetMsgBroker.dir/RNetMsgBroker_autogen/mocs_compilation.cpp.o	c477c01d3bee2806
+562	577	1791673962919044609	external/RNetMsgBroker/CMakeFiles/RNetMsgBroker.dir/rnetmsgbroker.cpp.o	8bd8b82900191adb
+563	579	1791673962919419035	CMakeFiles/rnet-can-proxy.dir/rnet_proxy_logdecode.cpp.o	ebc48f064f9c8680
+563	580	1791673962920029598	CMakeFiles/rnet-proxy-decode-test.dir/rnet_proxy_decode_test.cpp.o	8f87fbeb8c3e889b
+578	761	1791673962934737453	external/RNetMsgBroker/libRNetMsgBroker.so	64890199f894f382
+762	841	1791673963178420353	external/RNetMsgBroker/RNetMsgBrokerTest_autogen/timestamp	e355c832233c22c7
+762	841	1791673963178420353	external/RNetMsgBroker/RNetMsgBrokerTest_autogen/mocs_compilation.cpp	e355c832233c22c7
+762	841	1791673963178420353	/home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker/RNetMsgBrokerTest_autogen/timestamp	e355c832233c22c7
+762	841	1791673963178420353	/home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker/RNetMsgBrokerTest_autogen/mocs_compilation.cpp	e355c832233c22c7
+842	850	1791673963198420455	external/RNetMsgBroker/CMakeFiles/RNetMsgBrokerTest.dir/RNetMsgBrokerTest_autogen/mocs_compilation.cpp.o	d10885eb498da9ed
+842	864	1791673963199355716	external/RNetMsgBroker/CMakeFiles/RNetMsgBrokerTest.dir/testapp/main.cpp.o	2a749b9297f71eba
+762	1041	1791673963119605275	rnet-proxy-decode-test	ecf628c61e1062d7
+762	1044	1791673963119252640	rnet-can-proxy	38e1ea1db88bead4
+864	1216	1791673963220420567	external/RNetMsgBroker/RNetMsgBrokerTest	9bd17e7483c4cad9

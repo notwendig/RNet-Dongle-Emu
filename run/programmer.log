@@ -10,11 +10,13 @@
 0120:fixme:uxtheme:BufferedPaintInit Stub ()
 0120:fixme:uxtheme:BufferedPaintInit Stub ()
 0120:err:sync:RtlpWaitForCriticalSection section 02DED9F4 "?" wait timed out in thread 0120, blocked by 013c, retrying (60 sec)
+0120:fixme:uxtheme:BufferedPaintInit Stub ()
+0120:fixme:uxtheme:BufferedPaintUnInit Stub ()
 0120:fixme:uxtheme:BufferedPaintUnInit Stub ()
 0120:fixme:uxtheme:BufferedPaintUnInit Stub ()
 0120:fixme:uxtheme:BufferedPaintUnInit Stub ()
 0120:fixme:msvcrt:__clean_type_info_names_internal (7A80ABB4) stub
-0164:fixme:winediag:loader_init wine-staging 11.0 is a testing version containing experimental patches.
-0164:fixme:winediag:loader_init Please mention your exact version when filing bug reports on winehq.org.
-0170:fixme:winediag:loader_init wine-staging 11.0 is a testing version containing experimental patches.
-0170:fixme:winediag:loader_init Please mention your exact version when filing bug reports on winehq.org.
+016c:fixme:winediag:loader_init wine-staging 11.0 is a testing version containing experimental patches.
+016c:fixme:winediag:loader_init Please mention your exact version when filing bug reports on winehq.org.
+017c:fixme:winediag:loader_init wine-staging 11.0 is a testing version containing experimental patches.
+017c:fixme:winediag:loader_init Please mention your exact version when filing bug reports on winehq.org.

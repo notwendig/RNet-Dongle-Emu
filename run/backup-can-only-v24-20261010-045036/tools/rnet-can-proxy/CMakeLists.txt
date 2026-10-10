@@ -1,5 +1,0 @@
-cmake_minimum_required(VERSION 3.20)
-project(rnet_can_proxy LANGUAGES CXX)
-add_executable(rnet-can-proxy main.cpp)
-target_compile_features(rnet-can-proxy PRIVATE cxx_std_17)
-target_compile_options(rnet-can-proxy PRIVATE -Wall -Wextra -Wpedantic)

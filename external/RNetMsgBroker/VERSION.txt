@@ -1,0 +1,10 @@
+1.0.0
+
+- Erste stabile GitHub-Release-Version.
+- Library-Version wird über `RNetMsgBroker::versionString()` bereitgestellt.
+- `RNetMsgBrokerTest --version` gibt `RNetMsgBrokerTest <version>` aus.
+- `RNetMsgBrokerTest --libversion` gibt nur die reine Library-Version aus.
+- `RNetMsgBrokerTest --out/-o` schreibt reine Semikolon-CSV.
+- `cmake --build build --target deliver` erzeugt `RNetMsgBroker_v1.0.0.zip`.
+- `R-Net.json` ist strikt syntaktisch gültiges JSON mit korrekt geschriebenen Schlüsseln.
+- Enthält 187 R-Net-Frame-Definitionen mit `phase`, `quelle`, `senke`.

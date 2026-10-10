@@ -1,0 +1,43 @@
+name: Bug report
+about: Fehler in Decoder, CSV-Ausgabe oder JSON-Frame-Katalog melden
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Ausgabe von RNetMsgBrokerTest --version oder VERSION.txt
+      placeholder: "1.0.0"
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: Aufruf
+      description: Welcher Befehl wurde ausgeführt?
+      render: bash
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Erwartet
+      description: Was sollte passieren?
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Tatsächlich
+      description: Was ist passiert?
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: frame
+    attributes:
+      label: Beispiel-Frame / candump-Zeile
+      render: text
+    validations:
+      required: false

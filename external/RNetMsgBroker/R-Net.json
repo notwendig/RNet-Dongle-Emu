@@ -1,0 +1,4046 @@
+{
+  "$schema": "RNetMsgBroker/1",
+  "description": "R-Net frame definitions for RNetMsgBroker. v1.0.0 stable release: strict JSON keys, CSV export, version diagnostics and deliver target.",
+  "frames": [
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x56700",
+      "id-result": "0x56700",
+      "key-mask": "0xFFF0F",
+      "rnet_name": "RnetMsg_xyz",
+      "frametype": "example",
+      "phase": "test.example",
+      "quelle": "test",
+      "senke": "test",
+      "zyklus": "20ms",
+      "summary": "Beispiel: Modul kommt aus der CAN-ID, Felder aus den Daten nach #.",
+      "id_parts": [
+        {
+          "name": "Modul",
+          "bit_mask": "0xf0",
+          "shift": 4,
+          "big_endian": false
+        }
+      ],
+      "fields": [
+        {
+          "name": "field_1",
+          "bit_mask": "0x00ff00",
+          "shift": 8,
+          "big_endian": false,
+          "einheit": "",
+          "description": "oberes Beispiel-Datenbyte"
+        },
+        {
+          "name": "field_2",
+          "bit_mask": "0x0000ff",
+          "shift": 0,
+          "big_endian": false,
+          "einheit": "",
+          "description": "unteres Beispiel-Datenbyte"
+        }
+      ]
+    },
+    {
+      "extended": false,
+      "remote": "rtr",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x4",
+      "key-mask": "0xFFFFFFFF",
+      "rnet_name": "RNetSleepWakeRtr",
+      "frametype": "power",
+      "phase": "startup.power",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "sleep/wake sequence RTR"
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x2",
+      "key-mask": "0xFFFFFFFF",
+      "rnet_name": "RNetJsmInitSeen",
+      "frametype": "power",
+      "phase": "startup.power",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "seen during JSM init"
+    },
+    {
+      "extended": false,
+      "remote": "rtr",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x7B1",
+      "key-mask": "0xFFFFFFFF",
+      "rnet_name": "RNetConfigMode1Request",
+      "frametype": "config",
+      "phase": "startup.config_discovery",
+      "quelle": "unknown",
+      "senke": "unknown",
+      "summary": "PM requests drop to config mode 1"
+    },
+    {
+      "extended": false,
+      "remote": "rtr",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x7B0",
+      "key-mask": "0xFFFFFFFF",
+      "rnet_name": "RNetConfigMode0Request",
+      "frametype": "config",
+      "phase": "startup.config_discovery",
+      "quelle": "unknown",
+      "senke": "unknown",
+      "summary": "PM requests drop to config mode 0"
+    },
+    {
+      "extended": false,
+      "remote": "any",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x7E0",
+      "key-mask": "0xFFFFFFFF",
+      "rnet_name": "RNetDiagnosticsReserved7E0",
+      "frametype": "config",
+      "phase": "startup.config_discovery",
+      "quelle": "unknown",
+      "senke": "unknown",
+      "summary": "unknown diagnostics/reserved frame reported from DongleInterface.dll data"
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7F0",
+      "id-result": "0x60",
+      "key-mask": "0xFFFFFFF0",
+      "rnet_name": "RNetStdMotorOrModeStatus",
+      "frametype": "motor",
+      "phase": "runtime.status",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "standard 06X status/mode response family",
+      "id_parts": [
+        {
+          "mask": "0x00F",
+          "name": "module",
+          "endian": "l"
+        }
+      ]
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x78F",
+      "key-mask": "0xFFFFFFFF",
+      "rnet_name": "RNetProgrammerQuickRequest",
+      "frametype": "pop-quick",
+      "phase": "startup.config_discovery",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "R-Net Programmer POP Quick request"
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x793",
+      "key-mask": "0xFFFFFFFF",
+      "rnet_name": "RNetProgrammerQuickResponse",
+      "frametype": "pop-quick",
+      "phase": "startup.config_discovery",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "R-Net Programmer POP Quick response"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1F00F000",
+      "id-result": "0x1F000000",
+      "key-mask": "0x1F00F000",
+      "rnet_name": "RNetSerialExchangeSeq0",
+      "frametype": "serial",
+      "phase": "startup.serial_auth",
+      "quelle": "module",
+      "senke": "pm",
+      "summary": "extended serial challenge/response sequence 0",
+      "id_parts": [
+        {
+          "mask": "0x0000F000",
+          "name": "sequence",
+          "shift": 12,
+          "endian": "l"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "rtr",
+      "Id-and-mask": "0x1F00F000",
+      "id-result": "0x1F000000",
+      "key-mask": "0x1F00F000",
+      "rnet_name": "RNetSerialExchangeSeq0",
+      "frametype": "serial",
+      "phase": "startup.serial_auth",
+      "quelle": "pm",
+      "senke": "modules",
+      "summary": "serial number exchange RTR request for sequence 0",
+      "id_parts": [
+        {
+          "mask": "0x0000F000",
+          "name": "sequence",
+          "shift": 12,
+          "endian": "l"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1F00F000",
+      "id-result": "0x1F001000",
+      "key-mask": "0x1F00F000",
+      "rnet_name": "RNetSerialExchangeSeq1",
+      "frametype": "serial",
+      "phase": "startup.serial_auth",
+      "quelle": "module",
+      "senke": "pm",
+      "summary": "extended serial challenge/response sequence 1",
+      "id_parts": [
+        {
+          "mask": "0x0000F000",
+          "name": "sequence",
+          "shift": 12,
+          "endian": "l"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "rtr",
+      "Id-and-mask": "0x1F00F000",
+      "id-result": "0x1F001000",
+      "key-mask": "0x1F00F000",
+      "rnet_name": "RNetSerialExchangeSeq1",
+      "frametype": "serial",
+      "phase": "startup.serial_auth",
+      "quelle": "pm",
+      "senke": "modules",
+      "summary": "serial number exchange RTR request for sequence 1",
+      "id_parts": [
+        {
+          "mask": "0x0000F000",
+          "name": "sequence",
+          "shift": 12,
+          "endian": "l"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1F00F000",
+      "id-result": "0x1F002000",
+      "key-mask": "0x1F00F000",
+      "rnet_name": "RNetSerialExchangeSeq2",
+      "frametype": "serial",
+      "phase": "startup.serial_auth",
+      "quelle": "module",
+      "senke": "pm",
+      "summary": "extended serial challenge/response sequence 2",
+      "id_parts": [
+        {
+          "mask": "0x0000F000",
+          "name": "sequence",
+          "shift": 12,
+          "endian": "l"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "rtr",
+      "Id-and-mask": "0x1F00F000",
+      "id-result": "0x1F002000",
+      "key-mask": "0x1F00F000",
+      "rnet_name": "RNetSerialExchangeSeq2",
+      "frametype": "serial",
+      "phase": "startup.serial_auth",
+      "quelle": "pm",
+      "senke": "modules",
+      "summary": "serial number exchange RTR request for sequence 2",
+      "id_parts": [
+        {
+          "mask": "0x0000F000",
+          "name": "sequence",
+          "shift": 12,
+          "endian": "l"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1F00F000",
+      "id-result": "0x1F003000",
+      "key-mask": "0x1F00F000",
+      "rnet_name": "RNetSerialExchangeSeq3",
+      "frametype": "serial",
+      "phase": "startup.serial_auth",
+      "quelle": "module",
+      "senke": "pm",
+      "summary": "extended serial challenge/response sequence 3",
+      "id_parts": [
+        {
+          "mask": "0x0000F000",
+          "name": "sequence",
+          "shift": 12,
+          "endian": "l"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "rtr",
+      "Id-and-mask": "0x1F00F000",
+      "id-result": "0x1F003000",
+      "key-mask": "0x1F00F000",
+      "rnet_name": "RNetSerialExchangeSeq3",
+      "frametype": "serial",
+      "phase": "startup.serial_auth",
+      "quelle": "pm",
+      "senke": "modules",
+      "summary": "serial number exchange RTR request for sequence 3",
+      "id_parts": [
+        {
+          "mask": "0x0000F000",
+          "name": "sequence",
+          "shift": 12,
+          "endian": "l"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1F00F000",
+      "id-result": "0x1F004000",
+      "key-mask": "0x1F00F000",
+      "rnet_name": "RNetSerialExchangeSeq4",
+      "frametype": "serial",
+      "phase": "startup.serial_auth",
+      "quelle": "module",
+      "senke": "pm",
+      "summary": "extended serial challenge/response sequence 4",
+      "id_parts": [
+        {
+          "mask": "0x0000F000",
+          "name": "sequence",
+          "shift": 12,
+          "endian": "l"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "rtr",
+      "Id-and-mask": "0x1F00F000",
+      "id-result": "0x1F004000",
+      "key-mask": "0x1F00F000",
+      "rnet_name": "RNetSerialExchangeSeq4",
+      "frametype": "serial",
+      "phase": "startup.serial_auth",
+      "quelle": "pm",
+      "senke": "modules",
+      "summary": "serial number exchange RTR request for sequence 4",
+      "id_parts": [
+        {
+          "mask": "0x0000F000",
+          "name": "sequence",
+          "shift": 12,
+          "endian": "l"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1F00F000",
+      "id-result": "0x1F005000",
+      "key-mask": "0x1F00F000",
+      "rnet_name": "RNetSerialExchangeSeq5",
+      "frametype": "serial",
+      "phase": "startup.serial_auth",
+      "quelle": "module",
+      "senke": "pm",
+      "summary": "extended serial challenge/response sequence 5",
+      "id_parts": [
+        {
+          "mask": "0x0000F000",
+          "name": "sequence",
+          "shift": 12,
+          "endian": "l"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "rtr",
+      "Id-and-mask": "0x1F00F000",
+      "id-result": "0x1F005000",
+      "key-mask": "0x1F00F000",
+      "rnet_name": "RNetSerialExchangeSeq5",
+      "frametype": "serial",
+      "phase": "startup.serial_auth",
+      "quelle": "pm",
+      "senke": "modules",
+      "summary": "serial number exchange RTR request for sequence 5",
+      "id_parts": [
+        {
+          "mask": "0x0000F000",
+          "name": "sequence",
+          "shift": 12,
+          "endian": "l"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1F00F000",
+      "id-result": "0x1F006000",
+      "key-mask": "0x1F00F000",
+      "rnet_name": "RNetSerialExchangeSeq6",
+      "frametype": "serial",
+      "phase": "startup.serial_auth",
+      "quelle": "module",
+      "senke": "pm",
+      "summary": "extended serial challenge/response sequence 6",
+      "id_parts": [
+        {
+          "mask": "0x0000F000",
+          "name": "sequence",
+          "shift": 12,
+          "endian": "l"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "rtr",
+      "Id-and-mask": "0x1F00F000",
+      "id-result": "0x1F006000",
+      "key-mask": "0x1F00F000",
+      "rnet_name": "RNetSerialExchangeSeq6",
+      "frametype": "serial",
+      "phase": "startup.serial_auth",
+      "quelle": "pm",
+      "senke": "modules",
+      "summary": "serial number exchange RTR request for sequence 6",
+      "id_parts": [
+        {
+          "mask": "0x0000F000",
+          "name": "sequence",
+          "shift": 12,
+          "endian": "l"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1F00F000",
+      "id-result": "0x1F007000",
+      "key-mask": "0x1F00F000",
+      "rnet_name": "RNetSerialExchangeSeq7",
+      "frametype": "serial",
+      "phase": "startup.serial_auth",
+      "quelle": "module",
+      "senke": "pm",
+      "summary": "extended serial challenge/response sequence 7",
+      "id_parts": [
+        {
+          "mask": "0x0000F000",
+          "name": "sequence",
+          "shift": 12,
+          "endian": "l"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "rtr",
+      "Id-and-mask": "0x1F00F000",
+      "id-result": "0x1F007000",
+      "key-mask": "0x1F00F000",
+      "rnet_name": "RNetSerialExchangeSeq7",
+      "frametype": "serial",
+      "phase": "startup.serial_auth",
+      "quelle": "pm",
+      "senke": "modules",
+      "summary": "serial number exchange RTR request for sequence 7",
+      "id_parts": [
+        {
+          "mask": "0x0000F000",
+          "name": "sequence",
+          "shift": 12,
+          "endian": "l"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFF00",
+      "id-result": "0x1F800000",
+      "key-mask": "0x1FFFFF00",
+      "rnet_name": "RNetColorJsmSlot8CryForHelp",
+      "frametype": "serial",
+      "phase": "startup.serial_auth",
+      "quelle": "cjsm",
+      "senke": "pm",
+      "summary": "cJSM slot-8 authentication retry/cry-for-help family",
+      "id_parts": [
+        {
+          "mask": "0x000000FF",
+          "name": "slot",
+          "endian": "l"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFF00",
+      "id-result": "0x1F900000",
+      "key-mask": "0x1FFFFF00",
+      "rnet_name": "RNetColorJsmAuthResponse90",
+      "frametype": "serial",
+      "phase": "startup.serial_auth",
+      "quelle": "pm",
+      "senke": "cjsm",
+      "summary": "cJSM/PM authentication response family 0x1F90",
+      "id_parts": [
+        {
+          "mask": "0x000000FF",
+          "name": "slot",
+          "endian": "l"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFF00",
+      "id-result": "0x1F910000",
+      "key-mask": "0x1FFFFF00",
+      "rnet_name": "RNetColorJsmAuthResponse91",
+      "frametype": "serial",
+      "phase": "startup.serial_auth",
+      "quelle": "pm",
+      "senke": "cjsm",
+      "summary": "cJSM/PM authentication response family 0x1F91",
+      "id_parts": [
+        {
+          "mask": "0x000000FF",
+          "name": "slot",
+          "endian": "l"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFF0",
+      "id-result": "0x1FB00000",
+      "key-mask": "0x1FFFFFF0",
+      "rnet_name": "RNetDeviceSerialSlot",
+      "frametype": "serial",
+      "phase": "startup.serial_auth",
+      "quelle": "module",
+      "senke": "pm",
+      "summary": "device slot serial-number broadcast",
+      "id_parts": [
+        {
+          "mask": "0x0000000F",
+          "name": "slot",
+          "endian": "l"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "any",
+      "Id-and-mask": "0x1FC00000",
+      "id-result": "0x1E000000",
+      "key-mask": "0x1FC00000",
+      "rnet_name": "RNetPopSegmentedResponse",
+      "frametype": "pop-segmented",
+      "phase": "startup.config_discovery",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "POP segmented response base family",
+      "id_parts": [
+        {
+          "mask": "0x003F0000",
+          "name": "segment",
+          "shift": 16,
+          "endian": "l"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "any",
+      "Id-and-mask": "0x1FC00000",
+      "id-result": "0x1E400000",
+      "key-mask": "0x1FC00000",
+      "rnet_name": "RNetPopSegmentedRequest",
+      "frametype": "pop-segmented",
+      "phase": "startup.config_discovery",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "POP segmented request base family",
+      "id_parts": [
+        {
+          "mask": "0x003F0000",
+          "name": "segment",
+          "shift": 16,
+          "endian": "l"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFFFFF",
+      "id-result": "0x1E3C0001",
+      "key-mask": "0xFFFFFFFF",
+      "rnet_name": "RNetConfigTransferHeader1",
+      "frametype": "config-xfer",
+      "phase": "startup.config_discovery",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "configuration transfer header segment 1"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFFFFF",
+      "id-result": "0x1E3C0002",
+      "key-mask": "0xFFFFFFFF",
+      "rnet_name": "RNetConfigTransferHeader2",
+      "frametype": "config-xfer",
+      "phase": "startup.config_discovery",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "configuration transfer header segment 2"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFFFFF",
+      "id-result": "0x1E3D0003",
+      "key-mask": "0xFFFFFFFF",
+      "rnet_name": "RNetConfigTransferHeaderCrc",
+      "frametype": "config-xfer",
+      "phase": "startup.config_discovery",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "configuration transfer header CRC segment"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFFFFF",
+      "id-result": "0x1E4D0003",
+      "key-mask": "0xFFFFFFFF",
+      "rnet_name": "RNetConfigTransferBlockEnd",
+      "frametype": "config-xfer",
+      "phase": "startup.config_discovery",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "configuration transfer data block end"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFFFFF",
+      "id-result": "0x1E4E0001",
+      "key-mask": "0xFFFFFFFF",
+      "rnet_name": "RNetConfigTransferData1",
+      "frametype": "config-xfer",
+      "phase": "startup.config_discovery",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "configuration transfer data segment 1"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFFFFF",
+      "id-result": "0x1E4F0002",
+      "key-mask": "0xFFFFFFFF",
+      "rnet_name": "RNetConfigTransferDataCrc",
+      "frametype": "config-xfer",
+      "phase": "startup.config_discovery",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "configuration transfer data segment with CRC"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFFFFF",
+      "id-result": "0x1E80000F",
+      "key-mask": "0xFFFFFFFF",
+      "rnet_name": "RNetConfigTransferComplete",
+      "frametype": "config-xfer",
+      "phase": "startup.config_discovery",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "configuration transfer complete/status"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFFF0F",
+      "id-result": "0xA400D00",
+      "key-mask": "0xFFFFFF0F",
+      "rnet_name": "RNetSpeedOrBtUnknown0A400D",
+      "frametype": "speed-btm",
+      "phase": "runtime.unknown",
+      "quelle": "unknown",
+      "senke": "unknown",
+      "summary": "unknown 0A400D0M status/control family",
+      "id_parts": [
+        {
+          "mask": "0x000000F0",
+          "name": "module",
+          "shift": 4,
+          "endian": "l"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFFFFF",
+      "id-result": "0xA400002",
+      "key-mask": "0xFFFFFFFF",
+      "rnet_name": "RNetBtmStatus0002",
+      "frametype": "btm",
+      "phase": "runtime.control",
+      "quelle": "btm",
+      "senke": "jsm",
+      "summary": "Bluetooth module status"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFFFFF",
+      "id-result": "0xA400102",
+      "key-mask": "0xFFFFFFFF",
+      "rnet_name": "RNetBtmStatus0102",
+      "frametype": "btm",
+      "phase": "runtime.control",
+      "quelle": "btm",
+      "senke": "jsm",
+      "summary": "Bluetooth module status"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFFFFF",
+      "id-result": "0xA400300",
+      "key-mask": "0xFFFFFFFF",
+      "rnet_name": "RNetBtmControl0300",
+      "frametype": "btm",
+      "phase": "runtime.control",
+      "quelle": "jsm",
+      "senke": "btm",
+      "summary": "Bluetooth module control"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFFFFF",
+      "id-result": "0xA400301",
+      "key-mask": "0xFFFFFFFF",
+      "rnet_name": "RNetBtmControl0301",
+      "frametype": "btm",
+      "phase": "runtime.control",
+      "quelle": "jsm",
+      "senke": "btm",
+      "summary": "Bluetooth module control"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFFFFF",
+      "id-result": "0xC000400",
+      "key-mask": "0xFFFFFFFF",
+      "rnet_name": "RNetLampControlStatus",
+      "frametype": "lighting",
+      "phase": "runtime.control",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "lamp control status bitmap",
+      "fields": [
+        {
+          "sig_name": "left_indicator",
+          "bit_mask": "0x01",
+          "shift": 0,
+          "big_endian": false
+        },
+        {
+          "sig_name": "right_indicator",
+          "bit_mask": "0x02",
+          "shift": 1,
+          "big_endian": false
+        },
+        {
+          "sig_name": "hazard",
+          "bit_mask": "0x04",
+          "shift": 2,
+          "big_endian": false
+        },
+        {
+          "sig_name": "lights",
+          "bit_mask": "0x08",
+          "shift": 3,
+          "big_endian": false
+        },
+        {
+          "sig_name": "horn_or_aux",
+          "bit_mask": "0x10",
+          "shift": 4,
+          "big_endian": false
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFF0FF",
+      "id-result": "0xC000000",
+      "key-mask": "0xFFFFF0FF",
+      "rnet_name": "RNetJsmNetworkErrorTrigger",
+      "frametype": "error",
+      "phase": "runtime.error",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "frame family known to trigger JSM network error",
+      "id_parts": [
+        {
+          "mask": "0x00000F00",
+          "name": "module",
+          "shift": 8,
+          "endian": "l"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFFFF0",
+      "id-result": "0xC040D00",
+      "key-mask": "0xFFFFFFF0",
+      "rnet_name": "RNetPeriodic0C040D0X",
+      "frametype": "unknown",
+      "phase": "unknown.observed",
+      "quelle": "unknown",
+      "senke": "unknown",
+      "summary": "periodic 0C040D0X family",
+      "id_parts": [
+        {
+          "mask": "0x0000000F",
+          "name": "slot",
+          "endian": "l"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFFF00",
+      "id-result": "0xC180100",
+      "key-mask": "0xFFFFFF00",
+      "rnet_name": "RNetModuleStatus0C1801",
+      "frametype": "module",
+      "phase": "runtime.status",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "module status/control family 0C1801xx",
+      "id_parts": [
+        {
+          "mask": "0x000000FF",
+          "name": "module",
+          "endian": "l"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFFF00",
+      "id-result": "0xC180200",
+      "key-mask": "0xFFFFFF00",
+      "rnet_name": "RNetModuleStatus0C1802",
+      "frametype": "module",
+      "phase": "runtime.status",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "module status/control family 0C1802xx",
+      "id_parts": [
+        {
+          "mask": "0x000000FF",
+          "name": "module",
+          "endian": "l"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFFF00",
+      "id-result": "0xC180400",
+      "key-mask": "0xFFFFFF00",
+      "rnet_name": "RNetModuleStatus0C1804",
+      "frametype": "module",
+      "phase": "runtime.status",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "module status/control family 0C1804xx",
+      "id_parts": [
+        {
+          "mask": "0x000000FF",
+          "name": "module",
+          "endian": "l"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFF0FF",
+      "id-result": "0x140C0001",
+      "key-mask": "0xFFFFF0FF",
+      "rnet_name": "RNetMotorUnknown140C",
+      "frametype": "motor",
+      "phase": "runtime.status",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "unknown motor-related 140C0X01 family",
+      "id_parts": [
+        {
+          "mask": "0x00000F00",
+          "name": "module",
+          "shift": 8,
+          "endian": "l"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFFFFF",
+      "id-result": "0xC000302",
+      "key-mask": "0xFFFFFFFF",
+      "rnet_name": "RNetModule3Interaction302",
+      "frametype": "ui",
+      "phase": "startup.ui_activation",
+      "quelle": "unknown",
+      "senke": "unknown",
+      "summary": "module 3 interaction"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFFFFF",
+      "id-result": "0xC000304",
+      "key-mask": "0xFFFFFFFF",
+      "rnet_name": "RNetModule3Interaction304",
+      "frametype": "ui",
+      "phase": "startup.ui_activation",
+      "quelle": "unknown",
+      "senke": "unknown",
+      "summary": "module 3 interaction"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFF0FF",
+      "id-result": "0x1C200000",
+      "key-mask": "0xFFFFF0FF",
+      "rnet_name": "RNetJsmDisplayStatus",
+      "frametype": "ui",
+      "phase": "startup.ui_activation",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "JSM display/UI status family",
+      "id_parts": [
+        {
+          "mask": "0x00000F00",
+          "name": "module",
+          "shift": 8,
+          "endian": "l"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFF0FF",
+      "id-result": "0x1C240000",
+      "key-mask": "0xFFFFF0FF",
+      "rnet_name": "RNetPowerDownJsm",
+      "frametype": "ui",
+      "phase": "startup.ui_activation",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "PM requests JSM power down",
+      "id_parts": [
+        {
+          "mask": "0x00000F00",
+          "name": "module",
+          "shift": 8,
+          "endian": "l"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFF00",
+      "id-result": "0x0",
+      "key-mask": "0x1FFFFF00",
+      "rnet_name": "RNetGenericExtended00",
+      "frametype": "generic",
+      "phase": "runtime.generic",
+      "quelle": "unknown",
+      "senke": "unknown",
+      "summary": "generic editable extended family 0x000000xx",
+      "id_parts": [
+        {
+          "mask": "0x000000FF",
+          "name": "sub_id",
+          "endian": "l"
+        }
+      ],
+      "fields": [
+        {
+          "sig_name": "byte0",
+          "bit_mask": "0xFF",
+          "shift": 0
+        },
+        {
+          "sig_name": "byte1",
+          "bit_mask": "0xFF00",
+          "shift": 8
+        }
+      ]
+    },
+    {
+      "extended": false,
+      "remote": "rtr",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x0",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetPmSleepAllDevicesRtr",
+      "frametype": "power",
+      "phase": "startup.power",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "PM sleep all devices / power off",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x0",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetJsmSleepingAck",
+      "frametype": "power",
+      "phase": "startup.power",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "JSM sleeping acknowledgment",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": false,
+      "remote": "rtr",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x2",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetPmSleepAllDevicesAltRtr",
+      "frametype": "power",
+      "phase": "startup.power",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "PM sleep all devices, alternate",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x2",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetJsmInitSeen002",
+      "frametype": "power",
+      "phase": "startup.power",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "seen during JSM init",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x4",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetJsmSleepCommencing",
+      "frametype": "power",
+      "phase": "startup.power",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "JSM sleep commencing",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": false,
+      "remote": "rtr",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x4",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetSleepWakeRelatedRtr",
+      "frametype": "power",
+      "phase": "startup.power",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "related to sleep/wake sequence",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0xC",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetJsmCanConnectionTest",
+      "frametype": "power",
+      "phase": "startup.power",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "JSM test CAN connection before wake; can turn JSM off if sent while on",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0xE",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetJsmSerialHeartbeat",
+      "frametype": "serial",
+      "phase": "startup.serial_auth",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "JSM serial number heartbeat; PM must see this before profile handshaking",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "zyklus": "50ms",
+      "fields": [
+        {
+          "name": "serial32",
+          "byte": 0,
+          "width": 4,
+          "big_endian": true,
+          "description": "first four serial bytes"
+        },
+        {
+          "name": "serial_tail",
+          "byte": 4,
+          "width": 4,
+          "big_endian": true,
+          "description": "remaining heartbeat bytes"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFF000000",
+      "id-result": "0x1F000000",
+      "key-mask": "0xFF000000",
+      "rnet_name": "RNetSerialExchangeGeneric",
+      "frametype": "serial",
+      "phase": "startup.serial_auth",
+      "quelle": "module",
+      "senke": "pm",
+      "summary": "serial number exchange: seq/module, key and serial/challenge data encoded in ID",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "id_parts": [
+        {
+          "name": "seq",
+          "bit_mask": "0xF00000",
+          "endian": "l",
+          "shift": 20
+        },
+        {
+          "name": "slot",
+          "bit_mask": "0xF0000",
+          "endian": "l",
+          "shift": 16
+        },
+        {
+          "name": "key",
+          "bit_mask": "0xFF00",
+          "endian": "l",
+          "shift": 8
+        },
+        {
+          "name": "value",
+          "bit_mask": "0xFF",
+          "endian": "l",
+          "shift": 0
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "rtr",
+      "Id-and-mask": "0xFF000000",
+      "id-result": "0x1F000000",
+      "key-mask": "0xFF000000",
+      "rnet_name": "RNetSerialChallengeGenericRtr",
+      "frametype": "serial",
+      "phase": "startup.serial_auth",
+      "quelle": "pm",
+      "senke": "modules",
+      "summary": "serial number challenge from PM; challenge values are ignored by devices",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "id_parts": [
+        {
+          "name": "seq",
+          "bit_mask": "0xF00000",
+          "endian": "l",
+          "shift": 20
+        },
+        {
+          "name": "slot",
+          "bit_mask": "0xF0000",
+          "endian": "l",
+          "shift": 16
+        },
+        {
+          "name": "key",
+          "bit_mask": "0xFF00",
+          "endian": "l",
+          "shift": 8
+        },
+        {
+          "name": "challenge",
+          "bit_mask": "0xFF",
+          "endian": "l",
+          "shift": 0
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "any",
+      "Id-and-mask": "0xFFFF0000",
+      "id-result": "0x1F000000",
+      "key-mask": "0xFFFF0000",
+      "rnet_name": "RNetSerialSeqRange",
+      "frametype": "serial",
+      "phase": "startup.serial_auth",
+      "quelle": "pm",
+      "senke": "modules",
+      "summary": "serial number exchange sequence range 1F00XXXX through 1F70XXXX",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "id_parts": [
+        {
+          "name": "seq",
+          "bit_mask": "0xF00000",
+          "endian": "l",
+          "shift": 20
+        },
+        {
+          "name": "slot",
+          "bit_mask": "0xF0000",
+          "endian": "l",
+          "shift": 16
+        },
+        {
+          "name": "key",
+          "bit_mask": "0xFF00",
+          "endian": "l",
+          "shift": 8
+        },
+        {
+          "name": "value",
+          "bit_mask": "0xFF",
+          "endian": "l",
+          "shift": 0
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFFF00",
+      "id-result": "0x1F800000",
+      "key-mask": "0xFFFFFF00",
+      "rnet_name": "RNetSerialRelated1F8000",
+      "frametype": "serial",
+      "phase": "startup.serial_auth",
+      "quelle": "unknown",
+      "senke": "unknown",
+      "summary": "serial number related frame",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFFF00",
+      "id-result": "0x1F900000",
+      "key-mask": "0xFFFFFF00",
+      "rnet_name": "RNetSerialRelated1F9000",
+      "frametype": "serial",
+      "phase": "startup.serial_auth",
+      "quelle": "unknown",
+      "senke": "unknown",
+      "summary": "serial number related frame",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFFF00",
+      "id-result": "0x1F910000",
+      "key-mask": "0xFFFFFF00",
+      "rnet_name": "RNetSerialRelated1F9100",
+      "frametype": "serial",
+      "phase": "startup.serial_auth",
+      "quelle": "unknown",
+      "senke": "unknown",
+      "summary": "serial number related frame",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFFFF0",
+      "id-result": "0x1FB00000",
+      "key-mask": "0xFFFFFFF0",
+      "rnet_name": "RNetSetDeviceSerial",
+      "frametype": "serial",
+      "phase": "startup.serial_auth",
+      "quelle": "module",
+      "senke": "pm",
+      "summary": "set/report serial number for device slot Z",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "id_parts": [
+        {
+          "name": "slot",
+          "bit_mask": "0xF",
+          "endian": "l",
+          "shift": 0
+        }
+      ],
+      "fields": [
+        {
+          "name": "serial64",
+          "byte": 0,
+          "width": 8,
+          "big_endian": true,
+          "description": "8 byte device serial"
+        }
+      ]
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x7B3",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetJsmRequestSerialExchange",
+      "frametype": "config",
+      "phase": "startup.serial_auth",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "JSM request serial number exchange",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": false,
+      "remote": "rtr",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x7B3",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetPmCommencingSerialExchangeRtr",
+      "frametype": "config",
+      "phase": "startup.serial_auth",
+      "quelle": "pm",
+      "senke": "modules",
+      "summary": "PM commencing serial number exchange",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x7B1",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetPmDropToConfigMode1",
+      "frametype": "config",
+      "phase": "startup.config_discovery",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "PM drop to config mode 1",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x7B0",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetDropToConfigMode0",
+      "frametype": "config",
+      "phase": "startup.config_discovery",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "drop to config mode 0; ends capability mapping and starts run mode",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x40",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetOpenParameterPageMode0",
+      "frametype": "mode-map",
+      "phase": "startup.config_discovery",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "open parameter page for mode 0",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x0",
+        "mask": "0xFFFFFFFF",
+        "width": 4,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0xFF0",
+      "id-result": "0x40",
+      "key-mask": "0xFF0",
+      "rnet_name": "RNetSelectModeMapForParameterExchange",
+      "frametype": "mode-map",
+      "phase": "startup.config_discovery",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "JSMrx select modemap M for parameter exchange",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "id_parts": [
+        {
+          "name": "mode_map",
+          "bit_mask": "0xF",
+          "endian": "l",
+          "shift": 0
+        }
+      ],
+      "data": {
+        "value": "0x0",
+        "mask": "0xFFFFFFFF",
+        "width": 4,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0xFF0",
+      "id-result": "0x40",
+      "key-mask": "0xFF0",
+      "rnet_name": "RNetEndParameterExchangeForMode",
+      "frametype": "mode-map",
+      "phase": "startup.config_discovery",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "JSMtx end parameter exchange for mode M",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "id_parts": [
+        {
+          "name": "mode_map",
+          "bit_mask": "0xF",
+          "endian": "l",
+          "shift": 0
+        }
+      ],
+      "data": {
+        "value": "0x80000000",
+        "mask": "0xFFFFFFFF",
+        "width": 4,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x41",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetOpenParameterPageMode1",
+      "frametype": "mode-map",
+      "phase": "startup.config_discovery",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "open parameter page for mode 1",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x0",
+        "mask": "0xFFFFFFFF",
+        "width": 4,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x41",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetCloseParameterPageMode1",
+      "frametype": "mode-map",
+      "phase": "startup.config_discovery",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "close parameter page for mode 1",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x80000000",
+        "mask": "0xFFFFFFFF",
+        "width": 4,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0xFF0",
+      "id-result": "0x780",
+      "key-mask": "0xFF0",
+      "rnet_name": "RNetPopQuickRequest",
+      "frametype": "pop-quick",
+      "phase": "startup.config_discovery",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "POP Quick request 0x780-0x78F; M=device slot/programmer",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "id_parts": [
+        {
+          "name": "slot",
+          "bit_mask": "0xF",
+          "endian": "l",
+          "shift": 0
+        }
+      ],
+      "fields": [
+        {
+          "name": "command",
+          "byte": 0,
+          "width": 1
+        },
+        {
+          "name": "register",
+          "byte": 1,
+          "width": 1
+        },
+        {
+          "name": "param_or_value",
+          "byte": 4,
+          "width": 4
+        }
+      ]
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0xFF0",
+      "id-result": "0x790",
+      "key-mask": "0xFF0",
+      "rnet_name": "RNetPopQuickResponse",
+      "frametype": "pop-quick",
+      "phase": "startup.config_discovery",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "POP Quick response 0x790-0x79F; M=device slot/programmer",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "id_parts": [
+        {
+          "name": "slot",
+          "bit_mask": "0xF",
+          "endian": "l",
+          "shift": 0
+        }
+      ],
+      "fields": [
+        {
+          "name": "command",
+          "byte": 0,
+          "width": 1
+        },
+        {
+          "name": "register",
+          "byte": 1,
+          "width": 1
+        },
+        {
+          "name": "param_or_value",
+          "byte": 4,
+          "width": 4
+        }
+      ]
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x781",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetJsmProgrammingHeaderCapabilityExchange",
+      "frametype": "pop-quick",
+      "phase": "startup.config_discovery",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "JSM programming header for capability exchange",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x2080000011000000",
+        "mask": "0xFFFFFFFFFFFFFFFF",
+        "width": 8,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0xFF0",
+      "id-result": "0x780",
+      "key-mask": "0xFF0",
+      "rnet_name": "RNetPopCheckPointerExists",
+      "frametype": "pop-quick",
+      "phase": "startup.config_discovery",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "JSMtx check whether pointer X/sub V exists",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "id_parts": [
+        {
+          "name": "slot",
+          "bit_mask": "0xF",
+          "endian": "l",
+          "shift": 0
+        }
+      ],
+      "data": {
+        "value": "0x2081000000000000",
+        "mask": "0xF0FFFFFF00FF00FF",
+        "width": 8,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0xFF0",
+      "id-result": "0x780",
+      "key-mask": "0xFF0",
+      "rnet_name": "RNetPopRequestPointer",
+      "frametype": "pop-quick",
+      "phase": "startup.config_discovery",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "JSMtx request pointer from PM",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "id_parts": [
+        {
+          "name": "slot",
+          "bit_mask": "0xF",
+          "endian": "l",
+          "shift": 0
+        }
+      ],
+      "data": {
+        "value": "0x408F000000000000",
+        "mask": "0xF0FFFFFFFFFFFFFF",
+        "width": 8,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x790",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetPopPointerExistsPmSlot0",
+      "frametype": "pop-quick",
+      "phase": "startup.config_discovery",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "PMtx yes, pointer exists",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x4180000000000000",
+        "mask": "0xFFFFFFFFFFFFFFFF",
+        "width": 8,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0xFF0",
+      "id-result": "0x790",
+      "key-mask": "0xFF0",
+      "rnet_name": "RNetPopPointerExistsPm",
+      "frametype": "pop-quick",
+      "phase": "startup.config_discovery",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "PMtx yes, pointer exists",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "id_parts": [
+        {
+          "name": "slot",
+          "bit_mask": "0xF",
+          "endian": "l",
+          "shift": 0
+        }
+      ],
+      "data": {
+        "value": "0x4081000000000000",
+        "mask": "0xF0FFFFFFFFFFFFFF",
+        "width": 8,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x790",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetPopPointerValueSlot0",
+      "frametype": "pop-quick",
+      "phase": "startup.config_discovery",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "PMtx pointer value returned",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x218F000000000000",
+        "mask": "0xFFFFFFFF0000FFFF",
+        "width": 8,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0xFF0",
+      "id-result": "0x790",
+      "key-mask": "0xFF0",
+      "rnet_name": "RNetPopPointerValuePm",
+      "frametype": "pop-quick",
+      "phase": "startup.config_discovery",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "PMtx pointer value returned",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "id_parts": [
+        {
+          "name": "slot",
+          "bit_mask": "0xF",
+          "endian": "l",
+          "shift": 0
+        }
+      ],
+      "data": {
+        "value": "0x208F000000000000",
+        "mask": "0xF0FFFFFF0000FFFF",
+        "width": 8,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0xFF0",
+      "id-result": "0x790",
+      "key-mask": "0xFF0",
+      "rnet_name": "RNetPopPointerDoesNotExist",
+      "frametype": "pop-quick",
+      "phase": "startup.config_discovery",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "PMtx no, pointer does not exist",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "id_parts": [
+        {
+          "name": "slot",
+          "bit_mask": "0xF",
+          "endian": "l",
+          "shift": 0
+        }
+      ],
+      "data": {
+        "value": "0xC081000000000000",
+        "mask": "0xF0FFFFFFFFFFFFFF",
+        "width": 8,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0xFF0",
+      "id-result": "0x790",
+      "key-mask": "0xFF0",
+      "rnet_name": "RNetPopAddressNotFound",
+      "frametype": "pop-quick",
+      "phase": "startup.config_discovery",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "PMtx error: address not found",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "id_parts": [
+        {
+          "name": "slot",
+          "bit_mask": "0xF",
+          "endian": "l",
+          "shift": 0
+        }
+      ],
+      "data": {
+        "value": "0xC181000028000000",
+        "mask": "0xFFFFFFFFFFFFFFFF",
+        "width": 8,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0xFF0",
+      "id-result": "0x790",
+      "key-mask": "0xFF0",
+      "rnet_name": "RNetPopCJsmTextChunk",
+      "frametype": "pop-quick",
+      "phase": "startup.config_discovery",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "PMtx text chunk for color JSM display (prefix 2P8C0000; remaining bytes are text payload)",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "id_parts": [
+        {
+          "name": "slot",
+          "bit_mask": "0xF",
+          "endian": "l",
+          "shift": 0
+        }
+      ],
+      "data": {
+        "value": "0x208C0000",
+        "mask": "0xF0FF0000",
+        "width": 4,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x78F",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetProgrammerReadAddress0000",
+      "frametype": "programmer",
+      "phase": "service.programmer",
+      "quelle": "programmer",
+      "senke": "pm",
+      "summary": "R-Net Programmer: read address 0x00000000",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x830001FF00000000",
+        "mask": "0xFFFFFFFFFFFFFFFF",
+        "width": 8,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x78F",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetProgrammerReadAddress",
+      "frametype": "programmer",
+      "phase": "service.programmer",
+      "quelle": "programmer",
+      "senke": "pm",
+      "summary": "R-Net Programmer: set read address XXXX little-endian",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x830001FF00000000",
+        "mask": "0xFFFFFFFF0000FFFF",
+        "width": 8,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x78F",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetProgrammerStartReadOperation",
+      "frametype": "programmer",
+      "phase": "service.programmer",
+      "quelle": "programmer",
+      "senke": "pm",
+      "summary": "R-Net Programmer: start read operation",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x30001FF17000000",
+        "mask": "0xFFFFFFFFFFFFFFFF",
+        "width": 8,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x793",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetProgrammerReadResponse",
+      "frametype": "programmer",
+      "phase": "service.programmer",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "R-Net Programmer: read response, last byte status",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x4F0001FF000000C8",
+        "mask": "0xFFFFFFFFFFFFFFFF",
+        "width": 8,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x78F",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetProgrammerWriteCommand",
+      "frametype": "programmer",
+      "phase": "service.programmer",
+      "quelle": "programmer",
+      "senke": "pm",
+      "summary": "R-Net Programmer: write command",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x430001FF410000C8",
+        "mask": "0xFFFFFFFFFFFFFFFF",
+        "width": 8,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x793",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetProgrammerWriteResponse",
+      "frametype": "programmer",
+      "phase": "service.programmer",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "R-Net Programmer: write response",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0xF0001FF41000000",
+        "mask": "0xFFFFFFFFFFFFFFFF",
+        "width": 8,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x793",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetProgrammerOperationComplete",
+      "frametype": "programmer",
+      "phase": "service.programmer",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "R-Net Programmer: operation complete",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x8F0001FF00000000",
+        "mask": "0xFFFFFFFFFFFFFFFF",
+        "width": 8,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0x1E3F0002",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetConfigTransferAck",
+      "frametype": "config-transfer",
+      "phase": "startup.config_discovery",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "configuration transfer acknowledgment",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x50",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetProfileAttributeResponse",
+      "frametype": "profile",
+      "phase": "startup.profile_mode",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "profile attribute response, same format as 060",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "fields": [
+        {
+          "name": "attribute",
+          "byte": 0,
+          "width": 1
+        },
+        {
+          "name": "mode",
+          "byte": 1,
+          "width": 1
+        },
+        {
+          "name": "value",
+          "byte": 3,
+          "width": 1
+        }
+      ],
+      "data": {
+        "value": "0x0",
+        "mask": "0xF0FF00",
+        "width": 4,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x50",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetProfileInfoC0",
+      "frametype": "profile",
+      "phase": "startup.profile_mode",
+      "quelle": "unknown",
+      "senke": "unknown",
+      "summary": "profile info after init",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0xC000FF00",
+        "mask": "0xFFFFFFFF",
+        "width": 4,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x50",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetProfileInfoD0",
+      "frametype": "profile",
+      "phase": "startup.profile_mode",
+      "quelle": "unknown",
+      "senke": "unknown",
+      "summary": "profile info after init",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0xD000FF02",
+        "mask": "0xFFFFFFFF",
+        "width": 4,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x50",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetProfileInfoF0",
+      "frametype": "profile",
+      "phase": "startup.profile_mode",
+      "quelle": "unknown",
+      "senke": "unknown",
+      "summary": "profile info after init",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0xF000FF01",
+        "mask": "0xFFFFFFFF",
+        "width": 4,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x51",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetSelectProfile",
+      "frametype": "profile",
+      "phase": "startup.profile_mode",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "JSMtx select profile M",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "fields": [
+        {
+          "name": "profile",
+          "bit_mask": "0xF0000",
+          "shift": 16
+        }
+      ],
+      "data": {
+        "value": "0x400000",
+        "mask": "0xFFF0FFFF",
+        "width": 4,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x60",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetModeAttributeResponse",
+      "frametype": "mode",
+      "phase": "startup.profile_mode",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "return attribute Ss of mode M as data XX",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "fields": [
+        {
+          "name": "attribute",
+          "byte": 0,
+          "width": 1
+        },
+        {
+          "name": "mode",
+          "byte": 1,
+          "width": 1
+        },
+        {
+          "name": "value",
+          "byte": 3,
+          "width": 1
+        }
+      ],
+      "data": {
+        "value": "0x0",
+        "mask": "0xF0FF00",
+        "width": 4,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x60",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetModeAttribute11",
+      "frametype": "mode",
+      "phase": "startup.profile_mode",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "mode attribute",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x11000002",
+        "mask": "0xFFFFFFFF",
+        "width": 4,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x60",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetModeAttribute20",
+      "frametype": "mode",
+      "phase": "startup.profile_mode",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "mode attribute",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x20000000",
+        "mask": "0xFFFFFFFF",
+        "width": 4,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x60",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetModeAttribute30",
+      "frametype": "mode",
+      "phase": "startup.profile_mode",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "mode attribute",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x30000001",
+        "mask": "0xFFFFFFFF",
+        "width": 4,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x60",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetModeAttribute80",
+      "frametype": "mode",
+      "phase": "startup.profile_mode",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "mode attribute",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x80000080",
+        "mask": "0xFFFFFFFF",
+        "width": 4,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x60",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetDriveProfileJoystickStop",
+      "frametype": "mode",
+      "phase": "startup.profile_mode",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "DriveProfile joystick event stop",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x90000000",
+        "mask": "0xFFFFFFFF",
+        "width": 4,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x60",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetLiftProfileJoystickStart",
+      "frametype": "mode",
+      "phase": "startup.profile_mode",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "LiftProfile joystick event start",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x90010040",
+        "mask": "0xFFFFFFFF",
+        "width": 4,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x60",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetLiftProfileJoystickStop",
+      "frametype": "mode",
+      "phase": "startup.profile_mode",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "LiftProfile joystick event stop",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x90010000",
+        "mask": "0xFFFFFFFF",
+        "width": 4,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x61",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetSuspendMode",
+      "frametype": "mode",
+      "phase": "startup.profile_mode",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "JSMtx suspend mode M; 0x40=mode0, 0x48=mode8",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "fields": [
+        {
+          "name": "mode",
+          "bit_mask": "0xF0000",
+          "shift": 16
+        }
+      ],
+      "data": {
+        "value": "0x40400000",
+        "mask": "0xFFF0FFFF",
+        "width": 4,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x61",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetSelectMode",
+      "frametype": "mode",
+      "phase": "startup.profile_mode",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "JSMtx select mode M; last mode must be suspended first",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "fields": [
+        {
+          "name": "mode",
+          "bit_mask": "0xF0000",
+          "shift": 16
+        }
+      ],
+      "data": {
+        "value": "0x400000",
+        "mask": "0xFFF0FFFF",
+        "width": 4,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x61",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetSelectDriveMode0",
+      "frametype": "mode",
+      "phase": "startup.profile_mode",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "select mode 0 / drive",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x400000",
+        "mask": "0xFFFFFFFF",
+        "width": 4,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0x7FF",
+      "id-result": "0x61",
+      "key-mask": "0x7FF",
+      "rnet_name": "RNetSelectObpMode8",
+      "frametype": "mode",
+      "phase": "startup.profile_mode",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "select mode 8 / OBP On-Board Programming",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x480000",
+        "mask": "0xFFFFFFFF",
+        "width": 4,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFF0FF",
+      "id-result": "0x2000000",
+      "key-mask": "0xFFFFF0FF",
+      "rnet_name": "RNetJoystickPosition",
+      "frametype": "joystick",
+      "phase": "runtime.input",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "joystick position; X/Y signed int8 -100..+100",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "zyklus": "10ms",
+      "id_parts": [
+        {
+          "name": "device",
+          "bit_mask": "0xF00",
+          "endian": "l",
+          "shift": 8
+        }
+      ],
+      "fields": [
+        {
+          "name": "x_axis",
+          "byte": 0,
+          "width": 1,
+          "signed": true,
+          "description": "X-axis signed int8"
+        },
+        {
+          "name": "y_axis",
+          "byte": 1,
+          "width": 1,
+          "signed": true,
+          "description": "Y-axis signed int8"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFF0FF",
+      "id-result": "0xA040000",
+      "key-mask": "0xFFFFF0FF",
+      "rnet_name": "RNetMotorSpeedMaxSetting",
+      "frametype": "speed",
+      "phase": "runtime.status",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "motor speed maximum setting, 0x00-0x64 = 0-100%",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "id_parts": [
+        {
+          "name": "device",
+          "bit_mask": "0xF00",
+          "endian": "l",
+          "shift": 8
+        }
+      ],
+      "fields": [
+        {
+          "name": "speed_percent_raw",
+          "byte": 0,
+          "width": 1,
+          "einheit": "%",
+          "description": "raw percentage value 0x00-0x64"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFFFF0",
+      "id-result": "0xA400D00",
+      "key-mask": "0xFFFFFFF0",
+      "rnet_name": "RNetSpeedOrBtUnknown0A400D",
+      "frametype": "speed-unknown",
+      "phase": "runtime.status",
+      "quelle": "unknown",
+      "senke": "unknown",
+      "summary": "unknown speed/BTM-related frame; X={1,2,3,0xB}, Y={0,1,2,3}",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "id_parts": [
+        {
+          "name": "module",
+          "bit_mask": "0xF",
+          "endian": "l",
+          "shift": 0
+        }
+      ],
+      "fields": [
+        {
+          "name": "x",
+          "byte": 0,
+          "width": 1
+        },
+        {
+          "name": "y",
+          "byte": 1,
+          "width": 1
+        }
+      ]
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0xFF0",
+      "id-result": "0x60",
+      "key-mask": "0xFF0",
+      "rnet_name": "RNetChairAngleMotorStopped",
+      "frametype": "motor",
+      "phase": "runtime.status",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "PMtx chair angle motor has stopped",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "id_parts": [
+        {
+          "name": "module",
+          "bit_mask": "0xF",
+          "endian": "l",
+          "shift": 0
+        }
+      ],
+      "data": {
+        "value": "0x90010000",
+        "mask": "0xFFFFFFFF",
+        "width": 4,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": false,
+      "remote": "data",
+      "Id-and-mask": "0xFF0",
+      "id-result": "0x60",
+      "key-mask": "0xFF0",
+      "rnet_name": "RNetChairAngleMotorRunning",
+      "frametype": "motor",
+      "phase": "runtime.status",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "PMtx chair angle motor is running",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "id_parts": [
+        {
+          "name": "module",
+          "bit_mask": "0xF",
+          "endian": "l",
+          "shift": 0
+        }
+      ],
+      "data": {
+        "value": "0x90010040",
+        "mask": "0xFFFFFFFF",
+        "width": 4,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0xC000005",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetGlobalMotorStopped",
+      "frametype": "motor",
+      "phase": "runtime.status",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "PMtx global motor has stopped, 0 MPH",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0xC000006",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetGlobalMotorDecelerating",
+      "frametype": "motor",
+      "phase": "runtime.status",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "PMtx global motor is decelerating",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFF0FF",
+      "id-result": "0x14300000",
+      "key-mask": "0xFFFFF0FF",
+      "rnet_name": "RNetDriveMotorCurrent",
+      "frametype": "motor",
+      "phase": "runtime.status",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "PMtx drive motor current; little-endian 16-bit; 0x02e8 is about 6A",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "zyklus": "200ms",
+      "id_parts": [
+        {
+          "name": "device",
+          "bit_mask": "0xF00",
+          "endian": "l",
+          "shift": 8
+        }
+      ],
+      "fields": [
+        {
+          "name": "current_raw",
+          "byte": 0,
+          "width": 2,
+          "description": "little-endian raw current"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFF0FF",
+      "id-result": "0xC040000",
+      "key-mask": "0xFFFFF0FF",
+      "rnet_name": "RNetHornStart",
+      "frametype": "horn",
+      "phase": "runtime.control",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "horn start; X=origin device",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "id_parts": [
+        {
+          "name": "origin_device",
+          "bit_mask": "0xF00",
+          "endian": "l",
+          "shift": 8
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFF0FF",
+      "id-result": "0xC040001",
+      "key-mask": "0xFFFFF0FF",
+      "rnet_name": "RNetHornStop",
+      "frametype": "horn",
+      "phase": "runtime.control",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "horn stop",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "id_parts": [
+        {
+          "name": "origin_device",
+          "bit_mask": "0xF00",
+          "endian": "l",
+          "shift": 8
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0xC000401",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetLampStartLeftIndicator",
+      "frametype": "lighting",
+      "phase": "runtime.control",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "start left turn signal lamp",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0xC000402",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetLampStartRightIndicator",
+      "frametype": "lighting",
+      "phase": "runtime.control",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "start right turn signal lamp",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0xC000403",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetLampStartHazard",
+      "frametype": "lighting",
+      "phase": "runtime.control",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "start hazard lamps",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0xC000404",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetLampStartFlood",
+      "frametype": "lighting",
+      "phase": "runtime.control",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "start flood lamps",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "zyklus": "~1000ms"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0xC000E00",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetLampIndicatorBitmap",
+      "frametype": "lighting",
+      "phase": "runtime.control",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "lamp indicator bitmap; 01=left, 04=right, 10=hazard, 80=flood",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "fields": [
+        {
+          "name": "mask",
+          "bit_mask": "0xFF00",
+          "shift": 8
+        },
+        {
+          "name": "bitmap",
+          "bit_mask": "0xFF",
+          "shift": 0
+        },
+        {
+          "name": "left_indicator",
+          "bit_mask": "0x1",
+          "shift": 0
+        },
+        {
+          "name": "right_indicator",
+          "bit_mask": "0x4",
+          "shift": 2
+        },
+        {
+          "name": "hazard",
+          "bit_mask": "0x10",
+          "shift": 4
+        },
+        {
+          "name": "flood",
+          "bit_mask": "0x80",
+          "shift": 7
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0x181C0D00",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetPlayFourMusicalTones",
+      "frametype": "tones",
+      "phase": "runtime.control",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "play four musical tones; length 00-7F, note 00-9C",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "fields": [
+        {
+          "name": "tone1_len",
+          "byte": 0,
+          "width": 1
+        },
+        {
+          "name": "tone1_note",
+          "byte": 1,
+          "width": 1
+        },
+        {
+          "name": "tone2_len",
+          "byte": 2,
+          "width": 1
+        },
+        {
+          "name": "tone2_note",
+          "byte": 3,
+          "width": 1
+        },
+        {
+          "name": "tone3_len",
+          "byte": 4,
+          "width": 1
+        },
+        {
+          "name": "tone3_note",
+          "byte": 5,
+          "width": 1
+        },
+        {
+          "name": "tone4_len",
+          "byte": 6,
+          "width": 1
+        },
+        {
+          "name": "tone4_note",
+          "byte": 7,
+          "width": 1
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFF0FF",
+      "id-result": "0x1C0C0000",
+      "key-mask": "0xFFFFF0FF",
+      "rnet_name": "RNetBatteryLevel",
+      "frametype": "battery",
+      "phase": "runtime.status",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "battery level percentage; 0x00-0x64 = 0-100%",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "zyklus": "1000ms",
+      "id_parts": [
+        {
+          "name": "device",
+          "bit_mask": "0xF00",
+          "endian": "l",
+          "shift": 8
+        }
+      ],
+      "fields": [
+        {
+          "name": "battery_percent_raw",
+          "byte": 0,
+          "width": 1,
+          "einheit": "%",
+          "description": "raw percentage value 0x00-0x64"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFF0FF",
+      "id-result": "0x1C300004",
+      "key-mask": "0xFFFFF0FF",
+      "rnet_name": "RNetDistanceCounter",
+      "frametype": "odometer",
+      "phase": "runtime.status",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "distance counter; two 32-bit little-endian fields",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "zyklus": "1000ms",
+      "id_parts": [
+        {
+          "name": "device",
+          "bit_mask": "0xF00",
+          "endian": "l",
+          "shift": 8
+        }
+      ],
+      "fields": [
+        {
+          "name": "left_counter",
+          "byte": 0,
+          "width": 4
+        },
+        {
+          "name": "right_counter",
+          "byte": 4,
+          "width": 4
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFF0FF",
+      "id-result": "0x1C2C0000",
+      "key-mask": "0xFFFFF0FF",
+      "rnet_name": "RNetTimeOfDay",
+      "frametype": "time",
+      "phase": "runtime.status",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "time of day, little-endian format",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "id_parts": [
+        {
+          "name": "device",
+          "bit_mask": "0xF00",
+          "endian": "l",
+          "shift": 8
+        }
+      ],
+      "fields": [
+        {
+          "name": "time_raw",
+          "byte": 0,
+          "width": 6
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0x3C30F0F",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetJsmDeviceHeartbeat",
+      "frametype": "heartbeat",
+      "phase": "runtime.heartbeat",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "JSM device heartbeat",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "zyklus": "100ms",
+      "data": {
+        "value": "0x8787878787878787",
+        "mask": "0xFFFFFFFFFFFFFFFF",
+        "width": 8,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFF0FF",
+      "id-result": "0xC140000",
+      "key-mask": "0xFFFFF0FF",
+      "rnet_name": "RNetPmHeartbeat",
+      "frametype": "heartbeat",
+      "phase": "runtime.heartbeat",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "PM heartbeat; alternates between values 0xC0 and 0x01",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "zyklus": "1000ms",
+      "id_parts": [
+        {
+          "name": "device",
+          "bit_mask": "0xF00",
+          "endian": "l",
+          "shift": 8
+        }
+      ],
+      "fields": [
+        {
+          "name": "heartbeat_value",
+          "byte": 0,
+          "width": 1
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0xC140400",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetLampControllerHeartbeat",
+      "frametype": "heartbeat",
+      "phase": "runtime.heartbeat",
+      "quelle": "lamp_controller",
+      "senke": "jsm",
+      "summary": "lamp controller heartbeat",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "zyklus": "1000ms",
+      "data": {
+        "value": "0x82",
+        "mask": "0xFF",
+        "width": 1,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0xC180000",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetEnableMotorOutputDriveMode",
+      "frametype": "module-status",
+      "phase": "runtime.status",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "PMtx enable motor output after change to drive mode",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x101",
+        "mask": "0xFFFF",
+        "width": 2,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0xC180000",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetEnableMotorOutputChairAngle",
+      "frametype": "module-status",
+      "phase": "runtime.status",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "PMtx enable motor output after change to chair angle mode",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x200",
+        "mask": "0xFFF0",
+        "width": 2,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0xC180001",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetTiltProfileChangeStep1",
+      "frametype": "module-status",
+      "phase": "runtime.status",
+      "quelle": "unknown",
+      "senke": "unknown",
+      "summary": "after profile change to tilt, step 1 of 3",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x200101",
+        "mask": "0xFFFFFF",
+        "width": 3,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0xC180001",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetTiltProfileChangeStep2",
+      "frametype": "module-status",
+      "phase": "runtime.status",
+      "quelle": "unknown",
+      "senke": "unknown",
+      "summary": "after profile change to tilt, step 2 of 3",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x101",
+        "mask": "0xFFFFFF",
+        "width": 3,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0xC180001",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetTiltProfileChangeStep3",
+      "frametype": "module-status",
+      "phase": "runtime.status",
+      "quelle": "unknown",
+      "senke": "unknown",
+      "summary": "after profile change to tilt, step 3 of 3",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x10101",
+        "mask": "0xFFFFFF",
+        "width": 3,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0xC180102",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetStartup0C180102",
+      "frametype": "module-status",
+      "phase": "startup.status",
+      "quelle": "unknown",
+      "senke": "unknown",
+      "summary": "seen during startup",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x3",
+        "mask": "0xFFFF",
+        "width": 2,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0xC180200",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetModuleStatus0C180200",
+      "frametype": "module-status",
+      "phase": "runtime.status",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "unknown periodic module status x,y={0,1}",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x0",
+        "mask": "0xF0",
+        "width": 1,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0xC180400",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetModuleStatus0C180400",
+      "frametype": "module-status",
+      "phase": "runtime.status",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "unknown alternating module status X={2}, Y={1,2}",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "zyklus": "~125ms",
+      "data": {
+        "value": "0x0",
+        "mask": "0xF0",
+        "width": 1,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0xC280000",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetPmConnected",
+      "frametype": "module-status",
+      "phase": "runtime.status",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "PM connected; sent once after serial number exchange",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "fields": [
+        {
+          "name": "value",
+          "byte": 0,
+          "width": 1
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0xC000205",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetModule2UiInteraction",
+      "frametype": "ui",
+      "phase": "startup.ui_activation",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "JSMtx UI interaction for module 2",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0xC000301",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetModule3Interaction301",
+      "frametype": "ui",
+      "phase": "startup.ui_activation",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "JSMtx UI interaction for module 3",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0xC000303",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetModule3Interaction303",
+      "frametype": "ui",
+      "phase": "startup.ui_activation",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "JSMtx UI interaction for module 3",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFF0FF",
+      "id-result": "0x1C240001",
+      "key-mask": "0xFFFFF0FF",
+      "rnet_name": "RNetJsmUiActiveReady",
+      "frametype": "ui",
+      "phase": "startup.ui_activation",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "JSMtx device is ready, UI is active",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "id_parts": [
+        {
+          "name": "device",
+          "bit_mask": "0xF00",
+          "endian": "l",
+          "shift": 8
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0xC140000",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetDisconnectedEcuErrorState",
+      "frametype": "error-trigger",
+      "phase": "runtime.error",
+      "quelle": "unknown",
+      "senke": "unknown",
+      "summary": "induces error state: speed limited and power level change has no effect",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x1",
+        "mask": "0xFF",
+        "width": 1,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0x1C0C0000",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetStartupBatteryLevelPm",
+      "frametype": "startup",
+      "phase": "startup.status",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "startup sequence: PM battery level",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "fields": [
+        {
+          "name": "battery_percent_raw",
+          "byte": 0,
+          "width": 1,
+          "einheit": "%"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0xC280000",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetStartupPmConnectedZero",
+      "frametype": "startup",
+      "phase": "startup.status",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "startup sequence: PM connected value 00",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x0",
+        "mask": "0xFF",
+        "width": 1,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0xA040100",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetStartupSpeedSettingZero",
+      "frametype": "startup",
+      "phase": "startup.status",
+      "quelle": "unknown",
+      "senke": "unknown",
+      "summary": "startup sequence: speed setting 0",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x0",
+        "mask": "0xFF",
+        "width": 1,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0x14300000",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetStartupMotorCurrentZero",
+      "frametype": "startup",
+      "phase": "startup.status",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "startup sequence: motor current zero",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x0",
+        "mask": "0xFFFF",
+        "width": 2,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0x2000100",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetStartupJoystickCentered",
+      "frametype": "startup",
+      "phase": "startup.status",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "startup sequence: joystick centered",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "zyklus": "10ms",
+      "data": {
+        "value": "0x0",
+        "mask": "0xFFFF",
+        "width": 2,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0x1F00472F",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetBtmSerialExchangeSeq0",
+      "frametype": "btm-serial",
+      "phase": "startup.serial_auth",
+      "quelle": "btm",
+      "senke": "pm",
+      "summary": "BTM serial exchange observed: seq 0, key 0x47",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "id_parts": [
+        {
+          "name": "seq",
+          "bit_mask": "0xF00000",
+          "endian": "l",
+          "shift": 20
+        },
+        {
+          "name": "key",
+          "bit_mask": "0xFF00",
+          "endian": "l",
+          "shift": 8
+        },
+        {
+          "name": "value",
+          "bit_mask": "0xFF",
+          "endian": "l",
+          "shift": 0
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0x1F10A100",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetBtmSerialExchangeSeq1",
+      "frametype": "btm-serial",
+      "phase": "startup.serial_auth",
+      "quelle": "btm",
+      "senke": "pm",
+      "summary": "BTM serial exchange observed: seq 1, key 0xA1",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "id_parts": [
+        {
+          "name": "seq",
+          "bit_mask": "0xF00000",
+          "endian": "l",
+          "shift": 20
+        },
+        {
+          "name": "key",
+          "bit_mask": "0xFF00",
+          "endian": "l",
+          "shift": 8
+        },
+        {
+          "name": "value",
+          "bit_mask": "0xFF",
+          "endian": "l",
+          "shift": 0
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0x1F20620E",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetBtmSerialExchangeSeq2",
+      "frametype": "btm-serial",
+      "phase": "startup.serial_auth",
+      "quelle": "btm",
+      "senke": "pm",
+      "summary": "BTM serial exchange observed: seq 2, key 0x62",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "id_parts": [
+        {
+          "name": "seq",
+          "bit_mask": "0xF00000",
+          "endian": "l",
+          "shift": 20
+        },
+        {
+          "name": "key",
+          "bit_mask": "0xFF00",
+          "endian": "l",
+          "shift": 8
+        },
+        {
+          "name": "value",
+          "bit_mask": "0xFF",
+          "endian": "l",
+          "shift": 0
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0x1F30AD48",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetBtmSerialExchangeSeq3",
+      "frametype": "btm-serial",
+      "phase": "startup.serial_auth",
+      "quelle": "btm",
+      "senke": "pm",
+      "summary": "BTM serial exchange observed: seq 3, key 0xAD",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "id_parts": [
+        {
+          "name": "seq",
+          "bit_mask": "0xF00000",
+          "endian": "l",
+          "shift": 20
+        },
+        {
+          "name": "key",
+          "bit_mask": "0xFF00",
+          "endian": "l",
+          "shift": 8
+        },
+        {
+          "name": "value",
+          "bit_mask": "0xFF",
+          "endian": "l",
+          "shift": 0
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0x1F402E00",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetBtmSerialExchangeSeq4",
+      "frametype": "btm-serial",
+      "phase": "startup.serial_auth",
+      "quelle": "btm",
+      "senke": "pm",
+      "summary": "BTM serial exchange observed: seq 4, key 0x2E",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "id_parts": [
+        {
+          "name": "seq",
+          "bit_mask": "0xF00000",
+          "endian": "l",
+          "shift": 20
+        },
+        {
+          "name": "key",
+          "bit_mask": "0xFF00",
+          "endian": "l",
+          "shift": 8
+        },
+        {
+          "name": "value",
+          "bit_mask": "0xFF",
+          "endian": "l",
+          "shift": 0
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0x1F500500",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetBtmSerialExchangeSeq5",
+      "frametype": "btm-serial",
+      "phase": "startup.serial_auth",
+      "quelle": "btm",
+      "senke": "pm",
+      "summary": "BTM serial exchange observed: seq 5, key 0x05",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "id_parts": [
+        {
+          "name": "seq",
+          "bit_mask": "0xF00000",
+          "endian": "l",
+          "shift": 20
+        },
+        {
+          "name": "key",
+          "bit_mask": "0xFF00",
+          "endian": "l",
+          "shift": 8
+        },
+        {
+          "name": "value",
+          "bit_mask": "0xFF",
+          "endian": "l",
+          "shift": 0
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0x1F60B300",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetBtmSerialExchangeSeq6",
+      "frametype": "btm-serial",
+      "phase": "startup.serial_auth",
+      "quelle": "btm",
+      "senke": "pm",
+      "summary": "BTM serial exchange observed: seq 6, key 0xB3",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "id_parts": [
+        {
+          "name": "seq",
+          "bit_mask": "0xF00000",
+          "endian": "l",
+          "shift": 20
+        },
+        {
+          "name": "key",
+          "bit_mask": "0xFF00",
+          "endian": "l",
+          "shift": 8
+        },
+        {
+          "name": "value",
+          "bit_mask": "0xFF",
+          "endian": "l",
+          "shift": 0
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0x1F70EC00",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetBtmSerialExchangeSeq7",
+      "frametype": "btm-serial",
+      "phase": "startup.serial_auth",
+      "quelle": "btm",
+      "senke": "pm",
+      "summary": "BTM serial exchange observed: seq 7, key 0xEC",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "id_parts": [
+        {
+          "name": "seq",
+          "bit_mask": "0xF00000",
+          "endian": "l",
+          "shift": 20
+        },
+        {
+          "name": "key",
+          "bit_mask": "0xFF00",
+          "endian": "l",
+          "shift": 8
+        },
+        {
+          "name": "value",
+          "bit_mask": "0xFF",
+          "endian": "l",
+          "shift": 0
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0x1F800010",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetCJsmAuth1F800010",
+      "frametype": "cjsm-auth",
+      "phase": "startup.serial_auth",
+      "quelle": "cjsm",
+      "senke": "pm",
+      "summary": "cJSM cry for help: attempting slot 8 seq 0",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0x1F800011",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetCJsmAuth1F800011",
+      "frametype": "cjsm-auth",
+      "phase": "startup.serial_auth",
+      "quelle": "cjsm",
+      "senke": "pm",
+      "summary": "cJSM cry for help: attempting slot 8 seq 1",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0x1F800012",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetCJsmAuth1F800012",
+      "frametype": "cjsm-auth",
+      "phase": "startup.serial_auth",
+      "quelle": "cjsm",
+      "senke": "pm",
+      "summary": "cJSM cry for help: attempting slot 8 seq 2",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0x1F800013",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetCJsmAuth1F800013",
+      "frametype": "cjsm-auth",
+      "phase": "startup.serial_auth",
+      "quelle": "cjsm",
+      "senke": "pm",
+      "summary": "cJSM cry for help: attempting slot 8 seq 3",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0x1F800020",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetCJsmAuth1F800020",
+      "frametype": "cjsm-auth",
+      "phase": "startup.serial_auth",
+      "quelle": "cjsm",
+      "senke": "pm",
+      "summary": "cJSM cry for help: retrying with different parameters",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0x1F810000",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetCJsmAuth1F810000",
+      "frametype": "cjsm-auth",
+      "phase": "startup.serial_auth",
+      "quelle": "cjsm",
+      "senke": "pm",
+      "summary": "cJSM cry for help: slot 8+1 attempt",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0x1FA00000",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetCJsmAuth1FA00000",
+      "frametype": "cjsm-auth",
+      "phase": "startup.serial_auth",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "cJSM possible error state",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0x1F900000",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetCJsmAuth1F900000",
+      "frametype": "cjsm-auth",
+      "phase": "startup.serial_auth",
+      "quelle": "pm",
+      "senke": "cjsm",
+      "summary": "PM response: key mismatch",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0x1F910000",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetCJsmAuth1F910000",
+      "frametype": "cjsm-auth",
+      "phase": "startup.serial_auth",
+      "quelle": "pm",
+      "senke": "cjsm",
+      "summary": "PM response: key mismatch/unknown",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0x1F928F1C",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetCJsmAuth1F928F1C",
+      "frametype": "cjsm-auth",
+      "phase": "startup.serial_auth",
+      "quelle": "pm",
+      "senke": "cjsm",
+      "summary": "PM response with computed key 8F value 1C",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0x1F93C050",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetCJsmAuth1F93C050",
+      "frametype": "cjsm-auth",
+      "phase": "startup.serial_auth",
+      "quelle": "pm",
+      "senke": "cjsm",
+      "summary": "PM response with computed key C0 value 50",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0xC180001",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetChairAdjustModePartial0C180001",
+      "frametype": "unknown",
+      "phase": "unknown.observed",
+      "quelle": "unknown",
+      "senke": "unknown",
+      "summary": "partial decode: x={2,0}, y=1, z=1, possibly chair adjust mode",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x0",
+        "mask": "0xFF0F0",
+        "width": 3,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0xC180100",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetModuleStatus0C180100",
+      "frametype": "unknown",
+      "phase": "unknown.observed",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "partial decode: Xx=04, Yy={2,1} in clusters",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x0",
+        "mask": "0x0",
+        "width": 2,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0xC180101",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetUnknown0C180101020201",
+      "frametype": "unknown",
+      "phase": "unknown.observed",
+      "quelle": "unknown",
+      "senke": "unknown",
+      "summary": "unknown frame",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x20201",
+        "mask": "0xFFFFFF",
+        "width": 3,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0xC180101",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetUnknown0C180101030201",
+      "frametype": "unknown",
+      "phase": "unknown.observed",
+      "quelle": "unknown",
+      "senke": "unknown",
+      "summary": "unknown frame",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x30201",
+        "mask": "0xFFFFFF",
+        "width": 3,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0xC180201",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetUnknown0C180201210001",
+      "frametype": "unknown",
+      "phase": "unknown.observed",
+      "quelle": "unknown",
+      "senke": "unknown",
+      "summary": "unknown frame",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "data": {
+        "value": "0x210001",
+        "mask": "0xFFFFFF",
+        "width": 3,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0xC180401",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetUnknown0C180401",
+      "frametype": "unknown",
+      "phase": "unknown.observed",
+      "quelle": "unknown",
+      "senke": "unknown",
+      "summary": "unknown frame",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md"
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFF0FF",
+      "id-result": "0x140C0001",
+      "key-mask": "0xFFFFF0FF",
+      "rnet_name": "RNetUnknownMotorRelated140C0X01",
+      "frametype": "unknown",
+      "phase": "unknown.observed",
+      "quelle": "unknown",
+      "senke": "unknown",
+      "summary": "unknown, possibly motor related",
+      "source": "redragonx/open-rnet reference/RNET_FRAME_DICTIONARY.md",
+      "id_parts": [
+        {
+          "name": "device",
+          "bit_mask": "0xF00",
+          "endian": "l",
+          "shift": 8
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0x03C30F0F",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetJsmDeviceHeartbeat",
+      "frametype": "heartbeat",
+      "phase": "runtime.heartbeat",
+      "quelle": "jsm",
+      "senke": "pm",
+      "summary": "JSM device heartbeat; 7-byte variant observed in candump/can2RNET traces",
+      "source": "candump.txt plus can2RNET/open-rnet references",
+      "zyklus": "100ms",
+      "data": {
+        "value": "0x87878787878787",
+        "mask": "0xFFFFFFFFFFFFFF",
+        "width": 7,
+        "big_endian": true
+      }
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0xFFFFFF00",
+      "id-result": "0x0C180300",
+      "key-mask": "0xFFFFFF00",
+      "rnet_name": "RNetModuleStatus0C1803",
+      "frametype": "module",
+      "phase": "runtime.status",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "observed module status/control family 0C1803xx",
+      "source": "candump.txt",
+      "id_parts": [
+        {
+          "name": "sub_id",
+          "bit_mask": "0xFF",
+          "shift": 0,
+          "big_endian": false
+        }
+      ],
+      "fields": [
+        {
+          "name": "payload_raw",
+          "byte": 0,
+          "width": 8,
+          "big_endian": true,
+          "description": "raw payload"
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "data",
+      "Id-and-mask": "0x1FFFFFFF",
+      "id-result": "0x14300001",
+      "key-mask": "0x1FFFFFFF",
+      "rnet_name": "RNetDriveMotorOrStartupStatus14300001",
+      "frametype": "motor",
+      "phase": "runtime.status",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "observed 14300001 startup/motor related status frame",
+      "source": "candump.txt",
+      "fields": [
+        {
+          "name": "status_raw",
+          "byte": 0,
+          "width": 1,
+          "big_endian": true
+        }
+      ]
+    },
+    {
+      "extended": true,
+      "remote": "rtr",
+      "Id-and-mask": "0x1FF00000",
+      "id-result": "0x1E800000",
+      "key-mask": "0x1FF00000",
+      "rnet_name": "RNetConfigMemoryRequestRtr",
+      "frametype": "config",
+      "phase": "startup.config_discovery",
+      "quelle": "pm",
+      "senke": "jsm",
+      "summary": "observed configuration/memory RTR request family 1E8x....",
+      "source": "candump.txt",
+      "id_parts": [
+        {
+          "name": "request_group",
+          "bit_mask": "0x000F0000",
+          "shift": 16,
+          "big_endian": false
+        },
+        {
+          "name": "request_value",
+          "bit_mask": "0x0000FFFF",
+          "shift": 0,
+          "big_endian": false
+        }
+      ]
+    }
+  ]
+}

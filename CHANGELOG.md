@@ -137,3 +137,67 @@ All notable project changes are documented here.
 - `load_stored_blocks()` als absichtlich unreferenzierten Legacy-Helper dokumentiert.
 - Keine globale Warnungsabschaltung; `-Werror` bleibt aktiv.
 - Vollständiger Clean-Build von DLL, `rnet-can-proxy` und `rollstuhl.emu`.
+
+## 2026-10-10 — R-Net Log Decode V33
+
+- `RNET-LOG-DECODE-V33`.
+- CAN-/R-Net-Frames in Laufzeitlogs erhalten `; <RNetMsgBroker-Kurzdecode>`.
+- Decoder verwendet die `R-Net.json` des R-Net Analyzers/RNetMsgBroker; keine parallele Matcher-Tabelle.
+- FTD2XX-Rohlog bleibt unverändert; kommentierte Begleitdatei unter `run/ftd2xx-emu.decoded.log`.
+- `rnet-log-comment` ist rein textverarbeitend und sendet keine CAN-Frames.
+- Patch-/Apply-Backups liegen nur noch unter `/tmp`, nicht im Repository.
+- `README.md`, `docs/LOGGING.md` und `docs/BUILD.md` aktualisiert.
+
+## 2026-10-10 — RNetMsgBroker Subproject V35
+
+- `RNET-BROKER-SUBPROJECT-V35`.
+- `external/RNetMsgBroker` als CMake-Subprojekt integriert; fehlende Quelle wird reproduzierbar als `v1.0.0` nur unter `/tmp` geholt.
+- `rnet-can-proxy` linkt `RNetMsgBroker` direkt.
+- CAN-RX/CAN-TX-Kommentare entstehen im Proxy-Prozess; kein `rnet-log-comment`-Prozess mehr.
+- `R-Net.json` wird beim Proxy-Build neben das Binary kopiert.
+- Decoder-Selbsttest prüft `RNetLampControlStatus`.
+- Backups ausschließlich unter `/tmp`.
+- README und Doku aktualisiert.
+
+## V37
+- Power-Off-Screen: vorhandenes `free-r-net-logo-1254.png` statt Textlogo.
+- Logo groß, zentriert und seitenverhältnisgetreu skaliert.
+- Runtime-Marker `RNET-FRENET-POWEROFF-V37` für korrekte Binary-Prüfung.
+
+## 2026-10-10 — v2.00 RC V38 (RNET-V2-RC-V38)
+- stale Proxy/UDP-39000 Startfehler behoben; falscher Proxy kann nicht mehr unbemerkt weiterlaufen.
+- passives CAN-BUS Logging direkt im Broker-Prozess mit `; <RNetMsgBroker Decode>`.
+- automatischer v2.00 Release-Check und guarded Commit/Tag/Push.
+- FRENET Power-Off-Logo V37 als Release-Voraussetzung integriert.
+
+
+## 2026-10-10 — v2.00 RC V39 (RNET-V2-RC-V39)
+- Fix: UDP-Portprüfung verwendet die lokale `ss`-Spalte 4 statt Peer-Spalte 5.
+- Ungetrackte alte Projekt-Proxies werden anhand `/proc/<pid>/exe` beendet.
+- Neuer Proxy muss nach Start leben und UDP 39000 besitzen bzw. eindeutig als alleiniger neuer Owner starten.
+- Broker-CAN-Monitor ohne stdout/stderr-Redirect; kein Shutdown-Race beim frühen Bind-Fehler.
+- Release-Check auf V39 aktualisiert.
+
+
+## 2026-10-10 — v2.00 RC V40 (RNET-V2-RC-V40)
+- Fix: alter eigener Proxy wird nicht mehr fälschlich als fremder UDP-39000-Besitzer eingestuft.
+- Prozessidentität: `/proc/<pid>/exe`, mit exaktem kanonischen `argv[0]` als Fallback.
+- Fremde Executables auf UDP 39000 werden weiterhin nicht beendet.
+- Backups ausschließlich unter `/tmp`.
+
+
+## 2026-10-11 — v2.00 RC V41 (RNET-V2-RC-V41)
+- `start.sh emu|dev`: vor jedem Start alle Laufzeitlogs löschen.
+- `build/` und `bin/` vor jedem Start vollständig löschen.
+- anschließend frischer Build; EMU baut DLL+Proxy+GUI, DEV baut GUI.
+- `stop`/`status` löschen nichts.
+- Backups ausschließlich unter `/tmp`.
+
+
+## 2026-10-11 — V42 (RNET-PROXY-DECODE-V42)
+- `rnet-can-proxy.log`: feste `TX`/`RX`-Spalte ergänzt.
+- `TX`: lokal erzeugtes SocketCAN-Loopback (`MSG_DONTROUTE`).
+- `RX`: tatsächlich vom CAN-Bus empfangener Frame.
+- RNetMsgBroker-Kommentar bleibt hinter dem CAN-Frame erhalten.
+- Release-Check verlangt nun mindestens ein `TX` und ein `RX`.
+- Backups ausschließlich unter `/tmp`.
