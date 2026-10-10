@@ -1,0 +1,3 @@
+/home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/CMakeFiles/rnet_rollstuhl_emu.dir
+/home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/CMakeFiles/edit_cache.dir
+/home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/CMakeFiles/rebuild_cache.dir

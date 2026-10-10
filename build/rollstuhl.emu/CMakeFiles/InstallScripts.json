@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/juergen/Projects/RNet-Dongle-Emu/build/rollstuhl.emu/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

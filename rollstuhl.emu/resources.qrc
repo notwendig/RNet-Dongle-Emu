@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="/branding">
+    <file alias="free-r-net-logo-1254.png">../assets/branding/free-r-net-logo-1254.png</file>
+    <file alias="free-r-net-icon-256.png">../assets/branding/free-r-net-icon-256.png</file>
+    <file alias="free-r-net-icon-64.png">../assets/branding/free-r-net-icon-64.png</file>
+    <file alias="free-r-net-icon-32.png">../assets/branding/free-r-net-icon-32.png</file>
+  </qresource>
+</RCC>

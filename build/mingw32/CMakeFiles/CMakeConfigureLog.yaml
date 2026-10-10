@@ -1,0 +1,1174 @@
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineSystem.cmake:12 (find_program)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_UNAME"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "uname"
+    candidate_directories:
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
+      - "/home/juergen/.local/bin/"
+      - "/home/juergen/bin/"
+      - "/usr/lib64/ccache/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/usr/libexec/sdcc/"
+      - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
+      - "/bin/"
+    searched_directories:
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/uname"
+      - "/home/juergen/.local/bin/uname"
+      - "/home/juergen/bin/uname"
+      - "/usr/lib64/ccache/uname"
+      - "/usr/local/bin/uname"
+    found: "/usr/bin/uname"
+    search_context:
+      ENV{PATH}:
+        - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.local/bin"
+        - "/home/juergen/bin"
+        - "/usr/lib64/ccache"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/libexec/sdcc"
+        - "/usr/libexec/sdcc"
+        - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
+        - "/usr/libexec/sdcc"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineSystem.cmake:207 (message)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      The target system is: Windows -  - x86
+      The host system is: Linux - 7.2.9-200.fc44.x86_64 - x86_64
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeNinjaFindMake.cmake:5 (find_program)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_MAKE_PROGRAM"
+    description: "Program used to build from build.ninja files."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ninja-build"
+      - "ninja"
+      - "samu"
+    candidate_directories:
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
+      - "/home/juergen/.local/bin/"
+      - "/home/juergen/bin/"
+      - "/usr/lib64/ccache/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/usr/libexec/sdcc/"
+      - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
+    searched_directories:
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/ninja-build"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/ninja"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/samu"
+      - "/home/juergen/.local/bin/ninja-build"
+      - "/home/juergen/.local/bin/ninja"
+      - "/home/juergen/.local/bin/samu"
+      - "/home/juergen/bin/ninja-build"
+      - "/home/juergen/bin/ninja"
+      - "/home/juergen/bin/samu"
+      - "/usr/lib64/ccache/ninja-build"
+      - "/usr/lib64/ccache/ninja"
+      - "/usr/lib64/ccache/samu"
+      - "/usr/local/bin/ninja-build"
+      - "/usr/local/bin/ninja"
+      - "/usr/local/bin/samu"
+    found: "/usr/bin/ninja-build"
+    search_context:
+      ENV{PATH}:
+        - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.local/bin"
+        - "/home/juergen/bin"
+        - "/usr/lib64/ccache"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/libexec/sdcc"
+        - "/usr/libexec/sdcc"
+        - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
+        - "/usr/libexec/sdcc"
+      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompiler.cmake:115 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:71 (_cmake_find_compiler_path)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_CXX_COMPILER_WITH_PATH"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "i686-w64-mingw32-g++"
+    candidate_directories:
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
+      - "/home/juergen/.local/bin/"
+      - "/home/juergen/bin/"
+      - "/usr/lib64/ccache/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/usr/libexec/sdcc/"
+      - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
+    searched_directories:
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-g++"
+      - "/home/juergen/.local/bin/i686-w64-mingw32-g++"
+      - "/home/juergen/bin/i686-w64-mingw32-g++"
+    found: "/usr/lib64/ccache/i686-w64-mingw32-g++"
+    search_context:
+      ENV{PATH}:
+        - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.local/bin"
+        - "/home/juergen/bin"
+        - "/usr/lib64/ccache"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/libexec/sdcc"
+        - "/usr/libexec/sdcc"
+        - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
+        - "/usr/libexec/sdcc"
+      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:468 (find_file)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:506 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "file"
+    variable: "src_in"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "CMakeCXXCompilerId.cpp.in"
+    candidate_directories:
+      - "/usr/share/cmake/Modules/"
+    found: "/usr/share/cmake/Modules/CMakeCXXCompilerId.cpp.in"
+    search_context:
+      ENV{PATH}:
+        - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.local/bin"
+        - "/home/juergen/bin"
+        - "/usr/lib64/ccache"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/libexec/sdcc"
+        - "/usr/libexec/sdcc"
+        - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
+        - "/usr/libexec/sdcc"
+      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: /usr/lib64/ccache/i686-w64-mingw32-g++ 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.exe"
+      
+      The CXX compiler identification is GNU, found in:
+        /home/juergen/Projects/RNet-Dongle-Emu/build/mingw32/CMakeFiles/4.3.0/CompilerIdCXX/a.exe
+      
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_AR"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "i686-w64-mingw32-ar"
+      - "ar"
+    candidate_directories:
+      - "/usr/lib64/ccache/"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
+      - "/home/juergen/.local/bin/"
+      - "/home/juergen/bin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/usr/libexec/sdcc/"
+      - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
+    searched_directories:
+      - "/usr/lib64/ccache/i686-w64-mingw32-ar"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-ar"
+      - "/home/juergen/.local/bin/i686-w64-mingw32-ar"
+      - "/home/juergen/bin/i686-w64-mingw32-ar"
+      - "/usr/local/bin/i686-w64-mingw32-ar"
+    found: "/usr/bin/i686-w64-mingw32-ar"
+    search_context:
+      ENV{PATH}:
+        - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.local/bin"
+        - "/home/juergen/bin"
+        - "/usr/lib64/ccache"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/libexec/sdcc"
+        - "/usr/libexec/sdcc"
+        - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
+        - "/usr/libexec/sdcc"
+      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_RANLIB"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "i686-w64-mingw32-ranlib"
+      - "ranlib"
+    candidate_directories:
+      - "/usr/lib64/ccache/"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
+      - "/home/juergen/.local/bin/"
+      - "/home/juergen/bin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/usr/libexec/sdcc/"
+      - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
+    searched_directories:
+      - "/usr/lib64/ccache/i686-w64-mingw32-ranlib"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-ranlib"
+      - "/home/juergen/.local/bin/i686-w64-mingw32-ranlib"
+      - "/home/juergen/bin/i686-w64-mingw32-ranlib"
+      - "/usr/local/bin/i686-w64-mingw32-ranlib"
+    found: "/usr/bin/i686-w64-mingw32-ranlib"
+    search_context:
+      ENV{PATH}:
+        - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.local/bin"
+        - "/home/juergen/bin"
+        - "/usr/lib64/ccache"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/libexec/sdcc"
+        - "/usr/libexec/sdcc"
+        - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
+        - "/usr/libexec/sdcc"
+      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_STRIP"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "i686-w64-mingw32-strip"
+      - "strip"
+    candidate_directories:
+      - "/usr/lib64/ccache/"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
+      - "/home/juergen/.local/bin/"
+      - "/home/juergen/bin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/usr/libexec/sdcc/"
+      - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
+    searched_directories:
+      - "/usr/lib64/ccache/i686-w64-mingw32-strip"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-strip"
+      - "/home/juergen/.local/bin/i686-w64-mingw32-strip"
+      - "/home/juergen/bin/i686-w64-mingw32-strip"
+      - "/usr/local/bin/i686-w64-mingw32-strip"
+    found: "/usr/bin/i686-w64-mingw32-strip"
+    search_context:
+      ENV{PATH}:
+        - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.local/bin"
+        - "/home/juergen/bin"
+        - "/usr/lib64/ccache"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/libexec/sdcc"
+        - "/usr/libexec/sdcc"
+        - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
+        - "/usr/libexec/sdcc"
+      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_LINKER"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "i686-w64-mingw32-ld"
+      - "ld"
+    candidate_directories:
+      - "/usr/lib64/ccache/"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
+      - "/home/juergen/.local/bin/"
+      - "/home/juergen/bin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/usr/libexec/sdcc/"
+      - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
+    searched_directories:
+      - "/usr/lib64/ccache/i686-w64-mingw32-ld"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-ld"
+      - "/home/juergen/.local/bin/i686-w64-mingw32-ld"
+      - "/home/juergen/bin/i686-w64-mingw32-ld"
+      - "/usr/local/bin/i686-w64-mingw32-ld"
+    found: "/usr/bin/i686-w64-mingw32-ld"
+    search_context:
+      ENV{PATH}:
+        - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.local/bin"
+        - "/home/juergen/bin"
+        - "/usr/lib64/ccache"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/libexec/sdcc"
+        - "/usr/libexec/sdcc"
+        - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
+        - "/usr/libexec/sdcc"
+      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_NM"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "i686-w64-mingw32-nm"
+      - "nm"
+    candidate_directories:
+      - "/usr/lib64/ccache/"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
+      - "/home/juergen/.local/bin/"
+      - "/home/juergen/bin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/usr/libexec/sdcc/"
+      - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
+    searched_directories:
+      - "/usr/lib64/ccache/i686-w64-mingw32-nm"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-nm"
+      - "/home/juergen/.local/bin/i686-w64-mingw32-nm"
+      - "/home/juergen/bin/i686-w64-mingw32-nm"
+      - "/usr/local/bin/i686-w64-mingw32-nm"
+    found: "/usr/bin/i686-w64-mingw32-nm"
+    search_context:
+      ENV{PATH}:
+        - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.local/bin"
+        - "/home/juergen/bin"
+        - "/usr/lib64/ccache"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/libexec/sdcc"
+        - "/usr/libexec/sdcc"
+        - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
+        - "/usr/libexec/sdcc"
+      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_OBJDUMP"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "i686-w64-mingw32-objdump"
+      - "objdump"
+    candidate_directories:
+      - "/usr/lib64/ccache/"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
+      - "/home/juergen/.local/bin/"
+      - "/home/juergen/bin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/usr/libexec/sdcc/"
+      - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
+    searched_directories:
+      - "/usr/lib64/ccache/i686-w64-mingw32-objdump"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-objdump"
+      - "/home/juergen/.local/bin/i686-w64-mingw32-objdump"
+      - "/home/juergen/bin/i686-w64-mingw32-objdump"
+      - "/usr/local/bin/i686-w64-mingw32-objdump"
+    found: "/usr/bin/i686-w64-mingw32-objdump"
+    search_context:
+      ENV{PATH}:
+        - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.local/bin"
+        - "/home/juergen/bin"
+        - "/usr/lib64/ccache"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/libexec/sdcc"
+        - "/usr/libexec/sdcc"
+        - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
+        - "/usr/libexec/sdcc"
+      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_OBJCOPY"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "i686-w64-mingw32-objcopy"
+      - "objcopy"
+    candidate_directories:
+      - "/usr/lib64/ccache/"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
+      - "/home/juergen/.local/bin/"
+      - "/home/juergen/bin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/usr/libexec/sdcc/"
+      - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
+    searched_directories:
+      - "/usr/lib64/ccache/i686-w64-mingw32-objcopy"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-objcopy"
+      - "/home/juergen/.local/bin/i686-w64-mingw32-objcopy"
+      - "/home/juergen/bin/i686-w64-mingw32-objcopy"
+      - "/usr/local/bin/i686-w64-mingw32-objcopy"
+    found: "/usr/bin/i686-w64-mingw32-objcopy"
+    search_context:
+      ENV{PATH}:
+        - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.local/bin"
+        - "/home/juergen/bin"
+        - "/usr/lib64/ccache"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/libexec/sdcc"
+        - "/usr/libexec/sdcc"
+        - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
+        - "/usr/libexec/sdcc"
+      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_READELF"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "i686-w64-mingw32-readelf"
+      - "readelf"
+    candidate_directories:
+      - "/usr/lib64/ccache/"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
+      - "/home/juergen/.local/bin/"
+      - "/home/juergen/bin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/usr/libexec/sdcc/"
+      - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
+    searched_directories:
+      - "/usr/lib64/ccache/i686-w64-mingw32-readelf"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-readelf"
+      - "/home/juergen/.local/bin/i686-w64-mingw32-readelf"
+      - "/home/juergen/bin/i686-w64-mingw32-readelf"
+      - "/usr/local/bin/i686-w64-mingw32-readelf"
+    found: "/usr/bin/i686-w64-mingw32-readelf"
+    search_context:
+      ENV{PATH}:
+        - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.local/bin"
+        - "/home/juergen/bin"
+        - "/usr/lib64/ccache"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/libexec/sdcc"
+        - "/usr/libexec/sdcc"
+        - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
+        - "/usr/libexec/sdcc"
+      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_DLLTOOL"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "i686-w64-mingw32-dlltool"
+      - "dlltool"
+    candidate_directories:
+      - "/usr/lib64/ccache/"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
+      - "/home/juergen/.local/bin/"
+      - "/home/juergen/bin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/usr/libexec/sdcc/"
+      - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
+    searched_directories:
+      - "/usr/lib64/ccache/i686-w64-mingw32-dlltool"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-dlltool"
+      - "/home/juergen/.local/bin/i686-w64-mingw32-dlltool"
+      - "/home/juergen/bin/i686-w64-mingw32-dlltool"
+      - "/usr/local/bin/i686-w64-mingw32-dlltool"
+    found: "/usr/bin/i686-w64-mingw32-dlltool"
+    search_context:
+      ENV{PATH}:
+        - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.local/bin"
+        - "/home/juergen/bin"
+        - "/usr/lib64/ccache"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/libexec/sdcc"
+        - "/usr/libexec/sdcc"
+        - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
+        - "/usr/libexec/sdcc"
+      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_ADDR2LINE"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "i686-w64-mingw32-addr2line"
+      - "addr2line"
+    candidate_directories:
+      - "/usr/lib64/ccache/"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
+      - "/home/juergen/.local/bin/"
+      - "/home/juergen/bin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/usr/libexec/sdcc/"
+      - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
+    searched_directories:
+      - "/usr/lib64/ccache/i686-w64-mingw32-addr2line"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-addr2line"
+      - "/home/juergen/.local/bin/i686-w64-mingw32-addr2line"
+      - "/home/juergen/bin/i686-w64-mingw32-addr2line"
+      - "/usr/local/bin/i686-w64-mingw32-addr2line"
+    found: "/usr/bin/i686-w64-mingw32-addr2line"
+    search_context:
+      ENV{PATH}:
+        - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.local/bin"
+        - "/home/juergen/bin"
+        - "/usr/lib64/ccache"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/libexec/sdcc"
+        - "/usr/libexec/sdcc"
+        - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
+        - "/usr/libexec/sdcc"
+      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_TAPI"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "i686-w64-mingw32-tapi"
+      - "tapi"
+    candidate_directories:
+      - "/usr/lib64/ccache/"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
+      - "/home/juergen/.local/bin/"
+      - "/home/juergen/bin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/usr/libexec/sdcc/"
+      - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
+    searched_directories:
+      - "/usr/lib64/ccache/i686-w64-mingw32-tapi"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-tapi"
+      - "/home/juergen/.local/bin/i686-w64-mingw32-tapi"
+      - "/home/juergen/bin/i686-w64-mingw32-tapi"
+      - "/usr/local/bin/i686-w64-mingw32-tapi"
+      - "/usr/bin/i686-w64-mingw32-tapi"
+      - "/usr/libexec/sdcc/i686-w64-mingw32-tapi"
+      - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/i686-w64-mingw32-tapi"
+      - "/usr/lib64/ccache/tapi"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/tapi"
+      - "/home/juergen/.local/bin/tapi"
+      - "/home/juergen/bin/tapi"
+      - "/usr/local/bin/tapi"
+      - "/usr/bin/tapi"
+      - "/usr/libexec/sdcc/tapi"
+      - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/tapi"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.local/bin"
+        - "/home/juergen/bin"
+        - "/usr/lib64/ccache"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/libexec/sdcc"
+        - "/usr/libexec/sdcc"
+        - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
+        - "/usr/libexec/sdcc"
+      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Compiler/GNU-FindBinUtils.cmake:18 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:207 (include)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_CXX_COMPILER_AR"
+    description: "A wrapper around 'ar' adding the appropriate '--plugin' option for the GCC compiler"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "i686-w64-mingw32-gcc-ar-16.2"
+      - "i686-w64-mingw32-gcc-ar-16"
+      - "i686-w64-mingw32-gcc-ar16"
+      - "i686-w64-mingw32-gcc-ar"
+    candidate_directories:
+      - "/usr/lib64/ccache/"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
+      - "/home/juergen/.local/bin/"
+      - "/home/juergen/bin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/usr/libexec/sdcc/"
+      - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
+    searched_directories:
+      - "/usr/lib64/ccache/i686-w64-mingw32-gcc-ar-16.2"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-gcc-ar-16.2"
+      - "/home/juergen/.local/bin/i686-w64-mingw32-gcc-ar-16.2"
+      - "/home/juergen/bin/i686-w64-mingw32-gcc-ar-16.2"
+      - "/usr/local/bin/i686-w64-mingw32-gcc-ar-16.2"
+      - "/usr/bin/i686-w64-mingw32-gcc-ar-16.2"
+      - "/usr/libexec/sdcc/i686-w64-mingw32-gcc-ar-16.2"
+      - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/i686-w64-mingw32-gcc-ar-16.2"
+      - "/usr/lib64/ccache/i686-w64-mingw32-gcc-ar-16"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-gcc-ar-16"
+      - "/home/juergen/.local/bin/i686-w64-mingw32-gcc-ar-16"
+      - "/home/juergen/bin/i686-w64-mingw32-gcc-ar-16"
+      - "/usr/local/bin/i686-w64-mingw32-gcc-ar-16"
+      - "/usr/bin/i686-w64-mingw32-gcc-ar-16"
+      - "/usr/libexec/sdcc/i686-w64-mingw32-gcc-ar-16"
+      - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/i686-w64-mingw32-gcc-ar-16"
+      - "/usr/lib64/ccache/i686-w64-mingw32-gcc-ar16"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-gcc-ar16"
+      - "/home/juergen/.local/bin/i686-w64-mingw32-gcc-ar16"
+      - "/home/juergen/bin/i686-w64-mingw32-gcc-ar16"
+      - "/usr/local/bin/i686-w64-mingw32-gcc-ar16"
+      - "/usr/bin/i686-w64-mingw32-gcc-ar16"
+      - "/usr/libexec/sdcc/i686-w64-mingw32-gcc-ar16"
+      - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/i686-w64-mingw32-gcc-ar16"
+      - "/usr/lib64/ccache/i686-w64-mingw32-gcc-ar"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-gcc-ar"
+      - "/home/juergen/.local/bin/i686-w64-mingw32-gcc-ar"
+      - "/home/juergen/bin/i686-w64-mingw32-gcc-ar"
+      - "/usr/local/bin/i686-w64-mingw32-gcc-ar"
+    found: "/usr/bin/i686-w64-mingw32-gcc-ar"
+    search_context:
+      ENV{PATH}:
+        - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.local/bin"
+        - "/home/juergen/bin"
+        - "/usr/lib64/ccache"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/libexec/sdcc"
+        - "/usr/libexec/sdcc"
+        - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
+        - "/usr/libexec/sdcc"
+      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Compiler/GNU-FindBinUtils.cmake:30 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:207 (include)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_CXX_COMPILER_RANLIB"
+    description: "A wrapper around 'ranlib' adding the appropriate '--plugin' option for the GCC compiler"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "i686-w64-mingw32-gcc-ranlib-16.2"
+      - "i686-w64-mingw32-gcc-ranlib-16"
+      - "i686-w64-mingw32-gcc-ranlib16"
+      - "i686-w64-mingw32-gcc-ranlib"
+    candidate_directories:
+      - "/usr/lib64/ccache/"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/"
+      - "/home/juergen/.local/bin/"
+      - "/home/juergen/bin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/usr/libexec/sdcc/"
+      - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/"
+    searched_directories:
+      - "/usr/lib64/ccache/i686-w64-mingw32-gcc-ranlib-16.2"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-gcc-ranlib-16.2"
+      - "/home/juergen/.local/bin/i686-w64-mingw32-gcc-ranlib-16.2"
+      - "/home/juergen/bin/i686-w64-mingw32-gcc-ranlib-16.2"
+      - "/usr/local/bin/i686-w64-mingw32-gcc-ranlib-16.2"
+      - "/usr/bin/i686-w64-mingw32-gcc-ranlib-16.2"
+      - "/usr/libexec/sdcc/i686-w64-mingw32-gcc-ranlib-16.2"
+      - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/i686-w64-mingw32-gcc-ranlib-16.2"
+      - "/usr/lib64/ccache/i686-w64-mingw32-gcc-ranlib-16"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-gcc-ranlib-16"
+      - "/home/juergen/.local/bin/i686-w64-mingw32-gcc-ranlib-16"
+      - "/home/juergen/bin/i686-w64-mingw32-gcc-ranlib-16"
+      - "/usr/local/bin/i686-w64-mingw32-gcc-ranlib-16"
+      - "/usr/bin/i686-w64-mingw32-gcc-ranlib-16"
+      - "/usr/libexec/sdcc/i686-w64-mingw32-gcc-ranlib-16"
+      - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/i686-w64-mingw32-gcc-ranlib-16"
+      - "/usr/lib64/ccache/i686-w64-mingw32-gcc-ranlib16"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-gcc-ranlib16"
+      - "/home/juergen/.local/bin/i686-w64-mingw32-gcc-ranlib16"
+      - "/home/juergen/bin/i686-w64-mingw32-gcc-ranlib16"
+      - "/usr/local/bin/i686-w64-mingw32-gcc-ranlib16"
+      - "/usr/bin/i686-w64-mingw32-gcc-ranlib16"
+      - "/usr/libexec/sdcc/i686-w64-mingw32-gcc-ranlib16"
+      - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts/i686-w64-mingw32-gcc-ranlib16"
+      - "/usr/lib64/ccache/i686-w64-mingw32-gcc-ranlib"
+      - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin/i686-w64-mingw32-gcc-ranlib"
+      - "/home/juergen/.local/bin/i686-w64-mingw32-gcc-ranlib"
+      - "/home/juergen/bin/i686-w64-mingw32-gcc-ranlib"
+      - "/usr/local/bin/i686-w64-mingw32-gcc-ranlib"
+    found: "/usr/bin/i686-w64-mingw32-gcc-ranlib"
+    search_context:
+      ENV{PATH}:
+        - "/home/juergen/.vscode-oss/extensions/vadimcn.vscode-lldb-1.12.3/bin"
+        - "/home/juergen/.local/bin"
+        - "/home/juergen/bin"
+        - "/usr/lib64/ccache"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/libexec/sdcc"
+        - "/usr/libexec/sdcc"
+        - "/home/juergen/.vscode-oss/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts"
+        - "/usr/libexec/sdcc"
+      CMAKE_FIND_ROOT_PATH: "/usr/i686-w64-mingw32"
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
+      - "/usr/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "/home/juergen/Projects/RNet-Dongle-Emu/build/mingw32/CMakeFiles/CMakeScratch/TryCompile-vue9at"
+      binary: "/home/juergen/Projects/RNet-Dongle-Emu/build/mingw32/CMakeFiles/CMakeScratch/TryCompile-vue9at"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: '/home/juergen/Projects/RNet-Dongle-Emu/build/mingw32/CMakeFiles/CMakeScratch/TryCompile-vue9at'
+        
+        Run Build Command(s): /usr/bin/ninja-build -v cmTC_0e01c
+        [1/2] /usr/lib64/ccache/i686-w64-mingw32-g++   -v -o CMakeFiles/cmTC_0e01c.dir/CMakeCXXCompilerABI.cpp.obj -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/i686-w64-mingw32-g++
+        Target: i686-w64-mingw32
+        Configured with: ../configure --prefix=/usr --bindir=/usr/bin --includedir=/usr/include --mandir=/usr/share/man --infodir=/usr/share/info --datadir=/usr/share --build=x86_64-redhat-linux-gnu --host=x86_64-redhat-linux-gnu --with-gnu-as --with-gnu-ld --verbose --without-newlib --disable-multilib --disable-libcc1 --with-system-zlib --disable-nls --without-included-gettext --disable-win32-registry --enable-languages=c,c++,objc,obj-c++,fortran --with-bugurl=http://bugzilla.redhat.com/bugzilla --enable-threads=posix --without-isl --enable-libgomp --target=i686-w64-mingw32 --with-sysroot=/usr/i686-w64-mingw32/sys-root --with-gxx-include-dir=/usr/i686-w64-mingw32/sys-root/mingw/include/c++ --disable-sjlj-exceptions --with-dwarf2
+        Thread model: posix
+        Supported LTO compression algorithms: zlib
+        gcc version 16.2.1 20260819 (Fedora MinGW 16.2.1-1.fc44) (GCC) 
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-c' '-o' 'CMakeFiles/cmTC_8417a.dir/CMakeCXXCompilerABI.cpp.obj' '-shared-libgcc' '-mtune=generic' '-march=pentiumpro' '-dumpdir' 'CMakeFiles/cmTC_8417a.dir/'
+         /usr/libexec/gcc/i686-w64-mingw32/16.2.1/cc1plus -quiet -v -D_REENTRANT /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_8417a.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=pentiumpro -version -fdiagnostics-color=always -o /tmp/ccQTLqlQ.s
+        GNU C++20 (GCC) version 16.2.1 20260819 (Fedora MinGW 16.2.1-1.fc44) (i686-w64-mingw32)
+        	compiled by GNU C version 16.2.1 20260819 (Red Hat 16.2.1-2), GMP version 6.3.0, MPFR version 4.2.2, MPC version 1.4.1, isl version none
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring nonexistent directory "/usr/i686-w64-mingw32/sys-root/usr/local/include"
+        ignoring nonexistent directory "/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /usr/i686-w64-mingw32/sys-root/mingw/include/c++
+         /usr/i686-w64-mingw32/sys-root/mingw/include/c++/i686-w64-mingw32
+         /usr/i686-w64-mingw32/sys-root/mingw/include/c++/backward
+         /usr/lib/gcc/i686-w64-mingw32/16.2.1/include
+         /usr/lib/gcc/i686-w64-mingw32/16.2.1/include-fixed
+         /usr/i686-w64-mingw32/sys-root/mingw/include
+        End of search list.
+        Compiler executable checksum: b42bdbf29afeb2492e285bbd9f822f74
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-c' '-o' 'CMakeFiles/cmTC_8417a.dir/CMakeCXXCompilerABI.cpp.obj' '-shared-libgcc' '-mtune=generic' '-march=pentiumpro' '-dumpdir' 'CMakeFiles/cmTC_8417a.dir/'
+         /usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/bin/as -v -o CMakeFiles/cmTC_8417a.dir/CMakeCXXCompilerABI.cpp.obj /tmp/ccQTLqlQ.s
+        GNU assembler version 2.46.0 (i686-w64-mingw32) using BFD version version 2.46.0.20260210
+        COMPILER_PATH=/usr/libexec/gcc/i686-w64-mingw32/16.2.1/:/usr/libexec/gcc/i686-w64-mingw32/16.2.1/:/usr/libexec/gcc/i686-w64-mingw32/:/usr/lib/gcc/i686-w64-mingw32/16.2.1/:/usr/lib/gcc/i686-w64-mingw32/:/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/bin/
+        LIBRARY_PATH=/usr/lib/gcc/i686-w64-mingw32/16.2.1/:/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib/../lib/:/usr/i686-w64-mingw32/sys-root/mingw/lib/../lib/:/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib/:/usr/i686-w64-mingw32/sys-root/mingw/lib/
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-c' '-o' 'CMakeFiles/cmTC_8417a.dir/CMakeCXXCompilerABI.cpp.obj' '-shared-libgcc' '-mtune=generic' '-march=pentiumpro' '-dumpdir' 'CMakeFiles/cmTC_8417a.dir/CMakeCXXCompilerABI.cpp.'
+        [2/2] : && /usr/lib64/ccache/i686-w64-mingw32-g++  -v -Wl,-v CMakeFiles/cmTC_0e01c.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_0e01c.exe -Wl,--out-implib,libcmTC_0e01c.dll.a -Wl,--major-image-version,0,--minor-image-version,0   && :
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/i686-w64-mingw32-g++
+        COLLECT_LTO_WRAPPER=/usr/libexec/gcc/i686-w64-mingw32/16.2.1/lto-wrapper
+        Target: i686-w64-mingw32
+        Configured with: ../configure --prefix=/usr --bindir=/usr/bin --includedir=/usr/include --mandir=/usr/share/man --infodir=/usr/share/info --datadir=/usr/share --build=x86_64-redhat-linux-gnu --host=x86_64-redhat-linux-gnu --with-gnu-as --with-gnu-ld --verbose --without-newlib --disable-multilib --disable-libcc1 --with-system-zlib --disable-nls --without-included-gettext --disable-win32-registry --enable-languages=c,c++,objc,obj-c++,fortran --with-bugurl=http://bugzilla.redhat.com/bugzilla --enable-threads=posix --without-isl --enable-libgomp --target=i686-w64-mingw32 --with-sysroot=/usr/i686-w64-mingw32/sys-root --with-gxx-include-dir=/usr/i686-w64-mingw32/sys-root/mingw/include/c++ --disable-sjlj-exceptions --with-dwarf2
+        Thread model: posix
+        Supported LTO compression algorithms: zlib
+        gcc version 16.2.1 20260819 (Fedora MinGW 16.2.1-1.fc44) (GCC) 
+        COMPILER_PATH=/usr/libexec/gcc/i686-w64-mingw32/16.2.1/:/usr/libexec/gcc/i686-w64-mingw32/16.2.1/:/usr/libexec/gcc/i686-w64-mingw32/:/usr/lib/gcc/i686-w64-mingw32/16.2.1/:/usr/lib/gcc/i686-w64-mingw32/:/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/bin/
+        LIBRARY_PATH=/usr/lib/gcc/i686-w64-mingw32/16.2.1/:/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib/../lib/:/usr/i686-w64-mingw32/sys-root/mingw/lib/../lib/:/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib/:/usr/i686-w64-mingw32/sys-root/mingw/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_0e01c.exe' '-shared-libgcc' '-mtune=generic' '-march=pentiumpro' '-dumpdir' 'cmTC_0e01c.'
+         /usr/libexec/gcc/i686-w64-mingw32/16.2.1/collect2 -plugin /usr/libexec/gcc/i686-w64-mingw32/16.2.1/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/i686-w64-mingw32/16.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccepopU4.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 --sysroot=/usr/i686-w64-mingw32/sys-root -m i386pe -Bdynamic -u ___register_frame_info -u ___deregister_frame_info -o cmTC_0e01c.exe /usr/i686-w64-mingw32/sys-root/mingw/lib/../lib/crt2.o /usr/lib/gcc/i686-w64-mingw32/16.2.1/crtbegin.o -L/usr/lib/gcc/i686-w64-mingw32/16.2.1 -L/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib/../lib -L/usr/i686-w64-mingw32/sys-root/mingw/lib/../lib -L/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib -L/usr/i686-w64-mingw32/sys-root/mingw/lib -v CMakeFiles/cmTC_0e01c.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_0e01c.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 /usr/lib/gcc/i686-w64-mingw32/16.2.1/crtend.o
+        collect2 version 16.2.1 20260819 (Fedora MinGW 16.2.1-1.fc44)
+        /usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/bin/ld -plugin /usr/libexec/gcc/i686-w64-mingw32/16.2.1/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/i686-w64-mingw32/16.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccepopU4.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 --sysroot=/usr/i686-w64-mingw32/sys-root -m i386pe -Bdynamic -u ___register_frame_info -u ___deregister_frame_info -o cmTC_0e01c.exe /usr/i686-w64-mingw32/sys-root/mingw/lib/../lib/crt2.o /usr/lib/gcc/i686-w64-mingw32/16.2.1/crtbegin.o -L/usr/lib/gcc/i686-w64-mingw32/16.2.1 -L/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib/../lib -L/usr/i686-w64-mingw32/sys-root/mingw/lib/../lib -L/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib -L/usr/i686-w64-mingw32/sys-root/mingw/lib -v CMakeFiles/cmTC_0e01c.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_0e01c.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 /usr/lib/gcc/i686-w64-mingw32/16.2.1/crtend.o
+        GNU ld version 2.46.0.20260210
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_0e01c.exe' '-shared-libgcc' '-mtune=generic' '-march=pentiumpro' '-dumpdir' 'cmTC_0e01c.'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:217 (message)"
+      - "/usr/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Parsed CXX implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/usr/i686-w64-mingw32/sys-root/mingw/include/c++]
+          add: [/usr/i686-w64-mingw32/sys-root/mingw/include/c++/i686-w64-mingw32]
+          add: [/usr/i686-w64-mingw32/sys-root/mingw/include/c++/backward]
+          add: [/usr/lib/gcc/i686-w64-mingw32/16.2.1/include]
+          add: [/usr/lib/gcc/i686-w64-mingw32/16.2.1/include-fixed]
+          add: [/usr/i686-w64-mingw32/sys-root/mingw/include]
+        end of search list found
+        collapse include dir [/usr/i686-w64-mingw32/sys-root/mingw/include/c++] ==> [/usr/i686-w64-mingw32/sys-root/mingw/include/c++]
+        collapse include dir [/usr/i686-w64-mingw32/sys-root/mingw/include/c++/i686-w64-mingw32] ==> [/usr/i686-w64-mingw32/sys-root/mingw/include/c++/i686-w64-mingw32]
+        collapse include dir [/usr/i686-w64-mingw32/sys-root/mingw/include/c++/backward] ==> [/usr/i686-w64-mingw32/sys-root/mingw/include/c++/backward]
+        collapse include dir [/usr/lib/gcc/i686-w64-mingw32/16.2.1/include] ==> [/usr/lib/gcc/i686-w64-mingw32/16.2.1/include]
+        collapse include dir [/usr/lib/gcc/i686-w64-mingw32/16.2.1/include-fixed] ==> [/usr/lib/gcc/i686-w64-mingw32/16.2.1/include-fixed]
+        collapse include dir [/usr/i686-w64-mingw32/sys-root/mingw/include] ==> [/usr/i686-w64-mingw32/sys-root/mingw/include]
+        implicit include dirs: [/usr/i686-w64-mingw32/sys-root/mingw/include/c++;/usr/i686-w64-mingw32/sys-root/mingw/include/c++/i686-w64-mingw32;/usr/i686-w64-mingw32/sys-root/mingw/include/c++/backward;/usr/lib/gcc/i686-w64-mingw32/16.2.1/include;/usr/lib/gcc/i686-w64-mingw32/16.2.1/include-fixed;/usr/i686-w64-mingw32/sys-root/mingw/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:253 (message)"
+      - "/usr/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
+        ignore line: [Change Dir: '/home/juergen/Projects/RNet-Dongle-Emu/build/mingw32/CMakeFiles/CMakeScratch/TryCompile-vue9at']
+        ignore line: []
+        ignore line: [Run Build Command(s): /usr/bin/ninja-build -v cmTC_0e01c]
+        ignore line: [[1/2] /usr/lib64/ccache/i686-w64-mingw32-g++   -v -o CMakeFiles/cmTC_0e01c.dir/CMakeCXXCompilerABI.cpp.obj -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/i686-w64-mingw32-g++]
+        ignore line: [Target: i686-w64-mingw32]
+        ignore line: [Configured with: ../configure --prefix=/usr --bindir=/usr/bin --includedir=/usr/include --mandir=/usr/share/man --infodir=/usr/share/info --datadir=/usr/share --build=x86_64-redhat-linux-gnu --host=x86_64-redhat-linux-gnu --with-gnu-as --with-gnu-ld --verbose --without-newlib --disable-multilib --disable-libcc1 --with-system-zlib --disable-nls --without-included-gettext --disable-win32-registry --enable-languages=c,c++,objc,obj-c++,fortran --with-bugurl=http://bugzilla.redhat.com/bugzilla --enable-threads=posix --without-isl --enable-libgomp --target=i686-w64-mingw32 --with-sysroot=/usr/i686-w64-mingw32/sys-root --with-gxx-include-dir=/usr/i686-w64-mingw32/sys-root/mingw/include/c++ --disable-sjlj-exceptions --with-dwarf2]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib]
+        ignore line: [gcc version 16.2.1 20260819 (Fedora MinGW 16.2.1-1.fc44) (GCC) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-c' '-o' 'CMakeFiles/cmTC_8417a.dir/CMakeCXXCompilerABI.cpp.obj' '-shared-libgcc' '-mtune=generic' '-march=pentiumpro' '-dumpdir' 'CMakeFiles/cmTC_8417a.dir/']
+        ignore line: [ /usr/libexec/gcc/i686-w64-mingw32/16.2.1/cc1plus -quiet -v -D_REENTRANT /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_8417a.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=pentiumpro -version -fdiagnostics-color=always -o /tmp/ccQTLqlQ.s]
+        ignore line: [GNU C++20 (GCC) version 16.2.1 20260819 (Fedora MinGW 16.2.1-1.fc44) (i686-w64-mingw32)]
+        ignore line: [	compiled by GNU C version 16.2.1 20260819 (Red Hat 16.2.1-2)  GMP version 6.3.0  MPFR version 4.2.2  MPC version 1.4.1  isl version none]
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring nonexistent directory "/usr/i686-w64-mingw32/sys-root/usr/local/include"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /usr/i686-w64-mingw32/sys-root/mingw/include/c++]
+        ignore line: [ /usr/i686-w64-mingw32/sys-root/mingw/include/c++/i686-w64-mingw32]
+        ignore line: [ /usr/i686-w64-mingw32/sys-root/mingw/include/c++/backward]
+        ignore line: [ /usr/lib/gcc/i686-w64-mingw32/16.2.1/include]
+        ignore line: [ /usr/lib/gcc/i686-w64-mingw32/16.2.1/include-fixed]
+        ignore line: [ /usr/i686-w64-mingw32/sys-root/mingw/include]
+        ignore line: [End of search list.]
+        ignore line: [Compiler executable checksum: b42bdbf29afeb2492e285bbd9f822f74]
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-c' '-o' 'CMakeFiles/cmTC_8417a.dir/CMakeCXXCompilerABI.cpp.obj' '-shared-libgcc' '-mtune=generic' '-march=pentiumpro' '-dumpdir' 'CMakeFiles/cmTC_8417a.dir/']
+        ignore line: [ /usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/bin/as -v -o CMakeFiles/cmTC_8417a.dir/CMakeCXXCompilerABI.cpp.obj /tmp/ccQTLqlQ.s]
+        ignore line: [GNU assembler version 2.46.0 (i686-w64-mingw32) using BFD version version 2.46.0.20260210]
+        ignore line: [COMPILER_PATH=/usr/libexec/gcc/i686-w64-mingw32/16.2.1/:/usr/libexec/gcc/i686-w64-mingw32/16.2.1/:/usr/libexec/gcc/i686-w64-mingw32/:/usr/lib/gcc/i686-w64-mingw32/16.2.1/:/usr/lib/gcc/i686-w64-mingw32/:/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/bin/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/i686-w64-mingw32/16.2.1/:/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib/../lib/:/usr/i686-w64-mingw32/sys-root/mingw/lib/../lib/:/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib/:/usr/i686-w64-mingw32/sys-root/mingw/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-c' '-o' 'CMakeFiles/cmTC_8417a.dir/CMakeCXXCompilerABI.cpp.obj' '-shared-libgcc' '-mtune=generic' '-march=pentiumpro' '-dumpdir' 'CMakeFiles/cmTC_8417a.dir/CMakeCXXCompilerABI.cpp.']
+        ignore line: [[2/2] : && /usr/lib64/ccache/i686-w64-mingw32-g++  -v -Wl -v CMakeFiles/cmTC_0e01c.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_0e01c.exe -Wl --out-implib libcmTC_0e01c.dll.a -Wl --major-image-version 0 --minor-image-version 0   && :]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/i686-w64-mingw32-g++]
+        ignore line: [COLLECT_LTO_WRAPPER=/usr/libexec/gcc/i686-w64-mingw32/16.2.1/lto-wrapper]
+        ignore line: [Target: i686-w64-mingw32]
+        ignore line: [Configured with: ../configure --prefix=/usr --bindir=/usr/bin --includedir=/usr/include --mandir=/usr/share/man --infodir=/usr/share/info --datadir=/usr/share --build=x86_64-redhat-linux-gnu --host=x86_64-redhat-linux-gnu --with-gnu-as --with-gnu-ld --verbose --without-newlib --disable-multilib --disable-libcc1 --with-system-zlib --disable-nls --without-included-gettext --disable-win32-registry --enable-languages=c,c++,objc,obj-c++,fortran --with-bugurl=http://bugzilla.redhat.com/bugzilla --enable-threads=posix --without-isl --enable-libgomp --target=i686-w64-mingw32 --with-sysroot=/usr/i686-w64-mingw32/sys-root --with-gxx-include-dir=/usr/i686-w64-mingw32/sys-root/mingw/include/c++ --disable-sjlj-exceptions --with-dwarf2]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib]
+        ignore line: [gcc version 16.2.1 20260819 (Fedora MinGW 16.2.1-1.fc44) (GCC) ]
+        ignore line: [COMPILER_PATH=/usr/libexec/gcc/i686-w64-mingw32/16.2.1/:/usr/libexec/gcc/i686-w64-mingw32/16.2.1/:/usr/libexec/gcc/i686-w64-mingw32/:/usr/lib/gcc/i686-w64-mingw32/16.2.1/:/usr/lib/gcc/i686-w64-mingw32/:/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/bin/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/i686-w64-mingw32/16.2.1/:/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib/../lib/:/usr/i686-w64-mingw32/sys-root/mingw/lib/../lib/:/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib/:/usr/i686-w64-mingw32/sys-root/mingw/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_0e01c.exe' '-shared-libgcc' '-mtune=generic' '-march=pentiumpro' '-dumpdir' 'cmTC_0e01c.']
+        link line: [ /usr/libexec/gcc/i686-w64-mingw32/16.2.1/collect2 -plugin /usr/libexec/gcc/i686-w64-mingw32/16.2.1/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/i686-w64-mingw32/16.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccepopU4.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 --sysroot=/usr/i686-w64-mingw32/sys-root -m i386pe -Bdynamic -u ___register_frame_info -u ___deregister_frame_info -o cmTC_0e01c.exe /usr/i686-w64-mingw32/sys-root/mingw/lib/../lib/crt2.o /usr/lib/gcc/i686-w64-mingw32/16.2.1/crtbegin.o -L/usr/lib/gcc/i686-w64-mingw32/16.2.1 -L/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib/../lib -L/usr/i686-w64-mingw32/sys-root/mingw/lib/../lib -L/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib -L/usr/i686-w64-mingw32/sys-root/mingw/lib -v CMakeFiles/cmTC_0e01c.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_0e01c.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 /usr/lib/gcc/i686-w64-mingw32/16.2.1/crtend.o]
+          arg [/usr/libexec/gcc/i686-w64-mingw32/16.2.1/collect2] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [/usr/libexec/gcc/i686-w64-mingw32/16.2.1/liblto_plugin.so] ==> ignore
+          arg [-plugin-opt=/usr/libexec/gcc/i686-w64-mingw32/16.2.1/lto-wrapper] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/ccepopU4.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lmingw32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lmingwex] ==> ignore
+          arg [-plugin-opt=-pass-through=-lmsvcrt] ==> ignore
+          arg [-plugin-opt=-pass-through=-lkernel32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lpthread] ==> ignore
+          arg [-plugin-opt=-pass-through=-ladvapi32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lshell32] ==> ignore
+          arg [-plugin-opt=-pass-through=-luser32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lkernel32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lmingw32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lmingwex] ==> ignore
+          arg [-plugin-opt=-pass-through=-lmsvcrt] ==> ignore
+          arg [-plugin-opt=-pass-through=-lkernel32] ==> ignore
+          arg [--sysroot=/usr/i686-w64-mingw32/sys-root] ==> ignore
+          arg [-m] ==> ignore
+          arg [i386pe] ==> ignore
+          arg [-Bdynamic] ==> search dynamic
+          arg [-u] ==> ignore
+          arg [___register_frame_info] ==> ignore
+          arg [-u] ==> ignore
+          arg [___deregister_frame_info] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_0e01c.exe] ==> ignore
+          arg [/usr/i686-w64-mingw32/sys-root/mingw/lib/../lib/crt2.o] ==> obj [/usr/i686-w64-mingw32/sys-root/mingw/lib/../lib/crt2.o]
+          arg [/usr/lib/gcc/i686-w64-mingw32/16.2.1/crtbegin.o] ==> obj [/usr/lib/gcc/i686-w64-mingw32/16.2.1/crtbegin.o]
+          arg [-L/usr/lib/gcc/i686-w64-mingw32/16.2.1] ==> dir [/usr/lib/gcc/i686-w64-mingw32/16.2.1]
+          arg [-L/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib/../lib] ==> dir [/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib/../lib]
+          arg [-L/usr/i686-w64-mingw32/sys-root/mingw/lib/../lib] ==> dir [/usr/i686-w64-mingw32/sys-root/mingw/lib/../lib]
+          arg [-L/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib] ==> dir [/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib]
+          arg [-L/usr/i686-w64-mingw32/sys-root/mingw/lib] ==> dir [/usr/i686-w64-mingw32/sys-root/mingw/lib]
+          arg [-v] ==> ignore
+          arg [CMakeFiles/cmTC_0e01c.dir/CMakeCXXCompilerABI.cpp.obj] ==> ignore
+          arg [--out-implib] ==> ignore
+          arg [libcmTC_0e01c.dll.a] ==> ignore
+          arg [--major-image-version] ==> ignore
+          arg [0] ==> ignore
+          arg [--minor-image-version] ==> ignore
+          arg [0] ==> ignore
+          arg [-lstdc++] ==> lib [stdc++]
+          arg [-lmingw32] ==> lib [mingw32]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lmingwex] ==> lib [mingwex]
+          arg [-lmsvcrt] ==> lib [msvcrt]
+          arg [-lkernel32] ==> lib [kernel32]
+          arg [-lpthread] ==> lib [pthread]
+          arg [-ladvapi32] ==> lib [advapi32]
+          arg [-lshell32] ==> lib [shell32]
+          arg [-luser32] ==> lib [user32]
+          arg [-lkernel32] ==> lib [kernel32]
+          arg [-lmingw32] ==> lib [mingw32]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lmingwex] ==> lib [mingwex]
+          arg [-lmsvcrt] ==> lib [msvcrt]
+          arg [-lkernel32] ==> lib [kernel32]
+          arg [/usr/lib/gcc/i686-w64-mingw32/16.2.1/crtend.o] ==> obj [/usr/lib/gcc/i686-w64-mingw32/16.2.1/crtend.o]
+        ignore line: [collect2 version 16.2.1 20260819 (Fedora MinGW 16.2.1-1.fc44)]
+        ignore line: [/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/bin/ld -plugin /usr/libexec/gcc/i686-w64-mingw32/16.2.1/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/i686-w64-mingw32/16.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccepopU4.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 --sysroot=/usr/i686-w64-mingw32/sys-root -m i386pe -Bdynamic -u ___register_frame_info -u ___deregister_frame_info -o cmTC_0e01c.exe /usr/i686-w64-mingw32/sys-root/mingw/lib/../lib/crt2.o /usr/lib/gcc/i686-w64-mingw32/16.2.1/crtbegin.o -L/usr/lib/gcc/i686-w64-mingw32/16.2.1 -L/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib/../lib -L/usr/i686-w64-mingw32/sys-root/mingw/lib/../lib -L/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib -L/usr/i686-w64-mingw32/sys-root/mingw/lib -v CMakeFiles/cmTC_0e01c.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_0e01c.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 /usr/lib/gcc/i686-w64-mingw32/16.2.1/crtend.o]
+        linker tool for 'CXX': /usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/bin/ld
+        remove lib [msvcrt]
+        remove lib [msvcrt]
+        collapse obj [/usr/i686-w64-mingw32/sys-root/mingw/lib/../lib/crt2.o] ==> [/usr/i686-w64-mingw32/sys-root/mingw/lib/crt2.o]
+        collapse library dir [/usr/lib/gcc/i686-w64-mingw32/16.2.1] ==> [/usr/lib/gcc/i686-w64-mingw32/16.2.1]
+        collapse library dir [/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib/../lib] ==> [/usr/i686-w64-mingw32/lib]
+        collapse library dir [/usr/i686-w64-mingw32/sys-root/mingw/lib/../lib] ==> [/usr/i686-w64-mingw32/sys-root/mingw/lib]
+        collapse library dir [/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/lib] ==> [/usr/i686-w64-mingw32/lib]
+        collapse library dir [/usr/i686-w64-mingw32/sys-root/mingw/lib] ==> [/usr/i686-w64-mingw32/sys-root/mingw/lib]
+        implicit libs: [stdc++;mingw32;gcc_s;gcc;mingwex;kernel32;pthread;advapi32;shell32;user32;kernel32;mingw32;gcc_s;gcc;mingwex;kernel32]
+        implicit objs: [/usr/i686-w64-mingw32/sys-root/mingw/lib/crt2.o;/usr/lib/gcc/i686-w64-mingw32/16.2.1/crtbegin.o;/usr/lib/gcc/i686-w64-mingw32/16.2.1/crtend.o]
+        implicit dirs: [/usr/lib/gcc/i686-w64-mingw32/16.2.1;/usr/i686-w64-mingw32/lib;/usr/i686-w64-mingw32/sys-root/mingw/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake:38 (message)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:299 (cmake_determine_linker_id)"
+      - "/usr/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Running the CXX compiler's linker: "/usr/lib/gcc/i686-w64-mingw32/16.2.1/../../../../i686-w64-mingw32/bin/ld" "-v"
+      GNU ld version 2.46.0.20260210
+...

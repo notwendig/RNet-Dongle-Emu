@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="/icons">
+    <file>../assets/branding/free-r-net-icon-256.png</file>
+    <file>../assets/branding/free-r-net-icon-64.png</file>
+    <file>../assets/branding/free-r-net-icon-32.png</file>
+  </qresource>
+</RCC>

@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/home/juergen/Projects/RNet-Dongle-Emu/build/mingw32",
+  "command": "/usr/lib64/ccache/i686-w64-mingw32-g++ -DNOMINMAX -DWIN32_LEAN_AND_MEAN -D_CRT_SECURE_NO_WARNINGS -Dftd2xx_EXPORTS  -ffunction-sections -fdata-sections -Wall -Wextra -Wpedantic -o CMakeFiles/ftd2xx.dir/src/ftd2xx_emu.cpp.obj -c /home/juergen/Projects/RNet-Dongle-Emu/src/ftd2xx_emu.cpp",
+  "file": "/home/juergen/Projects/RNet-Dongle-Emu/src/ftd2xx_emu.cpp",
+  "output": "/home/juergen/Projects/RNet-Dongle-Emu/build/mingw32/CMakeFiles/ftd2xx.dir/src/ftd2xx_emu.cpp.obj"
+}
+]

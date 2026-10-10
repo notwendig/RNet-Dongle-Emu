@@ -1,0 +1,5 @@
+rnet-can-proxy: can0 <-> 127.0.0.1:39000
+waiting for FTD2XX Device=can0 ...
+EMU: rnet-can-proxy auf can0 + rollstuhl.emu auf can1
+FTD2XX peer connected
+FTD2XX peer connected

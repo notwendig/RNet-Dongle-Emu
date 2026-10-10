@@ -1,0 +1,10 @@
+[emulator]
+; V15: ftd2xx.dll ist nur noch FTDI/R-Net-Dongle + CAN-Brücke.
+; Die Rollstuhl-Simulation läuft vollständig in rollstuhl.emu.
+; Device=canN wählt das SocketCAN-Interface via rnet-can-proxy.
+Device=can0
+
+LogFile=ftd2xx-emu.log
+
+; Re-enumeration wird im CAN-Brückenbetrieb nicht künstlich erzeugt.
+EmulateReenumeration=0

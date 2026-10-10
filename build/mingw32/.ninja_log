@@ -1,0 +1,9 @@
+# ninja log v7
+2	16	1791603611305034222	CMakeFiles/ftd2xx.dir/src/ftd2xx_emu.cpp.obj	6b90aeb0efe45c33
+16	612	1791603611888037053	ftd2xx.dll	22d12b450a61b9d0
+16	612	1791603611888037053	libftd2xx.dll.a	22d12b450a61b9d0
+5057	5099	1791595775308794753	CMakeFiles/deploy_wine_runtime	4b62f9e1df927a17
+5057	5099	1791595775308794753	/home/juergen/Projects/RNet-Dongle-Emu/build/mingw32/CMakeFiles/deploy_wine_runtime	4b62f9e1df927a17
+2	17	1791604212127944032	CMakeFiles/ftd2xx.dir/src/ftd2xx_emu.cpp.obj	6b90aeb0efe45c33
+17	609	1791604212707946836	ftd2xx.dll	22d12b450a61b9d0
+17	609	1791604212707946836	libftd2xx.dll.a	22d12b450a61b9d0
