@@ -8,6 +8,7 @@
 *.so
 
 # Runtime captures/state
+/run/7
 ftd2xx-emu.log
 rnet-replay.txt
 rnet-block-state*.bin
