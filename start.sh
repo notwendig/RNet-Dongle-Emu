@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# R-Net launcher V30
+# R-Net launcher V35
 #   ./start.sh emu     App -> DLL -> can0 <CAN> can1 -> rollstuhl.emu
 #   ./start.sh dev     RealRollstuhl -> can0 <CAN> Device.emu_CJSM
 #   ./start.sh stop
 #   ./start.sh status
+#
+# In emu mode rnet-can-proxy decodes its CAN-RX/CAN-TX log lines in-process
+# through external/RNetMsgBroker + R-Net.json. No external decoder process.
 
 ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 RUN_DIR="$ROOT/run"
@@ -43,6 +46,9 @@ Optionale Umgebung:
   RNET_EMU_CAN=can1
   RNET_DEV_CAN=can0
   RNET_BITRATE=125000
+  RNET_PROXY_PORT=39000
+  RNET_JSON=/path/to/R-Net.json       # optional override
+  RNET_PROXY_DECODE=0                 # Proxy-Kommentare abschalten
 EOF
 }
 
@@ -163,16 +169,21 @@ start_emu() {
     stop_all
     ensure_binary "$PROXY" proxy
     ensure_binary "$CHAIR" gui
+
     setup_can "$APP_CAN"
     setup_can "$EMU_CAN"
     set_ini_device "$APP_CAN"
     echo emu > "$MODE_FILE"
 
-    nohup "$PROXY" "$APP_CAN" "$PROXY_PORT" >"$RUN_DIR/rnet-can-proxy.log" 2>&1 &
+    : > "$RUN_DIR/rnet-can-proxy.log"
+    nohup "$PROXY" "$APP_CAN" "$PROXY_PORT" \
+        >"$RUN_DIR/rnet-can-proxy.log" 2>&1 &
     echo $! > "$PROXY_PID"
     wait_proxy
 
-    RNET_EMU_CAN="$EMU_CAN" nohup "$CHAIR" emu >"$RUN_DIR/rollstuhl.emu.log" 2>&1 &
+    : > "$RUN_DIR/rollstuhl.emu.log"
+    nohup env RNET_EMU_CAN="$EMU_CAN" "$CHAIR" emu \
+        >"$RUN_DIR/rollstuhl.emu.log" 2>&1 &
     echo $! > "$CHAIR_PID"
 
     if [[ ! -f "$PROGRAMMER_EXE" ]]; then
@@ -180,6 +191,7 @@ start_emu() {
         stop_all
         return 1
     fi
+
     (
         cd "$PROGRAMMER_DIR"
         nohup wine "$(basename "$PROGRAMMER_EXE")" >"$RUN_DIR/programmer.log" 2>&1 &
@@ -188,20 +200,25 @@ start_emu() {
 
     echo "Mode: emu"
     echo "Pfad: App -> DLL -> $APP_CAN <CAN> $EMU_CAN -> rollstuhl.emu"
+    echo "Log:  $RUN_DIR/rnet-can-proxy.log"
+    echo "Decode: RNetMsgBroker im Proxy-Prozess"
 }
 
 start_dev() {
     stop_all
     ensure_binary "$CHAIR" gui
+
     setup_can "$DEV_CAN"
     echo dev > "$MODE_FILE"
 
-    RNET_DEV_CAN="$DEV_CAN" nohup "$CHAIR" dev >"$RUN_DIR/device.emu_CJSM.log" 2>&1 &
+    : > "$RUN_DIR/device.emu_CJSM.log"
+    nohup env RNET_DEV_CAN="$DEV_CAN" "$CHAIR" dev \
+        >"$RUN_DIR/device.emu_CJSM.log" 2>&1 &
     echo $! > "$CHAIR_PID"
 
     echo "Mode: dev"
     echo "Pfad: RealRollstuhl -> $DEV_CAN <CAN> Device.emu_CJSM"
-    echo "Programmer/DLL/Replay: nicht gestartet"
+    echo "Programmer/DLL/Replay/Proxy: nicht gestartet"
 }
 
 show_process() {
@@ -241,6 +258,8 @@ status() {
             show_process rnet-can-proxy "$PROXY_PID"
             show_process rollstuhl.emu "$CHAIR_PID"
             show_process R-Net-Programmer "$PROGRAMMER_PID"
+            echo "Proxy-Log: $RUN_DIR/rnet-can-proxy.log"
+            echo "Decode: RNetMsgBroker in-process"
             ;;
         dev)
             echo "Pfad: RealRollstuhl -> $DEV_CAN <CAN> Device.emu_CJSM"

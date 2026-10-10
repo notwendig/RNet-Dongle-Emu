@@ -137,3 +137,29 @@ All notable project changes are documented here.
 - `load_stored_blocks()` als absichtlich unreferenzierten Legacy-Helper dokumentiert.
 - Keine globale Warnungsabschaltung; `-Werror` bleibt aktiv.
 - Vollständiger Clean-Build von DLL, `rnet-can-proxy` und `rollstuhl.emu`.
+
+## 2026-10-10 — R-Net Log Decode V33
+
+- `RNET-LOG-DECODE-V33`.
+- CAN-/R-Net-Frames in Laufzeitlogs erhalten `; <RNetMsgBroker-Kurzdecode>`.
+- Decoder verwendet die `R-Net.json` des R-Net Analyzers/RNetMsgBroker; keine parallele Matcher-Tabelle.
+- FTD2XX-Rohlog bleibt unverändert; kommentierte Begleitdatei unter `run/ftd2xx-emu.decoded.log`.
+- `rnet-log-comment` ist rein textverarbeitend und sendet keine CAN-Frames.
+- Patch-/Apply-Backups liegen nur noch unter `/tmp`, nicht im Repository.
+- `README.md`, `docs/LOGGING.md` und `docs/BUILD.md` aktualisiert.
+
+## 2026-10-10 — RNetMsgBroker Subproject V35
+
+- `RNET-BROKER-SUBPROJECT-V35`.
+- `external/RNetMsgBroker` als CMake-Subprojekt integriert; fehlende Quelle wird reproduzierbar als `v1.0.0` nur unter `/tmp` geholt.
+- `rnet-can-proxy` linkt `RNetMsgBroker` direkt.
+- CAN-RX/CAN-TX-Kommentare entstehen im Proxy-Prozess; kein `rnet-log-comment`-Prozess mehr.
+- `R-Net.json` wird beim Proxy-Build neben das Binary kopiert.
+- Decoder-Selbsttest prüft `RNetLampControlStatus`.
+- Backups ausschließlich unter `/tmp`.
+- README und Doku aktualisiert.
+
+## V37
+- Power-Off-Screen: vorhandenes `free-r-net-logo-1254.png` statt Textlogo.
+- Logo groß, zentriert und seitenverhältnisgetreu skaliert.
+- Runtime-Marker `RNET-FRENET-POWEROFF-V37` für korrekte Binary-Prüfung.

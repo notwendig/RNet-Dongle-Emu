@@ -53,7 +53,7 @@ build CMakeFiles/rnet_rollstuhl_emu.dir/src/main.cpp.o: CXX_COMPILER__rnet_rolls
   CONFIG = Release
   DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB
   DEP_FILE = CMakeFiles/rnet_rollstuhl_emu.dir/src/main.cpp.o.d
-  FLAGS = -Werror -O3 -DNDEBUG -Wall -Wextra -Wpedantic
+  FLAGS = -O3 -DNDEBUG -Wall -Wextra -Wpedantic
   INCLUDES = -isystem /usr/include/qt6/QtWidgets -isystem /usr/include/qt6 -isystem /usr/include/qt6/QtCore -isystem /usr/lib64/qt6/mkspecs/linux-g++ -isystem /usr/include/qt6/QtGui
   OBJECT_DIR = CMakeFiles/rnet_rollstuhl_emu.dir
   OBJECT_FILE_DIR = CMakeFiles/rnet_rollstuhl_emu.dir/src
@@ -72,7 +72,7 @@ build CMakeFiles/rnet_rollstuhl_emu.dir/src/main.cpp.o: CXX_COMPILER__rnet_rolls
 build rollstuhl.emu: CXX_EXECUTABLE_LINKER__rnet_rollstuhl_emu_Release CMakeFiles/rnet_rollstuhl_emu.dir/src/main.cpp.o | /usr/lib64/libQt6Widgets.so.6.11.2 /usr/lib64/libQt6Gui.so.6.11.2 /usr/lib64/libGLX.so /usr/lib64/libOpenGL.so /usr/lib64/libQt6Core.so.6.11.2
   CONFIG = Release
   DEP_FILE = CMakeFiles/rnet_rollstuhl_emu.dir/link.d
-  FLAGS = -Werror -O3 -DNDEBUG
+  FLAGS = -O3 -DNDEBUG
   LINK_FLAGS = -Wl,--dependency-file=CMakeFiles/rnet_rollstuhl_emu.dir/link.d
   LINK_LIBRARIES = /usr/lib64/libQt6Widgets.so.6.11.2  /usr/lib64/libQt6Gui.so.6.11.2  /usr/lib64/libGLX.so  /usr/lib64/libOpenGL.so  /usr/lib64/libQt6Core.so.6.11.2
   OBJECT_DIR = CMakeFiles/rnet_rollstuhl_emu.dir

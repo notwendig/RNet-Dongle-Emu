@@ -1,19 +1,41 @@
-# Build V32 — 0 errors / 0 warnings
+# Build V35
 
-V32 lässt `-Werror` aktiv. Es gibt keine globale Abschaltung von `-Wunused-function`.
+V35 baut weiterhin getrennte Toolchains:
 
-Im aktuellen CAN-only-Pfad bleiben einige Replay-/POP-Helfer absichtlich im Source erhalten, obwohl sie nicht aufgerufen werden. Diese Funktionen werden lokal mit `[[maybe_unused]]` dokumentiert. V32 ergänzt insbesondere `load_stored_blocks()` zu dieser expliziten Liste.
+```text
+ftd2xx.dll       -> MinGW32
+rnet-can-proxy   -> natives Linux + RNetMsgBroker + Qt6::Core
+rollstuhl.emu    -> natives Linux / Qt6
+```
 
-Der vollständige Build ist:
+Komplett:
 
 ```bash
 ./build-clean.sh all
 ```
 
-Er erzeugt und prüft:
+Einzeln:
 
-- `build/mingw32/ftd2xx.dll`
-- `build/rnet-can-proxy/rnet-can-proxy`
-- `build/rollstuhl.emu/rollstuhl.emu`
+```bash
+./build-clean.sh dll
+./build-clean.sh proxy
+./build-clean.sh gui
+```
 
-Jeder Configure- und Build-Log wird auf Compiler-/CMake-Warnungen sowie Fehler geprüft. Ein solcher Fund beendet den Build mit Fehlerstatus. Nur ein vollständig sauberer Build meldet `0 errors, 0 warnings`.
+Der Proxy-Build bindet `external/RNetMsgBroker` per `add_subdirectory()` ein. `-Werror` bleibt aktiv; Buildausgaben mit Compiler-/CMake-Warnungen oder Fehlern werden als Fehler behandelt.
+
+Nach dem Proxy-Build läuft automatisch ein Decoder-Selbsttest. Dabei muss `0C000400#0B00000000000000` als `RNetLampControlStatus` erkannt werden.
+
+Erwartetes Ende:
+
+```text
+============================================================
+ BUILD V35: 0 errors, 0 warnings
+============================================================
+```
+
+## Broker-Quelle
+
+Ist `external/RNetMsgBroker` noch nicht vorhanden, beschafft der V35-Apply den
+stabilen Tag `v1.0.0` zunächst nach `/tmp` und kopiert ihn anschließend ins
+Projekt. `build-clean.sh` selbst greift nie auf das Netz zu.

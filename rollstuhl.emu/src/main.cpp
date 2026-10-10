@@ -9,6 +9,7 @@
 #include <QFile>
 #include <QFont>
 #include <QGraphicsScene>
+#include <QGraphicsPixmapItem>
 #include <QGraphicsTextItem>
 #include <QGraphicsView>
 #include <QGridLayout>
@@ -58,6 +59,8 @@
 #include <unistd.h>
 
 namespace {
+
+constexpr char kPowerOffLogoMarker[] = "RNET-FRENET-POWEROFF-V37";
 
 constexpr char kGuiMarker[] = "RNET-CHAIR-CJSM2-GUI-V28";
 constexpr int kJsmModule = 3;
@@ -704,6 +707,7 @@ public:
         appendLog(QStringLiteral(
             "RNET-CHAIR-REPLAY-V17: Replay-Antworten gepuffert, 1 CAN-Frame/ms"));
         appendLog(QString::fromLatin1(kGuiMarker));
+        appendLog(QString::fromLatin1(kPowerOffLogoMarker));
         appendLog(QStringLiteral(
             "CJSM2 GUI: Joystick, beide Paddles, MODE, PROFILE, HORN, 4 Screen-Tasten und externe Jacks"));
         appendLog(QStringLiteral(
@@ -1565,6 +1569,32 @@ private:
         item->setPos(pos);
     }
 
+
+    QPixmap loadFrenetLogo() const
+    {
+        // Unser vorhandenes free R-Net/FRENET-Branding-Asset.
+        // Zuerst Qt-Ressourcen (V28), danach robuste Dateipfad-Fallbacks.
+        const QString appDir = QCoreApplication::applicationDirPath();
+        const QStringList candidates = {
+            QStringLiteral(":/branding/free-r-net-logo-1254.png"),
+            QStringLiteral(":/free-r-net-logo-1254.png"),
+            QStringLiteral(":/assets/branding/free-r-net-logo-1254.png"),
+            QDir(appDir).absoluteFilePath(
+                QStringLiteral("../../assets/branding/free-r-net-logo-1254.png")),
+            QDir(appDir).absoluteFilePath(
+                QStringLiteral("../../../assets/branding/free-r-net-logo-1254.png")),
+            QDir::current().absoluteFilePath(
+                QStringLiteral("assets/branding/free-r-net-logo-1254.png"))
+        };
+
+        for (const QString& path : candidates) {
+            QPixmap pixmap;
+            if (pixmap.load(path) && !pixmap.isNull())
+                return pixmap;
+        }
+        return {};
+    }
+
     void renderDisplay()
     {
         if (!scene_)
@@ -1585,8 +1615,23 @@ private:
         }
 
         if (!powerOn_) {
-            addSceneText(QStringLiteral("R-NET"), QPointF(205, 112), 26, QColor(110, 118, 125), true);
-            addSceneText(QStringLiteral("OFF"), QPointF(218, 154), 22, QColor(145, 70, 70), true);
+            // RNET-FRENET-POWEROFF-V37:
+            // Bei Power-Off ausschließlich unser echtes free R-Net/FRENET-Logo.
+            scene_->setBackgroundBrush(QColor(8, 10, 12));
+
+            const QPixmap logo = loadFrenetLogo();
+            if (!logo.isNull()) {
+                const QPixmap scaled = logo.scaled(
+                    QSize(440, 270),
+                    Qt::KeepAspectRatio,
+                    Qt::SmoothTransformation);
+
+                QGraphicsPixmapItem* item = scene_->addPixmap(scaled);
+                const QRectF bounds = item->boundingRect();
+                const QPointF center = scene_->sceneRect().center();
+                item->setPos(center.x() - bounds.width() / 2.0,
+                             center.y() - bounds.height() / 2.0);
+            }
             return;
         }
 

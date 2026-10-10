@@ -1,7 +1,8 @@
 {
 	"InstallScripts" : 
 	[
-		"/home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/cmake_install.cmake"
+		"/home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/cmake_install.cmake",
+		"/home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/external/RNetMsgBroker/cmake_install.cmake"
 	],
 	"Parallel" : false
 }

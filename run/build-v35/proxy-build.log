@@ -1,0 +1,14 @@
+[0/2] Re-checking globbed directories...
+[1/14] Automatic MOC and UIC for target RNetMsgBroker
+[2/14] Building CXX object CMakeFiles/rnet-can-proxy.dir/main.cpp.o
+[3/14] Building CXX object external/RNetMsgBroker/CMakeFiles/RNetMsgBroker.dir/RNetMsgBroker_autogen/mocs_compilation.cpp.o
+[4/14] Building CXX object external/RNetMsgBroker/CMakeFiles/RNetMsgBroker.dir/rnetmsgbroker.cpp.o
+[5/14] Building CXX object CMakeFiles/rnet-can-proxy.dir/rnet_proxy_logdecode.cpp.o
+[6/14] Building CXX object CMakeFiles/rnet-proxy-decode-test.dir/rnet_proxy_decode_test.cpp.o
+[7/14] Linking CXX shared library external/RNetMsgBroker/libRNetMsgBroker.so
+[8/14] Automatic MOC and UIC for target RNetMsgBrokerTest
+[9/14] Building CXX object external/RNetMsgBroker/CMakeFiles/RNetMsgBrokerTest.dir/RNetMsgBrokerTest_autogen/mocs_compilation.cpp.o
+[10/14] Building CXX object external/RNetMsgBroker/CMakeFiles/RNetMsgBrokerTest.dir/testapp/main.cpp.o
+[11/14] Linking CXX executable rnet-can-proxy
+[12/14] Linking CXX executable rnet-proxy-decode-test
+[13/14] Linking CXX executable external/RNetMsgBroker/RNetMsgBrokerTest

@@ -248,3 +248,21 @@ Der Build bleibt mit `-Werror` streng. Nur die im aktuellen CAN-only-Pfad absich
 <!-- RNET-ZERO-WARNINGS-V32 -->
 
 V32 ergänzt `load_stored_blocks()` zur expliziten Liste der im CAN-only-Pfad erhaltenen, aber derzeit nicht referenzierten Replay/POP-Helfer. Es wird ausschließlich lokal `[[maybe_unused]]` verwendet; `-Werror` bleibt aktiv und es gibt keine globale Warnungsabschaltung. `./build-clean.sh all` baut DLL, CAN-Proxy und `rollstuhl.emu` vollständig neu und akzeptiert keine Warnungen oder Fehler.
+
+## R-Net-Log-Kommentare V33
+
+<!-- RNET-LOG-DECODE-V33 -->
+
+V33 ergänzt die CAN/R-Net-Logs um lesbare Kommentare hinter dem unveränderten Roh-Frame. Die Dekodierung verwendet direkt `RNetMsgBroker` und dessen `R-Net.json`, also dieselbe Definitionsebene wie der R-Net Analyzer; es gibt keine zweite handgepflegte Decoder-Tabelle. `run/ftd2xx-emu.decoded.log` ist die kommentierte Begleitdatei zum unveränderten DLL-Rohlog. Details: `docs/LOGGING.md`. Apply-Backups werden ausschließlich unter `/tmp` angelegt.
+
+## RNetMsgBroker-Subprojekt V35
+
+<!-- RNET-BROKER-SUBPROJECT-V35 -->
+
+`external/RNetMsgBroker` ist jetzt ein natives CMake-Subprojekt des Dongle-Emulators. `rnet-can-proxy` linkt den Broker direkt und ergänzt CAN-Logmeldungen im selben Prozess um `; <Kurzdecode>`. Die Definitionen stammen aus `external/RNetMsgBroker/R-Net.json`, derselben Decoderbasis wie im R-Net Analyzer. Fehlt lokal ein Broker-Quellbaum, holt der V35-Apply reproduzierbar den öffentlichen Tag `v1.0.0` nach `/tmp` und vendort ihn anschließend nach `external/RNetMsgBroker`. Der separate V33-Logfilterprozess entfällt. Apply-Backups liegen ausschließlich unter `/tmp`. Details: `docs/RNETMSGBROKER.md` und `docs/LOGGING.md`.
+
+## Power-Off branding (V37)
+
+`rollstuhl.emu` zeigt bei Power-Off das vorhandene
+`assets/branding/free-r-net-logo-1254.png` groß, seitenverhältnisgetreu
+und zentriert im CJSM2-Dialog-Screen. Es wird kein Ersatztext gezeichnet.

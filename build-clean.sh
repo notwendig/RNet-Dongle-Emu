@@ -2,7 +2,7 @@
 set -euo pipefail
 
 ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-RUN_DIR="$ROOT/run/build-v32"
+RUN_DIR="$ROOT/run/build-v35"
 mkdir -p "$RUN_DIR"
 JOBS="${RNET_BUILD_JOBS:-$(nproc)}"
 
@@ -53,19 +53,35 @@ build_dll() {
 }
 
 build_proxy() {
-    local src
+    local src testbin json out
     src="$(native_source rnet-can-proxy)" || fail "CMake-Source für rnet-can-proxy nicht gefunden"
+    [[ -f "$ROOT/external/RNetMsgBroker/CMakeLists.txt" ]] || fail "external/RNetMsgBroker fehlt"
+    [[ -f "$ROOT/external/RNetMsgBroker/R-Net.json" ]] || fail "external/RNetMsgBroker/R-Net.json fehlt"
+
     rm -rf "$ROOT/build/rnet-can-proxy"
-    run_checked proxy-configure env CXXFLAGS="${CXXFLAGS:-} -Werror" cmake -S "$src" -B "$ROOT/build/rnet-can-proxy" -G Ninja -DCMAKE_BUILD_TYPE=Release
+    run_checked proxy-configure env CXXFLAGS="${CXXFLAGS:-} -Werror" cmake \
+        -S "$src" -B "$ROOT/build/rnet-can-proxy" -G Ninja -DCMAKE_BUILD_TYPE=Release
     run_checked proxy-build cmake --build "$ROOT/build/rnet-can-proxy" -j"$JOBS"
+
     [[ -x "$ROOT/build/rnet-can-proxy/rnet-can-proxy" ]] || fail "rnet-can-proxy wurde nicht erzeugt"
+    [[ -f "$ROOT/build/rnet-can-proxy/R-Net.json" ]] || fail "R-Net.json wurde nicht neben den Proxy kopiert"
+
+    testbin="$ROOT/build/rnet-can-proxy/rnet-proxy-decode-test"
+    json="$ROOT/build/rnet-can-proxy/R-Net.json"
+    [[ -x "$testbin" ]] || fail "rnet-proxy-decode-test wurde nicht erzeugt"
+    out="$($testbin "$json")" || fail "Proxy-Decoder-Selbsttest fehlgeschlagen"
+    printf '%s\n' "$out"
+    grep -q 'RNetLampControlStatus' <<<"$out" || fail "Proxy-Decoder erkennt RNetLampControlStatus nicht"
+    grep -q 'RNET-PROXY-DECODE-V35' <<<"$out" || fail "V35 Decoder-Marker fehlt"
+    echo "[OK] Proxy-Decoder-Selbsttest"
 }
 
 build_gui() {
     local src
     src="$(native_source rollstuhl.emu)" || fail "CMake-Source für rollstuhl.emu nicht gefunden"
     rm -rf "$ROOT/build/rollstuhl.emu"
-    run_checked gui-configure env CXXFLAGS="${CXXFLAGS:-} -Werror" cmake -S "$src" -B "$ROOT/build/rollstuhl.emu" -G Ninja -DCMAKE_BUILD_TYPE=Release
+    run_checked gui-configure env CXXFLAGS="${CXXFLAGS:-} -Werror" cmake \
+        -S "$src" -B "$ROOT/build/rollstuhl.emu" -G Ninja -DCMAKE_BUILD_TYPE=Release
     run_checked gui-build cmake --build "$ROOT/build/rollstuhl.emu" -j"$JOBS"
     [[ -x "$ROOT/build/rollstuhl.emu/rollstuhl.emu" ]] || fail "rollstuhl.emu wurde nicht erzeugt"
 }
@@ -80,5 +96,5 @@ esac
 
 echo
 echo "============================================================"
-echo " BUILD V32: 0 errors, 0 warnings"
+echo " BUILD V35: 0 errors, 0 warnings"
 echo "============================================================"
