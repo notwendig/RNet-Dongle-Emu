@@ -1,223 +1,261 @@
-# DongleInterface
+<p align="center">
+  <img src="assets/branding/free-r-net-logo-1254.png" width="230" alt="freeR-Net logo">
+</p>
 
-<!-- DONGLEINTERFACE-PURE-DONGLE-CPOP-V1 -->
-## Pure-Dongle-/Rollstuhl-Trennung
+<h1 align="center">freeR-Net</h1>
 
-`R-Net Programmer -> DongleInterface.dll -> ftd2xx.dll -> SocketCAN -> rollstuhl.emu`
+<p align="center">
+  <strong>R-Net dongle interface, SocketCAN bridge and wheelchair emulator research toolkit.</strong>
+</p>
 
-- `ftd2xx.dll` enthält nur FTDI-/Dongle-Verhalten und CAN-Transport.
-- Gültige `10/02` Raw24 und `10/01` CAN-Bursts werden in `CRawMsg`,
-  `CUSBMsg`/`CCANMsg` und bei POP zusätzlich `CPOPMsg` instanziiert.
-- Ungültige Wire-Frames werden `JUNK/NOISE` geloggt und verworfen.
-- USB-Kommandos werden lokal im Dongle bearbeitet.
-- CAN wird transparent übertragen.
-- POP-/Block-/Rollstuhl-State-Machines gehören nur in `rollstuhl.emu`.
-- `rollstuhl.emu` ist Unterprojekt von `DongleInterface`; seine GUI bleibt gleich.
-- CAN RX/TX wird an der SocketCAN-I/O-Grenze als `CCANMsg` bzw. `CPOPMsg`
-  instanziiert und mit `std::clog << CPOPMsg` protokolliert.
+<p align="center">
+  <a href="https://github.com/notwendig/RNet-Dongle-Emu/actions/workflows/build.yml"><img alt="Build" src="https://github.com/notwendig/RNet-Dongle-Emu/actions/workflows/build.yml/badge.svg"></a>
+  <img alt="C++17" src="https://img.shields.io/badge/C%2B%2B-17-blue">
+  <img alt="Qt" src="https://img.shields.io/badge/Qt-6-41CD52">
+  <img alt="SocketCAN" src="https://img.shields.io/badge/CAN-SocketCAN-yellow">
+  <img alt="Wine" src="https://img.shields.io/badge/Wine-32--bit-8B0000">
+  <img alt="Platform" src="https://img.shields.io/badge/platform-Linux-lightgrey">
+</p>
 
-<!-- NO-AUTO-REWAKE-V1 -->
-## Kein automatisches Wieder-Einschalten
+---
 
-Nach einer abgeschlossenen Power-Off-/Sleep-Sequenz bleibt die Emulation aus.
+**freeR-Net** is an engineering and protocol-research project for understanding the
+R-Net programmer/dongle communication path and for testing R-Net protocol behaviour
+against an emulated wheelchair endpoint.
 
-- `0x002 RTR` setzt den Proxy-TX-Gate auf SILENT.
-- `0x00C` wird **nicht** mehr als Power-On/Freigabe des DLL-TX interpretiert.
-- Nach dem abschließenden `0x000 RTR` setzt `rollstuhl.emu` einen OFF-Latch.
-- Nach gesetztem OFF-Latch werden spätere automatische TX-Frames verworfen.
-- Ein Neustart von `rollstuhl.emu` beginnt eine neue Sitzung.
-- Der bereits funktionierende initiale Connect-/Read-Pfad bleibt unverändert.
+The repository deliberately separates the **dongle/transport layer** from the
+**wheelchair protocol/state-machine layer**.
 
-<!-- WRITE82-V2 -->
-## Write-at-92%-Fix: POP ODI 0x82
+> [!CAUTION]
+> This is research software, not a safety-certified mobility control system.
+> The repository intentionally does **not** provide instructions for binding a real
+> wheelchair CAN interface or switching a dealer dongle to OEM mode. See
+> [SAFETY.md](SAFETY.md).
 
-Der Programmer sendet beim bisher reproduzierbaren 92%-Abbruch den Quick-Write
-`78F#20 82 00 00 30 00 00 00`. `rollstuhl.emu` muss diesen Request quittieren.
-
-- RX: `78F#20 82 00 00 xx xx xx xx`
-- TX-Ack: `790#4F 82 00 00 00 00 00 00`
-- Logmarker: `[rollstuhl.emu][TX-WRITE82-ACK]`
-- Die FTDI-Schicht bleibt transparent; der Request wurde bereits 24/24 Byte geschrieben.
-- Nach Power-Off bleibt der CAN-TX durch den OFF-Latch stumm.
-- `0x00C` hebt den Proxy-PowerOff-Gate nicht mehr auf.
-
-<!-- WRITE92-STARTOFF-V4 -->
-## Write 92 % / Start Power OFF V4
-
-- `ODI 0x82` Quick-Write Ack bleibt erhalten.
-- `ODI 0x84 = 1` Quick-Write Ack bleibt erhalten.
-- Startzustand ist Power OFF / CAN still.
-- Wenn der aktuelle GUI-Source keinen sicher patchbaren Startzustand enthält,
-  übernimmt `RNET_STARTOFF_FALLBACK=1` den Start-AUS-Gate im CAN-I/O-Wrapper.
-- Die erste automatische `00C`-Wake-Sequenz wird dann unterdrückt.
-- Eine spätere explizite GUI-EIN-Sequenz darf den Start-AUS-Gate lösen.
-- Nach abgeschlossenem Power-Off bleibt der OFF-Latch bestehen.
-- `0x00C` hebt den Proxy-Silent-Latch nicht auf.
-<!-- SEGMENTED-WRITE-V5 -->
-## POP Segmented Write V5
-
-- `rollstuhl.emu` owns the POP write protocol state; the FTD/DLL remains CAN transport.
-- `78F#10 8C ...` starts `SegmentedDownload`.
-- Server ready response: `790#4F 8C ... <size> 40`.
-- Client segmented frames are buffered on the rollstuhl side.
-- End of a block/final data sends `1E410000#`.
-- Final `78F#80 8C ...` is completed with `790#8F 8C ...`.
-- Startup stays Power OFF until explicit GUI ON.
-- Proxy PowerOff gating is sticky: `0x00C` does not re-enable DLL CAN TX.
-
-<!-- WRITE100-CONNECT1-HARDOFF-V6 -->
-## Programmer write completion / first connect / hard Power-Off V6
-
-- First connect: a `20/80=0x1f` received before startup-ready is held until
-  the emulated JSM reaches `0x7B0`, then answered once with `4F/80`.
-- Segmented `0x8C` write remains on the `rollstuhl.emu` side.
-- The complete previously working post-write sequence is implemented:
-  `20/89`, `20/88`, `20/8A`, stateful `40/8B`, `20/8F`.
-- `40/8B` uses CRC-16/CCITT-FALSE over:
-  `key88(4) + value89(u32 LE) + size(u32 LE) + block data`.
-- After completed `000#R`, a later automatic `0x00C` is rejected with
-  `ENETDOWN` instead of being falsely reported as successfully transmitted.
-  The existing TX OFF latch remains the bus-safety fallback.
-- FTD2XX remains transport-only; these wheelchair protocol states live in
-  `rollstuhl.emu`.
-
-<!-- POWER-FSM-MANUAL-ONLY-V41 -->
-## Power-FSM V41: ausschließlich manuelles Power-On
-
-- Startzustand ist Power OFF.
-- `RNET_STARTOFF_FALLBACK` ist deaktiviert; der erste echte GUI-EIN-Klick
-  wird nicht mehr verschluckt.
-- Power-On darf nur von `Ein/Aus-Paddle` oder
-  `externer Ein/Aus-Schalter` ausgelöst werden.
-- Direkte/interne automatische `beginPowerOnSequence()`-Aufrufe werden blockiert.
-- Auch `finishPowerOnSequence()` darf den Zustand nur nach einer akzeptierten
-  manuellen EIN-Sequenz auf EIN setzen.
-- Ein CAN-TX-Fehler während Power-On bricht die Sequenz ab.
-- Nach Power-Off bleibt die State-Machine stabil AUS.
-- Der HardOff-TX-Latch bleibt zusätzlich als Sicherheitsnetz aktiv.
-
-<!-- COMMON-ONLY-NO-FTD2XX-RNET-CPOP-V1 -->
-## Gemeinsame Dongle-/R-Net-Nachrichtenklassen
-
-Die gemeinsame Implementierung liegt ausschließlich unter `common/`:
-
-- `common/DongleMessages.cpp`
-- `common/DongleMessages.hpp`
-- `common/RNetStream.hpp`
-
-Der frühere Doppelbestand `ftd2xx/rnet-cpop/` wurde entfernt.
-`ftd2xx` und `rollstuhl.emu` verwenden die gemeinsamen Klassen aus `common/`.
-
-<!-- VSCODE-ROLLSTUHL-NATIVE-V1 -->
-## VS Code / CMake Tools: `rollstuhl.emu`
-
-`rollstuhl.emu` ist eine native Linux/Qt6-Anwendung und wird **nicht** mit der
-MinGW32-Toolchain der Wine/FTD2XX-Komponenten gebaut.
-
-Für VS Code liegt deshalb unter `rollstuhl.emu/CMakePresets.json` der Preset
-`native-debug`. Er verwendet `/usr/bin/gcc` und `/usr/bin/g++` und baut nach:
-
-`build/rollstuhl.emu-vscode`
-
-Die Workspace-Einstellung `cmake.useCMakePresets=always` sorgt dafür, dass
-CMake Tools für dieses Projekt nicht mehr den zuvor ausgewählten MinGW-Kit
-verwendet.
-
-Die Wine-/FTD2XX-Komponenten bleiben weiterhin MinGW32-Builds und werden über
-ihre eigenen Buildabläufe/Preset-Konfigurationen gebaut.
-
-<!-- START-EMU-REAL-STOP-STATUS-V1 -->
-## Starten / Stoppen / Status
-
-Öffentlicher Einstieg:
+## Architecture
 
 ```text
-./start.sh emu
-./start.sh real
-./start.sh stop
-./start.sh status
+R-Net Programmer OEM
+        │
+        │ FTD2XX / Raw24
+        ▼
+   ftd2xx.dll
+  DongleInterface
+        │
+        │ SocketCAN / proxy
+        ▼
+      can0
+        │
+        │ test CAN pair
+        ▼
+      can1
+        │
+        ▼
+ rollstuhl.emu
 ```
 
-`emu` und `real` führen immer einen vollständigen frischen Ablauf aus:
+The protocol boundary is intentional:
 
-1. Terminal `reset`
-2. laufende Komponenten stoppen
-3. `rm -rf build`
-4. komplett neu bauen und deployen
-5. gewünschten Modus starten
+- `ftd2xx/` handles FTDI-facing transport, framing and CAN transport.
+- `common/` contains the shared recovered message types (`CRawMsg`, `CCANMsg`,
+  `CPOPMsg`, stream helpers).
+- `tools/rnet-can-proxy/` bridges the DLL transport to SocketCAN and implements the
+  sticky Power-Off TX gate.
+- `rollstuhl.emu/` owns wheelchair-side POP/block/session/power state machines.
+- `start.sh` is the single public entry point.
 
-`stop` und `status` bauen nichts.
+See [ARCHITECTURE-PURE-DONGLE.md](ARCHITECTURE-PURE-DONGLE.md) for the detailed data path.
 
-Der öffentliche Name `real` ersetzt `dev`. Intern wird für den noch
-bestehenden Legacy-Startpfad `real -> dev` abgebildet.
+## Current status
 
-<!-- SINGLE-PROJECT-START-V5 -->
-## Einheitlicher Start
+| Area | Status |
+|---|---|
+| Programmer connection | Working in emulation tests |
+| Configuration read | Working |
+| Configuration write | Working for the implemented POP/write path |
+| Segmented POP write | Implemented on `rollstuhl.emu` side |
+| Manual Power-On | Required; automatic re-wake is blocked |
+| Power-Off | Sticky CAN-TX silence after final Power-Off |
+| Real CAN verification | Configuration read verified on a You-Q test chair |
+| Runtime logs | Timestamped under `~/.rnet.logs/` |
+| CAN trace | `candump -tz -ca can0` per run |
 
-`start.sh` arbeitet ausschließlich relativ zu seinem eigenen Repository.
-Es gibt keinen zweiten/alten Projektpfad und keinen rekursiven Aufruf eines
-anderen `start.sh`.
+## Quick start
+
+The supported public commands are:
+
+```bash
+./start.sh emu
+./start.sh real
+./start.sh status
+./start.sh stop
+```
+
+`emu` and `real` always perform a fresh run:
 
 ```text
-./start.sh emu
-./start.sh real
-./start.sh stop
-./start.sh status
+reset
+→ stop old project processes
+→ rm -rf build
+→ rebuild all components
+→ deploy runtime
+→ start timestamped candump
+→ start selected mode
 ```
 
-`emu` und `real` führen immer aus:
+### `emu`
 
-1. Terminal `reset`
-2. laufende Projektprozesse direkt beenden
-3. `<Projektroot>/build` vollständig löschen
-4. Windows-Komponente, SocketCAN-Proxy (falls vorhanden) und `rollstuhl.emu`
-   frisch bauen/deployen
-5. `candump -tz -ca can0 | tee ~/.rnet.logs/<timestamp>-candump.log`
-6. gewünschten Modus starten
+```text
+App → DLL → can0 ⇄ can1 → rollstuhl.emu
+```
 
-`real` ist der öffentliche Name; für `rollstuhl.emu` wird intern weiterhin
-dessen Geräteargument `dev` verwendet.
+The Programmer, DLL transport, proxy and wheelchair emulator are started together.
 
-Vorhandene Dateien unter `~/.rnet.logs/` werden nicht gelöscht oder
-überschrieben.
+### `real`
 
-<!-- SINGLE-PROJECT-START-V6 -->
-## Build-Erkennung im zusammengeführten Repository
+```text
+Real wheelchair → can0 → Device.emu_CJSM
+```
 
-`start.sh` setzt nicht mehr voraus, dass die Windows-Komponente direkt im
-Projektroot liegt. Für den frischen Build wird rekursiv, außerhalb von
-`.git/` und `build/`, in dieser Reihenfolge gesucht:
+`real` is the public command name. Internally the existing GUI/device mode still uses
+the `dev` argument.
 
-1. `CMakePresets.json` mit `mingw32-release`
-2. `build-wine32.sh`
-3. passendes `CMakeLists.txt`
-4. `runtime-complete/build-forwarder.sh`
+## Logs
 
-Auch Install-/Deploy-Skripte werden im Repository gesucht.
+All runtime logs stay outside the repository:
 
-Alle übrigen Regeln aus V5 bleiben bestehen: ein Repository, kein Legacy-
-`start.sh`, kein Selbstaufruf, `rm -rf build`, candump mit Zeitstempel und
-Erhalt alter Logs.
+```text
+~/.rnet.logs/
+```
 
-<!-- SINGLE-PROJECT-START-V7-ACTUAL-REPO -->
-## Build/Start nach Zusammenführung
+Typical files:
 
-Der zusammengeführte Projektstand enthält die eigentlichen Quellen unter
-`ftd2xx/`, `common/` und `rollstuhl.emu/`. V7 ergänzt die dazu fehlende
-Build-Infrastruktur direkt in **diesem einen Repository**:
+```text
+YYYYMMDD-HHMMSS-candump.log
+YYYYMMDD-HHMMSS-rnet-can-proxy.log
+YYYYMMDD-HHMMSS-rollstuhl.emu.log
+YYYYMMDD-HHMMSS-programmer.log
+YYYYMMDD-HHMMSS-ftd2xx-emu.log
+```
 
-- `CMakeLists.txt` + `CMakePresets.json` für die PE32/i386-`ftd2xx.dll`
-- `ftd2xx/ftd2xx_emu.h` und `ftd2xx/ftd2xx.def`
-- MinGW32-Toolchain
-- CAN-only INI
-- nativen `rnet-can-proxy` mit Sticky-PowerOff-Gate V20
+Existing logs are never deleted or overwritten by `start.sh`.
 
-Der aktuelle `ftd2xx/ftd2xx_emu.cpp` wird nicht ersetzt.
+## Build requirements
 
-Öffentlicher Start:
-`./start.sh emu|real|stop|status`
+The project is developed and tested primarily on Linux with:
 
-`emu` und `real` führen immer `reset`, internen Stop, `rm -rf build`,
-kompletten Neuaufbau und anschließend den gewünschten Start aus.
-Laufzeitlogs einschließlich `candump -tz -ca can0` liegen mit Zeitstempel
-unter `~/.rnet.logs`; ältere Logs werden nicht gelöscht.
+- CMake + Ninja
+- GCC/G++
+- MinGW-w64 i686 cross compiler
+- Qt 6 Widgets
+- SocketCAN / `can-utils`
+- Wine/Wine-staging for the 32-bit R-Net Programmer
+
+The root CMake preset builds the 32-bit Windows `ftd2xx.dll`.
+`rollstuhl.emu` and `rnet-can-proxy` are native Linux binaries.
+
+## Repository layout
+
+```text
+.
+├── assets/branding/          freeR-Net logos and application icons
+├── cmake/toolchains/         MinGW32 cross toolchain
+├── common/                   shared R-Net/Dongle message classes
+├── docs/                     project and GitHub documentation
+├── examples/                 runtime configuration example
+├── ftd2xx/                   Windows FTD2XX/DongleInterface implementation
+├── rollstuhl.emu/            Qt6 wheelchair/device emulator
+├── tools/rnet-can-proxy/     native SocketCAN transport proxy
+├── .github/                  CI, issue forms and PR template
+└── start.sh                  emu | real | stop | status
+```
+
+## Branding
+
+The Qt application uses the embedded freeR-Net icons from
+`rollstuhl.emu/resources.qrc`. Repository assets are in
+[`assets/branding/`](assets/branding/).
+
+For the GitHub repository social preview, use:
+
+```text
+assets/branding/free-r-net-logo-1254.png
+```
+
+See [docs/GITHUB-SETUP.md](docs/GITHUB-SETUP.md).
+
+<!-- FREER_NET_SCREENSHOTS_V9 -->
+## Screenshots
+
+The following screenshots show the current **freeR-Net** user interface, the
+original PGDT programmer view under Wine, and the repository/build workspace.
+
+### PGDT R-Net Programmer
+
+<p align="center">
+  <img src="assets/screenshots/pgdt-rnet-programmer.png" alt="PGDT R-Net Programmer configuration screen" width="1000">
+</p>
+
+### freeR-Net emulator — active replay / runtime
+
+<p align="center">
+  <img src="assets/screenshots/freer-net-emulator-active.png" alt="freeR-Net rollstuhl emulator active session" width="1000">
+</p>
+
+### freeR-Net repository / start.sh comparison in VSCodium
+
+<p align="center">
+  <img src="assets/screenshots/freer-net-vscodium-diff.png" alt="freeR-Net repository opened in VSCodium with start.sh diff" width="1000">
+</p>
+
+### freeR-Net emulator — branded idle / power-off screen
+
+<p align="center">
+  <img src="assets/screenshots/freer-net-emulator-idle-branded.png" alt="freeR-Net rollstuhl emulator idle or power-off screen" width="1000">
+</p>
+
+### PGDT Programmer warning dialog
+
+<p align="center">
+  <img src="assets/screenshots/pgdt-warning-dialog.png" alt="PGDT programmer warning dialog" width="900">
+</p>
+
+> [!NOTE]
+> These screenshots were captured from the current Linux/Wine-based development
+> environment and illustrate the public project branding, application windows
+> and runtime behaviour.
+## Safety boundaries
+
+The repository contains protocol research and emulation code. Real-hardware use must
+be treated separately from bench/emulation testing.
+
+Important project rules include:
+
+- after the first Power-Off request, DLL→CAN TX stays silent for that proxy session;
+- `0x00C` must not automatically re-enable TX after Power-Off;
+- wheelchair protocol responses belong in `rollstuhl.emu`, not in the FTD layer;
+- real-chair CAN binding and dealer→OEM conversion are intentionally outside this repo.
+
+Read [SAFETY.md](SAFETY.md) before using the project with physical hardware.
+
+## Contributing
+
+Contributions are welcome when they preserve the transport/protocol separation and
+include enough logs or captures to reproduce protocol changes.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Acknowledgements
+
+Special thanks to **Constantin Grosch** for donating the R-Net programmer dongle that
+made this research possible.
+
+Thanks also to **ChatGPT by OpenAI** for assistance with reverse engineering,
+protocol analysis, build tooling and documentation.
+
+---
+
+<p align="center">
+  <img src="assets/branding/free-r-net-icon-64.png" width="48" alt="freeR-Net icon"><br>
+  <strong>freeR-Net</strong> — protocol research with a strict transport/state-machine boundary.
+</p>
