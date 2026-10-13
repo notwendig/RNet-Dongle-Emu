@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.21)
 
-project(rnet_rollstuhl_emu LANGUAGES CXX)
+project(freeRNet_rollstuhl_emu VERSION 1.0 LANGUAGES CXX)
 
 find_package(Qt6 6.2 REQUIRED COMPONENTS Widgets)
 find_package(Threads REQUIRED)
@@ -55,4 +55,10 @@ target_link_options(rnet_rollstuhl_emu PRIVATE
     "-Wl,--wrap=recvmsg"
     "-Wl,--wrap=writev"
     "-Wl,--wrap=readv"
+)
+
+
+# FREER_NET_BRANDING_V1
+set_target_properties(rnet_rollstuhl_emu PROPERTIES
+    OUTPUT_NAME "rollstuhl.emu"
 )

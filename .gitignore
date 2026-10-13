@@ -1,0 +1,30 @@
+# Build output
+/build/
+/cmake-build-*/
+**/build/
+
+# Runtime/test logs
+/logs/
+*.log
+candump.log
+
+# Generated packages/backups
+*.zip
+*.bak
+*.backup
+*.backup-*
+*~
+
+# Python/tool caches
+__pycache__/
+*.py[cod]
+
+# IDE/editor local state
+.vscode/*.log
+.vscode/.cmake/
+.idea/
+*.user
+
+# OS
+.DS_Store
+Thumbs.db

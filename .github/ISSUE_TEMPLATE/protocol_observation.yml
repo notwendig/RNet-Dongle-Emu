@@ -1,0 +1,35 @@
+name: Protocol observation
+description: Document an observed R-Net request/response sequence
+title: "[protocol] "
+labels: ["protocol"]
+body:
+  - type: dropdown
+    id: source
+    attributes:
+      label: Source
+      options:
+        - emulated wheelchair
+        - real test wheelchair
+        - Programmer/DLL
+        - other
+    validations:
+      required: true
+
+  - type: textarea
+    id: frames
+    attributes:
+      label: CAN / Raw24 sequence
+      render: text
+    validations:
+      required: true
+
+  - type: textarea
+    id: interpretation
+    attributes:
+      label: Interpretation
+      description: State, POP ODI, block/segment meaning, expected response.
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Supporting log markers

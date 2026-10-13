@@ -2153,6 +2153,13 @@ int main(int argc, char** argv)
 {
     QApplication app(argc, argv);
 
+    // FREER_NET_BRANDING_V1
+    QCoreApplication::setApplicationName(QStringLiteral("freeR-Net"));
+    QCoreApplication::setOrganizationName(QStringLiteral("freeR-Net"));
+    QApplication::setApplicationDisplayName(QStringLiteral("freeR-Net"));
+    QApplication::setWindowIcon(
+        QIcon(QStringLiteral(":/branding/free-r-net-icon-256.png")));
+
     constexpr const char* kModeMarker = "RNET-GUI-MODES-V29";
 
     if (argc != 2 || !argv[1] || !*argv[1]) {
@@ -2192,9 +2199,9 @@ int main(int argc, char** argv)
     MainWindow w(iface, replay);
     w.setProperty("rnetRunMode", token);
     if (token == QStringLiteral("emu"))
-        w.setWindowTitle(QStringLiteral("rollstuhl.emu — EMU — %1").arg(iface));
+        w.setWindowTitle(QStringLiteral("freeR-Net — rollstuhl.emu — EMU — %1").arg(iface));
     else
-        w.setWindowTitle(QStringLiteral("Device.emu_CJSM — DEV — %1").arg(iface));
+        w.setWindowTitle(QStringLiteral("freeR-Net — Device.emu_CJSM — DEV — %1").arg(iface));
     w.show();
     return app.exec();
 }
