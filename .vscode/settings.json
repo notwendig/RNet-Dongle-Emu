@@ -1,0 +1,5 @@
+{
+  "cmake.sourceDirectory": "${workspaceFolder}/rollstuhl.emu",
+  "cmake.useCMakePresets": "always",
+  "cmake.configureOnOpen": false
+}

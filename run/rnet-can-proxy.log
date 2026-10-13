@@ -1,5 +1,0 @@
-nohup: Eingabe wird ignoriert
-RNET-PROXY-DECODE-V42: in-process RNetMsgBroker, json=/home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/R-Net.json
-rnet-can-proxy: can0 <-> 127.0.0.1:39000
-RNET-CAN-POWEROFF-GATE-V19: ACTIVE; 0x002 RTR -> TX SILENT, 0x00C -> TX ACTIVE
-RNET-PROXY-DECODE-V42: passive CAN monitor active on can0; direction column=TX/RX

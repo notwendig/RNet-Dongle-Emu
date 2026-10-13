@@ -1,0 +1,38 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 21,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "native-debug",
+      "displayName": "rollstuhl.emu – Native Linux Debug",
+      "description": "Native Fedora GCC/Qt6 build; never MinGW.",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/../build/rollstuhl.emu-vscode",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_C_COMPILER": "/usr/bin/gcc",
+        "CMAKE_CXX_COMPILER": "/usr/bin/g++"
+      },
+      "vendor": {
+        "microsoft.com/VisualStudioSettings/CMake/1.0": {
+          "hostOS": [
+            "Linux"
+          ]
+        }
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "native-debug",
+      "displayName": "rollstuhl.emu – Native Linux Debug",
+      "configurePreset": "native-debug",
+      "jobs": 0
+    }
+  ]
+}

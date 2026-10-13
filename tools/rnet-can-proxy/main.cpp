@@ -4,7 +4,6 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include <fcntl.h>
 #include <linux/can.h>
 #include <linux/can/raw.h>
 #include <net/if.h>
@@ -26,7 +25,7 @@ constexpr unsigned char kCanTx = 2;
 constexpr unsigned char kCanRx = 3;
 constexpr unsigned char kHelloAck = 4;
 
-constexpr char kPowerOffGateMarker[] = "RNET-CAN-POWEROFF-GATE-V19";
+constexpr char kMarker[] = "RNET-CAN-POWEROFF-GATE-V20-STICKY";
 
 std::uint16_t interface_port(const std::string& ifname) {
     if (ifname.rfind("can", 0) == 0 && ifname.size() > 3) {
@@ -57,10 +56,7 @@ std::array<unsigned char, kPacketSize>
 make_packet(unsigned char type, std::uint32_t id = 0, unsigned char dlc = 0,
             const unsigned char* data = nullptr) {
     std::array<unsigned char, kPacketSize> p{};
-    p[0] = 'R';
-    p[1] = 'N';
-    p[2] = 'C';
-    p[3] = '1';
+    p[0] = 'R'; p[1] = 'N'; p[2] = 'C'; p[3] = '1';
     p[4] = type;
     p[5] = dlc;
     put_u32le(p.data() + 6, id);
@@ -75,8 +71,8 @@ bool valid_packet(const unsigned char* p, std::size_t n) {
            p[0] == 'R' && p[1] == 'N' && p[2] == 'C' && p[3] == '1';
 }
 
-void log_gate(const char* message) {
-    std::printf("%s: %s\n", kPowerOffGateMarker, message);
+void log_gate(const char* text) {
+    std::printf("%s: %s\n", kMarker, text);
     std::fflush(stdout);
 }
 
@@ -131,21 +127,20 @@ int main(int argc, char** argv) {
 
     std::printf("rnet-can-proxy: %s <-> 127.0.0.1:%u\n",
                 ifname.c_str(), static_cast<unsigned>(port));
-    std::printf("%s: ACTIVE; 0x002 RTR -> TX SILENT, 0x00C -> TX ACTIVE\n",
-                kPowerOffGateMarker);
+    std::printf("%s: ACTIVE; 0x002 RTR -> TX SILENT, 0x00C cannot re-enable\n",
+                kMarker);
     std::fflush(stdout);
 
     sockaddr_in peer{};
     socklen_t peerLen = sizeof(peer);
     bool havePeer = false;
 
-    // R-Net power state rule:
-    // - first standard CAN 0x002 RTR is the PowerOff request.
-    // - from that instant, the dongle must not transmit anything on CAN.
-    // - regular CAN RX continues to be forwarded to the DLL.
-    // - standard data frame 0x00C marks a fresh PowerOn and rearms CAN TX.
+    // Sticky safety gate:
+    // once a standard 0x002 RTR PowerOff is observed, DLL -> CAN traffic
+    // remains disabled until this proxy process is restarted.
     bool canTxSilent = false;
     bool dropLogged = false;
+    bool zeroCLogged = false;
 
     pollfd fds[2]{};
     fds[0].fd = udpfd;
@@ -156,23 +151,18 @@ int main(int argc, char** argv) {
     for (;;) {
         const int pr = ::poll(fds, 2, -1);
         if (pr < 0) {
-            if (errno == EINTR) {
-                continue;
-            }
+            if (errno == EINTR) continue;
             std::perror("poll");
             break;
         }
 
-        // IMPORTANT: process CAN before UDP TX.  If PowerOff and a queued
-        // programmer TX become ready in the same poll cycle, the 0x002 RTR
-        // must latch TX-silent before any further CAN write is attempted.
+        // CAN is deliberately processed before UDP so 0x002 RTR latches
+        // TX-silent before any simultaneously queued DLL TX can escape.
         if (fds[1].revents & POLLIN) {
             can_frame f{};
             const ssize_t n = ::read(canfd, &f, sizeof(f));
             if (n == static_cast<ssize_t>(sizeof(f))) {
-                if (f.can_id & CAN_ERR_FLAG) {
-                    continue;
-                }
+                if (f.can_id & CAN_ERR_FLAG) continue;
 
                 const bool isEff = (f.can_id & CAN_EFF_FLAG) != 0;
                 const bool isRtr = (f.can_id & CAN_RTR_FLAG) != 0;
@@ -185,24 +175,17 @@ int main(int argc, char** argv) {
                     }
                     canTxSilent = true;
                     dropLogged = false;
-
-                    // Preserve the former proxy behaviour: RTR frames are
-                    // consumed by the proxy and are not forwarded to the DLL.
-                    continue;
+                    continue; // do not forward this RTR to DLL
                 }
 
-                if (!isEff && !isRtr && id == 0x00Cu) {
-                    if (canTxSilent) {
-                        log_gate("PowerOn frame 0x00C -> CAN TX ACTIVE");
+                if (!isEff && !isRtr && id == 0x00Cu && canTxSilent) {
+                    if (!zeroCLogged) {
+                        log_gate("0x00C observed while silent -> gate remains TX SILENT");
+                        zeroCLogged = true;
                     }
-                    canTxSilent = false;
-                    dropLogged = false;
                 }
 
-                // Preserve existing behaviour for all other RTR frames.
-                if (isRtr) {
-                    continue;
-                }
+                if (isRtr) continue;
 
                 if (havePeer) {
                     const unsigned char dlc = f.can_dlc > 8 ? 8 : f.can_dlc;
@@ -220,6 +203,7 @@ int main(int argc, char** argv) {
             const ssize_t n =
                 ::recvfrom(udpfd, p.data(), p.size(), 0,
                            reinterpret_cast<sockaddr*>(&from), &fromLen);
+
             if (n > 0 && valid_packet(p.data(), static_cast<std::size_t>(n))) {
                 if (p[4] == kHello) {
                     peer = from;
@@ -228,16 +212,20 @@ int main(int argc, char** argv) {
                     const auto ack = make_packet(kHelloAck);
                     ::sendto(udpfd, ack.data(), ack.size(), 0,
                              reinterpret_cast<sockaddr*>(&peer), peerLen);
-                } else if (p[4] == kCanTx) {
-                    const std::uint32_t id = get_u32le(p.data() + 6) & CAN_EFF_MASK;
+                    continue;
+                }
+
+                if (p[4] == kCanTx) {
+                    const std::uint32_t id =
+                        get_u32le(p.data() + 6) & CAN_EFF_MASK;
                     const unsigned char dlc = p[5] > 8 ? 8 : p[5];
 
                     if (canTxSilent) {
                         if (!dropLogged) {
-                            char msg[160]{};
+                            char msg[180]{};
                             std::snprintf(
                                 msg, sizeof(msg),
-                                "dropping DLL CAN-TX while silent "
+                                "dropping DLL CAN-TX while sticky-silent "
                                 "(first dropped id=0x%08X dlc=%u)",
                                 static_cast<unsigned>(id),
                                 static_cast<unsigned>(dlc));

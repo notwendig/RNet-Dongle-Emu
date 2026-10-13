@@ -11,7 +11,7 @@
 # =============================================================================
 
 # =============================================================================
-# Project: ftd2xx_rnet_emu
+# Project: RNet_DongleInterface
 # Configurations: Release
 # =============================================================================
 
@@ -49,13 +49,14 @@ cmake_ninja_workdir = /home/juergen/Projects/RNet-Dongle-Emu/build/mingw32/
 
 build cmake_object_order_depends_target_ftd2xx: phony || .
 
-build CMakeFiles/ftd2xx.dir/src/ftd2xx_emu.cpp.obj: CXX_COMPILER__ftd2xx_unscanned_Release /home/juergen/Projects/RNet-Dongle-Emu/src/ftd2xx_emu.cpp || cmake_object_order_depends_target_ftd2xx
+build CMakeFiles/ftd2xx.dir/ftd2xx/ftd2xx_emu.cpp.obj: CXX_COMPILER__ftd2xx_unscanned_Release /home/juergen/Projects/RNet-Dongle-Emu/ftd2xx/ftd2xx_emu.cpp || cmake_object_order_depends_target_ftd2xx
   CONFIG = Release
   DEFINES = -DNOMINMAX -DWIN32_LEAN_AND_MEAN -D_CRT_SECURE_NO_WARNINGS -Dftd2xx_EXPORTS
-  DEP_FILE = CMakeFiles/ftd2xx.dir/src/ftd2xx_emu.cpp.obj.d
-  FLAGS = -Werror -O3 -DNDEBUG -Wall -Wextra -Wpedantic
+  DEP_FILE = CMakeFiles/ftd2xx.dir/ftd2xx/ftd2xx_emu.cpp.obj.d
+  FLAGS = -O3 -DNDEBUG -Wall -Wextra -Wpedantic
+  INCLUDES = -I/home/juergen/Projects/RNet-Dongle-Emu/ftd2xx -I/home/juergen/Projects/RNet-Dongle-Emu/common
   OBJECT_DIR = CMakeFiles/ftd2xx.dir
-  OBJECT_FILE_DIR = CMakeFiles/ftd2xx.dir/src
+  OBJECT_FILE_DIR = CMakeFiles/ftd2xx.dir/ftd2xx
   TARGET_COMPILE_PDB = CMakeFiles/ftd2xx.dir/
   TARGET_PDB = ftd2xx.pdb
   TARGET_SUPPORT_DIR = CMakeFiles/ftd2xx.dir
@@ -68,13 +69,13 @@ build CMakeFiles/ftd2xx.dir/src/ftd2xx_emu.cpp.obj: CXX_COMPILER__ftd2xx_unscann
 #############################################
 # Link the shared library ftd2xx.dll
 
-build ftd2xx.dll libftd2xx.dll.a: CXX_SHARED_LIBRARY_LINKER__ftd2xx_Release CMakeFiles/ftd2xx.dir/src/ftd2xx_emu.cpp.obj | /home/juergen/Projects/RNet-Dongle-Emu/src/ftd2xx.def
+build ftd2xx.dll libftd2xx.dll.a: CXX_SHARED_LIBRARY_LINKER__ftd2xx_Release CMakeFiles/ftd2xx.dir/ftd2xx/ftd2xx_emu.cpp.obj | /home/juergen/Projects/RNet-Dongle-Emu/ftd2xx/ftd2xx.def
   CONFIG = Release
-  LANGUAGE_COMPILE_FLAGS = -Werror -O3 -DNDEBUG
-  LINK_FLAGS = -shared -static-libgcc -static-libstdc++ /home/juergen/Projects/RNet-Dongle-Emu/src/ftd2xx.def
+  LANGUAGE_COMPILE_FLAGS = -O3 -DNDEBUG
+  LINK_FLAGS = -shared -static-libgcc -static-libstdc++ /home/juergen/Projects/RNet-Dongle-Emu/ftd2xx/ftd2xx.def
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles/ftd2xx.dir
-  POST_BUILD = cd /home/juergen/Projects/RNet-Dongle-Emu/build/mingw32 && /usr/bin/cmake -E copy_if_different /home/juergen/Projects/RNet-Dongle-Emu/ftd2xx-emu.ini /home/juergen/Projects/RNet-Dongle-Emu/build/mingw32/ftd2xx-emu.ini
+  POST_BUILD = cd /home/juergen/Projects/RNet-Dongle-Emu/build/mingw32 && /usr/bin/cmake -E copy_if_different /home/juergen/Projects/RNet-Dongle-Emu/examples/ftd2xx-emu.ini.example /home/juergen/Projects/RNet-Dongle-Emu/build/mingw32/ftd2xx-emu.ini
   PRE_LINK = :
   RESTAT = 1
   TARGET_COMPILE_PDB = CMakeFiles/ftd2xx.dir/

@@ -1,313 +1,223 @@
-<p align="center">
-  <img src="assets/branding/free-r-net-logo-1254.png" alt="free R-Net logo" width="220">
-</p>
+# DongleInterface
 
-<h1 align="center">free R-Net</h1>
+<!-- DONGLEINTERFACE-PURE-DONGLE-CPOP-V1 -->
+## Pure-Dongle-/Rollstuhl-Trennung
 
-<p align="center"><strong>RNet-Dongle-Emu</strong> · CAN-only R-Net dongle bridge, wheelchair emulator and analysis toolkit.</p>
+`R-Net Programmer -> DongleInterface.dll -> ftd2xx.dll -> SocketCAN -> rollstuhl.emu`
 
-> **Research / interoperability project.**
-> This is not a safety certification and must not be used to approve a mobility
-> device for operation. Device-specific real-wheelchair wiring, live programming
-> procedures and the Dealer-to-OEM dongle switch are intentionally not
-> documented here.
+- `ftd2xx.dll` enthält nur FTDI-/Dongle-Verhalten und CAN-Transport.
+- Gültige `10/02` Raw24 und `10/01` CAN-Bursts werden in `CRawMsg`,
+  `CUSBMsg`/`CCANMsg` und bei POP zusätzlich `CPOPMsg` instanziiert.
+- Ungültige Wire-Frames werden `JUNK/NOISE` geloggt und verworfen.
+- USB-Kommandos werden lokal im Dongle bearbeitet.
+- CAN wird transparent übertragen.
+- POP-/Block-/Rollstuhl-State-Machines gehören nur in `rollstuhl.emu`.
+- `rollstuhl.emu` ist Unterprojekt von `DongleInterface`; seine GUI bleibt gleich.
+- CAN RX/TX wird an der SocketCAN-I/O-Grenze als `CCANMsg` bzw. `CPOPMsg`
+  instanziiert und mit `std::clog << CPOPMsg` protokolliert.
 
-## Current architecture — CAN only
+<!-- NO-AUTO-REWAKE-V1 -->
+## Kein automatisches Wieder-Einschalten
 
-As of **2026-10-10**, the DLL-local wheelchair/replay backend has been removed
-from the runtime path. `ftd2xx.dll` accepts only `Device=canN` and acts as the
-FTD2XX/R-Net dongle endpoint plus a transport bridge to the native
-`rnet-can-proxy`.
+Nach einer abgeschlossenen Power-Off-/Sleep-Sequenz bleibt die Emulation aus.
 
-Wheelchair emulation is a separate process on the CAN test pair:
+- `0x002 RTR` setzt den Proxy-TX-Gate auf SILENT.
+- `0x00C` wird **nicht** mehr als Power-On/Freigabe des DLL-TX interpretiert.
+- Nach dem abschließenden `0x000 RTR` setzt `rollstuhl.emu` einen OFF-Latch.
+- Nach gesetztem OFF-Latch werden spätere automatische TX-Frames verworfen.
+- Ein Neustart von `rollstuhl.emu` beginnt eine neue Sitzung.
+- Der bereits funktionierende initiale Connect-/Read-Pfad bleibt unverändert.
+
+<!-- WRITE82-V2 -->
+## Write-at-92%-Fix: POP ODI 0x82
+
+Der Programmer sendet beim bisher reproduzierbaren 92%-Abbruch den Quick-Write
+`78F#20 82 00 00 30 00 00 00`. `rollstuhl.emu` muss diesen Request quittieren.
+
+- RX: `78F#20 82 00 00 xx xx xx xx`
+- TX-Ack: `790#4F 82 00 00 00 00 00 00`
+- Logmarker: `[rollstuhl.emu][TX-WRITE82-ACK]`
+- Die FTDI-Schicht bleibt transparent; der Request wurde bereits 24/24 Byte geschrieben.
+- Nach Power-Off bleibt der CAN-TX durch den OFF-Latch stumm.
+- `0x00C` hebt den Proxy-PowerOff-Gate nicht mehr auf.
+
+<!-- WRITE92-STARTOFF-V4 -->
+## Write 92 % / Start Power OFF V4
+
+- `ODI 0x82` Quick-Write Ack bleibt erhalten.
+- `ODI 0x84 = 1` Quick-Write Ack bleibt erhalten.
+- Startzustand ist Power OFF / CAN still.
+- Wenn der aktuelle GUI-Source keinen sicher patchbaren Startzustand enthält,
+  übernimmt `RNET_STARTOFF_FALLBACK=1` den Start-AUS-Gate im CAN-I/O-Wrapper.
+- Die erste automatische `00C`-Wake-Sequenz wird dann unterdrückt.
+- Eine spätere explizite GUI-EIN-Sequenz darf den Start-AUS-Gate lösen.
+- Nach abgeschlossenem Power-Off bleibt der OFF-Latch bestehen.
+- `0x00C` hebt den Proxy-Silent-Latch nicht auf.
+<!-- SEGMENTED-WRITE-V5 -->
+## POP Segmented Write V5
+
+- `rollstuhl.emu` owns the POP write protocol state; the FTD/DLL remains CAN transport.
+- `78F#10 8C ...` starts `SegmentedDownload`.
+- Server ready response: `790#4F 8C ... <size> 40`.
+- Client segmented frames are buffered on the rollstuhl side.
+- End of a block/final data sends `1E410000#`.
+- Final `78F#80 8C ...` is completed with `790#8F 8C ...`.
+- Startup stays Power OFF until explicit GUI ON.
+- Proxy PowerOff gating is sticky: `0x00C` does not re-enable DLL CAN TX.
+
+<!-- WRITE100-CONNECT1-HARDOFF-V6 -->
+## Programmer write completion / first connect / hard Power-Off V6
+
+- First connect: a `20/80=0x1f` received before startup-ready is held until
+  the emulated JSM reaches `0x7B0`, then answered once with `4F/80`.
+- Segmented `0x8C` write remains on the `rollstuhl.emu` side.
+- The complete previously working post-write sequence is implemented:
+  `20/89`, `20/88`, `20/8A`, stateful `40/8B`, `20/8F`.
+- `40/8B` uses CRC-16/CCITT-FALSE over:
+  `key88(4) + value89(u32 LE) + size(u32 LE) + block data`.
+- After completed `000#R`, a later automatic `0x00C` is rejected with
+  `ENETDOWN` instead of being falsely reported as successfully transmitted.
+  The existing TX OFF latch remains the bus-safety fallback.
+- FTD2XX remains transport-only; these wheelchair protocol states live in
+  `rollstuhl.emu`.
+
+<!-- POWER-FSM-MANUAL-ONLY-V41 -->
+## Power-FSM V41: ausschließlich manuelles Power-On
+
+- Startzustand ist Power OFF.
+- `RNET_STARTOFF_FALLBACK` ist deaktiviert; der erste echte GUI-EIN-Klick
+  wird nicht mehr verschluckt.
+- Power-On darf nur von `Ein/Aus-Paddle` oder
+  `externer Ein/Aus-Schalter` ausgelöst werden.
+- Direkte/interne automatische `beginPowerOnSequence()`-Aufrufe werden blockiert.
+- Auch `finishPowerOnSequence()` darf den Zustand nur nach einer akzeptierten
+  manuellen EIN-Sequenz auf EIN setzen.
+- Ein CAN-TX-Fehler während Power-On bricht die Sequenz ab.
+- Nach Power-Off bleibt die State-Machine stabil AUS.
+- Der HardOff-TX-Latch bleibt zusätzlich als Sicherheitsnetz aktiv.
+
+<!-- COMMON-ONLY-NO-FTD2XX-RNET-CPOP-V1 -->
+## Gemeinsame Dongle-/R-Net-Nachrichtenklassen
+
+Die gemeinsame Implementierung liegt ausschließlich unter `common/`:
+
+- `common/DongleMessages.cpp`
+- `common/DongleMessages.hpp`
+- `common/RNetStream.hpp`
+
+Der frühere Doppelbestand `ftd2xx/rnet-cpop/` wurde entfernt.
+`ftd2xx` und `rollstuhl.emu` verwenden die gemeinsamen Klassen aus `common/`.
+
+<!-- VSCODE-ROLLSTUHL-NATIVE-V1 -->
+## VS Code / CMake Tools: `rollstuhl.emu`
+
+`rollstuhl.emu` ist eine native Linux/Qt6-Anwendung und wird **nicht** mit der
+MinGW32-Toolchain der Wine/FTD2XX-Komponenten gebaut.
+
+Für VS Code liegt deshalb unter `rollstuhl.emu/CMakePresets.json` der Preset
+`native-debug`. Er verwendet `/usr/bin/gcc` und `/usr/bin/g++` und baut nach:
+
+`build/rollstuhl.emu-vscode`
+
+Die Workspace-Einstellung `cmake.useCMakePresets=always` sorgt dafür, dass
+CMake Tools für dieses Projekt nicht mehr den zuvor ausgewählten MinGW-Kit
+verwendet.
+
+Die Wine-/FTD2XX-Komponenten bleiben weiterhin MinGW32-Builds und werden über
+ihre eigenen Buildabläufe/Preset-Konfigurationen gebaut.
+
+<!-- START-EMU-REAL-STOP-STATUS-V1 -->
+## Starten / Stoppen / Status
+
+Öffentlicher Einstieg:
 
 ```text
-R-Net Programmer
-       |
-   ftd2xx.dll
-       |
-  Device=can0
-       |
-rnet-can-proxy
-       |
-      can0
-       |
-   CAN test pair
-       |
-      can1
-       |
- rollstuhl.emu
-```
-
-`Device=emu` is intentionally no longer supported. This avoids having two
-independent wheelchair emulators: one hidden in the DLL and one on SocketCAN.
-
-The CAN-only DLL still emulates the **dongle-local** FTD2XX/R-Net control
-functions required by the Programmer. Wheelchair CAN frames themselves are
-sent to and received from the external CAN interface.
-
-## Emulator status
-
-The software test path has been exercised end-to-end:
-
-- **connect: OK**
-- **read: OK**
-- **write: OK**
-
-This result applies to the emulator/test setup. It is not a claim that writing
-to a real wheelchair has been validated or is safe.
-
-A separate real-CAN test with a **You-Q test wheelchair** previously confirmed
-that the Programmer can read the wheelchair configuration through a CAN
-interface. Device-specific connection details and the Dealer-to-OEM switch are
-outside this repository.
-
-## `start.sh emu`
-
-The normal test entry point is:
-
-```bash
 ./start.sh emu
-```
-
-It performs the complete local setup:
-
-1. stops an older Programmer/proxy/chair instance;
-2. configures `can0` and `can1` as classic CAN at **125000 bit/s**;
-3. builds missing DLL/proxy/chair components;
-4. deploys the CAN-only DLL and writes `Device=can0`;
-5. starts `rnet-can-proxy` on `can0`;
-6. starts the Qt6 `rollstuhl.emu` on `can1`;
-7. starts R-Net Programmer under Wine.
-
-Useful commands:
-
-```bash
-./start.sh status
-./start.sh stop
-```
-
-Interface names and CAN setup can be adjusted without editing the script:
-
-```bash
-RNET_CAN_DONGLE=can0 \
-RNET_CAN_CHAIR=can1 \
-RNET_CAN_BITRATE=125000 \
-./start.sh emu
-```
-
-Set `RNET_CAN_SETUP=0` only when the interfaces have already been configured by
-another service.
-
-## `rollstuhl.emu`
-
-`rollstuhl.emu` is the software wheelchair node. The current Qt6 GUI models the
-CJSM2 controls and uses a `QGraphicsScene`/`QGraphicsView` for the display.
-Its replay responses, GUI-generated events and cyclic CAN frames all travel on
-`can1`; the DLL does not synthesize those wheelchair frames.
-
-V22 reverses JSM Y only at the CAN encoding boundary: joystick forward/up is
-positive R-Net Y and backward/down is negative R-Net Y, while Qt screen/mouse
-coordinates remain unchanged.
-
-The ON/OFF controls now emit CAN power sequences. Power-on sends the observed
-startup prefix (`00C`, `00E`, `7B3`, serial/network frames, `7B1`, `7B0`) before
-normal cyclic traffic resumes. Power-off stops normal cyclic traffic
-immediately, then emits the observed `002`/`002#R` + `004` sleep cadence for
-about 11.05 seconds and terminates with `000`/`000#R`; after that
-`rollstuhl.emu` is silent on CAN.
-
-## Configuration
-
-The runtime INI is intentionally small:
-
-```ini
-[emulator]
-Device=can0
-LogFile=ftd2xx-emu.log
-```
-
-Valid device values are `can0`, `can1`, ... . `Device=emu`, `Mode=replay` and a
-DLL-local `ReplayFile` are no longer runtime modes.
-
-## Build
-
-On Fedora, the project uses CMake/Ninja, MinGW32 for the DLL and Qt6 for
-`rollstuhl.emu`. The normal helper is:
-
-```bash
-scripts/build-can0-rollstuhl-emu.sh release emu
-```
-
-The helper builds:
-
-```text
-build/mingw32/ftd2xx.dll
-build/rnet-can-proxy/rnet-can-proxy
-build/rollstuhl.emu/rollstuhl.emu
-```
-
-The CAN-only build enables function/data sections and linker garbage collection
-so no longer referenced legacy local-emulator helpers are discarded from the
-release DLL.
-
-## Branding
-
-The project now ships with the **free R-Net** logo/icon set in `assets/branding/`.
-The Qt wheelchair emulator window uses the bundled app icon, and the emulator GUI also shows the logo in its header. The documentation embeds the same branding assets. See [Branding notes](docs/BRANDING.md).
-The branding resources use fixed Qt resource aliases plus filesystem fallbacks so the app icon and header logo remain visible in `rollstuhl.emu`.
-
-## Repository layout
-
-```text
-src/                    CAN-only FTD2XX/R-Net DLL source
-rollstuhl.emu/          Qt6 CAN wheelchair emulator / CJSM2 GUI
-tools/rnet-can-proxy/   native SocketCAN <-> localhost bridge
-cmake/toolchains/       MinGW32 cross-compilation toolchain
-tools/                  analysis/decryption utilities
-tests/                  parser and protocol tests
-docs/                   protocol, validation and compatibility notes
-scripts/                build/deployment/cleanup helpers
-run/                    runtime logs and PID files
-```
-
-## RND analysis and configuration reports
-
-The existing RND and `.R-net` analysis tools remain unchanged. Vendor programs,
-vendor DLLs, original/decrypted `.rnd` databases, customer `.R-net` files,
-replay captures and device state are not distributed as project content.
-
-See:
-
-- [Protocol notes](docs/PROTOCOL.md)
-- [Validation](docs/VALIDATION.md)
-- [Compatibility](docs/COMPATIBILITY.md)
-
-## Screenshots
-
-### R-Net Programmer with the emulated dongle
-
-![R-Net Programmer with the emulated dongle](docs/images/rnet-programmer-connected.png)
-
-### R-Net Programmer application information
-
-![R-Net Programmer OEM Generic application information](docs/images/programmer-about.png)
-
-## Acknowledgements
-
-Special thanks to **Constantin Grosch <groschorama@gmail.com>**, who provided an
-R-Net Programmer dongle free of charge for approximately 1.5 years. That loan
-made the protocol analysis, comparison testing and development work possible.
-
-Thanks also to **ChatGPT by OpenAI** for assistance with protocol/log analysis,
-debugging, documentation and coding during development.
-
-### rollstuhl.emu startup state
-
-Beginning with V23, `rollstuhl.emu` always starts with **power OFF**. Normal wheelchair cyclic CAN traffic is silent until ON/OFF is pressed. Switching on runs the captured PowerOn CAN sequence before normal periodic traffic starts.
-
-## Betriebsmodi
-
-<!-- RNET-MODES-V29 -->
-
-```text
-emu: App -> DLL -> can0 <CAN> can1 -> rollstuhl.emu
-dev: RealRollstuhl -> can0 <CAN> Device.emu_CJSM
-```
-
-```bash
-./start.sh emu
-./start.sh dev
+./start.sh real
 ./start.sh stop
 ./start.sh status
 ```
 
-Direkter GUI-Start: `rollstuhl.emu emu` bzw. `rollstuhl.emu dev`.
-Im `dev`-Modus wird kein Programmer-Replay geladen. Details: [`docs/MODES.md`](docs/MODES.md).
+`emu` und `real` führen immer einen vollständigen frischen Ablauf aus:
 
-## D2XX Ereignisse
+1. Terminal `reset`
+2. laufende Komponenten stoppen
+3. `rm -rf build`
+4. komplett neu bauen und deployen
+5. gewünschten Modus starten
 
-<!-- RNET-D2XX-EVENTS-V29 -->
+`stop` und `status` bauen nichts.
 
-`FT_SetEventNotification` speichert Event-Maske und Event-Handle. Neue RX-Daten setzen `FT_EVENT_RXCHAR` und signalisieren das vom Aufrufer übergebene Windows-Event. Der Eventstatus wird getrennt von der RX-Queue geführt; Einzelheiten stehen in [`docs/D2XX_EVENTS.md`](docs/D2XX_EVENTS.md).
+Der öffentliche Name `real` ersetzt `dev`. Intern wird für den noch
+bestehenden Legacy-Startpfad `real -> dev` abgebildet.
 
-## Sauberer Build
+<!-- SINGLE-PROJECT-START-V5 -->
+## Einheitlicher Start
 
-<!-- RNET-ZERO-WARNINGS-V30 -->
+`start.sh` arbeitet ausschließlich relativ zu seinem eigenen Repository.
+Es gibt keinen zweiten/alten Projektpfad und keinen rekursiven Aufruf eines
+anderen `start.sh`.
 
-`./build-clean.sh all` konfiguriert und baut DLL, CAN-Proxy und `rollstuhl.emu` vollständig. Der Build läuft mit `-Werror`; Warnungen oder Fehler führen zum Abbruch. `apply-v30.sh` führt diesen Build automatisch aus.
+```text
+./start.sh emu
+./start.sh real
+./start.sh stop
+./start.sh status
+```
 
-## Zero-Warning Build V31
+`emu` und `real` führen immer aus:
 
-<!-- RNET-ZERO-WARNINGS-V31 -->
+1. Terminal `reset`
+2. laufende Projektprozesse direkt beenden
+3. `<Projektroot>/build` vollständig löschen
+4. Windows-Komponente, SocketCAN-Proxy (falls vorhanden) und `rollstuhl.emu`
+   frisch bauen/deployen
+5. `candump -tz -ca can0 | tee ~/.rnet.logs/<timestamp>-candump.log`
+6. gewünschten Modus starten
 
-Der Build bleibt mit `-Werror` streng. Nur die im aktuellen CAN-only-Pfad absichtlich nicht referenzierten Legacy-Replay/POP-Helper sind im Source explizit mit `[[maybe_unused]]` dokumentiert. Es werden keine Warnungen global abgeschaltet. `./build-clean.sh all` baut DLL, CAN-Proxy und `rollstuhl.emu` und akzeptiert am Ende weder Compiler-/CMake-Warnungen noch Fehler.
+`real` ist der öffentliche Name; für `rollstuhl.emu` wird intern weiterhin
+dessen Geräteargument `dev` verwendet.
 
-## Zero-Warning Build V32
+Vorhandene Dateien unter `~/.rnet.logs/` werden nicht gelöscht oder
+überschrieben.
 
-<!-- RNET-ZERO-WARNINGS-V32 -->
+<!-- SINGLE-PROJECT-START-V6 -->
+## Build-Erkennung im zusammengeführten Repository
 
-V32 ergänzt `load_stored_blocks()` zur expliziten Liste der im CAN-only-Pfad erhaltenen, aber derzeit nicht referenzierten Replay/POP-Helfer. Es wird ausschließlich lokal `[[maybe_unused]]` verwendet; `-Werror` bleibt aktiv und es gibt keine globale Warnungsabschaltung. `./build-clean.sh all` baut DLL, CAN-Proxy und `rollstuhl.emu` vollständig neu und akzeptiert keine Warnungen oder Fehler.
+`start.sh` setzt nicht mehr voraus, dass die Windows-Komponente direkt im
+Projektroot liegt. Für den frischen Build wird rekursiv, außerhalb von
+`.git/` und `build/`, in dieser Reihenfolge gesucht:
 
-## R-Net-Log-Kommentare V33
+1. `CMakePresets.json` mit `mingw32-release`
+2. `build-wine32.sh`
+3. passendes `CMakeLists.txt`
+4. `runtime-complete/build-forwarder.sh`
 
-<!-- RNET-LOG-DECODE-V33 -->
+Auch Install-/Deploy-Skripte werden im Repository gesucht.
 
-V33 ergänzt die CAN/R-Net-Logs um lesbare Kommentare hinter dem unveränderten Roh-Frame. Die Dekodierung verwendet direkt `RNetMsgBroker` und dessen `R-Net.json`, also dieselbe Definitionsebene wie der R-Net Analyzer; es gibt keine zweite handgepflegte Decoder-Tabelle. `run/ftd2xx-emu.decoded.log` ist die kommentierte Begleitdatei zum unveränderten DLL-Rohlog. Details: `docs/LOGGING.md`. Apply-Backups werden ausschließlich unter `/tmp` angelegt.
+Alle übrigen Regeln aus V5 bleiben bestehen: ein Repository, kein Legacy-
+`start.sh`, kein Selbstaufruf, `rm -rf build`, candump mit Zeitstempel und
+Erhalt alter Logs.
 
-## RNetMsgBroker-Subprojekt V35
+<!-- SINGLE-PROJECT-START-V7-ACTUAL-REPO -->
+## Build/Start nach Zusammenführung
 
-<!-- RNET-BROKER-SUBPROJECT-V35 -->
+Der zusammengeführte Projektstand enthält die eigentlichen Quellen unter
+`ftd2xx/`, `common/` und `rollstuhl.emu/`. V7 ergänzt die dazu fehlende
+Build-Infrastruktur direkt in **diesem einen Repository**:
 
-`external/RNetMsgBroker` ist jetzt ein natives CMake-Subprojekt des Dongle-Emulators. `rnet-can-proxy` linkt den Broker direkt und ergänzt CAN-Logmeldungen im selben Prozess um `; <Kurzdecode>`. Die Definitionen stammen aus `external/RNetMsgBroker/R-Net.json`, derselben Decoderbasis wie im R-Net Analyzer. Fehlt lokal ein Broker-Quellbaum, holt der V35-Apply reproduzierbar den öffentlichen Tag `v1.0.0` nach `/tmp` und vendort ihn anschließend nach `external/RNetMsgBroker`. Der separate V33-Logfilterprozess entfällt. Apply-Backups liegen ausschließlich unter `/tmp`. Details: `docs/RNETMSGBROKER.md` und `docs/LOGGING.md`.
+- `CMakeLists.txt` + `CMakePresets.json` für die PE32/i386-`ftd2xx.dll`
+- `ftd2xx/ftd2xx_emu.h` und `ftd2xx/ftd2xx.def`
+- MinGW32-Toolchain
+- CAN-only INI
+- nativen `rnet-can-proxy` mit Sticky-PowerOff-Gate V20
 
-## Power-Off branding (V37)
+Der aktuelle `ftd2xx/ftd2xx_emu.cpp` wird nicht ersetzt.
 
-`rollstuhl.emu` zeigt bei Power-Off das vorhandene
-`assets/branding/free-r-net-logo-1254.png` groß, seitenverhältnisgetreu
-und zentriert im CJSM2-Dialog-Screen. Es wird kein Ersatztext gezeichnet.
+Öffentlicher Start:
+`./start.sh emu|real|stop|status`
 
-## v2.00 Release Candidate V38 (RNET-V2-RC-V38)
-
-Der Launcher entfernt stale Projekt-Proxies, bricht bei fremdem UDP-Port-Besitzer hart ab und verifiziert den neu gestarteten Proxy. Der Proxy protokolliert den CAN-Bus passiv mit Kommentaren aus dem eingebetteten RNetMsgBroker. `v2-release-check.sh` prüft den Release-Lauf; `release-v2.00.sh` commit/tag/pusht erst nach bestandenem Check. Backups ausschließlich unter `/tmp`.
-
-
-## v2.00 Release Candidate V39 (RNET-V2-RC-V39)
-
-V39 korrigiert die UDP-39000-Erkennung des V38-Launchers (`ss -lun`: Local Address ist Spalte 4), entfernt auch ungetrackte alte Projekt-Proxies über `/proc/<pid>/exe` und verifiziert nach dem Start die neue Proxy-PID. Der RNetMsgBroker-Monitor schreibt CAN-Decodes direkt, ohne stdout/stderr umzuleiten; damit beendet sich der Proxy auch bei frühem `bind()`-Fehler sauber. Backups ausschließlich unter `/tmp`.
-
-
-## v2.00 Release Candidate V40 (RNET-V2-RC-V40)
-
-V40 korrigiert die Erkennung alter eigener `rnet-can-proxy`-Prozesse.
-Ein Prozess gilt als eigener Projekt-Proxy, wenn entweder `/proc/<pid>/exe`
-oder das exakt kanonisierte `argv[0]` aus `/proc/<pid>/cmdline` auf
-`$HOME/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/rnet-can-proxy` zeigt.
-Nur dieser exakte Projektpfad wird automatisch beendet; namensgleiche
-Proxies aus anderen Verzeichnissen bleiben unangetastet.
-
-
-## v2.00 RC V41 (RNET-V2-RC-V41)
-
-`start.sh emu` und `start.sh dev` beginnen jetzt immer mit einem Clean-Start:
-alle Projekt-`*.log` sowie `*.log` im Programmer-Verzeichnis werden gelöscht,
-`build/` und `bin/` werden komplett entfernt und die für den Modus benötigten
-Targets anschließend frisch gebaut. `stop` und `status` führen keinen Clean aus.
-
-
-## Proxy-Log TX/RX V42 (RNET-PROXY-DECODE-V42)
-
-`rnet-can-proxy.log` besitzt jetzt eine explizite Richtungs-Spalte:
-
-`TX` = lokal durch den DLL/Proxy auf `can0` gesendet.
-
-`RX` = vom CAN-Bus auf `can0` empfangen.
-
-Beispiel:
-
-`2026-10-11 00:42:00.200 TX can0 78F#... ; RNetPopQuickRequest ...`
-
-`2026-10-11 00:42:00.217 RX can0 790#... ; RNetPopQuickResponse ...`
-
-Die Richtung wird passiv aus `recvmsg()`/SocketCAN `MSG_DONTROUTE`
-ermittelt; es werden keine zusätzlichen CAN-Frames gesendet.
+`emu` und `real` führen immer `reset`, internen Stop, `rm -rf build`,
+kompletten Neuaufbau und anschließend den gewünschten Start aus.
+Laufzeitlogs einschließlich `candump -tz -ca can0` liegen mit Zeitstempel
+unter `~/.rnet.logs`; ältere Logs werden nicht gelöscht.

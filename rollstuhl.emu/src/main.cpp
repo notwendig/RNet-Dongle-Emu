@@ -57,12 +57,38 @@
 #include <sys/ioctl.h>
 #include <sys/socket.h>
 #include <unistd.h>
+#include <QMetaObject>
+
+#include "cyclic/Cyclic02000300.h"
+#include "cyclic/Cyclic0C140000.h"
+#include "cyclic/Cyclic0C140100.h"
+#include "cyclic/Cyclic140C0001.h"
+#include "cyclic/Cyclic14300000.h"
+#include "cyclic/Cyclic1C0C0000.h"
+#include "cyclic/Cyclic1C300004.h"
+#include "cyclic/CyclicMessageContainer.h"
+#include "session/SessionState.h"
+#include "statemachine/ConnectStateMachine.h"
+#include "statemachine/FallbackStateMachine.h"
+#include "statemachine/PowerOffStateMachine.h"
+#include "statemachine/PowerOnStateMachine.h"
+#include "statemachine/ProtocolClassifier.h"
+#include "statemachine/ReadBlockStateMachine.h"
+#include "statemachine/StateMachineContainer.h"
+#include "statemachine/WriteBlockStateMachine.h"
+#include "threading/CanMessage.h"
+
+#include <memory>
+#include <mutex>
 
 namespace {
+
+[[maybe_unused]] constexpr char kPowerFsmPatchMarker[] = "RNET-POWER-FSM-MANUAL-ONLY-V41";
 
 constexpr char kPowerOffLogoMarker[] = "RNET-FRENET-POWEROFF-V37";
 
 constexpr char kGuiMarker[] = "RNET-CHAIR-CJSM2-GUI-V28";
+constexpr char kThreadArchitectureMarker[] = "RNET-PROTOCOL-STATES-V54";
 constexpr int kJsmModule = 3;
 constexpr int kMaxProfiles = 5;
 constexpr int kMaxModes = 4;
@@ -101,11 +127,28 @@ struct ReplayEntry {
 
 using ReplayMap = std::map<RequestKey, ReplayEntry>;
 
-struct PeriodicFrame {
-    CanMessage msg;
-    qint64 intervalMs = 0;
-    qint64 nextDueMs = 0;
-};
+rnetemu::CanMessage toThreadCan(const CanMessage& source)
+{
+    rnetemu::CanMessage target;
+    target.id = source.id;
+    target.extended = source.extended;
+    target.remote = source.remote;
+    target.dlc = source.dlc;
+    target.data = source.data;
+    return target;
+}
+
+CanMessage fromThreadCan(const rnetemu::CanMessage& source)
+{
+    CanMessage target;
+    target.id = source.id;
+    target.extended = source.extended;
+    target.remote = source.remote;
+    target.dlc = source.dlc;
+    target.data = source.data;
+    return target;
+}
+
 
 QString hexBytes(const std::array<std::uint8_t, 8>& data, unsigned dlc)
 {
@@ -367,6 +410,8 @@ enum class SendCanResult {
 
 SendCanResult sendCan(int fd, const CanMessage& m)
 {
+    static std::mutex txMutex;
+    std::lock_guard<std::mutex> txLock(txMutex);
     struct can_frame f {};
     f.can_id = m.id;
     if (m.extended)
@@ -671,16 +716,7 @@ public:
         }
 
         clock_.start();
-        setupPeriodic();
-        armPeriodic();
-
-        periodicTimer_ = new QTimer(this);
-        periodicTimer_->setTimerType(Qt::PreciseTimer);
-        periodicTimer_->setInterval(5);
-        connect(periodicTimer_, &QTimer::timeout, this, [this] {
-            sendDuePeriodic();
-        });
-        periodicTimer_->start();
+        setupThreadArchitecture();
 
         responseTimer_ = new QTimer(this);
         responseTimer_->setTimerType(Qt::PreciseTimer);
@@ -707,6 +743,7 @@ public:
         appendLog(QStringLiteral(
             "RNET-CHAIR-REPLAY-V17: Replay-Antworten gepuffert, 1 CAN-Frame/ms"));
         appendLog(QString::fromLatin1(kGuiMarker));
+        appendLog(QString::fromLatin1(kThreadArchitectureMarker));
         appendLog(QString::fromLatin1(kPowerOffLogoMarker));
         appendLog(QStringLiteral(
             "CJSM2 GUI: Joystick, beide Paddles, MODE, PROFILE, HORN, 4 Screen-Tasten und externe Jacks"));
@@ -727,6 +764,11 @@ public:
             settings.setValue(QStringLiteral("window/position"), pos());
             settings.sync();
         }
+
+        if (cyclicMessages_)
+            cyclicMessages_->stopAll();
+        if (stateMachines_)
+            stateMachines_->stopAll();
 
         if (fd_ >= 0)
             ::close(fd_);
@@ -1039,72 +1081,166 @@ private:
         }
         if (joystick_) joystick_->setEnabled(enabled);
     }
-
-    void setupPeriodic()
+    void setupThreadArchitecture()
     {
-        periodic_ = {
-            {ext(0x02000300u, {0x00, 0x00}),                                  10, 0},
-            {ext(0x14300000u, {0x00, 0x00}),                                 200, 0},
-            {ext(0x140C0001u, {0x00, 0x00}),                                 500, 0},
-            {ext(0x0C140000u, {0xC0}),                                      1000, 0},
-            {ext(0x0C140100u, {0x02}),                                      1000, 0},
-            {ext(0x1C0C0000u, {0x28}),                                      1000, 0},
-            {ext(0x1C300004u, {0xB7,0xAC,0x13,0x00,0x2F,0xD2,0x06,0x00}),    1000, 0}
+        session_ = std::make_shared<rnetemu::SessionState>();
+
+        auto sender = [this](const rnetemu::CanMessage& threaded) {
+            // Serialize the final session check with the Power-Off barrier.
+            // After powerOffBegin() returns, no cyclic worker from the old
+            // generation can still enter sendCan().
+            std::lock_guard<std::mutex> sessionTxLock(txSessionMutex_);
+            if (!session_ || !session_->txAllowed())
+                return rnetemu::SendResult::WouldBlock;
+
+            const CanMessage message = fromThreadCan(threaded);
+            const SendCanResult result = sendCan(fd_, message);
+            if (result == SendCanResult::Sent) {
+                QMetaObject::invokeMethod(
+                    this,
+                    [this] {
+                        ++txCount_;
+                        if ((txCount_ & 0x3Fu) == 0)
+                            refreshCounters();
+                    },
+                    Qt::QueuedConnection);
+                return rnetemu::SendResult::Sent;
+            }
+            if (result == SendCanResult::WouldBlock)
+                return rnetemu::SendResult::WouldBlock;
+            return rnetemu::SendResult::Error;
         };
+
+        cyclicMessages_ = std::make_unique<rnetemu::CyclicMessageContainer>();
+        joystickCyclic_ = static_cast<rnetemu::Cyclic02000300*>(
+            cyclicMessages_->add(std::make_unique<rnetemu::Cyclic02000300>(sender)));
+        cyclicMessages_->add(std::make_unique<rnetemu::Cyclic14300000>(sender));
+        cyclicMessages_->add(std::make_unique<rnetemu::Cyclic140C0001>(sender));
+        cyclicMessages_->add(std::make_unique<rnetemu::Cyclic0C140000>(sender));
+        cyclicMessages_->add(std::make_unique<rnetemu::Cyclic0C140100>(sender));
+        cyclicMessages_->add(std::make_unique<rnetemu::Cyclic1C0C0000>(sender));
+        cyclicMessages_->add(std::make_unique<rnetemu::Cyclic1C300004>(sender));
+        cyclicMessages_->startAll();
+
+        auto replayMatcher = [this](const rnetemu::CanMessage& message) {
+            return replayMatchesWorker(message);
+        };
+        auto replayConsumer =
+            [this](const rnetemu::CanMessage& message,
+                   std::uint64_t generation,
+                   const std::string& owner) {
+                replayConsumeWorker(message, generation, owner);
+            };
+
+        stateMachines_ = std::make_unique<rnetemu::StateMachineContainer>(session_);
+        stateMachines_->add(std::make_unique<rnetemu::PowerOnStateMachine>());
+        stateMachines_->add(std::make_unique<rnetemu::PowerOffStateMachine>());
+        stateMachines_->add(std::make_unique<rnetemu::ConnectStateMachine>(
+            session_, replayMatcher, replayConsumer));
+        stateMachines_->add(std::make_unique<rnetemu::ReadBlockStateMachine>(
+            session_, replayMatcher, replayConsumer));
+        stateMachines_->add(std::make_unique<rnetemu::WriteBlockStateMachine>(
+            session_, replayMatcher, replayConsumer));
+        stateMachines_->add(std::make_unique<rnetemu::FallbackStateMachine>(
+            session_, replayMatcher, replayConsumer));
+        stateMachines_->startAll();
+
         updateJoystickPeriodic();
+        syncThreadArchitecture();
+    }
+
+    void syncThreadArchitecture()
+    {
+        const bool txAllowed = session_ && session_->txAllowed();
+        const bool cyclicEnabled = txAllowed && responseQueue_.empty() && controlQueue_.empty();
+        if (cyclicMessages_)
+            cyclicMessages_->setEnabled(cyclicEnabled);
     }
 
     void updateJoystickPeriodic()
     {
-        for (auto& p : periodic_) {
-            if (p.msg.id != 0x02000300u)
-                continue;
-            p.msg.dlc = 2;
-            p.msg.data[0] = static_cast<std::uint8_t>(static_cast<std::int8_t>(joystickX_));
-            // Qt screen coordinates grow downwards. R-Net JSM Y is the opposite:
-            // forward/up must be positive on CAN, backward/down negative.
-            const int canY = -joystickY_;
-            p.msg.data[1] = static_cast<std::uint8_t>(static_cast<std::int8_t>(canY));
-            return;
-        }
+        if (joystickCyclic_)
+            joystickCyclic_->setPosition(joystickX_, joystickY_);
     }
 
     void armPeriodic()
     {
-        const qint64 now = clock_.isValid() ? clock_.elapsed() : 0;
-        for (auto& p : periodic_)
-            p.nextDueMs = now;
+        syncThreadArchitecture();
     }
 
-    void sendDuePeriodic()
+    bool replayMatchesWorker(const rnetemu::CanMessage& threaded)
     {
-        if (!powerOn_ || powerTransition_ != PowerTransition::Stable || fd_ < 0)
+        const CanMessage message = fromThreadCan(threaded);
+        std::lock_guard<std::mutex> lock(replayMutex_);
+        const auto it = replay_.find(keyFor(message));
+        return it != replay_.end() && !it->second.batches.empty();
+    }
+
+    void replayConsumeWorker(const rnetemu::CanMessage& threaded,
+                             std::uint64_t generation,
+                             const std::string& owner)
+    {
+        // Do not even advance a replay cursor once Power-Off has invalidated
+        // this worker event.
+        if (!session_ || !session_->generationCurrent(generation) ||
+            !session_->txAllowed())
             return;
 
-        // Replay-Antworten and GUI control events have priority over the 10-ms
-        // cyclic traffic. This preserves the proven V17 read/write pacing.
-        if (!responseQueue_.empty() || !controlQueue_.empty())
-            return;
+        const CanMessage message = fromThreadCan(threaded);
+        std::vector<CanMessage> responses;
 
-        const qint64 now = clock_.elapsed();
-        for (auto& p : periodic_) {
-            if (now < p.nextDueMs)
-                continue;
+        {
+            std::lock_guard<std::mutex> lock(replayMutex_);
+            if (!session_->generationCurrent(generation) || !session_->txAllowed())
+                return;
 
-            if (sendCan(fd_, p.msg) == SendCanResult::Sent)
-                ++txCount_;
+            const auto it = replay_.find(keyFor(message));
+            if (it == replay_.end() || it->second.batches.empty())
+                return;
 
-            do {
-                p.nextDueMs += p.intervalMs;
-            } while (p.nextDueMs <= now);
+            ReplayEntry& entry = it->second;
+            const std::size_t index = std::min(entry.next, entry.batches.size() - 1);
+            responses = entry.batches[index].responses;
+            if (entry.next + 1 < entry.batches.size())
+                ++entry.next;
         }
 
-        if ((txCount_ & 0x3Fu) == 0)
-            refreshCounters();
+        QMetaObject::invokeMethod(
+            this,
+            [this, message, generation, owner, responses = std::move(responses)]() mutable {
+                // Generation check is repeated in the Qt thread. This closes the
+                // race where Power-Off happens after the worker lookup but before
+                // the queued GUI/TX callback executes.
+                if (!session_ || !session_->generationCurrent(generation) ||
+                    !session_->txAllowed())
+                    return;
+
+                appendLog(QStringLiteral("RX [%1] %2")
+                              .arg(QString::fromStdString(owner), canText(message)));
+                for (const CanMessage& response : responses)
+                    responseQueue_.push_back(response);
+
+                if (!responses.empty() && responseTimer_ && !responseTimer_->isActive())
+                    responseTimer_->start();
+
+                if (responses.empty()) {
+                    appendLog(QStringLiteral("%1: Replay-Treffer ohne direkte CAN-Antwort")
+                                  .arg(QString::fromStdString(owner)));
+                } else {
+                    appendLog(QStringLiteral("%1: %2 Antwort(en) eingeplant, Queue=%3")
+                                  .arg(QString::fromStdString(owner))
+                                  .arg(responses.size())
+                                  .arg(responseQueue_.size()));
+                }
+                syncThreadArchitecture();
+                refreshCounters();
+            },
+            Qt::QueuedConnection);
     }
 
     void resetReplayCursors()
     {
+        std::lock_guard<std::mutex> lock(replayMutex_);
         for (auto& [key, entry] : replay_) {
             Q_UNUSED(key);
             entry.next = 0;
@@ -1113,31 +1249,34 @@ private:
 
     void enqueueControl(const CanMessage& msg, const QString& label)
     {
-        if (!powerOn_ || powerTransition_ != PowerTransition::Stable || fd_ < 0) {
+        if (!powerOn_ || powerTransition_ != PowerTransition::Stable ||
+            !session_ || !session_->txAllowed() || fd_ < 0) {
             appendLog(QStringLiteral("GUI ignoriert (Power-Zustand nicht stabil): %1").arg(label));
             return;
         }
 
         controlQueue_.push_back({msg, label});
+        syncThreadArchitecture();
         if (responseTimer_ && !responseTimer_->isActive())
             responseTimer_->start();
         refreshCounters();
     }
-
     void flushTxQueues()
     {
-        if (!powerOn_ || powerTransition_ != PowerTransition::Stable || fd_ < 0) {
+        if (!session_ || !session_->txAllowed() || fd_ < 0) {
+            // Power-Off may have happened while a worker was preparing an
+            // answer. Nothing from an invalid generation is sent.
+            responseQueue_.clear();
+            controlQueue_.clear();
             if (responseTimer_)
                 responseTimer_->stop();
+            syncThreadArchitecture();
             return;
         }
 
-        // Keep programmer replay responses at highest priority so Read/Write
-        // from R-Net retains the V17 behavior. GUI events follow afterwards.
         if (!responseQueue_.empty()) {
             const CanMessage& response = responseQueue_.front();
             const SendCanResult result = sendCan(fd_, response);
-
             if (result == SendCanResult::WouldBlock)
                 return;
 
@@ -1151,6 +1290,7 @@ private:
                 appendLog(QStringLiteral("TX  %1").arg(canText(response)));
                 responseQueue_.pop_front();
             }
+            syncThreadArchitecture();
             refreshCounters();
             return;
         }
@@ -1158,7 +1298,6 @@ private:
         if (!controlQueue_.empty()) {
             const QueuedControl& q = controlQueue_.front();
             const SendCanResult result = sendCan(fd_, q.msg);
-
             if (result == SendCanResult::WouldBlock)
                 return;
 
@@ -1173,10 +1312,12 @@ private:
                               .arg(q.label, canText(q.msg)));
                 controlQueue_.pop_front();
             }
+            syncThreadArchitecture();
             refreshCounters();
             return;
         }
 
+        syncThreadArchitecture();
         if (responseTimer_)
             responseTimer_->stop();
     }
@@ -1187,44 +1328,40 @@ private:
             return;
 
         for (;;) {
-            const auto msg = receiveCan(fd_);
-            if (!msg)
+            const auto message = receiveCan(fd_);
+            if (!message)
                 break;
 
             ++rxCount_;
+            const rnetemu::CanMessage threaded = toThreadCan(*message);
 
-            if (!powerOn_ || powerTransition_ != PowerTransition::Stable)
-                continue;
+            // CAN power transitions are protocol events too. The transition is
+            // started synchronously in the Qt/RX thread BEFORE fan-out, so a
+            // Power-Off can preempt ReadBlock/WriteBlock even while their worker
+            // queues still contain messages from the old generation.
+            // V54: remember that this Programmer session actually entered
+            // Write-to-R-Net. 4F/10/02 occurs during reads as well, therefore it
+            // may arm the post-write reboot only after a 20/82 write marker.
+            if (rnetemu::isProgrammerWriteSeenMarker(threaded))
+                programmerWriteSeen_ = true;
+            if (programmerWriteSeen_ &&
+                rnetemu::isProgrammerPostWriteMarker(threaded))
+                armProgrammerReconfigureRestart();
 
-            const auto it = replay_.find(keyFor(*msg));
-            if (it == replay_.end())
-                continue;
-
-            ReplayEntry& entry = it->second;
-            if (entry.batches.empty())
-                continue;
-
-            const std::size_t index =
-                std::min(entry.next, entry.batches.size() - 1);
-            const ReplayBatch& batch = entry.batches[index];
-            if (entry.next + 1 < entry.batches.size())
-                ++entry.next;
-
-            appendLog(QStringLiteral("RX  %1").arg(canText(*msg)));
-
-            for (const CanMessage& response : batch.responses)
-                responseQueue_.push_back(response);
-
-            if (!batch.responses.empty() && responseTimer_ && !responseTimer_->isActive())
-                responseTimer_->start();
-
-            if (batch.responses.empty()) {
-                appendLog(QStringLiteral("Replay-Treffer ohne direkte CAN-Antwort"));
-            } else {
-                appendLog(QStringLiteral("Replay: %1 Antwort(en) eingeplant, Queue=%2")
-                              .arg(batch.responses.size())
-                              .arg(responseQueue_.size()));
+            // V52/V54: 40/10/02 is a normal POP QuickRequest, not Power-Off.
+            // The hard cancellation barrier remains only 0x002 RTR.
+            if (rnetemu::isPowerOffRequest(threaded) && powerOn_ &&
+                powerTransition_ == PowerTransition::Stable) {
+                beginPowerOffSequence(QStringLiteral("CAN 002#R"));
+            } else if (rnetemu::isCanConnectionTest(threaded) && !powerOn_ &&
+                       powerTransition_ == PowerTransition::Stable) {
+                // 0x00C is a JSM CAN connection-test. In OFF context it is
+                // permitted to wake/start the emulated chair.
+                beginPowerOnSequence(QStringLiteral("CAN 00C# connection-test/wake"));
             }
+
+            if (stateMachines_)
+                stateMachines_->dispatch(threaded);
         }
 
         refreshCounters();
@@ -1237,8 +1374,30 @@ private:
 
     void beginPowerOnSequence(const QString& source)
     {
+        // RNET_POWER_FSM_V41_BEGIN_GUARD
+        const bool rnetManualPowerOn =
+            source == QStringLiteral("Ein/Aus-Paddle") ||
+            source == QStringLiteral("externer Ein/Aus-Schalter");
+
+        if (!rnetManualPowerOn) {
+            appendLog(QStringLiteral("Automatisches Power-On blockiert — %1").arg(source));
+            std::fprintf(stderr,
+                         "[rollstuhl.emu][POWER-FSM] automatic ON blocked source=%s\n",
+                         source.toLocal8Bit().constData());
+            return;
+        }
+
+        // Set only for a sequence which can really start.
         if (fd_ < 0 || powerTransition_ != PowerTransition::Stable || powerOn_)
             return;
+        powerOnSequenceManual_ = true;
+
+        if (fd_ < 0 || powerTransition_ != PowerTransition::Stable || powerOn_)
+            return;
+        if (stateMachines_) {
+            std::lock_guard<std::mutex> sessionTxLock(txSessionMutex_);
+            stateMachines_->powerOnBegin();
+        }
 
         responseQueue_.clear();
         controlQueue_.clear();
@@ -1249,6 +1408,7 @@ private:
         updateJoystickPeriodic();
 
         powerTransition_ = PowerTransition::Starting;
+        syncThreadArchitecture();
         powerSequence_.clear();
         powerSequenceStartMs_ = clock_.elapsed();
 
@@ -1294,10 +1454,65 @@ private:
         renderDisplay();
     }
 
+    void armProgrammerReconfigureRestart()
+    {
+        // Trace-verified Write-to-R-Net reboot timing. Do not re-arm on the
+        // Programmer's retry scans: the first post-write 4F/10/02 owns this
+        // reboot transaction.
+        if (programmerReconfigurePending_)
+            return;
+
+        constexpr int kPowerOffDelayMs = 27718;
+        programmerReconfigurePending_ = true;
+        const std::uint64_t token = ++programmerReconfigureToken_;
+        programmerReconfigurePowerOffDueMs_ = clock_.elapsed() + kPowerOffDelayMs;
+
+        appendLog(QStringLiteral(
+            "Write-to-R-Net: Reboot vorgemerkt; Power-Off in %1 ms (Trace V54)")
+                      .arg(kPowerOffDelayMs));
+
+        QTimer::singleShot(kPowerOffDelayMs, this, [this, token] {
+            if (!programmerReconfigurePending_ ||
+                token != programmerReconfigureToken_)
+                return;
+            if (fd_ < 0 || !powerOn_ ||
+                powerTransition_ != PowerTransition::Stable)
+                return;
+            beginPowerOffSequence(QStringLiteral("Programmer reconfiguration"));
+        });
+    }
+
+    void scheduleProgrammerReconfigurePowerOn()
+    {
+        if (!programmerReconfigurePending_)
+            return;
+
+        constexpr int kPowerOnDelayMs = 10232;
+        const std::uint64_t token = programmerReconfigureToken_;
+        appendLog(QStringLiteral(
+            "Write-to-R-Net: Sleep vollständig; Neustart in %1 ms (Trace V54)")
+                      .arg(kPowerOnDelayMs));
+
+        QTimer::singleShot(kPowerOnDelayMs, this, [this, token] {
+            if (!programmerReconfigurePending_ ||
+                token != programmerReconfigureToken_)
+                return;
+            if (fd_ < 0 || powerOn_ ||
+                powerTransition_ != PowerTransition::Stable)
+                return;
+            beginPowerOnSequence(QStringLiteral("Programmer reconfiguration restart"));
+        });
+    }
+
     void beginPowerOffSequence(const QString& source)
     {
         if (fd_ < 0 || powerTransition_ != PowerTransition::Stable || !powerOn_)
             return;
+        if (stateMachines_) {
+            std::lock_guard<std::mutex> sessionTxLock(txSessionMutex_);
+            stateMachines_->powerOffBegin();
+        }
+        syncThreadArchitecture();
 
         responseQueue_.clear();
         controlQueue_.clear();
@@ -1311,6 +1526,7 @@ private:
         hornActive_ = false;
 
         powerTransition_ = PowerTransition::Stopping;
+        syncThreadArchitecture();
         powerSequence_.clear();
         powerSequenceStartMs_ = clock_.elapsed();
 
@@ -1345,8 +1561,37 @@ private:
 
     void finishPowerOnSequence()
     {
+        // RNET_POWER_FSM_V41_FINISH_ON_GUARD
+        if (!powerOnSequenceManual_) {
+            appendLog(QStringLiteral("Automatischer Power-On-Abschluss verworfen"));
+            std::fprintf(stderr,
+                         "[rollstuhl.emu][POWER-FSM] automatic finishPowerOn blocked\n");
+            powerOn_ = false;
+            powerTransition_ = PowerTransition::Stable;
+            powerSequence_.clear();
+            responseQueue_.clear();
+            controlQueue_.clear();
+            if (powerTimer_)
+                powerTimer_->stop();
+            if (responseTimer_)
+                responseTimer_->stop();
+            updateControlStyles();
+            refreshStatus();
+            renderDisplay();
+            return;
+        }
+
         powerOn_ = true;
         powerTransition_ = PowerTransition::Stable;
+        if (stateMachines_)
+            stateMachines_->powerOnComplete();
+        syncThreadArchitecture();
+        if (programmerReconfigurePending_) {
+            programmerReconfigurePending_ = false;
+            programmerWriteSeen_ = false;
+            programmerReconfigurePowerOffDueMs_ = 0;
+            appendLog(QStringLiteral("Write-to-R-Net: Reboot vollständig (V54)"));
+        }
         powerSequence_.clear();
         resetReplayCursors();
         armPeriodic();
@@ -1354,19 +1599,36 @@ private:
         updateControlStyles();
         refreshStatus();
         renderDisplay();
+    
+        // RNET_POWER_FSM_V41_FINISH_ON_DONE
+        powerOnSequenceManual_ = false;
     }
 
     void finishPowerOffSequence()
     {
         powerOn_ = false;
         powerTransition_ = PowerTransition::Stable;
+        if (stateMachines_)
+            stateMachines_->powerOffComplete();
+        syncThreadArchitecture();
+        scheduleProgrammerReconfigurePowerOn();
         powerSequence_.clear();
         responseQueue_.clear();
         controlQueue_.clear();
+        syncThreadArchitecture();
         appendLog(QStringLiteral("Rollstuhl AUS — PowerOff-Sequenz beendet, CAN jetzt still"));
         updateControlStyles();
         refreshStatus();
         renderDisplay();
+    
+        // RNET_POWER_FSM_V41_OFF_STABLE
+        powerOnSequenceManual_ = false;
+        if (powerTimer_)
+            powerTimer_->stop();
+        if (responseTimer_)
+            responseTimer_->stop();
+        std::fprintf(stderr,
+                     "[rollstuhl.emu][POWER-FSM] OFF stable; automatic wake disabled\n");
     }
 
     void flushPowerSequence()
@@ -1404,12 +1666,46 @@ private:
             ++txCount_;
             appendLog(QStringLiteral("POWER TX  %1  %2").arg(q.label, canText(q.msg)));
         }
+        // RNET_POWER_FSM_V41_TX_ERROR_ABORT
+        if (result == SendCanResult::Error &&
+            powerTransition_ == PowerTransition::Starting) {
+            appendLog(QStringLiteral("Power-On abgebrochen: CAN-TX-Fehler"));
+            std::fprintf(stderr,
+                         "[rollstuhl.emu][POWER-FSM] ON sequence aborted after TX error: %s\n",
+                         std::strerror(errno));
+            powerSequence_.clear();
+            responseQueue_.clear();
+            controlQueue_.clear();
+            powerOn_ = false;
+            powerOnSequenceManual_ = false;
+            powerTransition_ = PowerTransition::Stable;
+            if (powerTimer_)
+                powerTimer_->stop();
+            if (responseTimer_)
+                responseTimer_->stop();
+            updateControlStyles();
+            refreshStatus();
+            renderDisplay();
+            refreshCounters();
+            return;
+        }
         powerSequence_.pop_front();
         refreshCounters();
     }
 
     void setPowerState(bool on, const QString& source)
     {
+        // RNET_POWER_FSM_V41_SET_GUARD
+        if (on &&
+            source != QStringLiteral("Ein/Aus-Paddle") &&
+            source != QStringLiteral("externer Ein/Aus-Schalter")) {
+            appendLog(QStringLiteral("Automatisches setPowerState(EIN) blockiert — %1").arg(source));
+            std::fprintf(stderr,
+                         "[rollstuhl.emu][POWER-FSM] setPowerState(auto ON) blocked source=%s\n",
+                         source.toLocal8Bit().constData());
+            return;
+        }
+
         if (powerTransition_ != PowerTransition::Stable) {
             appendLog(QStringLiteral("Power-Taste ignoriert: Sequenz läuft bereits"));
             return;
@@ -1771,13 +2067,22 @@ private:
     bool powerOn_ = false;
     std::uint64_t rxCount_ = 0;
     std::uint64_t txCount_ = 0;
-
+    mutable std::mutex replayMutex_;
     ReplayMap replay_;
     std::deque<CanMessage> responseQueue_;
     std::deque<QueuedControl> controlQueue_;
     std::deque<ScheduledPowerFrame> powerSequence_;
-    std::vector<PeriodicFrame> periodic_;
+    std::unique_ptr<rnetemu::CyclicMessageContainer> cyclicMessages_;
+    rnetemu::Cyclic02000300* joystickCyclic_ = nullptr;
+    std::unique_ptr<rnetemu::StateMachineContainer> stateMachines_;
+    std::shared_ptr<rnetemu::SessionState> session_;
+    std::mutex txSessionMutex_;
+    bool programmerWriteSeen_ = false;
+    bool programmerReconfigurePending_ = false;
+    std::uint64_t programmerReconfigureToken_ = 0;
+    qint64 programmerReconfigurePowerOffDueMs_ = 0;
     QElapsedTimer clock_;
+    bool powerOnSequenceManual_ = false; // RNET_POWER_FSM_V41_MEMBER
     PowerTransition powerTransition_ = PowerTransition::Stable;
     qint64 powerSequenceStartMs_ = 0;
 
@@ -1807,7 +2112,6 @@ private:
     };
 
     QSocketNotifier* notifier_ = nullptr;
-    QTimer* periodicTimer_ = nullptr;
     QTimer* responseTimer_ = nullptr;
     QTimer* powerTimer_ = nullptr;
     QTimer* displayTimer_ = nullptr;
