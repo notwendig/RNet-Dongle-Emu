@@ -1,7 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"/home/juergen/Projects/RNet-Dongle-Emu/build/mingw32/cmake_install.cmake"
-	],
-	"Parallel" : false
-}

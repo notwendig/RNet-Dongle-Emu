@@ -1,7 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"/home/juergen/Projects/RNet-Dongle-Emu/build/rnet-can-proxy/cmake_install.cmake"
-	],
-	"Parallel" : false
-}
